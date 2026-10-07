@@ -111,7 +111,8 @@ RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* \
     && cd /src && bash install_secp256k1.sh
 
 WORKDIR /src
-RUN pip install --no-cache-dir .
+# cbor2 6 removed CBORDecodeValueError, which cbor2pure (via pycardano) imports
+RUN pip install --no-cache-dir . "cbor2<6"
 
 # =============================================================================
 # Build stage: Scalus (Scala / JVM / JMH)
