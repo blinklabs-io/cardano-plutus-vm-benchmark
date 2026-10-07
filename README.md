@@ -2,7 +2,7 @@
 
 Reproducible, cross-language benchmark suite for Plutus (UPLC) virtual machine implementations.
 
-Builds 10 VMs from source inside Docker, runs each VM's **native benchmark framework**, and generates a unified comparison report. [View full results](https://saib-inc.github.io/cardano-plutus-vm-benchmark/)
+Builds 10 VMs from source inside Docker, runs each VM's **native benchmark framework**, and generates a unified comparison report. [View full results](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/)
 
 ## Latest Results (2026-05-09)
 
