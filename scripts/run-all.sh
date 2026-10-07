@@ -38,6 +38,15 @@ echo ""
 # Track which VMs to run (default: all)
 VMS="${BENCH_VMS:-chrysalis,chrysalis-aot,uplc-turbo,uplc-turbo-bc,plutigo,blaze-jsc,blaze-v8,plutuz,opshin,haskell,scalus-cek,scalus-jit,julc-java,llvm-uplc-jit}"
 
+# Without SYS_NICE in the bounding set (plain docker run), exec of the
+# capability-bearing nice fails outright, so probe once and fall back.
+if nice -n -20 true 2>/dev/null; then
+    PRIORITY=(nice -n -20)
+else
+    echo "WARN: cannot raise priority (add SYS_NICE); running at normal priority"
+    PRIORITY=()
+fi
+
 run_vm() {
     local vm_name="$1"
     local script="/bench/scripts/run-${vm_name}.sh"
@@ -52,7 +61,7 @@ run_vm() {
     echo " Running: ${vm_name}"
     echo "---------------------------------------------"
 
-    if nice -n -20 bash "$script" "$RUN_DIR"; then
+    if "${PRIORITY[@]}" bash "$script" "$RUN_DIR"; then
         echo "OK: ${vm_name} completed"
     else
         echo "FAIL: ${vm_name} exited with code $?"
