@@ -11,7 +11,7 @@ This is the end-to-end cost of evaluating a Plutus script from its on-chain repr
 
 ## Test Data
 
-78 flat-encoded Plutus smart contract scripts from the `plutus-use-cases` test suite. These are real-world contracts covering:
+89 flat-encoded Plutus smart contract scripts from the `plutus-use-cases` test suite. These are real-world contracts covering:
 
 - Auction, Crowdfunding, Currency, Escrow
 - Futures (settle, pay-out, increase-margin)
@@ -27,7 +27,7 @@ Each VM uses its own benchmark framework rather than a uniform harness:
 
 | VM | Framework | Warmup | Min Iterations | Time Budget |
 |---|---|---|---|---|
-| Chrysalis | BenchmarkDotNet | Automatic (pilot + overhead) | 50 | Auto |
+| Chrysalis | BenchmarkDotNet (`--job short`) | 3 iterations | 3 | Auto |
 | uplc-turbo | Criterion.rs | Automatic (warmup phase) | Auto | Auto |
 | Plutigo | Go testing.B | Automatic (b.N scaling) | Auto | 5s |
 | blaze-plutus | Vitest bench | Automatic | Auto | Auto |
@@ -39,10 +39,10 @@ Each framework handles warmup, iteration count, and outlier detection using its 
 
 ## Fairness Constraints
 
-- **Same data**: all VMs decode the same 78 `.flat` files
+- **Same data**: all VMs decode the same 89 `.flat` files
 - **Same machine**: all VMs run inside a single Docker container (`ubuntu:24.04`, glibc)
 - **Sequential execution**: VMs run one at a time to avoid CPU contention
-- **Pinned versions**: exact git SHAs recorded in `versions.env`
+- **Pinned versions**: exact git SHAs recorded in `.env`
 - **No custom harnesses**: each VM's own benchmark code is used unmodified
 
 ## Unified Output
@@ -53,7 +53,7 @@ All results are normalized to a common CSV schema:
 vm,script,mean_ns,median_ns,min_ns,max_ns,stddev_ns,iterations
 ```
 
-Times are in **nanoseconds**. The summary uses **geometric mean** across all 78 scripts, which is standard for cross-benchmark comparison (it handles the wide range of script complexities without being dominated by outliers).
+Times are in **nanoseconds**. The summary uses **geometric mean** across all 89 scripts, which is standard for cross-benchmark comparison (it handles the wide range of script complexities without being dominated by outliers).
 
 ## Limitations
 

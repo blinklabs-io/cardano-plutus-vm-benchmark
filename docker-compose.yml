@@ -8,6 +8,8 @@ services:
         - CHRYSALIS_SHA
         - UPLC_TURBO_REPO
         - UPLC_TURBO_SHA
+        - UPLC_TURBO_BC_REPO
+        - UPLC_TURBO_BC_SHA
         - PLUTIGO_REPO
         - PLUTIGO_SHA
         - BLAZE_REPO
@@ -37,8 +39,10 @@ services:
         - LLVM_VERSION
     cap_add:
       - SYS_NICE
-    user: "${UID:-1000}:${GID:-1000}"
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     env_file:
       - .env
+    environment:
+      - HOST_CPU
     volumes:
       - ./results:/results
