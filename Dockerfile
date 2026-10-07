@@ -5,10 +5,21 @@
 #   docker build -t plutus-bench .
 #   docker run -v ./results:/results plutus-bench
 
+# Toolchain versions come from .env through docker-compose build args; the
+# defaults only apply to a bare `docker build`. ARGs declared before the first
+# FROM are usable in FROM lines and must be re-declared inside a stage.
+ARG DOTNET_VERSION=10.0
+ARG RUST_VERSION=1.94
+ARG GO_VERSION=1.26
+ARG BUN_VERSION=1.3.10
+ARG PYTHON_VERSION=3.14
+ARG JDK_VERSION=21
+ARG NODE_MAJOR=22
+
 # =============================================================================
 # Build stage: Chrysalis (.NET / BenchmarkDotNet)
 # =============================================================================
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-chrysalis
+FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS build-chrysalis
 
 ARG CHRYSALIS_REPO
 ARG CHRYSALIS_SHA
@@ -23,7 +34,7 @@ RUN dotnet build -c Release -p:TreatWarningsAsErrors=false benchmarks/PlutusBenc
 # =============================================================================
 # Build stage: uplc-turbo (Rust / Criterion)
 # =============================================================================
-FROM rust:1.94-bookworm AS build-uplc-turbo
+FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo
 
 ARG UPLC_TURBO_REPO
 ARG UPLC_TURBO_SHA
@@ -38,7 +49,7 @@ RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.to
 # =============================================================================
 # Build stage: uplc-turbo bytecode VM (Rust / Criterion)
 # =============================================================================
-FROM rust:1.94-bookworm AS build-uplc-turbo-bc
+FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo-bc
 
 ARG UPLC_TURBO_BC_REPO
 ARG UPLC_TURBO_BC_SHA
@@ -53,7 +64,7 @@ RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.to
 # =============================================================================
 # Build stage: Plutigo (Go / testing.B)
 # =============================================================================
-FROM golang:1.26-bookworm AS build-plutigo
+FROM golang:${GO_VERSION}-bookworm AS build-plutigo
 
 ARG PLUTIGO_REPO
 ARG PLUTIGO_SHA
@@ -68,7 +79,7 @@ RUN CGO_ENABLED=0 go test -c -o /plutigo-bench ./tests/
 # =============================================================================
 # Build stage: blaze-plutus (TypeScript / Vitest bench)
 # =============================================================================
-FROM oven/bun:1.3.14-debian AS build-blaze
+FROM oven/bun:${BUN_VERSION}-debian AS build-blaze
 
 ARG BLAZE_REPO
 ARG BLAZE_SHA
@@ -110,7 +121,7 @@ RUN zig build -Doptimize=ReleaseFast
 # =============================================================================
 # Build stage: opshin-uplc (Python)
 # =============================================================================
-FROM python:3.14-bookworm AS build-opshin
+FROM python:${PYTHON_VERSION}-bookworm AS build-opshin
 
 ARG OPSHIN_REPO
 ARG OPSHIN_SHA
@@ -133,7 +144,7 @@ RUN pip install --no-cache-dir . "cbor2<6"
 # =============================================================================
 # Build stage: Scalus (Scala / JVM / JMH)
 # =============================================================================
-FROM eclipse-temurin:21-jdk-jammy AS build-scalus
+FROM eclipse-temurin:${JDK_VERSION}-jdk-jammy AS build-scalus
 
 ARG SCALUS_REPO
 ARG SCALUS_SHA
@@ -294,6 +305,14 @@ RUN set -eux; \
 # =============================================================================
 FROM ubuntu:24.04 AS runner
 
+ARG DOTNET_VERSION
+ARG BUN_VERSION
+ARG PYTHON_VERSION
+ARG JDK_VERSION
+ARG NODE_MAJOR
+
+ENV PYTHON_VERSION=${PYTHON_VERSION}
+
 ENV DEBIAN_FRONTEND=noninteractive
 ENV HOME=/root
 
@@ -303,7 +322,7 @@ RUN apt-get update \
        wget apt-transport-https ca-certificates \
     && wget -q https://dot.net/v1/dotnet-install.sh -O /tmp/dotnet-install.sh \
     && chmod +x /tmp/dotnet-install.sh \
-    && /tmp/dotnet-install.sh --channel 10.0 --install-dir /usr/share/dotnet \
+    && /tmp/dotnet-install.sh --channel "${DOTNET_VERSION}" --install-dir /usr/share/dotnet \
     && ln -s /usr/share/dotnet/dotnet /usr/local/bin/dotnet \
     && rm /tmp/dotnet-install.sh
 
@@ -314,11 +333,11 @@ RUN apt-get install -y --no-install-recommends \
 
 # Install Bun
 RUN apt-get install -y --no-install-recommends curl unzip \
-    && curl -fsSL https://bun.sh/install | bash \
+    && curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}" \
     && ln -s /root/.bun/bin/bun /usr/local/bin/bun
 
 # Install Node.js (for V8 benchmark variant)
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+RUN curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" | bash - \
     && apt-get install -y --no-install-recommends nodejs
 
 # Install ICU, NativeAOT prerequisites (clang, zlib), and utilities
@@ -360,10 +379,10 @@ COPY --from=build-plutuz /src/zig-out /bench/plutuz/zig-out
 COPY --from=build-plutuz /src/bench /bench/plutuz/bench
 COPY --from=build-plutuz /src/build.zig /bench/plutuz/build.zig
 
-# opshin: Copy Python 3.14 runtime (Ubuntu 24.04 has 3.12, but opshin was built with 3.14)
-COPY --from=build-opshin /usr/local/bin/python3.14 /usr/local/bin/python3.14
-COPY --from=build-opshin /usr/local/lib/python3.14 /usr/local/lib/python3.14
-COPY --from=build-opshin /usr/local/lib/libpython3.14* /usr/local/lib/
+# opshin: Copy the Python runtime it was built with (Ubuntu 24.04 ships 3.12)
+COPY --from=build-opshin /usr/local/bin/python${PYTHON_VERSION} /usr/local/bin/python${PYTHON_VERSION}
+COPY --from=build-opshin /usr/local/lib/python${PYTHON_VERSION} /usr/local/lib/python${PYTHON_VERSION}
+COPY --from=build-opshin /usr/local/lib/libpython${PYTHON_VERSION}* /usr/local/lib/
 RUN ldconfig
 COPY --from=build-opshin /src /bench/opshin
 # Copy our benchmark script into opshin dir (not part of upstream repo)
@@ -384,7 +403,7 @@ COPY --from=build-julc /src/julc-benchmark/build/libs/*-jmh.jar /bench/julc/julc
 
 # Install JDK 21 (full JDK: sbt recompiles Scalus Java sources with --release 11) for Scalus + GHC runtime deps for Haskell + libssl runtime for llvm-uplc
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-21-jdk-headless \
+    openjdk-${JDK_VERSION}-jdk-headless \
     libgmp10 libsodium-dev libsecp256k1-dev libstdc++6 libssl3t64 \
     && rm -rf /var/lib/apt/lists/* \
     && ldconfig
