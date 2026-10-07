@@ -44,7 +44,7 @@ ARG UPLC_TURBO_BC_REPO
 ARG UPLC_TURBO_BC_SHA
 
 RUN git clone "$UPLC_TURBO_BC_REPO" /src \
-    && cd /src && git checkout "$UPLC_TURBO_BC_SHA"
+    && cd /src && (git checkout "$UPLC_TURBO_BC_SHA" || (git fetch origin "$UPLC_TURBO_BC_SHA" && git checkout "$UPLC_TURBO_BC_SHA"))
 
 WORKDIR /src
 
