@@ -323,7 +323,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
 
 # Install ICU, NativeAOT prerequisites (clang, zlib), and utilities
 RUN apt-get install -y --no-install-recommends \
-    libicu-dev clang zlib1g-dev time procps \
+    libicu-dev clang zlib1g-dev time procps libcap2-bin \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy secp256k1 libraries from opshin build
@@ -420,6 +420,10 @@ COPY parsers/ /bench/parsers/
 COPY report/ /bench/report/
 
 RUN chmod +x /bench/scripts/*.sh
+
+# The container runs as the host UID, so SYS_NICE from cap_add is only in the
+# bounding set; a file capability lets non-root nice raise priority.
+RUN setcap cap_sys_nice+ep /usr/bin/nice
 
 # Make everything writable so the container can run as any UID
 # Delete .NET obj dirs and sbt target dirs so they get recreated as the running user
