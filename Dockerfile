@@ -54,8 +54,10 @@ FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo-bc
 ARG UPLC_TURBO_BC_REPO
 ARG UPLC_TURBO_BC_SHA
 
-RUN git clone "$UPLC_TURBO_BC_REPO" /src \
-    && cd /src && git checkout "$UPLC_TURBO_BC_SHA"
+# The pin is on an unmerged branch, so fetch it by full object ID when the default clone lacks it.
+RUN test "${#UPLC_TURBO_BC_SHA}" -eq 40 \
+    && git clone "$UPLC_TURBO_BC_REPO" /src \
+    && cd /src && (git checkout "$UPLC_TURBO_BC_SHA" || (git fetch origin "$UPLC_TURBO_BC_SHA" && git checkout "$UPLC_TURBO_BC_SHA"))
 
 WORKDIR /src
 
