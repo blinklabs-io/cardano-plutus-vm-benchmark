@@ -23,11 +23,27 @@ echo " Cardano Plutus VM Benchmark Suite"
 echo " $(date)"
 echo "============================================="
 
+# arm64 /proc/cpuinfo has no "model name", and lscpu reports "-" for Apple
+# silicon under Docker, so fall back to the vendor; HOST_CPU overrides both
+# because a Docker VM on macOS cannot see the host CPU model.
+detect_cpu() {
+    local model
+    model=$(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2 | xargs)
+    if [[ -z "$model" ]]; then
+        model=$(lscpu 2>/dev/null | awk -F: '/^Model name/ {print $2}' | xargs)
+        [[ "$model" == "-" ]] && model=""
+    fi
+    if [[ -z "$model" ]]; then
+        model=$(lscpu 2>/dev/null | awk -F: '/^Vendor ID/ {print $2}' | xargs)
+    fi
+    echo "${model:-unknown} ($(uname -m))"
+}
+
 # Record hardware fingerprint
 {
     echo "date: $(date -Iseconds)"
     echo "kernel: $(uname -r)"
-    echo "cpu: $(grep 'model name' /proc/cpuinfo | head -1 | cut -d: -f2 | xargs)"
+    echo "cpu: ${HOST_CPU:-$(detect_cpu)}"
     echo "cores: $(nproc)"
     echo "memory: $(free -h | awk '/Mem:/ {print $2}')"
 } > "$RUN_DIR/environment.txt"
@@ -37,6 +53,15 @@ echo ""
 
 # Track which VMs to run (default: all)
 VMS="${BENCH_VMS:-chrysalis,chrysalis-aot,uplc-turbo,uplc-turbo-bc,plutigo,blaze-jsc,blaze-v8,plutuz,opshin,haskell,scalus-cek,scalus-jit,julc-java,llvm-uplc-jit}"
+
+# Without SYS_NICE in the bounding set (plain docker run), exec of the
+# capability-bearing nice fails outright, so probe once and fall back.
+if nice -n -20 true 2>/dev/null; then
+    PRIORITY=(nice -n -20)
+else
+    echo "WARN: cannot raise priority (add SYS_NICE); running at normal priority"
+    PRIORITY=()
+fi
 
 run_vm() {
     local vm_name="$1"
@@ -52,7 +77,7 @@ run_vm() {
     echo " Running: ${vm_name}"
     echo "---------------------------------------------"
 
-    if nice -n -20 bash "$script" "$RUN_DIR"; then
+    if "${PRIORITY[@]}" bash "$script" "$RUN_DIR"; then
         echo "OK: ${vm_name} completed"
     else
         echo "FAIL: ${vm_name} exited with code $?"

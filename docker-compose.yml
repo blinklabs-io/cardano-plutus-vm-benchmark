@@ -26,14 +26,23 @@ services:
         - JULC_SHA
         - LLVM_UPLC_REPO
         - LLVM_UPLC_SHA
+        - DOTNET_VERSION
+        - RUST_VERSION
+        - GO_VERSION
+        - BUN_VERSION
+        - PYTHON_VERSION
+        - JDK_VERSION
+        - NODE_MAJOR
         - ZIG_VERSION
         - GHC_VERSION
         - JDK_SDK_VERSION
         - LLVM_VERSION
     cap_add:
       - SYS_NICE
-    user: "${UID:-1000}:${GID:-1000}"
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     env_file:
       - .env
+    environment:
+      - HOST_CPU
     volumes:
       - ./results:/results

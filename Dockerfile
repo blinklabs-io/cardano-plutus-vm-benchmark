@@ -5,16 +5,27 @@
 #   docker build -t plutus-bench .
 #   docker run -v ./results:/results plutus-bench
 
+# Toolchain versions come from .env through docker-compose build args; the
+# defaults only apply to a bare `docker build`. ARGs declared before the first
+# FROM are usable in FROM lines and must be re-declared inside a stage.
+ARG DOTNET_VERSION=10.0
+ARG RUST_VERSION=1.94
+ARG GO_VERSION=1.26
+ARG BUN_VERSION=1.3.10
+ARG PYTHON_VERSION=3.14
+ARG JDK_VERSION=21
+ARG NODE_MAJOR=22
+
 # =============================================================================
 # Build stage: Chrysalis (.NET / BenchmarkDotNet)
 # =============================================================================
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-chrysalis
+FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS build-chrysalis
 
 ARG CHRYSALIS_REPO
 ARG CHRYSALIS_SHA
 
 RUN git clone "$CHRYSALIS_REPO" /src \
-    && cd /src && git checkout "$CHRYSALIS_SHA"
+    && cd /src && (git checkout "$CHRYSALIS_SHA" || (git fetch origin "$CHRYSALIS_SHA" && git checkout "$CHRYSALIS_SHA"))
 
 WORKDIR /src
 RUN dotnet restore benchmarks/PlutusBench/PlutusBench.csproj
@@ -23,13 +34,13 @@ RUN dotnet build -c Release -p:TreatWarningsAsErrors=false benchmarks/PlutusBenc
 # =============================================================================
 # Build stage: uplc-turbo (Rust / Criterion)
 # =============================================================================
-FROM rust:1.94-bookworm AS build-uplc-turbo
+FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo
 
 ARG UPLC_TURBO_REPO
 ARG UPLC_TURBO_SHA
 
 RUN git clone "$UPLC_TURBO_REPO" /src \
-    && cd /src && git checkout "$UPLC_TURBO_SHA"
+    && cd /src && (git checkout "$UPLC_TURBO_SHA" || (git fetch origin "$UPLC_TURBO_SHA" && git checkout "$UPLC_TURBO_SHA"))
 
 WORKDIR /src
 
@@ -38,12 +49,14 @@ RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.to
 # =============================================================================
 # Build stage: uplc-turbo bytecode VM (Rust / Criterion)
 # =============================================================================
-FROM rust:1.94-bookworm AS build-uplc-turbo-bc
+FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo-bc
 
 ARG UPLC_TURBO_BC_REPO
 ARG UPLC_TURBO_BC_SHA
 
-RUN git clone "$UPLC_TURBO_BC_REPO" /src \
+# The pin is on an unmerged branch, so fetch it by full object ID when the default clone lacks it.
+RUN test "${#UPLC_TURBO_BC_SHA}" -eq 40 \
+    && git clone "$UPLC_TURBO_BC_REPO" /src \
     && cd /src && (git checkout "$UPLC_TURBO_BC_SHA" || (git fetch origin "$UPLC_TURBO_BC_SHA" && git checkout "$UPLC_TURBO_BC_SHA"))
 
 WORKDIR /src
@@ -53,13 +66,13 @@ RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.to
 # =============================================================================
 # Build stage: Plutigo (Go / testing.B)
 # =============================================================================
-FROM golang:1.26-bookworm AS build-plutigo
+FROM golang:${GO_VERSION}-bookworm AS build-plutigo
 
 ARG PLUTIGO_REPO
 ARG PLUTIGO_SHA
 
 RUN git clone "$PLUTIGO_REPO" /src \
-    && cd /src && git checkout "$PLUTIGO_SHA"
+    && cd /src && (git checkout "$PLUTIGO_SHA" || (git fetch origin "$PLUTIGO_SHA" && git checkout "$PLUTIGO_SHA"))
 
 WORKDIR /src
 RUN go mod download
@@ -68,7 +81,7 @@ RUN CGO_ENABLED=0 go test -c -o /plutigo-bench ./tests/
 # =============================================================================
 # Build stage: blaze-plutus (TypeScript / Vitest bench)
 # =============================================================================
-FROM oven/bun:1.3.14-debian AS build-blaze
+FROM oven/bun:${BUN_VERSION}-debian AS build-blaze
 
 ARG BLAZE_REPO
 ARG BLAZE_SHA
@@ -76,7 +89,7 @@ ARG BLAZE_SHA
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 RUN git clone "$BLAZE_REPO" /src \
-    && cd /src && git checkout "$BLAZE_SHA"
+    && cd /src && (git checkout "$BLAZE_SHA" || (git fetch origin "$BLAZE_SHA" && git checkout "$BLAZE_SHA"))
 
 WORKDIR /src
 RUN bun install
@@ -94,12 +107,13 @@ RUN apt-get update \
     && apt-get install -y curl xz-utils git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL "https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${ZIG_VERSION}.tar.xz" \
+RUN ARCH="$(uname -m)" \
+    && curl -fsSL "https://ziglang.org/download/${ZIG_VERSION}/zig-${ARCH}-linux-${ZIG_VERSION}.tar.xz" \
     | tar -xJ -C /opt \
-    && ln -s /opt/zig-x86_64-linux-${ZIG_VERSION}/zig /usr/local/bin/zig
+    && ln -s /opt/zig-${ARCH}-linux-${ZIG_VERSION}/zig /usr/local/bin/zig
 
 RUN git clone "$PLUTUZ_REPO" /src \
-    && cd /src && git checkout "$PLUTUZ_SHA"
+    && cd /src && (git checkout "$PLUTUZ_SHA" || (git fetch origin "$PLUTUZ_SHA" && git checkout "$PLUTUZ_SHA"))
 
 WORKDIR /src
 # Patch build.zig to install the bench binary (upstream only has a run step)
@@ -109,7 +123,7 @@ RUN zig build -Doptimize=ReleaseFast
 # =============================================================================
 # Build stage: opshin-uplc (Python)
 # =============================================================================
-FROM python:3.14-bookworm AS build-opshin
+FROM python:${PYTHON_VERSION}-bookworm AS build-opshin
 
 ARG OPSHIN_REPO
 ARG OPSHIN_SHA
@@ -119,19 +133,20 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone "$OPSHIN_REPO" /src \
-    && cd /src && git checkout "$OPSHIN_SHA"
+    && cd /src && (git checkout "$OPSHIN_SHA" || (git fetch origin "$OPSHIN_SHA" && git checkout "$OPSHIN_SHA"))
 
 # Build secp256k1 from source (script uses sudo, but we're root in Docker)
 RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* \
     && cd /src && bash install_secp256k1.sh
 
 WORKDIR /src
-RUN pip install --no-cache-dir .
+# cbor2 6 removed CBORDecodeValueError, which cbor2pure (via pycardano) imports
+RUN pip install --no-cache-dir . "cbor2<6"
 
 # =============================================================================
 # Build stage: Scalus (Scala / JVM / JMH)
 # =============================================================================
-FROM eclipse-temurin:21-jdk-jammy AS build-scalus
+FROM eclipse-temurin:${JDK_VERSION}-jdk-jammy AS build-scalus
 
 ARG SCALUS_REPO
 ARG SCALUS_SHA
@@ -146,7 +161,7 @@ RUN curl -fsSL "https://github.com/sbt/sbt/releases/download/v1.10.11/sbt-1.10.1
     && ln -s /opt/sbt/bin/sbt /usr/local/bin/sbt
 
 RUN git clone "$SCALUS_REPO" /src \
-    && cd /src && git checkout "$SCALUS_SHA"
+    && cd /src && (git checkout "$SCALUS_SHA" || (git fetch origin "$SCALUS_SHA" && git checkout "$SCALUS_SHA"))
 
 WORKDIR /src
 
@@ -174,7 +189,7 @@ ENV JAVA_HOME=/root/.sdkman/candidates/java/current
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 RUN git clone "$JULC_REPO" /src \
-    && cd /src && git checkout "$JULC_SHA"
+    && cd /src && (git checkout "$JULC_SHA" || (git fetch origin "$JULC_SHA" && git checkout "$JULC_SHA"))
 
 WORKDIR /src
 
@@ -213,7 +228,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ENV PATH="/root/.ghcup/bin:${PATH}"
 
 RUN git clone "$HASKELL_REPO" /src \
-    && cd /src && git checkout "$HASKELL_SHA"
+    && cd /src && (git checkout "$HASKELL_SHA" || (git fetch origin "$HASKELL_SHA" && git checkout "$HASKELL_SHA"))
 
 WORKDIR /src
 
@@ -222,7 +237,8 @@ RUN sed -i 's/flags: +with-inline-r/flags: -with-inline-r/' cabal.project \
     && sed -i 's/flags: +with-cert/flags: -with-cert/' cabal.project
 
 RUN cabal update
-RUN cabal build plutus-benchmark:bench:validation -j
+RUN cabal build plutus-benchmark:bench:validation -j \
+    && cp "$(cabal list-bin plutus-benchmark:bench:validation)" /validation-bin
 
 # =============================================================================
 # Build stage: llvm-uplc (C++ / LLVM LLJIT)
@@ -266,7 +282,7 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone "$LLVM_UPLC_REPO" /src \
-    && cd /src && git checkout "$LLVM_UPLC_SHA" \
+    && cd /src && (git checkout "$LLVM_UPLC_SHA" || (git fetch origin "$LLVM_UPLC_SHA" && git checkout "$LLVM_UPLC_SHA")) \
     && git submodule update --init --recursive
 
 WORKDIR /src
@@ -291,6 +307,14 @@ RUN set -eux; \
 # =============================================================================
 FROM ubuntu:24.04 AS runner
 
+ARG DOTNET_VERSION
+ARG BUN_VERSION
+ARG PYTHON_VERSION
+ARG JDK_VERSION
+ARG NODE_MAJOR
+
+ENV PYTHON_VERSION=${PYTHON_VERSION}
+
 ENV DEBIAN_FRONTEND=noninteractive
 ENV HOME=/root
 
@@ -300,7 +324,7 @@ RUN apt-get update \
        wget apt-transport-https ca-certificates \
     && wget -q https://dot.net/v1/dotnet-install.sh -O /tmp/dotnet-install.sh \
     && chmod +x /tmp/dotnet-install.sh \
-    && /tmp/dotnet-install.sh --channel 10.0 --install-dir /usr/share/dotnet \
+    && /tmp/dotnet-install.sh --channel "${DOTNET_VERSION}" --install-dir /usr/share/dotnet \
     && ln -s /usr/share/dotnet/dotnet /usr/local/bin/dotnet \
     && rm /tmp/dotnet-install.sh
 
@@ -311,16 +335,16 @@ RUN apt-get install -y --no-install-recommends \
 
 # Install Bun
 RUN apt-get install -y --no-install-recommends curl unzip \
-    && curl -fsSL https://bun.sh/install | bash \
+    && curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}" \
     && ln -s /root/.bun/bin/bun /usr/local/bin/bun
 
 # Install Node.js (for V8 benchmark variant)
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+RUN curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" | bash - \
     && apt-get install -y --no-install-recommends nodejs
 
 # Install ICU, NativeAOT prerequisites (clang, zlib), and utilities
 RUN apt-get install -y --no-install-recommends \
-    libicu-dev clang zlib1g-dev time procps \
+    libicu-dev clang zlib1g-dev time procps libcap2-bin \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy secp256k1 libraries from opshin build
@@ -357,17 +381,17 @@ COPY --from=build-plutuz /src/zig-out /bench/plutuz/zig-out
 COPY --from=build-plutuz /src/bench /bench/plutuz/bench
 COPY --from=build-plutuz /src/build.zig /bench/plutuz/build.zig
 
-# opshin: Copy Python 3.14 runtime (Ubuntu 24.04 has 3.12, but opshin was built with 3.14)
-COPY --from=build-opshin /usr/local/bin/python3.14 /usr/local/bin/python3.14
-COPY --from=build-opshin /usr/local/lib/python3.14 /usr/local/lib/python3.14
-COPY --from=build-opshin /usr/local/lib/libpython3.14* /usr/local/lib/
+# opshin: Copy the Python runtime it was built with (Ubuntu 24.04 ships 3.12)
+COPY --from=build-opshin /usr/local/bin/python${PYTHON_VERSION} /usr/local/bin/python${PYTHON_VERSION}
+COPY --from=build-opshin /usr/local/lib/python${PYTHON_VERSION} /usr/local/lib/python${PYTHON_VERSION}
+COPY --from=build-opshin /usr/local/lib/libpython${PYTHON_VERSION}* /usr/local/lib/
 RUN ldconfig
 COPY --from=build-opshin /src /bench/opshin
 # Copy our benchmark script into opshin dir (not part of upstream repo)
 COPY scripts/opshin_bench.py /bench/opshin/bench_plutus_use_cases.py
 
 # Haskell: compiled Criterion benchmark binary (data loaded from /bench/data/ at runtime)
-COPY --from=build-haskell /src/dist-newstyle/build/x86_64-linux/ghc-9.6.4/plutus-benchmark-0.1.0.0/b/validation/build/validation/validation /bench/haskell/bin/validation
+COPY --from=build-haskell /validation-bin /bench/haskell/bin/validation
 
 # Scalus: full sbt project + compiled JMH benchmarks (JMH needs sbt at runtime)
 COPY --from=build-scalus /src /bench/scalus
@@ -381,7 +405,7 @@ COPY --from=build-julc /src/julc-benchmark/build/libs/*-jmh.jar /bench/julc/julc
 
 # Install JDK 21 (full JDK: sbt recompiles Scalus Java sources with --release 11) for Scalus + GHC runtime deps for Haskell + libssl runtime for llvm-uplc
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-21-jdk-headless \
+    openjdk-${JDK_VERSION}-jdk-headless \
     libgmp10 libsodium-dev libsecp256k1-dev libstdc++6 libssl3t64 \
     && rm -rf /var/lib/apt/lists/* \
     && ldconfig
@@ -417,6 +441,10 @@ COPY parsers/ /bench/parsers/
 COPY report/ /bench/report/
 
 RUN chmod +x /bench/scripts/*.sh
+
+# The container runs as the host UID, so SYS_NICE from cap_add is only in the
+# bounding set; a file capability lets non-root nice raise priority.
+RUN setcap cap_sys_nice+ep /usr/bin/nice
 
 # Make everything writable so the container can run as any UID
 # Delete .NET obj dirs and sbt target dirs so they get recreated as the running user
