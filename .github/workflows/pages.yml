@@ -19,6 +19,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
     steps:
@@ -28,7 +29,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Generate report
         run: |
-          latest_run=$(find results -mindepth 2 -maxdepth 2 -name unified.csv -printf '%h\n' | sort | tail -n 1)
+          latest_run=$(find results -mindepth 2 -maxdepth 2 -name unified.csv -printf '%h\n' | sort -V | tail -n 1)
           test -n "$latest_run"
           python report/generate_report.py "$latest_run"
       - name: Upload Pages artifact
