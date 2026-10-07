@@ -94,9 +94,10 @@ RUN apt-get update \
     && apt-get install -y curl xz-utils git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL "https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${ZIG_VERSION}.tar.xz" \
+RUN ARCH="$(uname -m)" \
+    && curl -fsSL "https://ziglang.org/download/${ZIG_VERSION}/zig-${ARCH}-linux-${ZIG_VERSION}.tar.xz" \
     | tar -xJ -C /opt \
-    && ln -s /opt/zig-x86_64-linux-${ZIG_VERSION}/zig /usr/local/bin/zig
+    && ln -s /opt/zig-${ARCH}-linux-${ZIG_VERSION}/zig /usr/local/bin/zig
 
 RUN git clone "$PLUTUZ_REPO" /src \
     && cd /src && git checkout "$PLUTUZ_SHA"
@@ -222,7 +223,8 @@ RUN sed -i 's/flags: +with-inline-r/flags: -with-inline-r/' cabal.project \
     && sed -i 's/flags: +with-cert/flags: -with-cert/' cabal.project
 
 RUN cabal update
-RUN cabal build plutus-benchmark:bench:validation -j
+RUN cabal build plutus-benchmark:bench:validation -j \
+    && cp "$(cabal list-bin plutus-benchmark:bench:validation)" /validation-bin
 
 # =============================================================================
 # Build stage: llvm-uplc (C++ / LLVM LLJIT)
@@ -367,7 +369,7 @@ COPY --from=build-opshin /src /bench/opshin
 COPY scripts/opshin_bench.py /bench/opshin/bench_plutus_use_cases.py
 
 # Haskell: compiled Criterion benchmark binary (data loaded from /bench/data/ at runtime)
-COPY --from=build-haskell /src/dist-newstyle/build/x86_64-linux/ghc-9.6.4/plutus-benchmark-0.1.0.0/b/validation/build/validation/validation /bench/haskell/bin/validation
+COPY --from=build-haskell /validation-bin /bench/haskell/bin/validation
 
 # Scalus: full sbt project + compiled JMH benchmarks (JMH needs sbt at runtime)
 COPY --from=build-scalus /src /bench/scalus
