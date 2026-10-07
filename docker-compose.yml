@@ -33,5 +33,7 @@ services:
     user: "${UID:-1000}:${GID:-1000}"
     env_file:
       - .env
+    environment:
+      - HOST_CPU
     volumes:
       - ./results:/results

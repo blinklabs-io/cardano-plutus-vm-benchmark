@@ -23,11 +23,27 @@ echo " Cardano Plutus VM Benchmark Suite"
 echo " $(date)"
 echo "============================================="
 
+# arm64 /proc/cpuinfo has no "model name", and lscpu reports "-" for Apple
+# silicon under Docker, so fall back to the vendor; HOST_CPU overrides both
+# because a Docker VM on macOS cannot see the host CPU model.
+detect_cpu() {
+    local model
+    model=$(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2 | xargs)
+    if [[ -z "$model" ]]; then
+        model=$(lscpu 2>/dev/null | awk -F: '/^Model name/ {print $2}' | xargs)
+        [[ "$model" == "-" ]] && model=""
+    fi
+    if [[ -z "$model" ]]; then
+        model=$(lscpu 2>/dev/null | awk -F: '/^Vendor ID/ {print $2}' | xargs)
+    fi
+    echo "${model:-unknown} ($(uname -m))"
+}
+
 # Record hardware fingerprint
 {
     echo "date: $(date -Iseconds)"
     echo "kernel: $(uname -r)"
-    echo "cpu: $(grep 'model name' /proc/cpuinfo | head -1 | cut -d: -f2 | xargs)"
+    echo "cpu: ${HOST_CPU:-$(detect_cpu)}"
     echo "cores: $(nproc)"
     echo "memory: $(free -h | awk '/Mem:/ {print $2}')"
 } > "$RUN_DIR/environment.txt"
