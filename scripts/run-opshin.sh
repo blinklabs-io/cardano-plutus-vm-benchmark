@@ -23,8 +23,8 @@ with open('bench_plutus_use_cases.py', 'w') as f:
     f.write(code)
 "
 
-# Run benchmark (use Python 3.14 from build stage, not Ubuntu's 3.12)
-python3.14 bench_plutus_use_cases.py 2>&1 | tee "$RUN_DIR/opshin-raw.log"
+# Run benchmark (use the Python from the build stage, not Ubuntu's 3.12)
+"python${PYTHON_VERSION:-3.14}" bench_plutus_use_cases.py 2>&1 | tee "$RUN_DIR/opshin-raw.log"
 
 # Parse into unified CSV
 python3 /bench/parsers/parse_opshin.py "$RUN_DIR/opshin-raw.log" > "$RUN_DIR/opshin.csv"

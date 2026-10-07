@@ -26,6 +26,13 @@ services:
         - JULC_SHA
         - LLVM_UPLC_REPO
         - LLVM_UPLC_SHA
+        - DOTNET_VERSION
+        - RUST_VERSION
+        - GO_VERSION
+        - BUN_VERSION
+        - PYTHON_VERSION
+        - JDK_VERSION
+        - NODE_MAJOR
         - ZIG_VERSION
         - GHC_VERSION
         - JDK_SDK_VERSION
