@@ -36,7 +36,7 @@ Builds 6 VMs from source inside Docker, runs each VM's **native benchmark framew
 
 ## What's Measured
 
-Each VM: **flat-decode + CEK evaluate** on 78 real-world Plutus smart contract scripts (auction, escrow, uniswap, stablecoin, etc.).
+Each VM: **flat-decode + CEK evaluate** on 89 real-world Plutus smart contract scripts (auction, escrow, uniswap, stablecoin, etc.).
 
 All VMs use the same canonical `.flat` test data committed in `data/plutus_use_cases/`.
 
@@ -75,7 +75,7 @@ docker compose run --rm benchmark
 ## Project Structure
 
 ```
-data/plutus_use_cases/    # 78 canonical .flat benchmark scripts
+data/plutus_use_cases/    # 89 canonical .flat benchmark scripts
 Dockerfile                # Multi-stage: build all VMs, single ubuntu:24.04 runtime
 docker-compose.yml        # One-command orchestration
 .env              # Pinned git SHAs and toolchain versions
