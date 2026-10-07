@@ -52,6 +52,9 @@ docker compose run --rm benchmark
 
 # Run specific VMs only
 docker compose run --rm -e BENCH_VMS=chrysalis,uplc-turbo benchmark
+
+# Record the host CPU when the container cannot see it (e.g. Docker on macOS)
+HOST_CPU="Apple M4 Pro" docker compose run --rm benchmark
 ```
 
 Results are written to `./results/<date>/`:
