@@ -30,7 +30,7 @@ services:
         - LLVM_VERSION
     cap_add:
       - SYS_NICE
-    user: "${UID:-1000}:${GID:-1000}"
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     env_file:
       - .env
     volumes:
