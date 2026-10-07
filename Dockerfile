@@ -49,7 +49,7 @@ RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.to
 # =============================================================================
 # Build stage: uplc-turbo bytecode VM (Rust / Criterion)
 # =============================================================================
-FROM rust:1.94-bookworm AS build-uplc-turbo-bc
+FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo-bc
 
 ARG UPLC_TURBO_BC_REPO
 ARG UPLC_TURBO_BC_SHA
@@ -310,6 +310,8 @@ ARG BUN_VERSION
 ARG PYTHON_VERSION
 ARG JDK_VERSION
 ARG NODE_MAJOR
+
+ENV PYTHON_VERSION=${PYTHON_VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV HOME=/root
