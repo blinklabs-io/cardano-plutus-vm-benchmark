@@ -36,6 +36,21 @@ WORKDIR /src
 RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.toml
 
 # =============================================================================
+# Build stage: uplc-turbo bytecode VM (Rust / Criterion)
+# =============================================================================
+FROM rust:1.94-bookworm AS build-uplc-turbo-bc
+
+ARG UPLC_TURBO_BC_REPO
+ARG UPLC_TURBO_BC_SHA
+
+RUN git clone "$UPLC_TURBO_BC_REPO" /src \
+    && cd /src && git checkout "$UPLC_TURBO_BC_SHA"
+
+WORKDIR /src
+
+RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.toml
+
+# =============================================================================
 # Build stage: Plutigo (Go / testing.B)
 # =============================================================================
 FROM golang:1.26-bookworm AS build-plutigo
@@ -53,7 +68,7 @@ RUN CGO_ENABLED=0 go test -c -o /plutigo-bench ./tests/
 # =============================================================================
 # Build stage: blaze-plutus (TypeScript / Vitest bench)
 # =============================================================================
-FROM oven/bun:1.3.10-debian AS build-blaze
+FROM oven/bun:1.3.14-debian AS build-blaze
 
 ARG BLAZE_REPO
 ARG BLAZE_SHA
@@ -327,6 +342,13 @@ COPY --from=build-uplc-turbo /src/crates/uplc/Cargo.toml /bench/uplc-turbo/crate
 COPY --from=build-uplc-turbo /src/Cargo.toml /bench/uplc-turbo/Cargo.toml
 COPY --from=build-uplc-turbo /src/Cargo.lock /bench/uplc-turbo/Cargo.lock
 
+# uplc-turbo bytecode VM: compiled bench binary + data
+COPY --from=build-uplc-turbo-bc /src/target /bench/uplc-turbo-bc/target
+COPY --from=build-uplc-turbo-bc /src/crates/uplc/benches /bench/uplc-turbo-bc/crates/uplc/benches
+COPY --from=build-uplc-turbo-bc /src/crates/uplc/Cargo.toml /bench/uplc-turbo-bc/crates/uplc/Cargo.toml
+COPY --from=build-uplc-turbo-bc /src/Cargo.toml /bench/uplc-turbo-bc/Cargo.toml
+COPY --from=build-uplc-turbo-bc /src/Cargo.lock /bench/uplc-turbo-bc/Cargo.lock
+
 # Plutigo: compiled test binary
 COPY --from=build-plutigo /plutigo-bench /bench/plutigo/plutigo-bench
 
@@ -360,9 +382,9 @@ RUN ln -sf /opt/sbt/bin/sbt /usr/local/bin/sbt
 # Julc: fat JMH benchmark JAR (no sbt/gradle needed at runtime)
 COPY --from=build-julc /src/julc-benchmark/build/libs/*-jmh.jar /bench/julc/julc-benchmark-jmh.jar
 
-# Install JDK 21 for Scalus + GHC runtime deps for Haskell + libssl runtime for llvm-uplc
+# Install JDK 21 (full JDK: sbt recompiles Scalus Java sources with --release 11) for Scalus + GHC runtime deps for Haskell + libssl runtime for llvm-uplc
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-21-jre-headless \
+    openjdk-21-jdk-headless \
     libgmp10 libsodium-dev libsecp256k1-dev libstdc++6 libssl3t64 \
     && rm -rf /var/lib/apt/lists/* \
     && ldconfig
