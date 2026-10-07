@@ -14,7 +14,7 @@ ARG CHRYSALIS_REPO
 ARG CHRYSALIS_SHA
 
 RUN git clone "$CHRYSALIS_REPO" /src \
-    && cd /src && git checkout "$CHRYSALIS_SHA"
+    && cd /src && (git checkout "$CHRYSALIS_SHA" || (git fetch origin "$CHRYSALIS_SHA" && git checkout "$CHRYSALIS_SHA"))
 
 WORKDIR /src
 RUN dotnet restore benchmarks/PlutusBench/PlutusBench.csproj
@@ -29,7 +29,7 @@ ARG UPLC_TURBO_REPO
 ARG UPLC_TURBO_SHA
 
 RUN git clone "$UPLC_TURBO_REPO" /src \
-    && cd /src && git checkout "$UPLC_TURBO_SHA"
+    && cd /src && (git checkout "$UPLC_TURBO_SHA" || (git fetch origin "$UPLC_TURBO_SHA" && git checkout "$UPLC_TURBO_SHA"))
 
 WORKDIR /src
 
@@ -44,7 +44,7 @@ ARG PLUTIGO_REPO
 ARG PLUTIGO_SHA
 
 RUN git clone "$PLUTIGO_REPO" /src \
-    && cd /src && git checkout "$PLUTIGO_SHA"
+    && cd /src && (git checkout "$PLUTIGO_SHA" || (git fetch origin "$PLUTIGO_SHA" && git checkout "$PLUTIGO_SHA"))
 
 WORKDIR /src
 RUN go mod download
@@ -61,7 +61,7 @@ ARG BLAZE_SHA
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 RUN git clone "$BLAZE_REPO" /src \
-    && cd /src && git checkout "$BLAZE_SHA"
+    && cd /src && (git checkout "$BLAZE_SHA" || (git fetch origin "$BLAZE_SHA" && git checkout "$BLAZE_SHA"))
 
 WORKDIR /src
 RUN bun install
@@ -84,7 +84,7 @@ RUN curl -fsSL "https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${Z
     && ln -s /opt/zig-x86_64-linux-${ZIG_VERSION}/zig /usr/local/bin/zig
 
 RUN git clone "$PLUTUZ_REPO" /src \
-    && cd /src && git checkout "$PLUTUZ_SHA"
+    && cd /src && (git checkout "$PLUTUZ_SHA" || (git fetch origin "$PLUTUZ_SHA" && git checkout "$PLUTUZ_SHA"))
 
 WORKDIR /src
 # Patch build.zig to install the bench binary (upstream only has a run step)
@@ -104,7 +104,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone "$OPSHIN_REPO" /src \
-    && cd /src && git checkout "$OPSHIN_SHA"
+    && cd /src && (git checkout "$OPSHIN_SHA" || (git fetch origin "$OPSHIN_SHA" && git checkout "$OPSHIN_SHA"))
 
 # Build secp256k1 from source (script uses sudo, but we're root in Docker)
 RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* \
@@ -131,7 +131,7 @@ RUN curl -fsSL "https://github.com/sbt/sbt/releases/download/v1.10.11/sbt-1.10.1
     && ln -s /opt/sbt/bin/sbt /usr/local/bin/sbt
 
 RUN git clone "$SCALUS_REPO" /src \
-    && cd /src && git checkout "$SCALUS_SHA"
+    && cd /src && (git checkout "$SCALUS_SHA" || (git fetch origin "$SCALUS_SHA" && git checkout "$SCALUS_SHA"))
 
 WORKDIR /src
 
@@ -159,7 +159,7 @@ ENV JAVA_HOME=/root/.sdkman/candidates/java/current
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 RUN git clone "$JULC_REPO" /src \
-    && cd /src && git checkout "$JULC_SHA"
+    && cd /src && (git checkout "$JULC_SHA" || (git fetch origin "$JULC_SHA" && git checkout "$JULC_SHA"))
 
 WORKDIR /src
 
@@ -198,7 +198,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ENV PATH="/root/.ghcup/bin:${PATH}"
 
 RUN git clone "$HASKELL_REPO" /src \
-    && cd /src && git checkout "$HASKELL_SHA"
+    && cd /src && (git checkout "$HASKELL_SHA" || (git fetch origin "$HASKELL_SHA" && git checkout "$HASKELL_SHA"))
 
 WORKDIR /src
 
@@ -251,7 +251,7 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone "$LLVM_UPLC_REPO" /src \
-    && cd /src && git checkout "$LLVM_UPLC_SHA" \
+    && cd /src && (git checkout "$LLVM_UPLC_SHA" || (git fetch origin "$LLVM_UPLC_SHA" && git checkout "$LLVM_UPLC_SHA")) \
     && git submodule update --init --recursive
 
 WORKDIR /src
