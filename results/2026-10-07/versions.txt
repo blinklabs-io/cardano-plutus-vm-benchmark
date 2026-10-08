@@ -1,0 +1,25 @@
+# Baseline: VM pins from main @ 09993f1 (the 2026-05-09 results),
+# built with the integration/all-fixes harness @ 5dfcdb9 plus the bytecode fetch-by-SHA fix (PR #24).
+# On main, uplc-turbo-bc ran bytecode mode against the uplc-turbo build, so both use the same pin.
+CHRYSALIS_SHA=78529da4280ebc2d0641b5a17115923c85503961 https://github.com/SAIB-Inc/Chrysalis.git
+UPLC_TURBO_SHA=6f0ef8e42d79654691677eb3ad3033aff35f99ad https://github.com/pragma-org/uplc.git
+UPLC_TURBO_BC_SHA=6f0ef8e42d79654691677eb3ad3033aff35f99ad https://github.com/pragma-org/uplc.git
+PLUTIGO_SHA=fcb4c036dd128837985a97ad0970dbc03f31497c https://github.com/blinklabs-io/plutigo.git
+BLAZE_SHA=28367d38e18103daf9da42abce227d06486eea87 https://github.com/butaneprotocol/blaze-cardano.git
+PLUTUZ_SHA=33b812dbcf88f6851286e54cb93a4a443353f94c https://github.com/utxo-company/plutuz.git
+OPSHIN_SHA=8216a056fa8eacace597b9a335174cc054c12bbe https://github.com/OpShin/uplc.git
+HASKELL_SHA=318c729391d2af395970867964e5db7f58d8ff2a https://github.com/IntersectMBO/plutus.git
+SCALUS_SHA=c3718ff123913ed49f424cc4ff64000a42b6def2 https://github.com/scalus3/scalus.git
+JULC_SHA=b4686eec87eb7afb51b44e72d13d29a99306dd54 https://github.com/bloxbean/julc.git
+LLVM_UPLC_SHA=52089dae6a1799c4bccc46840b47248a8e8a523c https://github.com/SeungheonOh/llvm-uplc.git
+BUN_VERSION=1.3.10
+NODE_MAJOR=22
+DOTNET_VERSION=10.0
+RUST_VERSION=1.94
+GO_VERSION=1.26
+ZIG_VERSION=0.15.2
+PYTHON_VERSION=3.14
+GHC_VERSION=9.6.4
+JDK_VERSION=21
+JDK_SDK_VERSION=25.0.2-graal
+LLVM_VERSION=22.1.0
