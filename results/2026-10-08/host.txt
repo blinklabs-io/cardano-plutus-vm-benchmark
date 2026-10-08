@@ -1,0 +1,8 @@
+architecture: x86_64 (Docker image linux/amd64)
+cpu: 11th Gen Intel(R) Core(TM) i9-11900 @ 2.50GHz (Rocket Lake), max 5.2 GHz
+topology: 1 socket, 8 cores, 2 threads per core, 16 logical CPUs
+cache: L1d 48 KiB/core, L1i 32 KiB/core, L2 512 KiB/core, L3 16 MiB shared
+memory: 61 GiB
+os: Ubuntu 25.10, kernel 6.17.0-41-generic, bare metal (no hypervisor)
+cpufreq: intel_pstate, powersave governor, turbo enabled
+docker: 29.1.3, compose 2.40.3
