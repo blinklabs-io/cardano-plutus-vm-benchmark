@@ -24,8 +24,8 @@ dotnet run -c Release --project benchmarks/PlutusBench -- \
 # Copy BenchmarkDotNet artifacts (BDN writes to cwd, not project dir)
 cp -r BenchmarkDotNet.Artifacts/results/* "$RUN_DIR/" 2>/dev/null || true
 
-# Parse into unified CSV
-python3 /bench/parsers/parse_benchmarkdotnet.py "$RUN_DIR" > "$RUN_DIR/chrysalis.csv"
+# Parse this run's own artifacts: RUN_DIR may also hold the AOT run's reports.
+python3 /bench/parsers/parse_benchmarkdotnet.py chrysalis BenchmarkDotNet.Artifacts/results > "$RUN_DIR/chrysalis.csv"
 
 # Fill in -1 for any scripts that were given but produced no result
 python3 /bench/parsers/fill_failures.py "$RUN_DIR/chrysalis.csv" "$DATA_DIR" chrysalis "$RUN_DIR/chrysalis-raw.log"
