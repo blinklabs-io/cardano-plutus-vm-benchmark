@@ -21,11 +21,13 @@ dotnet run -c Release --project benchmarks/PlutusBench -- \
     --exporters json \
     2>&1 | tee "$RUN_DIR/chrysalis-aot-raw.log"
 
-# Copy BenchmarkDotNet artifacts
-cp -r BenchmarkDotNet.Artifacts/results/* "$RUN_DIR/" 2>/dev/null || true
+# BDN names reports after the benchmark class, not the runtime, so copying
+# into RUN_DIR itself would overwrite the JIT run's reports.
+mkdir -p "$RUN_DIR/chrysalis-aot"
+cp -r BenchmarkDotNet.Artifacts/results/* "$RUN_DIR/chrysalis-aot/" 2>/dev/null || true
 
-# Parse into unified CSV
-python3 /bench/parsers/parse_benchmarkdotnet.py chrysalis-aot "$RUN_DIR" > "$RUN_DIR/chrysalis-aot.csv"
+# Parse this run's own artifacts, not every report under RUN_DIR
+python3 /bench/parsers/parse_benchmarkdotnet.py chrysalis-aot BenchmarkDotNet.Artifacts/results > "$RUN_DIR/chrysalis-aot.csv"
 
 # Fill in -1 for any scripts that were given but produced no result
 python3 /bench/parsers/fill_failures.py "$RUN_DIR/chrysalis-aot.csv" "$DATA_DIR" chrysalis-aot "$RUN_DIR/chrysalis-aot-raw.log"
