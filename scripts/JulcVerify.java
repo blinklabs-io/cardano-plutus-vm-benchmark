@@ -29,7 +29,9 @@ public class JulcVerify {
                     if (!result.isSuccess()) {
                         System.out.println("EVAL_FAIL: " + name + " " + result.getClass().getSimpleName());
                     }
-                } catch (Exception e) {
+                } catch (Throwable e) {
+                    System.out.println("EVAL_FAIL: " + name + " " + e);
+                }
                     System.out.println("EVAL_FAIL: " + name + " " + e);
                 }
             }
