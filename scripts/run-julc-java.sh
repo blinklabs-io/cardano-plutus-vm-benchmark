@@ -17,6 +17,13 @@ cd "$BENCH_DIR"
 # Build file list for JMH -p parameter
 FILE_LIST=$(ls data/*.flat | xargs -I{} basename {} | paste -sd, -)
 
+# JMH times failed evaluations too, so record them first (EVAL_FAIL lines are
+# turned into -1 rows by fill_failures.py)
+/opt/jdk-25/bin/java \
+    -cp julc-benchmark-jmh.jar \
+    /bench/scripts/JulcVerify.java "$DATA_DIR" \
+    2>&1 | tee "$RUN_DIR/julc-java-raw.log"
+
 # Run JMH benchmark with CekJavaBenchmark, CSV output
 /opt/jdk-25/bin/java \
     -jar julc-benchmark-jmh.jar \
@@ -24,7 +31,7 @@ FILE_LIST=$(ls data/*.flat | xargs -I{} basename {} | paste -sd, -)
     -rff "$RUN_DIR/julc-java-jmh.csv" \
     -p "file=$FILE_LIST" \
     ".*CekJavaBenchmark" \
-    2>&1 | tee "$RUN_DIR/julc-java-raw.log"
+    2>&1 | tee -a "$RUN_DIR/julc-java-raw.log"
 
 # Parse JMH CSV into unified CSV
 python3 /bench/parsers/parse_jmh.py "$RUN_DIR/julc-java-jmh.csv" julc-java > "$RUN_DIR/julc-java.csv"
