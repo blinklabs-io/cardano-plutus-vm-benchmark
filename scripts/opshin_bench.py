@@ -49,10 +49,12 @@ grand_total_ns = 0
 grand_total_iters = 0
 
 for name, cbor_flat in scripts.items():
-    # Verify it works
+    # Verify it works; eval() returns an evaluation error as the result
+    # rather than raising it
     try:
         prog = unflatten(cbor_flat)
-        eval(prog)
+        if isinstance(eval(prog).result, Exception):
+            raise RuntimeError("evaluation failed")
     except Exception:
         print(f"  {name:<35} SKIP (eval error)")
         continue
