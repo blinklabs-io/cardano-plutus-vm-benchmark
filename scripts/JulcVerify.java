@@ -32,8 +32,6 @@ public class JulcVerify {
                 } catch (Throwable e) {
                     System.out.println("EVAL_FAIL: " + name + " " + e);
                 }
-                    System.out.println("EVAL_FAIL: " + name + " " + e);
-                }
             }
         }
     }
