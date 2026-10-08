@@ -3,7 +3,7 @@ set -euo pipefail
 
 RUN_DIR="$1"
 DATA_DIR="/bench/data/plutus_use_cases"
-BENCH_DIR="/bench/uplc-turbo"
+BENCH_DIR="/bench/uplc-turbo-bc"
 
 echo "uplc-turbo Bytecode (Rust / Criterion / AOT compiled)"
 

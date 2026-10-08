@@ -17,7 +17,7 @@ cd "$BENCH_DIR"
 
 # Run compiled Go test binary with benchmark flags
 ./plutigo-bench \
-    -test.bench=BenchmarkFlatFiles \
+    -test.bench='^BenchmarkFlatFiles$' \
     -test.benchmem \
     -test.run='^$' \
     -test.count=1 \
