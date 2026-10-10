@@ -199,7 +199,7 @@ RUN ./gradlew :julc-benchmark:jmhJar --no-daemon
 # =============================================================================
 # Build stage: plutus-core / Haskell (GHC / Criterion)
 # =============================================================================
-FROM debian:bookworm AS build-haskell
+FROM ghcr.io/blinklabs-io/haskell:9.6.7-3.12.1.0-3 AS build-haskell
 
 ARG HASKELL_REPO
 ARG HASKELL_SHA
@@ -208,24 +208,6 @@ ARG GHC_VERSION
 ENV BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
     BOOTSTRAP_HASKELL_GHC_VERSION=${GHC_VERSION} \
     BOOTSTRAP_HASKELL_INSTALL_NO_STACK=1
-
-RUN apt-get update \
-    && apt-get install -y curl git pkg-config build-essential \
-       libsodium-dev libsecp256k1-dev zlib1g-dev libgmp-dev libnuma-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install libblst (BLS12-381 crypto required by cardano-crypto-class)
-RUN git clone --depth 1 --branch v0.3.14 https://github.com/supranational/blst.git /tmp/blst \
-    && cd /tmp/blst && ./build.sh \
-    && cp libblst.a /usr/local/lib/ \
-    && cp bindings/blst.h bindings/blst_aux.h /usr/local/include/ \
-    && mkdir -p /usr/local/lib/pkgconfig \
-    && printf 'prefix=/usr/local\nlibdir=${prefix}/lib\nincludedir=${prefix}/include\nName: libblst\nVersion: 0.3.14\nDescription: BLS12-381 library\nLibs: -L${libdir} -lblst\nCflags: -I${includedir}\n' > /usr/local/lib/pkgconfig/libblst.pc \
-    && rm -rf /tmp/blst
-
-# Install GHC + cabal via ghcup
-RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-ENV PATH="/root/.ghcup/bin:${PATH}"
 
 RUN git clone "$HASKELL_REPO" /src \
     && cd /src && (git checkout "$HASKELL_SHA" || (git fetch origin "$HASKELL_SHA" && git checkout "$HASKELL_SHA"))
