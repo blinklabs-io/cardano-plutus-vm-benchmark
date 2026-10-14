@@ -331,6 +331,7 @@ RUN apt-get install -y --no-install-recommends \
 
 # Copy secp256k1 libraries from opshin build
 COPY --from=build-opshin /usr/local/lib/libsecp256k1* /usr/local/lib/
+COPY --from=build-haskell /usr/local/lib/libsecp256k1.so.2* /usr/local/lib/
 RUN ldconfig
 
 # --- Copy VM builds ---
