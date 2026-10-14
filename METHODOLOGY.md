@@ -34,7 +34,7 @@ Each VM uses its own benchmark framework rather than a uniform harness:
 | Plutuz | Custom | 5 iterations | 50 | 5s |
 | opshin-uplc | Custom | 5 iterations | 50 | 5s |
 | llvm-uplc | Custom (`uplcbench`) | 5 iterations | 50 | 5s |
-| Scalus, Julc | JMH (`-wi 1 -i 1 -f 1`) | 1 iteration | 1 | 5s |
+| Scalus, Julc | JMH (`-wi 1 -i 3 -f 1`) | 1 iteration | 3 | 5s |
 
 Each framework handles warmup, iteration count, and outlier detection using its own proven methodology. Reimplementing this in a uniform harness would be less accurate and harder to maintain.
 
@@ -60,7 +60,7 @@ Times are in **nanoseconds**. The summary uses **geometric mean** across all 89 
 
 - **Different statistical methodologies**: each framework computes mean/median/stddev differently. BenchmarkDotNet and Criterion are the most sophisticated; Go bench and the custom frameworks are simpler.
 - **Go bench lacks stddev/min/max**: only reports mean ns/op in default output.
-- **Placeholder columns**: Vitest's table output has no median, so blaze `median_ns` repeats `mean_ns`, and `stddev_ns` is `mean × RME`, a confidence margin rather than a standard deviation. JMH takes one measurement sample and reports no error (`NaN`), so Scalus and Julc `stddev_ns` is 0 and `median_ns`, `min_ns` and `max_ns` equal the mean: the statistic is unavailable, not zero. Rankings use `mean_ns` only.
+- **Unavailable statistics**: `-1` marks a statistic the framework does not provide. Vitest's text output has no median or standard deviation; its RME is retained in the raw log and is not a standard deviation. JMH CSV provides a confidence interval, not median, minimum, maximum, or standard deviation; the raw JMH CSV retains that confidence interval. Rankings use `mean_ns` only.
 - **Short BenchmarkDotNet job**: `--job short` takes 3 measurement iterations, so on noisy scripts the Chrysalis 99.9% confidence error can exceed the mean.
 - **JIT warmup variance**: .NET and Node.js/Bun have JIT compilation, meaning early iterations are slower. Their frameworks account for this, but it's a fundamentally different execution model than ahead-of-time compiled VMs.
 - **Memory comparison**: each VM uses different allocators and GC strategies. Memory numbers are not directly comparable across languages.

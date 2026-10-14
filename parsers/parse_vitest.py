@@ -61,10 +61,10 @@ def parse_json(json_path: str) -> None:
             min_ns = int(min_s * 1e9)
             max_ns = int(max_s * 1e9)
 
-            rme = bench.get("rme", 0)
-            stddev_ns = int(mean_ns * rme / 100) if rme else 0
+            stddev_ns = -1
 
-            median_ns = int(bench.get("p50", mean_s) * 1e9)
+            p50 = bench.get("p50")
+            median_ns = int(p50 * 1e9) if p50 is not None else -1
 
             print(
                 f"{VM_NAME},{name},"
@@ -88,14 +88,13 @@ def parse_text(log_path: str) -> None:
         min_ms = float(m.group(2))
         max_ms = float(m.group(3))
         mean_ms = float(m.group(4))
-        rme_pct = float(m.group(5))
         iterations = int(m.group(6))
 
         mean_ns = int(mean_ms * 1_000_000)
         min_ns = int(min_ms * 1_000_000)
         max_ns = int(max_ms * 1_000_000)
-        median_ns = mean_ns  # table doesn't show median separately
-        stddev_ns = int(mean_ns * rme_pct / 100)
+        median_ns = -1
+        stddev_ns = -1
 
         print(
             f"{VM_NAME},{name},"
