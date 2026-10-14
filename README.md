@@ -4,28 +4,27 @@ Reproducible, cross-language benchmark suite for Plutus (UPLC) virtual machine i
 
 Builds 10 VMs from source inside Docker, runs each VM's **native benchmark framework**, and generates a unified comparison report. [View full results](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/)
 
-## Latest Results (2026-05-09)
+## Latest Results (2026-10-13)
 
-> AMD Ryzen 9 9900X3D, 24 cores, 47 GB RAM, Ubuntu 24.04 (WSL2)
+> Host: devastator — Intel Core i7-6700 @ 3.40 GHz, 8 logical cores, 15 GiB RAM, Ubuntu 24.04.5 LTS
 
 | VM | Language | Geo Mean | vs Fastest |
 |---|---|---|---|
-| **llvm-uplc (JIT)** | C++ / LLVM | 95.09 us | 1.00x |
-| **Scalus (JIT)** | Scala / JVM | 169.09 us | 1.78x |
-| **plutus-core** | Haskell | 176.05 us | 1.85x |
-| **uplc-turbo (bytecode)** | Rust | 205.45 us | 2.16x |
-| **Julc** | Java / GraalVM | 247.62 us | 2.60x |
-| **uplc-turbo (AST)** | Rust | 267.72 us | 2.82x |
-| **Scalus (CEK)** | Scala / JVM | 282.70 us | 2.97x |
-| **Plutuz** | Zig | 365.69 us | 3.85x |
-| **Chrysalis (JIT)** | C# / .NET | 386.98 us | 4.07x |
-| **Chrysalis (AOT)** | C# / .NET | 388.27 us | 4.08x |
-| **Plutigo** | Go | 551.81 us | 5.80x |
-| **blaze-plutus (JSC)** | TypeScript | 1.20 ms | 12.66x |
-| **blaze-plutus (V8)** | TypeScript | 1.21 ms | 12.72x |
-| **opshin** | Python | 49.69 ms | 522.52x |
+| **llvm-uplc (JIT)** | C++ / LLVM | 166.44 us | 1.00x |
+| **uplc-turbo (bytecode)** | Rust | 300.99 us | 1.81x |
+| **Plutigo** | Go | 371.70 us | 2.23x |
+| **uplc-turbo (AST)** | Rust | 600.50 us | 3.61x |
+| **Julc** | Java / GraalVM | 654.84 us | 3.93x |
+| **Plutuz** | Zig | 668.12 us | 4.01x |
+| **Scalus (CEK)** | Scala / JVM | 673.68 us | 4.05x |
+| **Chrysalis (JIT)** | C# / .NET | 725.66 us | 4.36x |
+| **Chrysalis (AOT)** | C# / .NET | 764.24 us | 4.59x |
+| **Scalus (JIT)** | Scala / JVM | 905.83 us | 5.44x |
+| **blaze-plutus (V8)** | TypeScript | 2.34 ms | 14.06x |
+| **blaze-plutus (JSC)** | TypeScript | 2.36 ms | 14.15x |
+| **opshin** | Python | 56.25 ms | 337.95x |
 
-*Geometric mean of 89 plutus_use_cases scripts. Lower is better. Copied from [`results/2026-05-09/report.md`](results/2026-05-09/report.md); refresh this table whenever a new results directory is committed.*
+*Geometric mean of 89 plutus_use_cases scripts. Lower is better. Copied from [`results/2026-10-13/report.md`](results/2026-10-13/report.md); refresh this table whenever a new results directory is committed.*
 
 ## VMs Benchmarked
 
