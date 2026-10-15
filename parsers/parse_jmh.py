@@ -50,19 +50,14 @@ def parse(csv_path: str, vm_filter: str | None = None) -> None:
                 continue
 
             score = float(row["Score"])
-            error_str = row["Score Error (99.9%)"]
-            error = float(error_str) if error_str != "NaN" else 0.0
             unit = row["Unit"]
             samples = int(row["Samples"])
 
             multiplier = UNIT_TO_NS.get(unit, 1)
             mean_ns = int(score * multiplier)
-            # Use error as stddev approximation
-            stddev_ns = int(error * multiplier)
-            # JMH avgt doesn't give min/max directly
-            min_ns = int((score - error) * multiplier)
-            max_ns = int((score + error) * multiplier)
-            median_ns = mean_ns
+            # Score Error is a confidence interval, not a standard deviation.
+            # JMH's CSV output does not include median, min, max, or stddev.
+            median_ns = min_ns = max_ns = stddev_ns = -1
 
             print(
                 f"{vm_name},{script},"

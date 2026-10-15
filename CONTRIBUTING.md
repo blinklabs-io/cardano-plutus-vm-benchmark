@@ -103,7 +103,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/) for clear an
 ### Examples
 
 ```
-feat(docker): add Haskell plutus-core as 7th VM
+feat(docker): add Haskell plutus-core benchmark
 fix(parsers): handle missing stddev in Go bench output
 chore: update pinned SHAs in .env
 bench: results 2026-03-15

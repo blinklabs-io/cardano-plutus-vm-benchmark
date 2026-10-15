@@ -27,7 +27,7 @@ FILE_LIST=$(ls data/*.flat | xargs -I{} basename {} | paste -sd, -)
 # Run JMH benchmark with CekJavaBenchmark, CSV output
 /opt/jdk-25/bin/java \
     -jar julc-benchmark-jmh.jar \
-    -i 1 -wi 1 -w 5s -r 5s -f 1 -t 1 \
+    -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 \
     -rff "$RUN_DIR/julc-java-jmh.csv" \
     -p "file=$FILE_LIST" \
     ".*CekJavaBenchmark" \
