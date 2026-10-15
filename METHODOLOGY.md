@@ -27,6 +27,7 @@ Each VM uses its own benchmark framework rather than a uniform harness:
 
 | VM | Framework | Warmup | Min Iterations | Time Budget |
 |---|---|---|---|---|
+| plutus-core | Criterion (Haskell) | Automatic | Automatic | Automatic |
 | Chrysalis | BenchmarkDotNet (`--job short`) | 3 iterations | 3 | Auto |
 | uplc-turbo | Criterion.rs | Automatic (warmup phase) | Auto | Auto |
 | Plutigo | Go testing.B | Automatic (b.N scaling) | Auto | 5s |
