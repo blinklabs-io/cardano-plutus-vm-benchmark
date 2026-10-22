@@ -10,7 +10,7 @@
 # FROM are usable in FROM lines and must be re-declared inside a stage.
 ARG DOTNET_VERSION=10.0
 ARG RUST_VERSION=1.94
-ARG GO_VERSION=1.26
+ARG GO_VERSION=1.27.3
 ARG BUN_VERSION=1.3.10
 ARG PYTHON_VERSION=3.14
 ARG JDK_VERSION=21
@@ -66,7 +66,7 @@ RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.to
 # =============================================================================
 # Build stage: Plutigo (Go / testing.B)
 # =============================================================================
-FROM golang:${GO_VERSION}-bookworm AS build-plutigo
+FROM ghcr.io/blinklabs-io/go:${GO_VERSION}-1 AS build-plutigo
 
 ARG PLUTIGO_REPO
 ARG PLUTIGO_SHA
