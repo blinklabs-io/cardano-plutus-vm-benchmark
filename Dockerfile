@@ -32,15 +32,15 @@ RUN dotnet restore benchmarks/PlutusBench/PlutusBench.csproj
 RUN dotnet build -c Release -p:TreatWarningsAsErrors=false benchmarks/PlutusBench/PlutusBench.csproj
 
 # =============================================================================
-# Build stage: uplc-turbo (Rust / Criterion)
+# Build stage: Amaru UPLC (Rust / Criterion)
 # =============================================================================
-FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo
+FROM rust:${RUST_VERSION}-bookworm AS build-amaru-uplc
 
-ARG UPLC_TURBO_REPO
-ARG UPLC_TURBO_SHA
+ARG AMARU_UPLC_REPO
+ARG AMARU_UPLC_SHA
 
-RUN git clone "$UPLC_TURBO_REPO" /src \
-    && cd /src && (git checkout "$UPLC_TURBO_SHA" || (git fetch origin "$UPLC_TURBO_SHA" && git checkout "$UPLC_TURBO_SHA"))
+RUN git clone "$AMARU_UPLC_REPO" /src \
+    && cd /src && (git checkout "$AMARU_UPLC_SHA" || (git fetch origin "$AMARU_UPLC_SHA" && git checkout "$AMARU_UPLC_SHA"))
 
 WORKDIR /src
 
@@ -339,12 +339,13 @@ RUN ldconfig
 # Chrysalis: full source + build output (BenchmarkDotNet needs project at runtime)
 COPY --from=build-chrysalis /src /bench/chrysalis
 
-# uplc-turbo: compiled bench binary + data
-COPY --from=build-uplc-turbo /src/target /bench/uplc-turbo/target
-COPY --from=build-uplc-turbo /src/crates/uplc/benches /bench/uplc-turbo/crates/uplc/benches
-COPY --from=build-uplc-turbo /src/crates/uplc/Cargo.toml /bench/uplc-turbo/crates/uplc/Cargo.toml
-COPY --from=build-uplc-turbo /src/Cargo.toml /bench/uplc-turbo/Cargo.toml
-COPY --from=build-uplc-turbo /src/Cargo.lock /bench/uplc-turbo/Cargo.lock
+# Amaru UPLC: compiled Criterion benchmark binary
+COPY --from=build-amaru-uplc /src/target /bench/amaru-uplc/target
+COPY --from=build-amaru-uplc /src/crates/uplc/benches /bench/amaru-uplc/crates/uplc/benches
+COPY --from=build-amaru-uplc /src/crates/uplc/Cargo.toml /bench/amaru-uplc/crates/uplc/Cargo.toml
+COPY --from=build-amaru-uplc /src/Cargo.toml /bench/amaru-uplc/Cargo.toml
+COPY --from=build-amaru-uplc /src/Cargo.lock /bench/amaru-uplc/Cargo.lock
+RUN ln -s /bench/amaru-uplc /bench/uplc-turbo
 
 # uplc-turbo bytecode VM: compiled bench binary + data
 COPY --from=build-uplc-turbo-bc /src/target /bench/uplc-turbo-bc/target

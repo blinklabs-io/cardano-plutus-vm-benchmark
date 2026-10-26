@@ -52,7 +52,7 @@ cat "$RUN_DIR/environment.txt"
 echo ""
 
 # Track which VMs to run (default: all)
-VMS="${BENCH_VMS:-chrysalis,chrysalis-aot,uplc-turbo,uplc-turbo-bc,plutigo,blaze-jsc,blaze-v8,plutuz,opshin,haskell,scalus-cek,scalus-jit,julc-java,llvm-uplc-jit}"
+VMS="${BENCH_VMS:-chrysalis,chrysalis-aot,amaru-uplc,uplc-turbo-bc,plutigo,blaze-jsc,blaze-v8,plutuz,opshin,haskell,scalus-cek,scalus-jit,julc-java,llvm-uplc-jit}"
 
 # Without SYS_NICE in the bounding set (plain docker run), exec of the
 # capability-bearing nice fails outright, so probe once and fall back.

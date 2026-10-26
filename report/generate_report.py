@@ -11,11 +11,12 @@ VM_ORDER = [
     "haskell", "scalus-jit", "scalus-cek",
     "julc-java",
     "llvm-uplc-jit",
-    "uplc-turbo-bc", "uplc-turbo",
+    "amaru-uplc", "uplc-turbo-bc", "uplc-turbo",
     "plutuz", "chrysalis", "chrysalis-aot",
     "plutigo", "blaze-jsc", "blaze-v8", "opshin",
 ]
 VM_LABELS = {
+    "amaru-uplc": "Amaru UPLC CEK (Rust)",
     "uplc-turbo": "uplc-turbo AST walker (Rust)",
     "uplc-turbo-bc": "uplc-turbo Bytecode VM (Rust)",
     "plutuz": "Plutuz CEK (Zig)",

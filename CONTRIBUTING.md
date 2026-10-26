@@ -94,6 +94,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/) for clear an
 | `data` | Benchmark data changes |
 | `ci` | GitHub Actions workflow changes |
 | `chrysalis` | Chrysalis VM-specific changes |
+| `amaru-uplc` | Amaru UPLC benchmark changes |
 | `uplc-turbo` | uplc-turbo VM-specific changes |
 | `plutigo` | Plutigo VM-specific changes |
 | `blaze` | blaze-plutus VM-specific changes |

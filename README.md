@@ -2,43 +2,44 @@
 
 Reproducible, cross-language benchmark suite for Plutus (UPLC) virtual machine implementations.
 
-Builds 10 VMs from source inside Docker, runs each VM's **native benchmark framework**, and generates a unified comparison report. [View full results](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/)
+Builds 11 VMs from source inside Docker, runs each VM's **native benchmark framework**, and generates a unified comparison report. [View full results](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/)
 
-## Latest Results (2026-10-14)
+## Latest Results (2026-10-26)
 
 > Host: devastator — Intel Core i7-6700 @ 3.40 GHz, 8 logical cores, 15 GiB RAM, Ubuntu 24.04.5 LTS
 
 | VM | Language | Geo Mean | vs Fastest |
 |---|---|---|---|
-| **llvm-uplc (JIT)** | C++ / LLVM | 166.18 us | 1.00x |
-| **uplc-turbo (bytecode)** | Rust | 302.56 us | 1.82x |
-| **plutus-core (CEK)** | Haskell / GHC | 359.88 us | 2.17x |
-| **Plutigo** | Go | 374.39 us | 2.25x |
-| **uplc-turbo (AST)** | Rust | 597.87 us | 3.60x |
-| **Scalus (JIT)** | Scala / JVM | 632.66 us | 3.81x |
-| **Julc** | Java / GraalVM | 655.44 us | 3.94x |
-| **Plutuz** | Zig | 671.76 us | 4.04x |
-| **Scalus (CEK)** | Scala / JVM | 674.68 us | 4.06x |
-| **Chrysalis (JIT)** | C# / .NET | 721.93 us | 4.34x |
-| **Chrysalis (AOT)** | C# / .NET | 765.82 us | 4.61x |
-| **blaze-plutus (JSC)** | TypeScript | 2.35 ms | 14.13x |
-| **blaze-plutus (V8)** | TypeScript | 2.38 ms | 14.34x |
-| **opshin** | Python | 55.45 ms | 333.70x |
+| **llvm-uplc UPLC→native JIT (C++ / LLVM)** | C++ / LLVM | 165.41 us | 1.00x |
+| **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 174.92 us | 1.06x |
+| **uplc-turbo Bytecode VM (Rust)** | Rust | 297.38 us | 1.80x |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 354.88 us | 2.15x |
+| **Plutigo CEK (Go)** | Go | 445.34 us | 2.69x |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 458.16 us | 2.77x |
+| **Amaru UPLC CEK (Rust)** | Rust | 591.27 us | 3.57x |
+| **Julc CEK (Java / GraalVM)** | Java / GraalVM | 639.38 us | 3.87x |
+| **Plutuz CEK (Zig)** | Zig | 659.34 us | 3.99x |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 722.85 us | 4.37x |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 753.88 us | 4.56x |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 2.26 ms | 13.66x |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 2.30 ms | 13.92x |
+| **opshin CEK (Python / CPython)** | Python / CPython | 53.33 ms | 322.43x |
 
-*Geometric mean of 89 plutus_use_cases scripts. Lower is better. Copied from [`results/2026-10-14/report.md`](results/2026-10-14/report.md); refresh this table whenever a new results directory is committed.*
+*Plutigo v0.9.11 and Amaru UPLC v0.4.0; geometric mean across 89 `plutus_use_cases` scripts. Lower is better. See [`results/2026-10-26/report.md`](results/2026-10-26/report.md) for full results and coverage.*
 
 ## VMs Benchmarked
 
 | VM | Language | Benchmark Framework | Repository |
 |---|---|---|---|
 | **plutus-core** | Haskell / GHC | Criterion | [IntersectMBO/plutus](https://github.com/IntersectMBO/plutus) (`plutus-benchmark`) |
-| **uplc-turbo** | Rust | Criterion.rs | [pragma-org/uplc](https://github.com/pragma-org/uplc) |
+| **Amaru UPLC** | Rust | Criterion.rs | [pragma-org/uplc v0.4.0](https://github.com/pragma-org/uplc/releases/tag/amaru-uplc-v0.4.0) |
 | **uplc-turbo (bytecode)** | Rust | Criterion.rs | [pragma-org/uplc PR #47](https://github.com/pragma-org/uplc/pull/47) branch `pi/bytecode` (unmerged) |
 | **Plutuz** | Zig | Custom (JSON) | [utxo-company/plutuz](https://github.com/utxo-company/plutuz) |
 | **Chrysalis** | C# / .NET | BenchmarkDotNet (JIT + AOT) | [SAIB-Inc/Chrysalis](https://github.com/SAIB-Inc/Chrysalis) |
-| **Plutigo** | Go | testing.B | [blinklabs-io/plutigo](https://github.com/blinklabs-io/plutigo) |
+| **Plutigo v0.9.11** | Go | testing.B | [blinklabs-io/plutigo](https://github.com/blinklabs-io/plutigo) |
 | **blaze-plutus** | TypeScript | Vitest bench (V8 + JSC) | [butaneprotocol/blaze-cardano](https://github.com/butaneprotocol/blaze-cardano) |
 | **opshin-uplc** | Python | Custom | [OpShin/uplc](https://github.com/OpShin/uplc) |
+| **Scalus** | Scala / JVM | JMH | [scalus3/scalus](https://github.com/scalus3/scalus) |
 | **Julc** | Java | JMH (CEK) | [bloxbean/julc](https://github.com/bloxbean/julc) |
 | **llvm-uplc** | C++ / LLVM | Custom (`uplcbench`, JSON) | [SeungheonOh/llvm-uplc](https://github.com/SeungheonOh/llvm-uplc) |
 
@@ -59,7 +60,7 @@ docker compose build
 docker compose run --rm benchmark
 
 # Run specific VMs only
-docker compose run --rm -e BENCH_VMS=chrysalis,uplc-turbo benchmark
+docker compose run --rm -e BENCH_VMS=chrysalis,amaru-uplc benchmark
 
 # Record the host CPU when the container cannot see it (e.g. Docker on macOS)
 HOST_CPU="Apple M4 Pro" docker compose run --rm benchmark
