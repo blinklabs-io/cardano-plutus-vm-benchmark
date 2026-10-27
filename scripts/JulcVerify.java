@@ -1,9 +1,9 @@
-import com.bloxbean.cardano.julc.core.Program;
-import com.bloxbean.cardano.julc.core.flat.UplcFlatDecoder;
-import com.bloxbean.cardano.julc.vm.EvalOptions;
-import com.bloxbean.cardano.julc.vm.EvalResult;
-import com.bloxbean.cardano.julc.vm.PlutusLanguage;
-import com.bloxbean.cardano.julc.vm.java.JavaVmProvider;
+import org.julclang.core.Program;
+import org.julclang.core.flat.UplcFlatDecoder;
+import org.julclang.vm.EvalOptions;
+import org.julclang.vm.EvalResult;
+import org.julclang.vm.PlutusLanguage;
+import org.julclang.vm.java.JavaVmProvider;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -15,7 +15,7 @@ HEADER = "vm,script,mean_ns,median_ns,min_ns,max_ns,stddev_ns,iterations"
 # Map JMH benchmark class to VM name
 BENCH_TO_VM = {
     "CekJVMBenchmark.bench": "scalus-cek",
-    "JITHybridBenchmark.benchJIT_Hybrid": "scalus-jit",
+    "JITBenchmark.benchJIT": "scalus-jit",
     "CekJavaBenchmark.bench": "julc-java",
 }
 
