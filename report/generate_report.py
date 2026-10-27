@@ -80,6 +80,17 @@ def load_data(run_dir: str):
     return data, scripts, present_vms, env_info
 
 
+def load_versions(run_dir: str):
+    """Load source revisions and toolchains recorded for a benchmark run."""
+    versions_path = os.path.join(run_dir, "versions.csv")
+    versions = {}
+    if os.path.isfile(versions_path):
+        with open(versions_path, newline="") as f:
+            for row in csv.DictReader(f):
+                versions[row["vm"]] = row
+    return versions
+
+
 def compute_geo_means(data, scripts, present_vms):
     """Compute geometric means with penalty for missing scripts.
 
@@ -111,7 +122,7 @@ def compute_geo_means(data, scripts, present_vms):
     return geo_means
 
 
-def generate_markdown(run_dir: str, data, scripts, present_vms, env_info) -> None:
+def generate_markdown(run_dir: str, data, scripts, present_vms, env_info, versions) -> None:
     """Generate report.md."""
     geo_means = compute_geo_means(data, scripts, present_vms)
 
@@ -129,6 +140,28 @@ def generate_markdown(run_dir: str, data, scripts, present_vms, env_info) -> Non
         lines.append("```")
         lines.append(env_info)
         lines.append("```")
+        lines.append("")
+
+    recorded_versions = [vm for vm in present_vms if vm in versions]
+    if recorded_versions:
+        lines.append("## VM Versions")
+        lines.append("")
+        lines.append("| VM | Source revision | Toolchain |")
+        lines.append("|---|---|---|")
+        for vm in recorded_versions:
+            version = versions[vm]
+            repo = version.get("repo", "unknown")
+            version_label = version.get("version", "unknown")
+            revision = version.get("revision", "unknown")
+            toolchain = version.get("toolchain", "unknown")
+            if repo != "unknown" and revision != "unknown":
+                source = repo.removesuffix(".git") + f"/commit/{revision}"
+                if version_label == "commit" or version_label == "unknown":
+                    version_label = "commit"
+                revision = f"{version_label} ([{revision[:7]}]({source}))"
+            else:
+                revision = version_label
+            lines.append(f"| {VM_LABELS.get(vm, vm)} | {revision} | {toolchain} |")
         lines.append("")
 
     lines.append("## Summary (geometric mean across all scripts)")
@@ -213,6 +246,13 @@ def generate_html(run_dir: str, env_info: str) -> None:
     with open(unified_path) as f:
         csv_data = f.read().strip()
 
+    versions_path = os.path.join(run_dir, "versions.csv")
+    if os.path.isfile(versions_path):
+        with open(versions_path) as f:
+            versions_data = f.read().strip()
+    else:
+        versions_data = "vm,repo,version,revision,toolchain"
+
     # Build environment badge
     if env_info:
         env_badge = ""
@@ -231,7 +271,9 @@ def generate_html(run_dir: str, env_info: str) -> None:
     else:
         env_badge = os.path.basename(run_dir)
 
-    html = template.replace("{{CSV_DATA}}", csv_data).replace("{{ENV_BADGE}}", env_badge)
+    html = (template.replace("{{CSV_DATA}}", csv_data)
+            .replace("{{VERSIONS_DATA}}", versions_data)
+            .replace("{{ENV_BADGE}}", env_badge))
 
     # Write to docs/index.html (relative to repo root)
     repo_root = os.path.dirname(os.path.dirname(__file__))
@@ -246,7 +288,8 @@ def generate_html(run_dir: str, env_info: str) -> None:
 
 def generate(run_dir: str) -> None:
     data, scripts, present_vms, env_info = load_data(run_dir)
-    generate_markdown(run_dir, data, scripts, present_vms, env_info)
+    versions = load_versions(run_dir)
+    generate_markdown(run_dir, data, scripts, present_vms, env_info, versions)
     generate_html(run_dir, env_info)
 
 

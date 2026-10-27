@@ -7,11 +7,11 @@ BENCH_DIR="/bench/amaru-uplc"
 
 echo "Amaru UPLC CEK (Rust / Criterion)"
 
-rm -rf "$BENCH_DIR/crates/uplc/benches/use_cases/plutus_use_cases"
-ln -sf "$DATA_DIR" "$BENCH_DIR/crates/uplc/benches/use_cases/plutus_use_cases"
-cd "$BENCH_DIR/crates/uplc"
+rm -rf "$BENCH_DIR/crates/amaru-uplc/benches/use_cases/plutus_use_cases"
+ln -sf "$DATA_DIR" "$BENCH_DIR/crates/amaru-uplc/benches/use_cases/plutus_use_cases"
+cd "$BENCH_DIR/crates/amaru-uplc"
 
-BENCH_BIN=$(find "$BENCH_DIR/target/release/deps" -name 'use_cases-*' -type f ! -name '*.d' | head -1)
+BENCH_BIN=$(find "$BENCH_DIR/target" -type f -name 'use_cases-*' -perm -u+x ! -name '*.d' | head -1)
 if [[ -z "$BENCH_BIN" ]]; then
     echo "ERROR: could not find use_cases benchmark binary"
     exit 1
@@ -19,6 +19,11 @@ fi
 
 rm -rf target/criterion
 "$BENCH_BIN" --bench 2>&1 | tee "$RUN_DIR/amaru-uplc-raw.log" || true
+
+if ! find target/criterion -type f -name estimates.json -print -quit 2>/dev/null | grep -q .; then
+    echo "ERROR: Criterion produced no benchmark measurements"
+    exit 1
+fi
 
 FAILED_SCRIPTS=$(grep "^EVAL_FAIL:" "$RUN_DIR/amaru-uplc-raw.log" | sed 's/EVAL_FAIL: //' | sort -u || true)
 rm -rf "$RUN_DIR/criterion-output-amaru-uplc"

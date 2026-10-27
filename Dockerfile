@@ -10,6 +10,7 @@
 # FROM are usable in FROM lines and must be re-declared inside a stage.
 ARG DOTNET_VERSION=10.0
 ARG RUST_VERSION=1.94
+ARG AMARU_UPLC_RUST_VERSION=1.97
 ARG GO_VERSION=1.27.3
 ARG BUN_VERSION=1.3.10
 ARG PYTHON_VERSION=3.14
@@ -34,7 +35,7 @@ RUN dotnet build -c Release -p:TreatWarningsAsErrors=false benchmarks/PlutusBenc
 # =============================================================================
 # Build stage: Amaru UPLC (Rust / Criterion)
 # =============================================================================
-FROM rust:${RUST_VERSION}-bookworm AS build-amaru-uplc
+FROM rust:${AMARU_UPLC_RUST_VERSION}-bookworm AS build-amaru-uplc
 
 ARG AMARU_UPLC_REPO
 ARG AMARU_UPLC_SHA
@@ -44,7 +45,7 @@ RUN git clone "$AMARU_UPLC_REPO" /src \
 
 WORKDIR /src
 
-RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.toml
+RUN cargo build --release --bench use_cases --manifest-path crates/amaru-uplc/Cargo.toml
 
 # =============================================================================
 # Build stage: uplc-turbo bytecode VM (Rust / Criterion)
@@ -341,8 +342,8 @@ COPY --from=build-chrysalis /src /bench/chrysalis
 
 # Amaru UPLC: compiled Criterion benchmark binary
 COPY --from=build-amaru-uplc /src/target /bench/amaru-uplc/target
-COPY --from=build-amaru-uplc /src/crates/uplc/benches /bench/amaru-uplc/crates/uplc/benches
-COPY --from=build-amaru-uplc /src/crates/uplc/Cargo.toml /bench/amaru-uplc/crates/uplc/Cargo.toml
+COPY --from=build-amaru-uplc /src/crates/amaru-uplc/benches /bench/amaru-uplc/crates/amaru-uplc/benches
+COPY --from=build-amaru-uplc /src/crates/amaru-uplc/Cargo.toml /bench/amaru-uplc/crates/amaru-uplc/Cargo.toml
 COPY --from=build-amaru-uplc /src/Cargo.toml /bench/amaru-uplc/Cargo.toml
 COPY --from=build-amaru-uplc /src/Cargo.lock /bench/amaru-uplc/Cargo.lock
 RUN ln -s /bench/amaru-uplc /bench/uplc-turbo
