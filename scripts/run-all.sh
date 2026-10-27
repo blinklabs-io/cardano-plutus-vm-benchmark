@@ -78,12 +78,32 @@ version_row() {
     printf '%s,%s,%s,%s,%s\n' "$vm" "${repo:-unknown}" "$version" "${revision:-unknown}" "${toolchain:-unknown}"
 }
 
+declare -A VERSION_ROWS=()
+VERSION_ORDER=()
+if [[ -f "$RUN_DIR/versions.csv" ]]; then
+    while IFS= read -r row; do
+        [[ -z "$row" || "$row" == vm,* ]] && continue
+        vm=${row%%,*}
+        if [[ -z "${VERSION_ROWS[$vm]+present}" ]]; then
+            VERSION_ORDER+=("$vm")
+        fi
+        VERSION_ROWS[$vm]="$row"
+    done < "$RUN_DIR/versions.csv"
+fi
+
+IFS=',' read -ra VERSION_VMS <<< "$VMS"
+for vm in "${VERSION_VMS[@]}"; do
+    vm=$(echo "$vm" | xargs)
+    if [[ -z "${VERSION_ROWS[$vm]+present}" ]]; then
+        VERSION_ORDER+=("$vm")
+    fi
+    VERSION_ROWS[$vm]=$(version_row "$vm")
+done
+
 {
     echo "vm,repo,version,revision,toolchain"
-    IFS=',' read -ra VERSION_VMS <<< "$VMS"
-    for vm in "${VERSION_VMS[@]}"; do
-        vm=$(echo "$vm" | xargs)
-        version_row "$vm"
+    for vm in "${VERSION_ORDER[@]}"; do
+        printf '%s\n' "${VERSION_ROWS[$vm]}"
     done
 } > "$RUN_DIR/versions.csv"
 
