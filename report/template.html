@@ -605,6 +605,7 @@
 const CSV_DATA = `{{CSV_DATA}}`;
 
 const VM_META = {
+  'amaru-uplc':     { label: 'Amaru UPLC',   lang: 'Rust',        runtime: 'CEK',            engine: 'CEK interpreter',              color: '#dea584', compiler: 'rustc 1.94' },
   'uplc-turbo':     { label: 'uplc-turbo AST', lang: 'Rust',        runtime: 'AST walker',     engine: 'AST walker',                  color: '#dea584', compiler: 'rustc 1.94' },
   'uplc-turbo-bc':  { label: 'uplc-turbo BC',  lang: 'Rust',        runtime: 'Bytecode VM',    engine: 'UPLC → bytecode VM',      color: '#c48a6a', compiler: 'rustc 1.94' },
   'plutuz':         { label: 'Plutuz',         lang: 'Zig',         runtime: 'CEK',            engine: 'CEK interpreter',              color: '#f69d50', compiler: 'Zig 0.15.2' },
@@ -620,7 +621,7 @@ const VM_META = {
   'julc-java':      { label: 'Julc CEK',       lang: 'Java',        runtime: 'GraalVM',        engine: 'CEK interpreter',              color: '#f89820', compiler: 'GraalVM JDK 25' },
   'llvm-uplc-jit':  { label: 'llvm-uplc',      lang: 'C++',         runtime: 'LLVM',           engine: 'UPLC → native JIT',       color: '#00b4d8', compiler: 'LLVM 22.1.0' },
 };
-const VM_ORDER = ['llvm-uplc-jit','haskell','scalus-jit','scalus-cek','julc-java','uplc-turbo-bc','uplc-turbo','plutuz','chrysalis','chrysalis-aot','blaze-v8','blaze-jsc','plutigo','opshin'];
+const VM_ORDER = ['llvm-uplc-jit','haskell','scalus-jit','scalus-cek','julc-java','amaru-uplc','uplc-turbo-bc','uplc-turbo','plutuz','chrysalis','chrysalis-aot','blaze-v8','blaze-jsc','plutigo','opshin'];
 
 function parseCSV(csv) {
   const lines = csv.trim().split('\n'), header = lines[0].split(',');
