@@ -7,15 +7,10 @@ BENCH_DIR="/bench/plutigo"
 
 echo "Plutigo (Go / testing.B)"
 
-# Go test binary uses runtime.Caller(0) which hardcodes the source path /src/tests/bench
-# We must place data at that exact path
-mkdir -p /src/tests
-rm -rf /src/tests/bench
-ln -sf "$DATA_DIR" /src/tests/bench
-
 cd "$BENCH_DIR"
 
 # Run compiled Go test binary with benchmark flags
+export PLUTIGO_BENCH_DIR="$DATA_DIR"
 ./plutigo-bench \
     -test.bench='^BenchmarkFlatFiles$' \
     -test.benchmem \
