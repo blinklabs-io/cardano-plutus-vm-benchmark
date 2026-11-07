@@ -39,13 +39,20 @@ FROM rust:${AMARU_UPLC_RUST_VERSION}-bookworm AS build-amaru-uplc
 
 ARG AMARU_UPLC_REPO
 ARG AMARU_UPLC_SHA
-
-RUN git clone "$AMARU_UPLC_REPO" /src \
-    && cd /src && (git checkout "$AMARU_UPLC_SHA" || (git fetch origin "$AMARU_UPLC_SHA" && git checkout "$AMARU_UPLC_SHA"))
+ARG CARGO_BUILD_JOBS=2
+ENV CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS}
 
 WORKDIR /src
-
-RUN cargo build --release --bench use_cases --manifest-path crates/amaru-uplc/Cargo.toml
+COPY harness/amaru-uplc/Cargo.toml harness/amaru-uplc/Cargo.lock harness/amaru-uplc/rust-toolchain.toml ./
+COPY harness/amaru-uplc/use_cases.rs ./
+ENV CARGO_PROFILE_RELEASE_LTO=fat \
+    CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1 \
+    CARGO_PROFILE_BENCH_LTO=fat \
+    CARGO_PROFILE_BENCH_CODEGEN_UNITS=1
+RUN cargo build --locked --release --bench use_cases \
+    && bench_bin=$(find /src/target/release -type f -perm /111 -name 'use_cases-*' ! -name '*.d' | head -1) \
+    && test -n "$bench_bin" \
+    && cp "$bench_bin" /use_cases-bin
 
 # =============================================================================
 # Build stage: uplc-turbo bytecode VM (Rust / Criterion)
@@ -54,6 +61,8 @@ FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo-bc
 
 ARG UPLC_TURBO_BC_REPO
 ARG UPLC_TURBO_BC_SHA
+ARG CARGO_BUILD_JOBS=2
+ENV CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS}
 
 # The pin is on an unmerged branch, so fetch it by full object ID when the default clone lacks it.
 RUN test "${#UPLC_TURBO_BC_SHA}" -eq 40 \
@@ -94,6 +103,17 @@ RUN git clone "$BLAZE_REPO" /src \
 
 WORKDIR /src
 RUN bun install
+
+# =============================================================================
+# Build stage: Harmonic Labs plutus-machine (Node.js)
+# =============================================================================
+FROM node:${NODE_MAJOR}-bookworm AS build-plutus-machine
+
+WORKDIR /src
+COPY harness/plutus-machine/package.json harness/plutus-machine/package-lock.json ./
+RUN npm ci --omit=dev
+COPY harness/plutus-machine/bench.mjs ./bench/bench.mjs
+RUN ln -s node_modules/@harmoniclabs/plutus-machine/dist /src/dist
 
 # =============================================================================
 # Build stage: Plutuz (Zig)
@@ -147,7 +167,7 @@ RUN pip install --no-cache-dir . "cbor2<6"
 # =============================================================================
 # Build stage: Scalus (Scala / JVM / JMH)
 # =============================================================================
-FROM eclipse-temurin:${JDK_VERSION}-jdk-jammy AS build-scalus
+FROM eclipse-temurin:${JDK_VERSION}-jdk-noble AS build-scalus
 
 ARG SCALUS_REPO
 ARG SCALUS_SHA
@@ -340,13 +360,11 @@ RUN ldconfig
 # Chrysalis: full source + build output (BenchmarkDotNet needs project at runtime)
 COPY --from=build-chrysalis /src /bench/chrysalis
 
-# Amaru UPLC: compiled Criterion benchmark binary
-COPY --from=build-amaru-uplc /src/target /bench/amaru-uplc/target
-COPY --from=build-amaru-uplc /src/crates/amaru-uplc/benches /bench/amaru-uplc/crates/amaru-uplc/benches
-COPY --from=build-amaru-uplc /src/crates/amaru-uplc/Cargo.toml /bench/amaru-uplc/crates/amaru-uplc/Cargo.toml
-COPY --from=build-amaru-uplc /src/Cargo.toml /bench/amaru-uplc/Cargo.toml
-COPY --from=build-amaru-uplc /src/Cargo.lock /bench/amaru-uplc/Cargo.lock
-RUN ln -s /bench/amaru-uplc /bench/uplc-turbo
+# Amaru UPLC: released crate benchmark binary
+COPY --from=build-amaru-uplc /use_cases-bin /bench/amaru-uplc/bin/use_cases
+
+# Harmonic Labs plutus-machine: released package and its native benchmark
+COPY --from=build-plutus-machine /src /bench/plutus-machine
 
 # uplc-turbo bytecode VM: compiled bench binary + data
 COPY --from=build-uplc-turbo-bc /src/target /bench/uplc-turbo-bc/target

@@ -30,6 +30,7 @@ Each VM uses its own benchmark framework rather than a uniform harness:
 | plutus-core | Criterion (Haskell) | Automatic | Automatic | Automatic |
 | Chrysalis | BenchmarkDotNet (`--job short`) | 3 iterations | 3 | Auto |
 | Amaru UPLC | Criterion.rs | Automatic (warmup phase) | Auto | Auto |
+| Harmonic Labs plutus-machine | Native Node.js runner | 5 iterations | 50 | 5s |
 | Plutigo | Go testing.B | Automatic (b.N scaling) | Auto | 5s |
 | blaze-plutus | Vitest bench | Automatic | Auto | Auto |
 | Plutuz | Custom | 5 iterations | 50 | 5s |
@@ -45,7 +46,7 @@ Each framework handles warmup, iteration count, and outlier detection using its 
 - **Same machine**: all VMs run inside a single Docker container (`ubuntu:24.04`, glibc)
 - **Sequential execution**: VMs run one at a time to avoid CPU contention
 - **Pinned versions**: exact git SHAs recorded in `.env`
-- **No custom harnesses**: each VM's own benchmark code is used unmodified
+- **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark; the plutus-machine row uses the benchmark published by Harmonic Labs.
 
 ## Unified Output
 
@@ -72,7 +73,7 @@ Times are in **nanoseconds**. The summary uses **geometric mean** across all 89 
 Anyone with Docker can reproduce results:
 
 ```bash
-git clone https://github.com/saib-inc/cardano-plutus-vm-benchmark.git
+git clone https://github.com/blinklabs-io/cardano-plutus-vm-benchmark.git
 cd cardano-plutus-vm-benchmark
 docker compose up
 ```
