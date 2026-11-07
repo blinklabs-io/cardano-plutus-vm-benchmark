@@ -6,11 +6,7 @@ services:
       args:
         - CHRYSALIS_REPO
         - CHRYSALIS_SHA
-        - AMARU_UPLC_REPO
-        - AMARU_UPLC_SHA
         - AMARU_UPLC_RUST_VERSION
-        - UPLC_TURBO_BC_REPO
-        - UPLC_TURBO_BC_SHA
         - PLUTIGO_REPO
         - PLUTIGO_SHA
         - BLAZE_REPO
@@ -28,7 +24,6 @@ services:
         - LLVM_UPLC_REPO
         - LLVM_UPLC_SHA
         - DOTNET_VERSION
-        - RUST_VERSION
         - GO_VERSION
         - BUN_VERSION
         - PYTHON_VERSION

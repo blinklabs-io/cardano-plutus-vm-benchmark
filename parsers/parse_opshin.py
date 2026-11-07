@@ -47,7 +47,7 @@ def parse(log_path: str) -> None:
 
             print(
                 f"{VM_NAME},{name},"
-                f"{mean_ns},{mean_ns},{min_ns},{max_ns},"
+                f"{mean_ns},-1,{min_ns},{max_ns},"
                 f"{stddev_ns},{iterations}"
             )
 

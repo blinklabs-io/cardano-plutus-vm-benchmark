@@ -36,7 +36,7 @@ ERROR_PATTERNS = [
     # Python (opshin)
     r"^Traceback ",
     r"SKIP \(eval error\)",
-    # Rust (uplc-turbo)
+    # Rust benchmarks
     r"^EVAL_FAIL:",
     r"thread '.*' panicked",
     # Node.js / Bun (blaze)
@@ -53,11 +53,13 @@ ERROR_RE = re.compile("|".join(f"(?:{p})" for p in ERROR_PATTERNS), re.MULTILINE
 # These help us find which script an error belongs to by scanning backwards
 # from an error line to find the most recent script reference.
 SCRIPT_CONTEXT_PATTERNS = [
+    # Per-script process runner: "--- script-name: process 123"
+    r"^---\s+(\S+):\s+process\b",
     # Criterion (Rust): "Benchmarking script-name"
     r"^Benchmarking\s+(\S+)",
     # JMH (Scalus): "# Parameters: (file = script-name.flat)"
     r"# Parameters:.*file\s*=\s*(\S+?)(?:\.flat)?\)",
-    # uplc-turbo: "EVAL_FAIL: script-name"
+    # Rust benchmark adapter: "EVAL_FAIL: script-name"
     r"^EVAL_FAIL:\s+(\S+)",
     # opshin: "script-name SKIP (eval error)"
     r"^(\S+)\s+SKIP \(eval error\)",

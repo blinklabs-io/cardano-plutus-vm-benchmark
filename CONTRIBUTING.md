@@ -95,7 +95,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/) for clear an
 | `ci` | GitHub Actions workflow changes |
 | `chrysalis` | Chrysalis VM-specific changes |
 | `amaru-uplc` | Amaru UPLC benchmark changes |
-| `uplc-turbo` | uplc-turbo VM-specific changes |
+| `amaru-uplc` | Amaru UPLC VM-specific changes |
 | `plutigo` | Plutigo VM-specific changes |
 | `blaze` | blaze-plutus VM-specific changes |
 | `plutuz` | Plutuz VM-specific changes |
@@ -140,12 +140,13 @@ To add a new Plutus VM implementation:
 3. Add an output parser in `parsers/parse_<vm_name>.py`
 4. Add the VM's CSV filename to `parsers/normalize.py`
 5. Add the VM to `VM_ORDER` and `VM_LABELS` in `report/generate_report.py`
-6. Add pinned SHA to `.env`
+6. Add an exact source revision or released package version to `.env`
 7. Update `README.md` and `METHODOLOGY.md`
 
 ## Updating VM Versions
 
-1. Update the relevant `*_SHA` in `.env`
+1. Update the relevant source revision in `.env`, or update the exact package
+   version and lockfile for release-package adapters
 2. Test with `docker compose build --no-cache && docker compose run --rm benchmark`
 3. Submit PR with commit message: `chore: update <vm-name> to <commit/tag>`
 
@@ -154,7 +155,9 @@ To add a new Plutus VM implementation:
 - **Never push directly to `main`** - Always use Pull Requests
 - **Never force push to `main`** - This destroys history
 - **Never modify benchmark data** without consensus from maintainers
-- **Never add custom harnesses** - Use each VM's native benchmark
+- **Prefer native benchmarks** - When a released package has no published benchmark,
+  a repository-owned adapter may call its public evaluation API. Document the timed
+  work and keep the adapter's warmup and measurement rules explicit.
 
 ## Questions?
 

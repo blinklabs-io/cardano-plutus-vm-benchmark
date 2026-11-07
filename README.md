@@ -2,41 +2,41 @@
 
 Reproducible, cross-language benchmark suite for Plutus (UPLC) virtual machine implementations.
 
-Builds 11 VMs from source inside Docker, runs each VM's **native benchmark framework**, and generates a unified comparison report. [View full results](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/)
+Builds 11 VMs from source or released packages inside Docker, runs each VM's benchmark framework, and generates a unified comparison report. [View full results](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/)
 
-## Latest Results (2026-10-29)
+## Latest Results (2026-11-07)
 
-> System: Intel Core i7-6700 @ 3.40 GHz, 8 logical cores, 15 GiB RAM, Linux kernel 6.8.0-139-generic
+> System: Intel Core i7-6700 @ 3.40 GHz, 8 logical cores, 15 GiB RAM, Linux kernel 6.8.0-147-generic
 
 | VM | Language | Geo Mean | vs Fastest |
 |---|---|---|---|
-| **llvm-uplc UPLC→native JIT (C++ / LLVM)** | C++ / LLVM | 164.19 us | 1.00x |
-| **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 176.73 us | 1.08x |
-| **uplc-turbo Bytecode VM (Rust)** | Rust | 300.59 us | 1.83x |
-| **Plutigo CEK (Go)** | Go | 351.62 us | 2.14x |
-| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 352.89 us | 2.15x |
-| **Scalus CEK (Scala / JVM)** | Scala / JVM | 459.10 us | 2.80x |
-| **Amaru UPLC CEK (Rust)** | Rust | 529.00 us | 3.22x |
-| **Julc CEK (Java / GraalVM)** | Java / GraalVM | 647.37 us | 3.94x |
-| **Plutuz CEK (Zig)** | Zig | 659.83 us | 4.02x |
-| **Chrysalis CEK (C# / .NET)** | C# / .NET | 712.58 us | 4.34x |
-| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 754.92 us | 4.60x |
-| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 2.33 ms | 14.22x |
-| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 2.34 ms | 14.27x |
-| **opshin CEK (Python / CPython)** | Python / CPython | 54.90 ms | 334.36x |
+| **llvm-uplc post-JIT execution (C++ / LLVM)** | C++ / LLVM | 169.64 us | 1.00x |
+| **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 342.91 us | 2.02x |
+| **Plutigo CEK (Go)** | Go | 368.03 us | 2.17x |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 387.76 us | 2.29x |
+| **Amaru UPLC CEK (Rust)** | Rust | 388.78 us | 2.29x |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 480.91 us | 2.83x |
+| **Plutuz CEK (Zig)** | Zig | 682.81 us | 4.03x |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 766.45 us | 4.52x |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 792.41 us | 4.67x |
+| **Julc CEK (Java / GraalVM)** | Java / GraalVM | 883.41 us | 5.21x |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 2.46 ms | 14.50x |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 2.47 ms | 14.57x |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 20.50 ms | 120.83x |
+| **opshin CEK (Python / CPython)** | Python / CPython | 118.18 ms | 696.65x |
 
-*All 14 benchmark configurations were measured on Oct 29 across 89 `plutus_use_cases` scripts. Plutigo v0.10.1 measured 351.62 us, 23.6% faster than v0.10.0 (460.51 us) on Oct 27. Julc had 11 evaluation failures and OpShin had 30; failures are shown in the report and use the slowest successful time for that script in the geometric mean. Lower is better. See [`results/2026-10-29/report.md`](results/2026-10-29/report.md) for versions, results, and coverage.*
+*All 14 benchmark configurations were measured on Nov 7 across 89 `plutus_use_cases` scripts. Julc had 11 evaluation failures and OpShin had 30; failures are shown in the report and use the slowest successful time for that script in the geometric mean. Lower is better. See [`results/2026-11-07/report.md`](results/2026-11-07/report.md) for versions, results, and coverage.*
 
 ## VMs Benchmarked
 
 | VM | Language | Benchmark Framework | Repository |
 |---|---|---|---|
 | **plutus-core** | Haskell / GHC | Criterion | [IntersectMBO/plutus](https://github.com/IntersectMBO/plutus) (`plutus-benchmark`) |
-| **Amaru UPLC** | Rust | Criterion.rs | [`amaru-uplc` v0.4.0](https://github.com/pragma-org/amaru/tree/main/crates/amaru-uplc) |
-| **uplc-turbo (bytecode)** | Rust | Criterion.rs | [pragma-org/uplc PR #47](https://github.com/pragma-org/uplc/pull/47) branch `pi/bytecode` (unmerged) |
+| **Amaru UPLC** | Rust | Repository Criterion.rs adapter | [`amaru-uplc` v0.6.0](https://crates.io/crates/amaru-uplc/0.6.0) |
+| **Harmonic Labs plutus-machine** | TypeScript / Node.js | Repository Node.js adapter | [`plutus-machine` v3.0.5](https://www.npmjs.com/package/@harmoniclabs/plutus-machine/v/3.0.5), the evaluator used by Pebble v0.5.0 |
 | **Plutuz** | Zig | Custom (JSON) | [utxo-company/plutuz](https://github.com/utxo-company/plutuz) |
 | **Chrysalis** | C# / .NET | BenchmarkDotNet (JIT + AOT) | [SAIB-Inc/Chrysalis](https://github.com/SAIB-Inc/Chrysalis) |
-| **Plutigo v0.10.1** | Go | testing.B | [blinklabs-io/plutigo](https://github.com/blinklabs-io/plutigo) |
+| **Plutigo v0.11.4** | Go | testing.B | [blinklabs-io/plutigo](https://github.com/blinklabs-io/plutigo) |
 | **blaze-plutus** | TypeScript | Vitest bench (V8 + JSC) | [butaneprotocol/blaze-cardano](https://github.com/butaneprotocol/blaze-cardano) |
 | **opshin-uplc** | Python | Custom | [OpShin/uplc](https://github.com/OpShin/uplc) |
 | **Scalus** | Scala / JVM | JMH | [scalus3/scalus](https://github.com/scalus3/scalus) |
@@ -96,6 +96,7 @@ docker-compose.yml        # One-command orchestration
 scripts/                  # Per-VM runner scripts + orchestrator
 parsers/                  # Output normalizers (one per framework)
 report/                   # Unified CSV -> markdown report generator
+harness/                  # Release-package adapters for Amaru and plutus-machine
 results/                  # Git-tracked results, including per-run versions.csv
 ```
 

@@ -9,8 +9,7 @@ VM_FILES = [
     "chrysalis.csv",
     "chrysalis-aot.csv",
     "amaru-uplc.csv",
-    "uplc-turbo.csv",
-    "uplc-turbo-bc.csv",
+    "plutus-machine.csv",
     "plutigo.csv",
     "blaze-jsc.csv",
     "blaze-v8.csv",
@@ -48,7 +47,7 @@ def normalize(run_dir: str) -> None:
     rows.sort(key=lambda r: (r.get("script", ""), r.get("vm", "")))
 
     with open(output_path, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=HEADER)
+        writer = csv.DictWriter(f, fieldnames=HEADER, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
