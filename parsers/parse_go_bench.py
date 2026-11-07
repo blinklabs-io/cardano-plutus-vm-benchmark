@@ -31,8 +31,8 @@ def parse(log_path: str) -> None:
             # Go bench only reports mean ns/op; no median/min/max/stddev
             print(
                 f"{VM_NAME},{name},"
-                f"{mean_ns},{mean_ns},0,0,"
-                f"0,{iterations}"
+                f"{mean_ns},-1,-1,-1,"
+                f"-1,{iterations}"
             )
 
 

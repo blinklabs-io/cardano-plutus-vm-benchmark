@@ -37,8 +37,6 @@ RUN dotnet build -c Release -p:TreatWarningsAsErrors=false benchmarks/PlutusBenc
 # =============================================================================
 FROM rust:${AMARU_UPLC_RUST_VERSION}-bookworm AS build-amaru-uplc
 
-ARG AMARU_UPLC_REPO
-ARG AMARU_UPLC_SHA
 ARG CARGO_BUILD_JOBS=2
 ENV CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS}
 
@@ -46,9 +44,7 @@ WORKDIR /src
 COPY harness/amaru-uplc/Cargo.toml harness/amaru-uplc/Cargo.lock harness/amaru-uplc/rust-toolchain.toml ./
 COPY harness/amaru-uplc/use_cases.rs ./
 ENV CARGO_PROFILE_RELEASE_LTO=fat \
-    CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1 \
-    CARGO_PROFILE_BENCH_LTO=fat \
-    CARGO_PROFILE_BENCH_CODEGEN_UNITS=1
+    CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
 RUN cargo build --locked --release --bench use_cases \
     && bench_bin=$(find /src/target/release -type f -perm /111 -name 'use_cases-*' ! -name '*.d' | head -1) \
     && test -n "$bench_bin" \

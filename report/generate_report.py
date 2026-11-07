@@ -16,7 +16,7 @@ VM_ORDER = [
     "plutigo", "blaze-jsc", "blaze-v8", "opshin",
 ]
 VM_LABELS = {
-    "amaru-uplc": "Amaru UPLC AST walker (Rust)",
+    "amaru-uplc": "Amaru UPLC CEK (Rust)",
     "plutus-machine": "Harmonic Labs plutus-machine CEK (TypeScript / Node.js)",
     "uplc-turbo": "uplc-turbo AST walker (Rust)",
     "uplc-turbo-bc": "uplc-turbo Bytecode VM (Rust)",
@@ -31,7 +31,7 @@ VM_LABELS = {
     "scalus-cek": "Scalus CEK (Scala / JVM)",
     "scalus-jit": "Scalus UPLC→JVM JIT (Scala / JVM)",
     "julc-java": "Julc CEK (Java / GraalVM)",
-    "llvm-uplc-jit": "llvm-uplc UPLC→native JIT (C++ / LLVM)",
+    "llvm-uplc-jit": "llvm-uplc post-JIT execution (C++ / LLVM)",
 }
 
 
@@ -160,6 +160,8 @@ def generate_markdown(run_dir: str, data, scripts, present_vms, env_info, versio
                 if version_label == "commit" or version_label == "unknown":
                     version_label = "commit"
                 revision = f"{version_label} ([{revision[:7]}]({source}))"
+            elif repo != "unknown":
+                revision = f"[{version_label}]({repo})"
             else:
                 revision = version_label
             lines.append(f"| {VM_LABELS.get(vm, vm)} | {revision} | {toolchain} |")
@@ -168,6 +170,8 @@ def generate_markdown(run_dir: str, data, scripts, present_vms, env_info, versio
     lines.append("## Summary (geometric mean across all scripts)")
     lines.append("")
     lines.append("*Note: VMs that fail or skip a script are assigned the slowest competitor's time for that script.*")
+    lines.append("")
+    lines.append("*Measurement caveats: llvm-uplc reports steady-state execution after JIT compilation; its per-script compilation time is retained only in the raw JSON. Scalus JIT and Chrysalis use three measurement samples, and their raw framework output should be consulted for uncertainty.*")
     lines.append("")
     lines.append("| VM | Language | Geo Mean | vs Fastest |")
     lines.append("|---|---|---|---|")
@@ -259,14 +263,17 @@ def generate_html(run_dir: str, env_info: str) -> None:
         env_badge = ""
         for line in env_info.split("\n"):
             line = line.strip()
-            if line.startswith("CPU:"):
-                env_badge += f"<code>{line.split(':', 1)[1].strip()}</code>"
-            elif line.startswith("Cores:"):
-                env_badge += f" &middot; {line.split(':', 1)[1].strip()} cores"
-            elif line.startswith("RAM:"):
-                env_badge += f" &middot; {line.split(':', 1)[1].strip()}"
-            elif line.startswith("OS:"):
-                env_badge += f" &middot; {line.split(':', 1)[1].strip()}"
+            key, _, value = line.partition(":")
+            key = key.strip().lower()
+            value = value.strip()
+            if key == "cpu":
+                env_badge += f"<code>{value}</code>"
+            elif key == "cores":
+                env_badge += f" &middot; {value} cores"
+            elif key in {"memory", "ram"}:
+                env_badge += f" &middot; {value}"
+            elif key in {"kernel", "os"}:
+                env_badge += f" &middot; {value}"
         date = os.path.basename(run_dir)
         env_badge += f" &middot; {date}"
     else:

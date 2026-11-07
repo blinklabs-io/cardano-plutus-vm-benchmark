@@ -7,7 +7,7 @@ BENCH_DIR="/bench/amaru-uplc"
 BENCH_BIN="$BENCH_DIR/bin/use_cases"
 RAW="$RUN_DIR/amaru-uplc-raw.log"
 
-echo "Amaru UPLC AST (Rust / Criterion)"
+echo "Amaru UPLC CEK (Rust / Criterion)"
 
 if [[ ! -x "$BENCH_BIN" ]]; then
     echo "ERROR: could not find use_cases benchmark binary" | tee "$RAW"
@@ -33,6 +33,7 @@ for flat in "$DATA_DIR"/*.flat; do
     (
         echo "--- $name: process $BASHPID"
         exec env PVB_DATA_DIR="$work/$name" \
+            CRITERION_HOME="$BENCH_DIR/target/criterion" \
             "$BENCH_BIN" --bench --noplot "${TIMING[@]}"
     ) 2>&1 | tee -a "$RAW" || true
 done

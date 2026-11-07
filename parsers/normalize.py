@@ -49,7 +49,7 @@ def normalize(run_dir: str) -> None:
     rows.sort(key=lambda r: (r.get("script", ""), r.get("vm", "")))
 
     with open(output_path, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=HEADER)
+        writer = csv.DictWriter(f, fieldnames=HEADER, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 

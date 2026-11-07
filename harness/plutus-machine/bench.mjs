@@ -17,7 +17,7 @@ import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
 const { UPLCDecoder } = require("@harmoniclabs/uplc");
-const { Machine } = require("../dist/index.js");
+const { CEKError, Machine } = require("../dist/index.js");
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = process.env.BENCH_DATA ?? join(HERE, "plutus_use_cases");
@@ -26,7 +26,6 @@ const OUT_FILE = join(OUT_DIR, "plutus_use_cases.json");
 
 const WARMUP = Number(process.env.BENCH_WARMUP ?? 5);
 const MIN_ITERATIONS = Number(process.env.BENCH_MIN_ITERS ?? 50);
-const MAX_ITERATIONS = Number(process.env.BENCH_MAX_ITERS ?? 10000);
 const TIME_BUDGET_NS = Number(process.env.BENCH_BUDGET_NS ?? 5e9);
 
 if (!existsSync(DATA_DIR)) {
@@ -37,7 +36,11 @@ if (!existsSync(DATA_DIR)) {
 /** flat-decode then evaluate, which is what the suite measures. */
 function runScript(bytes) {
   const program = UPLCDecoder.parse(bytes, "flat");
-  return Machine.evalSimple(program.body);
+  const result = Machine.evalSimple(program.body);
+  if (result instanceof CEKError) {
+    throw new Error(result.msg ?? "CEK evaluation failed");
+  }
+  return result;
 }
 
 function summarise(samples) {
@@ -46,7 +49,9 @@ function summarise(samples) {
   const variance = sorted.reduce((a, b) => a + (b - mean) ** 2, 0) / sorted.length;
   return {
     mean_ns: Math.round(mean),
-    median_ns: sorted[sorted.length >> 1],
+    median_ns: sorted.length % 2
+      ? sorted[sorted.length >> 1]
+      : Math.round((sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2),
     min_ns: sorted[0],
     max_ns: sorted[sorted.length - 1],
     stddev_ns: Math.round(Math.sqrt(variance)),
@@ -73,9 +78,8 @@ for (const file of files) {
   const samples = [];
   const started = process.hrtime.bigint();
   while (
-    samples.length < MAX_ITERATIONS &&
-    (samples.length < MIN_ITERATIONS ||
-      Number(process.hrtime.bigint() - started) < TIME_BUDGET_NS)
+    samples.length < MIN_ITERATIONS ||
+    Number(process.hrtime.bigint() - started) < TIME_BUDGET_NS
   ) {
     const t0 = process.hrtime.bigint();
     runScript(bytes);

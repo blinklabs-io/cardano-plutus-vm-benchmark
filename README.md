@@ -10,12 +10,12 @@ Builds 12 VMs from source or released packages inside Docker, runs each VM's ben
 
 | VM | Language | Geo Mean | vs Fastest |
 |---|---|---|---|
-| **llvm-uplc UPLC→native JIT (C++ / LLVM)** | C++ / LLVM | 169.64 us | 1.00x |
+| **llvm-uplc post-JIT execution (C++ / LLVM)** | C++ / LLVM | 169.64 us | 1.00x |
 | **uplc-turbo Bytecode VM (Rust)** | Rust | 313.49 us | 1.85x |
 | **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 342.91 us | 2.02x |
 | **Plutigo CEK (Go)** | Go | 368.03 us | 2.17x |
 | **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 387.76 us | 2.29x |
-| **Amaru UPLC AST walker (Rust)** | Rust | 388.78 us | 2.29x |
+| **Amaru UPLC CEK (Rust)** | Rust | 388.78 us | 2.29x |
 | **Scalus CEK (Scala / JVM)** | Scala / JVM | 480.91 us | 2.83x |
 | **Plutuz CEK (Zig)** | Zig | 682.81 us | 4.03x |
 | **Chrysalis CEK (C# / .NET)** | C# / .NET | 766.45 us | 4.52x |
@@ -23,7 +23,7 @@ Builds 12 VMs from source or released packages inside Docker, runs each VM's ben
 | **Julc CEK (Java / GraalVM)** | Java / GraalVM | 888.63 us | 5.24x |
 | **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 2.46 ms | 14.50x |
 | **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 2.47 ms | 14.57x |
-| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 21.46 ms | 126.48x |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 20.50 ms | 120.83x |
 | **opshin CEK (Python / CPython)** | Python / CPython | 119.62 ms | 705.11x |
 
 *All 15 benchmark configurations were measured on Nov 7 across 89 `plutus_use_cases` scripts. Julc had 11 evaluation failures and OpShin had 30; failures are shown in the report and use the slowest successful time for that script in the geometric mean. Lower is better. See [`results/2026-11-07/report.md`](results/2026-11-07/report.md) for versions, results, and coverage.*
@@ -33,8 +33,8 @@ Builds 12 VMs from source or released packages inside Docker, runs each VM's ben
 | VM | Language | Benchmark Framework | Repository |
 |---|---|---|---|
 | **plutus-core** | Haskell / GHC | Criterion | [IntersectMBO/plutus](https://github.com/IntersectMBO/plutus) (`plutus-benchmark`) |
-| **Amaru UPLC** | Rust | Criterion.rs | [`amaru-uplc` v0.6.0](https://github.com/pragma-org/amaru/releases/tag/v10.11.20261105) |
-| **Harmonic Labs plutus-machine** | TypeScript / Node.js | Native Node.js runner | [`plutus-machine` v3.0.5](https://github.com/HarmonicLabs/plutus-machine/releases/tag/v3.0.5), the evaluator used by Pebble v0.5.0 |
+| **Amaru UPLC** | Rust | Repository Criterion.rs adapter | [`amaru-uplc` v0.6.0](https://crates.io/crates/amaru-uplc/0.6.0) |
+| **Harmonic Labs plutus-machine** | TypeScript / Node.js | Repository Node.js adapter | [`plutus-machine` v3.0.5](https://www.npmjs.com/package/@harmoniclabs/plutus-machine/v/3.0.5), the evaluator used by Pebble v0.5.0 |
 | **uplc-turbo (bytecode)** | Rust | Criterion.rs | [pragma-org/uplc PR #47](https://github.com/pragma-org/uplc/pull/47) branch `pi/bytecode` (unmerged) |
 | **Plutuz** | Zig | Custom (JSON) | [utxo-company/plutuz](https://github.com/utxo-company/plutuz) |
 | **Chrysalis** | C# / .NET | BenchmarkDotNet (JIT + AOT) | [SAIB-Inc/Chrysalis](https://github.com/SAIB-Inc/Chrysalis) |

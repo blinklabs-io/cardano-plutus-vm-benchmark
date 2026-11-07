@@ -60,8 +60,8 @@ version_row() {
     local vm="$1" repo="" version="" revision="" toolchain=""
     case "$vm" in
         chrysalis|chrysalis-aot) repo="${CHRYSALIS_REPO:-}"; version="${CHRYSALIS_VERSION:-}"; revision="${CHRYSALIS_SHA:-}"; toolchain=".NET SDK ${DOTNET_VERSION:-unknown}" ;;
-        amaru-uplc) repo="${AMARU_UPLC_REPO:-}"; version="${AMARU_UPLC_VERSION:-}"; revision="${AMARU_UPLC_SHA:-}"; toolchain="rustc ${AMARU_UPLC_RUST_TOOLCHAIN:-${AMARU_UPLC_RUST_VERSION:-${RUST_VERSION:-unknown}}}" ;;
-        plutus-machine) repo="${PLUTUS_MACHINE_REPO:-}"; version="${PLUTUS_MACHINE_VERSION:-}"; revision="${PLUTUS_MACHINE_SHA:-}"; toolchain="Node.js ${NODE_MAJOR:-unknown}" ;;
+        amaru-uplc) repo="${AMARU_UPLC_REPO:-}"; version="${AMARU_UPLC_VERSION:-}"; toolchain="rustc ${AMARU_UPLC_RUST_TOOLCHAIN:-${AMARU_UPLC_RUST_VERSION:-${RUST_VERSION:-unknown}}}" ;;
+        plutus-machine) repo="${PLUTUS_MACHINE_REPO:-}"; version="${PLUTUS_MACHINE_VERSION:-}"; toolchain="Node.js ${NODE_MAJOR:-unknown}" ;;
         uplc-turbo|uplc-turbo-bc) repo="${UPLC_TURBO_BC_REPO:-}"; version="${UPLC_TURBO_BC_VERSION:-}"; revision="${UPLC_TURBO_BC_SHA:-}"; toolchain="rustc ${RUST_VERSION:-unknown}" ;;
         plutigo) repo="${PLUTIGO_REPO:-}"; version="${PLUTIGO_VERSION:-}"; revision="${PLUTIGO_SHA:-}"; toolchain="Go ${GO_VERSION:-unknown}" ;;
         blaze-jsc) repo="${BLAZE_REPO:-}"; version="${BLAZE_VERSION:-}"; revision="${BLAZE_SHA:-}"; toolchain="Bun ${BUN_VERSION:-unknown}" ;;

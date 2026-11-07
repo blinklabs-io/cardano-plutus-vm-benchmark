@@ -588,7 +588,7 @@
 
   <div class="section">
     <div class="section-title">Method</div>
-    <div class="note" style="margin:0">flat-decode + CEK evaluate on 89 Plutus scripts. Each VM uses its native benchmark framework. Sequential execution, single Docker container. Geometric means within each category are computed only from scripts where every VM in that category produced a successful result &mdash; that is the only fair like-for-like comparison.</div>
+    <div class="note" style="margin:0">flat-decode + CEK evaluate on 89 Plutus scripts, except llvm-uplc, whose ranked time is steady-state execution after per-script JIT compilation. Scalus JIT and Chrysalis use three measurement samples; consult their raw framework output for uncertainty. Sequential execution, single Docker container. Geometric means within each category are computed only from scripts where every VM in that category produced a successful result.</div>
   </div>
 
   <footer>
@@ -608,7 +608,7 @@ const CSV_DATA = `{{CSV_DATA}}`;
 const VERSIONS_DATA = `{{VERSIONS_DATA}}`;
 
 const VM_META = {
-  'amaru-uplc':     { label: 'Amaru UPLC',   lang: 'Rust',        runtime: 'AST walker',     engine: 'AST walker',                  color: '#dea584' },
+  'amaru-uplc':     { label: 'Amaru UPLC',   lang: 'Rust',        runtime: 'CEK',            engine: 'CEK interpreter',              color: '#2f9e8f' },
   'plutus-machine': { label: 'Harmonic Labs plutus-machine', lang: 'TypeScript', runtime: 'Node.js', engine: 'CEK interpreter',      color: '#6f61d5' },
   'uplc-turbo':     { label: 'uplc-turbo AST', lang: 'Rust',        runtime: 'AST walker',     engine: 'AST walker',                  color: '#dea584' },
   'uplc-turbo-bc':  { label: 'uplc-turbo BC',  lang: 'Rust',        runtime: 'Bytecode VM',    engine: 'UPLC → bytecode VM',      color: '#c48a6a' },
@@ -623,7 +623,7 @@ const VM_META = {
   'scalus-cek':     { label: 'Scalus CEK',     lang: 'Scala',       runtime: 'JVM',            engine: 'CEK interpreter',              color: '#dc322f' },
   'scalus-jit':     { label: 'Scalus JIT',     lang: 'Scala',       runtime: 'JVM',            engine: 'UPLC → JVM bytecode JIT', color: '#ff6b6b' },
   'julc-java':      { label: 'Julc CEK',       lang: 'Java',        runtime: 'GraalVM',        engine: 'CEK interpreter',              color: '#f89820' },
-  'llvm-uplc-jit':  { label: 'llvm-uplc',      lang: 'C++',         runtime: 'LLVM',           engine: 'UPLC → native JIT',       color: '#00b4d8' },
+  'llvm-uplc-jit':  { label: 'llvm-uplc (post-JIT)', lang: 'C++', runtime: 'LLVM',           engine: 'UPLC → native JIT',       color: '#00b4d8' },
 };
 const VM_ORDER = ['llvm-uplc-jit','haskell','scalus-jit','scalus-cek','julc-java','amaru-uplc','plutus-machine','uplc-turbo-bc','uplc-turbo','plutuz','chrysalis','chrysalis-aot','blaze-v8','blaze-jsc','plutigo','opshin'];
 

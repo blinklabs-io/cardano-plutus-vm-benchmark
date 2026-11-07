@@ -30,20 +30,13 @@ def parse(csv_path: str) -> None:
 
             mean_s = float(row["Mean"])
             stddev_s = float(row["Stddev"])
-            mean_lb_s = float(row["MeanLB"])
-            mean_ub_s = float(row["MeanUB"])
-
             mean_ns = int(mean_s * 1e9)
             stddev_ns = int(stddev_s * 1e9)
-            min_ns = int(mean_lb_s * 1e9)
-            max_ns = int(mean_ub_s * 1e9)
-            median_ns = mean_ns
-            iterations = 0
 
             results[script] = (
                 f"{VM_NAME},{script},"
-                f"{mean_ns},{median_ns},{min_ns},{max_ns},"
-                f"{stddev_ns},{iterations}"
+                f"{mean_ns},-1,-1,-1,"
+                f"{stddev_ns},-1"
             )
 
     print(HEADER)
