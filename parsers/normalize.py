@@ -10,8 +10,6 @@ VM_FILES = [
     "chrysalis-aot.csv",
     "amaru-uplc.csv",
     "plutus-machine.csv",
-    "uplc-turbo.csv",
-    "uplc-turbo-bc.csv",
     "plutigo.csv",
     "blaze-jsc.csv",
     "blaze-v8.csv",

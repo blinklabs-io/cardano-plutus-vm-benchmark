@@ -11,15 +11,13 @@ VM_ORDER = [
     "haskell", "scalus-jit", "scalus-cek",
     "julc-java",
     "llvm-uplc-jit",
-    "amaru-uplc", "plutus-machine", "uplc-turbo-bc", "uplc-turbo",
+    "amaru-uplc", "plutus-machine",
     "plutuz", "chrysalis", "chrysalis-aot",
     "plutigo", "blaze-jsc", "blaze-v8", "opshin",
 ]
 VM_LABELS = {
     "amaru-uplc": "Amaru UPLC CEK (Rust)",
     "plutus-machine": "Harmonic Labs plutus-machine CEK (TypeScript / Node.js)",
-    "uplc-turbo": "uplc-turbo AST walker (Rust)",
-    "uplc-turbo-bc": "uplc-turbo Bytecode VM (Rust)",
     "plutuz": "Plutuz CEK (Zig)",
     "chrysalis": "Chrysalis CEK (C# / .NET)",
     "chrysalis-aot": "Chrysalis CEK (C# / .NET AOT)",

@@ -9,7 +9,6 @@
 # defaults only apply to a bare `docker build`. ARGs declared before the first
 # FROM are usable in FROM lines and must be re-declared inside a stage.
 ARG DOTNET_VERSION=10.0
-ARG RUST_VERSION=1.94
 ARG AMARU_UPLC_RUST_VERSION=1.97
 ARG GO_VERSION=1.27.3
 ARG BUN_VERSION=1.3.10
@@ -49,25 +48,6 @@ RUN cargo build --locked --release --bench use_cases \
     && bench_bin=$(find /src/target/release -type f -perm /111 -name 'use_cases-*' ! -name '*.d' | head -1) \
     && test -n "$bench_bin" \
     && cp "$bench_bin" /use_cases-bin
-
-# =============================================================================
-# Build stage: uplc-turbo bytecode VM (Rust / Criterion)
-# =============================================================================
-FROM rust:${RUST_VERSION}-bookworm AS build-uplc-turbo-bc
-
-ARG UPLC_TURBO_BC_REPO
-ARG UPLC_TURBO_BC_SHA
-ARG CARGO_BUILD_JOBS=2
-ENV CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS}
-
-# The pin is on an unmerged branch, so fetch it by full object ID when the default clone lacks it.
-RUN test "${#UPLC_TURBO_BC_SHA}" -eq 40 \
-    && git clone "$UPLC_TURBO_BC_REPO" /src \
-    && cd /src && (git checkout "$UPLC_TURBO_BC_SHA" || (git fetch origin "$UPLC_TURBO_BC_SHA" && git checkout "$UPLC_TURBO_BC_SHA"))
-
-WORKDIR /src
-
-RUN cargo build --release --bench use_cases --manifest-path crates/uplc/Cargo.toml
 
 # =============================================================================
 # Build stage: Plutigo (Go / testing.B)
@@ -361,13 +341,6 @@ COPY --from=build-amaru-uplc /use_cases-bin /bench/amaru-uplc/bin/use_cases
 
 # Harmonic Labs plutus-machine: released package and its native benchmark
 COPY --from=build-plutus-machine /src /bench/plutus-machine
-
-# uplc-turbo bytecode VM: compiled bench binary + data
-COPY --from=build-uplc-turbo-bc /src/target /bench/uplc-turbo-bc/target
-COPY --from=build-uplc-turbo-bc /src/crates/uplc/benches /bench/uplc-turbo-bc/crates/uplc/benches
-COPY --from=build-uplc-turbo-bc /src/crates/uplc/Cargo.toml /bench/uplc-turbo-bc/crates/uplc/Cargo.toml
-COPY --from=build-uplc-turbo-bc /src/Cargo.toml /bench/uplc-turbo-bc/Cargo.toml
-COPY --from=build-uplc-turbo-bc /src/Cargo.lock /bench/uplc-turbo-bc/Cargo.lock
 
 # Plutigo: compiled test binary
 COPY --from=build-plutigo /plutigo-bench /bench/plutigo/plutigo-bench

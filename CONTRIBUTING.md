@@ -95,7 +95,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/) for clear an
 | `ci` | GitHub Actions workflow changes |
 | `chrysalis` | Chrysalis VM-specific changes |
 | `amaru-uplc` | Amaru UPLC benchmark changes |
-| `uplc-turbo` | uplc-turbo VM-specific changes |
+| `amaru-uplc` | Amaru UPLC VM-specific changes |
 | `plutigo` | Plutigo VM-specific changes |
 | `blaze` | blaze-plutus VM-specific changes |
 | `plutuz` | Plutuz VM-specific changes |
