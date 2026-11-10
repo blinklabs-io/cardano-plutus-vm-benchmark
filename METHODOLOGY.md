@@ -46,7 +46,7 @@ Each framework handles warmup, iteration count, and outlier detection using its 
 - **Same machine**: all VMs run inside a single Docker container (`ubuntu:24.04`, glibc)
 - **Sequential execution**: VMs run one at a time to avoid CPU contention
 - **Pinned versions**: exact source revisions or released package versions are recorded in `.env`
-- **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark. The plutus-machine adapter exercises the exact npm package used by Pebble. The adapter replaces `process.env` with a plain object before loading the package, because the package reads `PEBBLE_PROFILE` on every CEK step and the native lookup would otherwise be measured.
+- **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark. The plutus-machine adapter exercises the exact npm package used by Pebble, but replaces `process.env` with a plain object before loading it (see Limitations).
 - **Amaru release profile**: its adapter is compiled with fat LTO and one codegen unit. Its default V3/PV11 cost model is constructed once per process and cloned for each `Program::eval`, matching the upstream adapter.
 
 ## Unified Output
@@ -67,6 +67,7 @@ Times are in **nanoseconds**. The summary uses **geometric mean** across all 89 
 - **Short BenchmarkDotNet job**: `--job short` takes 3 measurement iterations, so on noisy scripts the Chrysalis 99.9% confidence error can exceed the mean.
 - **Short JMH job**: Scalus JIT uses three measurement samples. Its raw 99.9% confidence intervals are wider than the mean for most scripts in this run, so its aggregate should be treated as low confidence.
 - **llvm-uplc compilation**: the ranked value is steady-state execution after one per-script JIT compilation. Compilation time is retained as `compile_ns` in the raw JSON but excluded from `mean_ns`, so that row is not an end-to-end decode-and-evaluate comparison.
+- **plutus-machine `process.env` replacement**: the package reads `PEBBLE_PROFILE` on every CEK step. The adapter swaps `process.env` for a plain object so that native lookup is not measured, which also removes a per-step cost Pebble users pay. Its numbers are therefore not end-to-end and are not directly comparable to the other VMs.
 - **JIT warmup variance**: .NET and Node.js/Bun have JIT compilation, meaning early iterations are slower. Their frameworks account for this, but it's a fundamentally different execution model than ahead-of-time compiled VMs.
 - **Memory comparison**: each VM uses different allocators and GC strategies. Memory numbers are not directly comparable across languages.
 - **Docker overhead**: container execution adds minimal but non-zero overhead vs bare metal. This affects all VMs equally.
