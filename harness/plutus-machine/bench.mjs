@@ -15,6 +15,10 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
 
+// plutus-machine reads process.env.PEBBLE_PROFILE on every CEK step. That is a
+// native lookup in Node, so a plain copy keeps it out of the measured time.
+process.env = { ...process.env };
+
 const require = createRequire(import.meta.url);
 const { UPLCDecoder } = require("@harmoniclabs/uplc");
 const { CEKError, Machine } = require("../dist/index.js");

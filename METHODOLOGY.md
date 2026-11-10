@@ -46,7 +46,7 @@ Each framework handles warmup, iteration count, and outlier detection using its 
 - **Same machine**: all VMs run inside a single Docker container (`ubuntu:24.04`, glibc)
 - **Sequential execution**: VMs run one at a time to avoid CPU contention
 - **Pinned versions**: exact source revisions or released package versions are recorded in `.env`
-- **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark. The plutus-machine adapter exercises the exact npm package used by Pebble.
+- **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark. The plutus-machine adapter exercises the exact npm package used by Pebble. The adapter replaces `process.env` with a plain object before loading the package, because the package reads `PEBBLE_PROFILE` on every CEK step and the native lookup would otherwise be measured.
 - **Amaru release profile**: its adapter is compiled with fat LTO and one codegen unit. Its default V3/PV11 cost model is constructed once per process and cloned for each `Program::eval`, matching the upstream adapter.
 
 ## Unified Output
