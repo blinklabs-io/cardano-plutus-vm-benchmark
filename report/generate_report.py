@@ -169,7 +169,7 @@ def generate_markdown(run_dir: str, data, scripts, present_vms, env_info, versio
     lines.append("")
     lines.append("*Note: VMs that fail or skip a script are assigned the slowest competitor's time for that script.*")
     lines.append("")
-    lines.append("*Measurement caveats: llvm-uplc reports steady-state execution after JIT compilation; its per-script compilation time is retained only in the raw JSON. Scalus JIT and Chrysalis use three measurement samples, and their raw framework output should be consulted for uncertainty.*")
+    lines.append("*Measurement caveats: llvm-uplc reports steady-state execution after JIT compilation; its per-script compilation time is retained only in the raw JSON. Scalus JIT, Scalus CEK, Julc and Chrysalis use three measurement samples, and their raw framework output should be consulted for uncertainty.*")
     lines.append("")
     lines.append("| VM | Language | Geo Mean | vs Fastest |")
     lines.append("|---|---|---|---|")

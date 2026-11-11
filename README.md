@@ -25,7 +25,7 @@ Builds 11 VMs from source or released packages inside Docker, runs each VM's ben
 | **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 14.45 ms | 88.82x |
 | **opshin CEK (Python / CPython)** | Python / CPython | 104.09 ms | 639.84x |
 
-*All 14 benchmark configurations were measured on Nov 11 across 89 `plutus_use_cases` scripts. Julc had 11 evaluation failures and OpShin had 30; failures are shown in the report and use the slowest successful time for that script in the geometric mean. Lower is better. See [`results/2026-11-11/report.md`](results/2026-11-11/report.md) for versions, results, and coverage.*
+*All 14 benchmark configurations were measured on Nov 11 across 89 `plutus_use_cases` scripts. Julc had 11 evaluation failures and OpShin had 30; failures are shown in the report and use the slowest successful time for that script in the geometric mean. Lower is better. Scalus JIT's three-sample JMH intervals are wider than its means for most scripts, so its result is low confidence. See [`results/2026-11-11/report.md`](results/2026-11-11/report.md) for versions, results, and coverage.*
 
 ## VMs Benchmarked
 

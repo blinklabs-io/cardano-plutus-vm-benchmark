@@ -34,7 +34,7 @@ memory: 15Gi
 
 *Note: VMs that fail or skip a script are assigned the slowest competitor's time for that script.*
 
-*Measurement caveats: llvm-uplc reports steady-state execution after JIT compilation; its per-script compilation time is retained only in the raw JSON. Scalus JIT and Chrysalis use three measurement samples, and their raw framework output should be consulted for uncertainty.*
+*Measurement caveats: llvm-uplc reports steady-state execution after JIT compilation; its per-script compilation time is retained only in the raw JSON. Scalus JIT, Scalus CEK, Julc and Chrysalis use three measurement samples, and their raw framework output should be consulted for uncertainty.*
 
 | VM | Language | Geo Mean | vs Fastest |
 |---|---|---|---|
