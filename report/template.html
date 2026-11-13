@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardano Plutus VM Benchmark &mdash; SAIB</title>
+<title>Cardano Plutus VM Benchmark &mdash; Blink Labs</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -68,6 +68,10 @@
   }
   .header h1 .it { color: var(--purple-bright); font-weight: 600; }
   .header p { color: var(--text-muted); font-size: 0.72rem; margin-top: 0.3rem; }
+  .header .brand { display: inline-block; margin-bottom: 0.6rem; }
+  .header .brand img { height: 22px; display: block; }
+  .header .lineage a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-accent); }
+  .header .lineage a:hover { color: var(--text); }
   .header p code { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; }
   .gh-link {
     display: inline-flex;
@@ -387,6 +391,9 @@
     opacity: 0.6;
   }
   .cat-chip:hover { color: var(--text); border-color: var(--border-accent); }
+  a.cat-chip { text-decoration: none; }
+  a.cat-chip::before { display: none; }
+  .tier-note { margin: -0.4rem 0 1rem; }
   .cat-chip.active { color: var(--text); background: var(--surface); border-color: var(--border-accent); }
   .cat-chip.active.int  { color: var(--text); border-color: var(--text-secondary); }
   .cat-chip.active.comp { color: var(--purple-bright); border-color: var(--purple-bright); }
@@ -540,8 +547,10 @@
 
   <div class="header">
     <div>
+      <a href="https://blinklabs.io" class="brand" target="_blank"><img src="blink-labs-logo.svg" alt="Blink Labs"></a>
       <h1>Cardano <span class="it">Plutus</span> VM Benchmark</h1>
       <p>Cross-language UPLC virtual-machine comparison &mdash; {{ENV_BADGE}}</p>
+      <p class="lineage">Maintained by <a href="https://blinklabs.io" target="_blank">Blink Labs</a>, continuing the <a href="https://github.com/SAIB-Inc/cardano-plutus-vm-benchmark" target="_blank">original benchmark by SAIB Inc.</a> It tracks the newest code of each VM, not only its latest stable release.</p>
     </div>
     <a href="https://github.com/blinklabs-io/cardano-plutus-vm-benchmark" class="gh-link" target="_blank">
       <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -550,6 +559,8 @@
   </div>
 
   <div class="section">
+    <div class="cat-filter" id="tier-switch"></div>
+    <div class="note tier-note" id="tier-note"></div>
     <div class="cat-filter" id="cat-filter"></div>
     <div id="rankings-by-cat"></div>
     <details class="overall-details">
@@ -588,12 +599,13 @@
 
   <div class="section">
     <div class="section-title">Method</div>
-    <div class="note" style="margin:0">flat-decode + CEK evaluate on 89 Plutus scripts, except llvm-uplc, whose ranked time is steady-state execution after per-script JIT compilation. Scalus JIT, Scalus CEK, Julc and Chrysalis use three measurement samples; consult their raw framework output for uncertainty. Sequential execution, single Docker container. Geometric means within each category are computed only from scripts where every VM in that category produced a successful result.</div>
+    <div class="note" style="margin:0">Two tiers. The full tier times decoding each whole .flat file and evaluating it; the eval tier decodes the program before timing and times its evaluation only. JIT VMs (llvm-uplc, Scalus JIT) appear only in the eval tier: they compile before timing, and llvm-uplc's compilation time is retained in its raw JSON. Scalus JIT, Scalus CEK, Julc and Chrysalis use three measurement samples; consult their raw framework output for uncertainty. Sequential execution, single Docker container. Geometric means within each category are computed only from scripts where every VM in that category produced a successful result.</div>
   </div>
 
   <footer>
-    <img src="saib-logo.png" alt="SAIB" class="footer-logo"><br>
-    <div class="footer-line">Built by <a href="https://saib.dev">SAIB Inc.</a></div>
+    <img src="blink-labs-logo.svg" alt="Blink Labs" class="footer-logo"><br>
+    <div class="footer-line">Maintained by <a href="https://blinklabs.io">Blink Labs</a></div>
+    <div class="footer-line">Continued from the <a href="https://github.com/SAIB-Inc/cardano-plutus-vm-benchmark">original benchmark</a> built by <a href="https://saib.dev">SAIB Inc.</a></div>
     <div class="footer-line">
       <a href="https://github.com/blinklabs-io/cardano-plutus-vm-benchmark">Source</a>
       &nbsp;&middot;&nbsp;
@@ -644,7 +656,21 @@ function engineClass(m) { const e=m.engine||''; if (e.includes('JIT')) return 'j
 function engineCode(m) { const c = engineClass(m); return c==='jit' ? 'JIT compiler' : c==='bc' ? 'Bytecode VM' : 'Interpreter'; }
 function fullLabel(vm) { const m=VM_META[vm]; return m.label+' ('+m.runtime+')'; }
 
-const rows = parseCSV(CSV_DATA), data = {};
+// Measurement tiers. Runs from before tiers were recorded have no tier
+// column; their rows are read as the full tier.
+const TIERS = [
+  { key: 'full', label: 'Decode + evaluate', note: 'Full tier: each iteration decodes the whole .flat file, including its Data arguments, and evaluates it.' },
+  { key: 'eval', label: 'Evaluate only', note: 'Eval tier: the program is decoded before timing, and each iteration evaluates it. JIT VMs compile before timing too.' },
+];
+const allRows = parseCSV(CSV_DATA).map(r => ({ ...r, tier: r.tier || 'full' }));
+const availableTiers = TIERS.filter(t => allRows.some(r => r.tier === t.key));
+const requestedTier = new URLSearchParams(location.search).get('tier');
+const tier = (availableTiers.find(t => t.key === requestedTier) || availableTiers[0] || TIERS[0]);
+document.getElementById('tier-switch').innerHTML = '<span class="label">Tier:</span>' + availableTiers.map(t =>
+  '<a class="cat-chip'+(t.key===tier.key?' active':'')+'" href="?tier='+t.key+'">'+t.label+'</a>').join('');
+document.getElementById('tier-note').textContent = tier.note;
+
+const rows = allRows.filter(r => r.tier === tier.key), data = {};
 rows.forEach(r => { if(!data[r.script]) data[r.script]={}; data[r.script][r.vm]=parseInt(r.mean_ns); });
 const scripts = Object.keys(data).sort();
 const presentVMs = VM_ORDER.filter(vm => rows.some(r => r.vm===vm));

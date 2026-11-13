@@ -27,7 +27,11 @@ mkdir -p "$RUN_DIR/chrysalis-aot"
 cp -r BenchmarkDotNet.Artifacts/results/* "$RUN_DIR/chrysalis-aot/" 2>/dev/null || true
 
 # Parse this run's own artifacts, not every report under RUN_DIR
-python3 /bench/parsers/parse_benchmarkdotnet.py chrysalis-aot BenchmarkDotNet.Artifacts/results > "$RUN_DIR/chrysalis-aot.csv"
+# DecodeAndEval is the full tier; Eval (harness/chrysalis/eval-tier.patch) is
+# the eval tier.
+python3 /bench/parsers/parse_benchmarkdotnet.py chrysalis-aot BenchmarkDotNet.Artifacts/results full > "$RUN_DIR/chrysalis-aot.csv"
+python3 /bench/parsers/parse_benchmarkdotnet.py chrysalis-aot BenchmarkDotNet.Artifacts/results eval > "$RUN_DIR/chrysalis-aot-eval.csv"
 
 # Fill in -1 for any scripts that were given but produced no result
 python3 /bench/parsers/fill_failures.py "$RUN_DIR/chrysalis-aot.csv" "$DATA_DIR" chrysalis-aot "$RUN_DIR/chrysalis-aot-raw.log"
+python3 /bench/parsers/fill_failures.py "$RUN_DIR/chrysalis-aot-eval.csv" "$DATA_DIR" chrysalis-aot "$RUN_DIR/chrysalis-aot-raw.log"

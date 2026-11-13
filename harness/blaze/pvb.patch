@@ -1,0 +1,53 @@
+diff --git a/packages/blaze-plutus/bench/plutus_use_cases.bench.ts b/packages/blaze-plutus/bench/plutus_use_cases.bench.ts
+index 75cbb84..d7213fb 100644
+--- a/packages/blaze-plutus/bench/plutus_use_cases.bench.ts
++++ b/packages/blaze-plutus/bench/plutus_use_cases.bench.ts
+@@ -9,11 +9,48 @@ const files = readdirSync(benchDir)
+   .filter((f) => f.endsWith(".flat"))
+   .sort();
+ 
++// cardano-plutus-vm-benchmark: report the runtime that runs the benchmark, so
++// the runner can check that the Bun row runs on Bun (JavaScriptCore) and the
++// Node row on Node (V8).
++console.log(
++  `PVB_RUNTIME: ${process.versions.bun ? `bun ${process.versions.bun}` : `node ${process.versions.node}`}`,
++);
++
++// cardano-plutus-vm-benchmark: PVB_TIER=eval decodes each script before
++// timing and times evaluation only. It first checks that evaluation leaves
++// the decoded term unchanged, and leaves out (fails) any script it changes.
++const evalTier = process.env.PVB_TIER === "eval";
++const snapshot = (term: unknown) =>
++  JSON.stringify(term, (_key, value) =>
++    typeof value === "bigint" ? `${value}n` : value instanceof Uint8Array ? Array.from(value) : value,
++  );
++
+ describe("plutus use cases", () => {
+   for (const file of files) {
+     const bytes = new Uint8Array(readFileSync(join(benchDir, file)));
+     const name = file.replace(".flat", "");
+ 
++    if (evalTier) {
++      try {
++        const program = decodeFlatDeBruijn(bytes);
++        const decoded = snapshot(program.term);
++        for (let i = 0; i < 3; i++) new CekMachine().run(program.term);
++        if (snapshot(program.term) !== decoded) {
++          console.error(`EVAL_FAIL: ${name}`);
++          console.error("  evaluation modified the decoded program");
++          continue;
++        }
++        bench(name, () => {
++          const machine = new CekMachine();
++          machine.run(program.term);
++        });
++      } catch (e) {
++        console.error(`EVAL_FAIL: ${name}`);
++        console.error(`  ${e}`);
++      }
++      continue;
++    }
++
+     bench(name, () => {
+       const program = decodeFlatDeBruijn(bytes);
+       const machine = new CekMachine();

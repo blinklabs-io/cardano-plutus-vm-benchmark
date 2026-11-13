@@ -8,6 +8,11 @@ import sys
 VM_NAME = "chrysalis"  # default; overridden by CLI arg
 HEADER = "vm,script,mean_ns,median_ns,min_ns,max_ns,stddev_ns,iterations"
 
+# Benchmark method for each tier: DecodeAndEval decodes in the timed method,
+# Eval (added by harness/chrysalis/eval-tier.patch) evaluates the program
+# decoded in [GlobalSetup].
+TIER_METHODS = {"full": "DecodeAndEval", "eval": "Eval"}
+
 # BenchmarkDotNet reports times with unit suffixes
 UNIT_MULTIPLIERS = {
     "ns": 1,
@@ -30,7 +35,8 @@ def parse_time_ns(value) -> int:
     return int(float(s))
 
 
-def parse(run_dir: str) -> None:
+def parse(run_dir: str, tier: str = "full") -> None:
+    method = TIER_METHODS[tier]
     print(HEADER)
 
     # Find BDN JSON report files
@@ -54,6 +60,8 @@ def parse(run_dir: str) -> None:
 
         benchmarks = data.get("Benchmarks", [])
         for bench in benchmarks:
+            if bench.get("Method", "DecodeAndEval") != method:
+                continue
             # Extract script name from parameters
             params = bench.get("Parameters", "")
             script_name = params.replace("Script=", "") if params else bench.get(
@@ -77,10 +85,10 @@ def parse(run_dir: str) -> None:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print(f"Usage: {sys.argv[0]} [vm-name] <run-dir>", file=sys.stderr)
+        print(f"Usage: {sys.argv[0]} [vm-name] <run-dir> [tier]", file=sys.stderr)
         sys.exit(1)
-    if len(sys.argv) == 3:
+    if len(sys.argv) >= 3:
         VM_NAME = sys.argv[1]
-        parse(sys.argv[2])
+        parse(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else "full")
     else:
         parse(sys.argv[1])

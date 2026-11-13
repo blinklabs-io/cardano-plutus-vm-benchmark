@@ -17,12 +17,18 @@ cp "$DATA_DIR"/*.flat bench/src/main/resources/data/
 # Build file list for JMH -p parameter
 FILE_LIST=$(ls bench/src/main/resources/data/*.flat | xargs -I{} basename {} | paste -sd, -)
 
-# Run JMH benchmark with all files, CSV output
-sbt "bench/Jmh/run -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff $RUN_DIR/scalus-cek-jmh.csv -p file=$FILE_LIST .*CekJVMBenchmark" \
-    2>&1 | tee "$RUN_DIR/scalus-cek-raw.log"
-
-# Parse JMH CSV into unified CSV
-python3 /bench/parsers/parse_jmh.py "$RUN_DIR/scalus-cek-jmh.csv" scalus-cek > "$RUN_DIR/scalus-cek.csv"
-
-# Fill in -1 for any scripts that were given but produced no result
-python3 /bench/parsers/fill_failures.py "$RUN_DIR/scalus-cek.csv" "$DATA_DIR" scalus-cek "$RUN_DIR/scalus-cek-raw.log"
+# bench decodes the .flat file in the timed method (full tier); benchEval
+# evaluates the program decoded in @Setup (eval tier). Each tier runs on its
+# own so a failure logged by one cannot override the other tier's result.
+for tier in full eval; do
+    suffix="" method="bench\$"
+    if [[ "$tier" == eval ]]; then
+        suffix="-eval"
+        method="benchEval\$"
+    fi
+    sbt "bench/Jmh/run -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff $RUN_DIR/scalus-cek${suffix}-jmh.csv -p file=$FILE_LIST .*CekJVMBenchmark.${method}" \
+        2>&1 | tee "$RUN_DIR/scalus-cek${suffix}-raw.log"
+    python3 /bench/parsers/parse_jmh.py "$RUN_DIR/scalus-cek${suffix}-jmh.csv" scalus-cek "$tier" > "$RUN_DIR/scalus-cek${suffix}.csv"
+    # Fill in -1 for any scripts that were given but produced no result
+    python3 /bench/parsers/fill_failures.py "$RUN_DIR/scalus-cek${suffix}.csv" "$DATA_DIR" scalus-cek "$RUN_DIR/scalus-cek${suffix}-raw.log"
+done

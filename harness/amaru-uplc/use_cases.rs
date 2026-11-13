@@ -1,7 +1,9 @@
 // Benchmark harness for the released amaru-uplc crate.
 //
-// Each iteration decodes one flat-encoded Plutus V3 program and evaluates it
-// at protocol version 11 with the crate's default V3 cost model.
+// In the full tier (the default), each iteration decodes one flat-encoded
+// Plutus V3 program and evaluates it at protocol version 11 with the crate's
+// default V3 cost model. With PVB_TIER=eval, the program is decoded once
+// before timing and each iteration only evaluates it.
 
 use amaru_kernel::{PlutusVersion, protocol_version::PROTOCOL_VERSION_11};
 use amaru_uplc::{
@@ -46,6 +48,7 @@ fn eval_once(arena: &Arena, bytes: &[u8], cost_model: &CostModel) -> Result<(), 
 }
 
 fn bench(c: &mut Criterion) {
+    let eval_tier = std::env::var("PVB_TIER").as_deref() == Ok("eval");
     let cost_model = CostModel::v3();
     let mut arena = Arena::from_bump(Bump::with_capacity(10_485_760));
 
@@ -56,6 +59,28 @@ fn bench(c: &mut Criterion) {
             let message: String = message.chars().take(200).collect();
             println!("EVAL_FAIL: {name}");
             println!("  {message}");
+            continue;
+        }
+
+        if eval_tier {
+            println!("PVB_LOOP e3 {name}");
+            let decode_arena = Arena::from_bump(Bump::with_capacity(10_485_760));
+            let (program, _) = flat::decode::<DeBruijn>(
+                &decode_arena,
+                &bytes,
+                PlutusVersion::V3,
+                PROTOCOL_VERSION_11,
+            )
+            .expect("decode");
+            let mut eval_arena = Arena::from_bump(Bump::with_capacity(10_485_760));
+            c.bench_function(&name, |b| {
+                b.iter(|| {
+                    let result = program.eval(&eval_arena, cost_model.clone(), ExBudget::max());
+                    std::hint::black_box(result.is_success());
+                    drop(result);
+                    eval_arena.reset();
+                })
+            });
             continue;
         }
 

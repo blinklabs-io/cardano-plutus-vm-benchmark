@@ -14,11 +14,21 @@ ln -sf "$DATA_DIR" "$BENCH_DIR/packages/blaze-plutus/bench/plutus_use_cases"
 cd "$BENCH_DIR/packages/blaze-plutus"
 
 # Run vitest bench via Node.js (V8 engine)
-npx vitest bench --run \
-    2>&1 | tee "$RUN_DIR/blaze-v8-raw.log"
+# The full tier decodes each .flat file in the timed loop; PVB_TIER=eval
+# (harness/blaze/pvb.patch) decodes it before timing.
+run_tier() {
+    local tier="$1" suffix="$2"
+    local raw="$RUN_DIR/blaze-v8${suffix}-raw.log"
+    PVB_TIER="$tier" npx vitest bench --run \
+        2>&1 | tee "$raw"
+    # harness/blaze/pvb.patch prints the runtime that ran the benchmark.
+    if ! grep -q "PVB_RUNTIME: node " "$raw"; then
+        echo "ERROR: blaze-v8 did not run on node: $(grep -o 'PVB_RUNTIME: .*' "$raw" | head -1)" >&2
+        exit 1
+    fi
+    python3 /bench/parsers/parse_vitest.py blaze-v8 "$raw" > "$RUN_DIR/blaze-v8${suffix}.csv"
+    python3 /bench/parsers/fill_failures.py "$RUN_DIR/blaze-v8${suffix}.csv" "$DATA_DIR" blaze-v8 "$raw"
+}
 
-# Parse into unified CSV
-python3 /bench/parsers/parse_vitest.py blaze-v8 "$RUN_DIR/blaze-v8-raw.log" > "$RUN_DIR/blaze-v8.csv"
-
-# Fill in -1 for any scripts that were given but produced no result
-python3 /bench/parsers/fill_failures.py "$RUN_DIR/blaze-v8.csv" "$DATA_DIR" blaze-v8 "$RUN_DIR/blaze-v8-raw.log"
+run_tier full ""
+run_tier eval "-eval"
