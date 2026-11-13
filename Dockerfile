@@ -28,6 +28,10 @@ RUN git clone "$CHRYSALIS_REPO" /src \
     && cd /src && (git checkout "$CHRYSALIS_SHA" || (git fetch origin "$CHRYSALIS_SHA" && git checkout "$CHRYSALIS_SHA"))
 
 WORKDIR /src
+# Add the eval tier: an Eval benchmark beside DecodeAndEval that evaluates the
+# program decoded in [GlobalSetup].
+COPY harness/chrysalis/eval-tier.patch /tmp/eval-tier.patch
+RUN git apply /tmp/eval-tier.patch
 RUN dotnet restore benchmarks/PlutusBench/PlutusBench.csproj
 RUN dotnet build -c Release -p:TreatWarningsAsErrors=false benchmarks/PlutusBench/PlutusBench.csproj
 
@@ -78,6 +82,10 @@ RUN git clone "$BLAZE_REPO" /src \
     && cd /src && (git checkout "$BLAZE_SHA" || (git fetch origin "$BLAZE_SHA" && git checkout "$BLAZE_SHA"))
 
 WORKDIR /src
+# Add the eval tier (PVB_TIER=eval decodes each script before timing) and a
+# line reporting which runtime runs the benchmark.
+COPY harness/blaze/pvb.patch /tmp/pvb.patch
+RUN git apply /tmp/pvb.patch
 RUN bun install
 
 # =============================================================================
@@ -115,6 +123,10 @@ RUN git clone "$PLUTUZ_REPO" /src \
 WORKDIR /src
 # Patch build.zig to install the bench binary (upstream only has a run step)
 RUN sed -i '/const run_bench = b.addRunArtifact(bench_exe);/i\    b.installArtifact(bench_exe);' build.zig
+# Add the eval tier: PVB_TIER=eval decodes each iteration's program before
+# its timer starts.
+COPY harness/plutuz/eval-tier.patch /tmp/eval-tier.patch
+RUN git apply /tmp/eval-tier.patch
 RUN zig build -Doptimize=ReleaseFast
 
 # =============================================================================
@@ -216,8 +228,16 @@ RUN sed -i 's/flags: +with-inline-r/flags: -with-inline-r/' cabal.project \
     && sed -i 's/flags: +with-cert/flags: -with-cert/' cabal.project
 
 RUN cabal update
-RUN cabal build plutus-benchmark:bench:validation -j \
-    && cp "$(cabal list-bin plutus-benchmark:bench:validation)" /validation-bin
+
+# validation (BenchCek.hs) decodes before timing: the eval tier.
+# validation-flat (our harness) decodes the whole file in the loop: the full tier.
+COPY harness/haskell/BenchFlat.hs plutus-benchmark/validation/bench/BenchFlat.hs
+COPY harness/haskell/validation-flat.cabal /tmp/validation-flat.cabal
+RUN cat /tmp/validation-flat.cabal >> plutus-benchmark/plutus-benchmark.cabal
+
+RUN cabal build plutus-benchmark:bench:validation plutus-benchmark:bench:validation-flat -j \
+    && cp "$(cabal list-bin plutus-benchmark:bench:validation)" /validation-bin \
+    && cp "$(cabal list-bin plutus-benchmark:bench:validation-flat)" /validation-flat-bin
 
 # =============================================================================
 # Build stage: llvm-uplc (C++ / LLVM LLJIT)
@@ -364,6 +384,7 @@ COPY scripts/opshin_bench.py /bench/opshin/bench_plutus_use_cases.py
 
 # Haskell: compiled Criterion benchmark binary (data loaded from /bench/data/ at runtime)
 COPY --from=build-haskell /validation-bin /bench/haskell/bin/validation
+COPY --from=build-haskell /validation-flat-bin /bench/haskell/bin/validation-flat
 
 # Scalus: full sbt project + compiled JMH benchmarks (JMH needs sbt at runtime)
 COPY --from=build-scalus /src /bench/scalus

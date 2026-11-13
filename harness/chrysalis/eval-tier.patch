@@ -1,0 +1,34 @@
+--- a/benchmarks/PlutusBench/Program.cs	2026-11-13 06:30:57.654330210 -0500
++++ b/benchmarks/PlutusBench/Program.cs	2026-11-13 06:30:57.673720345 -0500
+@@ -46,15 +46,18 @@
+             .ToArray()!;
+ 
+     private Dictionary<string, byte[]> _flatBytes = null!;
++    private Dictionary<string, Program<DeBruijn>> _programs = null!;
+ 
+     /// <summary>Loads all flat-encoded script data.</summary>
+     [GlobalSetup]
+     public void Setup()
+     {
+         _flatBytes = [];
++        _programs = [];
+         foreach (string name in AllFiles)
+         {
+             _flatBytes[name] = File.ReadAllBytes(Path.Combine(DataDir, name + ".flat"));
++            _programs[name] = FlatDecoder.DecodeProgram(_flatBytes[name]);
+         }
+     }
+ 
+@@ -74,4 +77,12 @@
+         CekMachine machine = new(ExBudget.Unlimited);
+         return machine.Run(program.Term);
+     }
++
++    /// <summary>CEK evaluate a single Plutus script decoded in setup.</summary>
++    [Benchmark]
++    public Term<DeBruijn> Eval()
++    {
++        CekMachine machine = new(ExBudget.Unlimited);
++        return machine.Run(_programs[Script].Term);
++    }
+ }

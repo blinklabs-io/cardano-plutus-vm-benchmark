@@ -1,4 +1,10 @@
-"""Benchmark UPLC CEK machine using plutus_use_cases flat-encoded scripts."""
+"""Benchmark UPLC CEK machine using plutus_use_cases flat-encoded scripts.
+
+The full tier (the default) decodes each script in the timed loop. With
+PVB_TIER=eval, each script is decoded once before timing and the loop times
+evaluation only; the script then checks that evaluation left the decoded
+program unchanged.
+"""
 
 import os
 import sys
@@ -12,6 +18,7 @@ BENCH_DIR = os.path.expanduser(
 WARMUP = 3
 MIN_ITERS = 20
 TIME_BUDGET_S = 2.0
+EVAL_TIER = os.environ.get("PVB_TIER") == "eval"
 
 
 def fmt_ns(ns: int) -> str:
@@ -60,16 +67,27 @@ for name, cbor_flat in scripts.items():
         continue
 
     # Warmup
-    for _ in range(WARMUP):
+    if EVAL_TIER:
         prog = unflatten(cbor_flat)
-        eval(prog)
+        decoded = prog.dumps()
+        for _ in range(WARMUP):
+            eval(prog)
+        if prog.dumps() != decoded:
+            print(f"  {name:<35} SKIP (eval error)")
+            print("    evaluation modified the decoded program")
+            continue
+    else:
+        for _ in range(WARMUP):
+            prog = unflatten(cbor_flat)
+            eval(prog)
 
     # Measured
     samples = []
     total_s = 0.0
     while len(samples) < MIN_ITERS or total_s < TIME_BUDGET_S:
         t0 = time.perf_counter_ns()
-        prog = unflatten(cbor_flat)
+        if not EVAL_TIER:
+            prog = unflatten(cbor_flat)
         eval(prog)
         elapsed = time.perf_counter_ns() - t0
         samples.append(elapsed)

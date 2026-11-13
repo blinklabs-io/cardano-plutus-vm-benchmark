@@ -9,6 +9,11 @@
 //
 // Warmup 5 iterations, then at least 50 iterations and at least 5 seconds per
 // script, matching the other custom runners in that suite.
+//
+// PVB_TIER=eval decodes each script once before timing and times evaluation
+// only, writing bench/results/plutus_use_cases-eval.json. It checks that
+// evaluation leaves the decoded program unchanged, so that every timed
+// iteration evaluates the same program.
 
 import { readFileSync, readdirSync, mkdirSync, writeFileSync, existsSync } from "fs";
 import { dirname, join } from "path";
@@ -20,13 +25,14 @@ import { createRequire } from "module";
 process.env = { ...process.env };
 
 const require = createRequire(import.meta.url);
-const { UPLCDecoder } = require("@harmoniclabs/uplc");
+const { UPLCDecoder, showUPLC } = require("@harmoniclabs/uplc");
 const { CEKError, Machine } = require("../dist/index.js");
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = process.env.BENCH_DATA ?? join(HERE, "plutus_use_cases");
 const OUT_DIR = join(HERE, "results");
-const OUT_FILE = join(OUT_DIR, "plutus_use_cases.json");
+const EVAL_TIER = process.env.PVB_TIER === "eval";
+const OUT_FILE = join(OUT_DIR, EVAL_TIER ? "plutus_use_cases-eval.json" : "plutus_use_cases.json");
 
 const WARMUP = Number(process.env.BENCH_WARMUP ?? 5);
 const MIN_ITERATIONS = Number(process.env.BENCH_MIN_ITERS ?? 50);
@@ -37,14 +43,18 @@ if (!existsSync(DATA_DIR)) {
   process.exit(1);
 }
 
-/** flat-decode then evaluate, which is what the suite measures. */
-function runScript(bytes) {
-  const program = UPLCDecoder.parse(bytes, "flat");
-  const result = Machine.evalSimple(program.body);
+/** evaluate a decoded program body. */
+function evaluate(body) {
+  const result = Machine.evalSimple(body);
   if (result instanceof CEKError) {
     throw new Error(result.msg ?? "CEK evaluation failed");
   }
   return result;
+}
+
+/** flat-decode then evaluate, which the full tier measures. */
+function runScript(bytes) {
+  return evaluate(UPLCDecoder.parse(bytes, "flat").body);
 }
 
 function summarise(samples) {
@@ -70,9 +80,21 @@ let failed = 0;
 for (const file of files) {
   const name = file.replace(/\.flat$/, "");
   const bytes = new Uint8Array(readFileSync(join(DATA_DIR, file)));
+  // The eval tier decodes once, before timing, and evaluates that program.
+  let run = () => runScript(bytes);
 
   try {
-    for (let i = 0; i < WARMUP; i++) runScript(bytes);
+    if (EVAL_TIER) {
+      const body = UPLCDecoder.parse(bytes, "flat").body;
+      const decoded = showUPLC(body);
+      run = () => evaluate(body);
+      for (let i = 0; i < WARMUP; i++) run();
+      if (showUPLC(body) !== decoded) {
+        throw new Error("evaluation modified the decoded program");
+      }
+    } else {
+      for (let i = 0; i < WARMUP; i++) run();
+    }
   } catch (err) {
     console.error(`${name}: ${String(err).split("\n")[0]}`);
     failed++;
@@ -86,7 +108,7 @@ for (const file of files) {
     Number(process.hrtime.bigint() - started) < TIME_BUDGET_NS
   ) {
     const t0 = process.hrtime.bigint();
-    runScript(bytes);
+    run();
     samples.push(Number(process.hrtime.bigint() - t0));
   }
 

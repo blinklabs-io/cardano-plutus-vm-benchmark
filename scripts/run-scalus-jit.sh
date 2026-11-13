@@ -21,8 +21,9 @@ FILE_LIST=$(ls bench/src/main/resources/data/*.flat | xargs -I{} basename {} | p
 sbt "bench/Jmh/run -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff $RUN_DIR/scalus-jit-jmh.csv -p file=$FILE_LIST .*JITBenchmark" \
     2>&1 | tee "$RUN_DIR/scalus-jit-raw.log"
 
+# Decoding and JIT compilation happen in @Setup: eval tier
 # Parse JMH CSV into unified CSV
-python3 /bench/parsers/parse_jmh.py "$RUN_DIR/scalus-jit-jmh.csv" scalus-jit > "$RUN_DIR/scalus-jit.csv"
+python3 /bench/parsers/parse_jmh.py "$RUN_DIR/scalus-jit-jmh.csv" scalus-jit eval > "$RUN_DIR/scalus-jit-eval.csv"
 
 # Fill in -1 for any scripts that were given but produced no result
-python3 /bench/parsers/fill_failures.py "$RUN_DIR/scalus-jit.csv" "$DATA_DIR" scalus-jit "$RUN_DIR/scalus-jit-raw.log"
+python3 /bench/parsers/fill_failures.py "$RUN_DIR/scalus-jit-eval.csv" "$DATA_DIR" scalus-jit "$RUN_DIR/scalus-jit-raw.log"

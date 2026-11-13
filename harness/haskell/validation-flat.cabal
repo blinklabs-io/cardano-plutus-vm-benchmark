@@ -1,0 +1,15 @@
+
+-- Added by cardano-plutus-vm-benchmark: the full tier for plutus-core.
+benchmark validation-flat
+  import:         lang, os-support
+  type:           exitcode-stdio-1.0
+  main-is:        BenchFlat.hs
+  hs-source-dirs: validation/bench
+  build-depends:
+    , base                     >=4.9 && <5
+    , criterion
+    , deepseq
+    , plutus-benchmark-common
+    , plutus-core
+    , plutus-ledger-api
+    , validation-internal

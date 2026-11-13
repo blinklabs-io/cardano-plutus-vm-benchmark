@@ -8,8 +8,9 @@ VM_NAME = "plutigo"
 HEADER = "vm,script,mean_ns,median_ns,min_ns,max_ns,stddev_ns,iterations"
 
 # BenchmarkFlatFiles/auction_1-1-8    12345    98765 ns/op    4096 B/op    42 allocs/op
+# BenchmarkFlatFilesEval/auction_1-1-8 ...
 BENCH_RE = re.compile(
-    r"BenchmarkFlatFiles/(\S+)-\d+\s+"  # name-GOMAXPROCS
+    r"BenchmarkFlatFiles\w*/(\S+)-\d+\s+"  # name-GOMAXPROCS
     r"(\d+)\s+"                          # iterations
     r"([\d.]+)\s+ns/op"                  # ns/op
 )

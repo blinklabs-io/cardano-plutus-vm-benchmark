@@ -145,9 +145,15 @@ To add a new Plutus VM implementation:
 
 ## Updating VM Versions
 
-1. Update the relevant source revision in `.env`, or update the exact package
-   version and lockfile for release-package adapters
-2. Test with `docker compose build --no-cache && docker compose run --rm benchmark`
+The benchmark tracks the newest code of each VM, not only its latest stable
+release.
+
+1. Run `scripts/update-pins.sh` to move every VM to its newest default-branch
+   commit or newest published package version. To pin one VM by hand, set its
+   full commit SHA in `.env`, or its exact package version and lockfile for
+   release-package adapters.
+2. Check that the patches in `harness/` still apply, and test with
+   `docker compose build --no-cache && docker compose run --rm benchmark`
 3. Submit PR with commit message: `chore: update <vm-name> to <commit/tag>`
 
 ### What NOT to Do

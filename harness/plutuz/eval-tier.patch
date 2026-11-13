@@ -1,0 +1,65 @@
+--- a/bench/bench.zig	2026-11-13 06:35:21.971807188 -0500
++++ b/bench/bench.zig	2026-11-13 06:35:21.991376647 -0500
+@@ -68,6 +68,7 @@
+     name: []const u8,
+     file_bytes: []const u8,
+     quiet: bool,
++    eval_tier: bool,
+ ) !BenchResult {
+     // Verify the file decodes before benchmarking
+     {
+@@ -90,19 +91,32 @@
+         _ = arena.reset(.retain_capacity);
+     }
+ 
+-    // Measured iterations: decode + eval per iteration
++    // Measured iterations: decode + eval per iteration. In the eval tier
++    // (PVB_TIER=eval, added by cardano-plutus-vm-benchmark) each iteration
++    // still decodes a fresh program, into its own arena, but before the
++    // timer starts, so only evaluation is timed.
+     var samples: std.ArrayList(u64) = .empty;
+     defer samples.deinit(allocator);
+ 
++    var decode_arena = std.heap.ArenaAllocator.init(allocator);
++    defer decode_arena.deinit();
++
+     var timer = try std.time.Timer.start();
+     var total_elapsed: u64 = 0;
+ 
+     while (samples.items.len < MIN_ITERATIONS or total_elapsed < TIME_BUDGET_NS) {
+-        timer.reset();
+-        const program = plutuz.decodeFlatDeBruijn(arena.allocator(), file_bytes) catch break;
++        var program: *const plutuz.DeBruijnProgram = undefined;
++        if (eval_tier) {
++            program = plutuz.decodeFlatDeBruijn(decode_arena.allocator(), file_bytes) catch break;
++            timer.reset();
++        } else {
++            timer.reset();
++            program = plutuz.decodeFlatDeBruijn(arena.allocator(), file_bytes) catch break;
++        }
+         _ = plutuz.eval(arena.allocator(), program) catch {};
+         const elapsed = timer.read();
+         _ = arena.reset(.retain_capacity);
++        if (eval_tier) _ = decode_arena.reset(.retain_capacity);
+         try samples.append(allocator, elapsed);
+         total_elapsed += elapsed;
+ 
+@@ -197,7 +211,8 @@
+     }
+ 
+     const bench_dir = "bench/plutus_use_cases";
+-    const results_path = "bench/results/plutus_use_cases.json";
++    const eval_tier = if (std.posix.getenv("PVB_TIER")) |tier| std.mem.eql(u8, tier, "eval") else false;
++    const results_path = if (eval_tier) "bench/results/plutus_use_cases-eval.json" else "bench/results/plutus_use_cases.json";
+ 
+     var dir = std.fs.cwd().openDir(bench_dir, .{ .iterate = true }) catch {
+         std.debug.print("error: cannot open {s}\n", .{bench_dir});
+@@ -246,7 +261,7 @@
+         defer allocator.free(file_bytes);
+ 
+         const name = file_name[0 .. file_name.len - 5]; // strip .flat
+-        const result = try runBenchmark(allocator, name, file_bytes, quiet);
++        const result = try runBenchmark(allocator, name, file_bytes, quiet, eval_tier);
+         try results.append(allocator, result);
+ 
+         if (!quiet) {

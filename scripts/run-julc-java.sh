@@ -33,8 +33,10 @@ FILE_LIST=$(ls data/*.flat | xargs -I{} basename {} | paste -sd, -)
     ".*CekJavaBenchmark" \
     2>&1 | tee -a "$RUN_DIR/julc-java-raw.log"
 
+# The program is decoded in @Setup: eval tier. Each timed call still
+# prepares it (builtin availability walk and cost model construction).
 # Parse JMH CSV into unified CSV
-python3 /bench/parsers/parse_jmh.py "$RUN_DIR/julc-java-jmh.csv" julc-java > "$RUN_DIR/julc-java.csv"
+python3 /bench/parsers/parse_jmh.py "$RUN_DIR/julc-java-jmh.csv" julc-java eval > "$RUN_DIR/julc-java-eval.csv"
 
 # Fill in -1 for any scripts that were given but produced no result
-python3 /bench/parsers/fill_failures.py "$RUN_DIR/julc-java.csv" "$DATA_DIR" julc-java "$RUN_DIR/julc-java-raw.log"
+python3 /bench/parsers/fill_failures.py "$RUN_DIR/julc-java-eval.csv" "$DATA_DIR" julc-java "$RUN_DIR/julc-java-raw.log"
