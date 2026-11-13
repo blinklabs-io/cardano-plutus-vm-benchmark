@@ -59,7 +59,7 @@ for vm in "${GIT_VMS[@]}"; do
     # and commit. (git describe would name the nearest ancestor tag, which in
     # monorepos and release-branch workflows is often another package's or an
     # older release's.)
-    tag=$(git ls-remote --tags "$repo" | awk -v s="$sha" '$1 == s { sub("refs/tags/", "", $2); sub("\\^\\{\\}$", "", $2); print $2; exit }')
+    tag=$(git ls-remote --tags "$repo" | awk -v s="$sha" '$1 == s && !found { sub("refs/tags/", "", $2); sub("\\^\\{\\}$", "", $2); print $2; found = 1 }')
     label="${tag:-${branch}@${sha:0:7}}"
     env_set "${vm}_SHA" "$sha"
     env_set "${vm}_VERSION" "$label"

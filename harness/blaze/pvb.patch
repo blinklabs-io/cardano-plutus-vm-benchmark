@@ -2,7 +2,7 @@ diff --git a/packages/blaze-plutus/bench/plutus_use_cases.bench.ts b/packages/bl
 index 75cbb84..d7213fb 100644
 --- a/packages/blaze-plutus/bench/plutus_use_cases.bench.ts
 +++ b/packages/blaze-plutus/bench/plutus_use_cases.bench.ts
-@@ -9,11 +9,43 @@ const files = readdirSync(benchDir)
+@@ -9,11 +9,48 @@ const files = readdirSync(benchDir)
    .filter((f) => f.endsWith(".flat"))
    .sort();
  
@@ -28,18 +28,23 @@ index 75cbb84..d7213fb 100644
      const name = file.replace(".flat", "");
  
 +    if (evalTier) {
-+      const program = decodeFlatDeBruijn(bytes);
-+      const decoded = snapshot(program.term);
-+      for (let i = 0; i < 3; i++) new CekMachine().run(program.term);
-+      if (snapshot(program.term) !== decoded) {
++      try {
++        const program = decodeFlatDeBruijn(bytes);
++        const decoded = snapshot(program.term);
++        for (let i = 0; i < 3; i++) new CekMachine().run(program.term);
++        if (snapshot(program.term) !== decoded) {
++          console.error(`EVAL_FAIL: ${name}`);
++          console.error("  evaluation modified the decoded program");
++          continue;
++        }
++        bench(name, () => {
++          const machine = new CekMachine();
++          machine.run(program.term);
++        });
++      } catch (e) {
 +        console.error(`EVAL_FAIL: ${name}`);
-+        console.error("  evaluation modified the decoded program");
-+        continue;
++        console.error(`  ${e}`);
 +      }
-+      bench(name, () => {
-+        const machine = new CekMachine();
-+        machine.run(program.term);
-+      });
 +      continue;
 +    }
 +
