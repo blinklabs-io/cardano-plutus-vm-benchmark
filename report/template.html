@@ -659,9 +659,9 @@ function corpusLine(r) {
 
 document.getElementById('env-badge').innerHTML = run.env;
 document.getElementById('corpus-switch').innerHTML = '<span class="label">Corpus:</span>' + RUNS.map(r =>
-  '<a class="cat-chip'+(r===run?' active':'')+'" href="'+pageLink(r.corpus)+'">'+escapeHtml(r.title)+'<span class="count">'+r.count+'</span></a>').join('');
+  '<a class="cat-chip'+(r===run?' active':'')+'" href="'+pageLink(r.corpus, pageParams.get('tier'))+'">'+escapeHtml(r.title)+'<span class="count">'+r.count+'</span></a>').join('');
 document.getElementById('corpus-note').textContent = run.note + ' This run: ' + corpusLine(run) + ', ' + run.date + '.';
-document.getElementById('programs-note').innerHTML = escapeHtml(run.title) + ' (<code>' + escapeHtml(run.corpus) + '</code>): ' + corpusLine(run) + '.' +
+document.getElementById('programs-note').innerHTML = escapeHtml(run.title) + ' (<code>' + escapeHtml(run.corpus) + '</code>): ' + escapeHtml(corpusLine(run)) + '.' +
   (run.count < run.total ? ' Programs are ranked by SHA-256 of <code>&lt;seed&gt;:&lt;file name&gt;</code> and the first ' + run.count + ' are taken, so the same seed always selects the same programs (<code>BENCH_SEED</code>, <code>BENCH_SAMPLE</code>).' : '');
 document.getElementById('programs-summary').textContent = 'Show the ' + run.programs.length + ' programs';
 document.getElementById('program-list').innerHTML = run.programs.map(name => {
@@ -882,8 +882,8 @@ document.getElementById('toolchain').innerHTML = sortedPenalized.map(vm => {
   const v=vmVersions[vm]||{}, revision=v.revision||'', shortRevision=revision.slice(0,7);
   const version=v.version||(revision?'commit:'+shortRevision:''), toolchain=v.toolchain||'';
   const source=(v.repo&&revision&&v.repo!=='unknown')?v.repo.replace(/\.git$/,'')+'/commit/'+revision:'';
-  const revisionLabel=source?`<a href="${source}" title="${v.repo}@${revision}" target="_blank" rel="noopener">${version.startsWith('commit:')?'rev '+shortRevision:version+' · rev '+shortRevision}</a>`:(version||'version not recorded');
-  return `<div class="tc-tag"><span class="tc-dot" style="background:${m.color}"></span><span class="tc-vm">${m.label}</span><span class="tc-ver">${revisionLabel}${toolchain?' · '+toolchain:' · toolchain not recorded'}</span></div>`;
+  const revisionLabel=source?`<a href="${escapeHtml(source)}" title="${escapeHtml(v.repo+'@'+revision)}" target="_blank" rel="noopener">${escapeHtml(version.startsWith('commit:')?'rev '+shortRevision:version+' · rev '+shortRevision)}</a>`:(escapeHtml(version)||'version not recorded');
+  return `<div class="tc-tag"><span class="tc-dot" style="background:${m.color}"></span><span class="tc-vm">${m.label}</span><span class="tc-ver">${revisionLabel}${toolchain?' · '+escapeHtml(toolchain):' · toolchain not recorded'}</span></div>`;
 }).join('');
 
 // Filters

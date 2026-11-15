@@ -2,6 +2,7 @@
 """Generate markdown and HTML comparison reports from unified.csv."""
 
 import csv
+import html
 import json
 import math
 import os
@@ -344,7 +345,7 @@ def env_badge(run_dir: str, env_info: str) -> str:
     for line in env_info.split("\n"):
         key, _, value = line.strip().partition(":")
         key = key.strip().lower()
-        value = value.strip()
+        value = html.escape(value.strip())
         if key == "cpu":
             badge += f"<code>{value}</code>"
         elif key == "cores":
@@ -390,11 +391,17 @@ def generate_html(run_dirs: list[str]) -> None:
     with open(template_path) as f:
         template = f.read()
 
-    runs = [page_run(run_dir) for run_dir in run_dirs]
+    newest: dict[str, dict] = {}
+    for run in (page_run(run_dir) for run_dir in run_dirs):
+        held = newest.get(run["corpus"])
+        if held is None or run["date"] >= held["date"]:
+            newest[run["corpus"]] = run
+    runs = list(newest.values())
     order = {corpus: i for i, corpus in enumerate(CORPORA)}
     runs.sort(key=lambda r: order.get(r["corpus"], len(CORPORA)))
-    # "</" would end the inline script.
-    runs_json = json.dumps(runs).replace("</", "<\\/")
+    # Any "<" could open "</script>" or "<!--<script>", which changes how the
+    # parser ends the inline script.
+    runs_json = json.dumps(runs).replace("<", "\\u003c")
     html = template.replace("{{RUNS_JSON}}", runs_json)
 
     # Write to docs/index.html (relative to repo root)
