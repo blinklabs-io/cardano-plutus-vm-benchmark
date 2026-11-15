@@ -15,12 +15,17 @@ def parse(criterion_dir: str, vm_name: str = "amaru-uplc") -> None:
         print(f"Warning: {criterion_dir} not found", file=sys.stderr)
         return
 
-    for bench_name in sorted(os.listdir(criterion_dir)):
-        estimates_path = os.path.join(
-            criterion_dir, bench_name, "new", "estimates.json"
-        )
-        if not os.path.isfile(estimates_path):
-            continue
+    # Criterion shortens a benchmark's directory name to 64 characters, so the
+    # script name comes from new/benchmark.json. Each script may have its own
+    # CRITERION_HOME below criterion_dir, so search the whole tree.
+    bench_dirs = sorted(
+        os.path.dirname(root)
+        for root, _, files in os.walk(criterion_dir)
+        if os.path.basename(root) == "new" and "estimates.json" in files
+    )
+    for bench_dir in bench_dirs:
+        bench_name = os.path.relpath(bench_dir, criterion_dir)
+        estimates_path = os.path.join(bench_dir, "new", "estimates.json")
 
         with open(estimates_path) as f:
             est = json.load(f)
@@ -30,9 +35,7 @@ def parse(criterion_dir: str, vm_name: str = "amaru-uplc") -> None:
         stddev_ns = int(est["std_dev"]["point_estimate"])
 
         # Extract min/max from sample data if available
-        sample_path = os.path.join(
-            criterion_dir, bench_name, "new", "sample.json"
-        )
+        sample_path = os.path.join(bench_dir, "new", "sample.json")
         min_ns = 0
         max_ns = 0
         iterations = 0
@@ -49,8 +52,12 @@ def parse(criterion_dir: str, vm_name: str = "amaru-uplc") -> None:
                     max_ns = int(max(per_iter))
                 iterations = len(per_iter)
 
-        # Clean up bench name: remove group prefix if present
-        script_name = bench_name.split("/")[-1] if "/" in bench_name else bench_name
+        script_name = os.path.basename(bench_name)
+        benchmark_path = os.path.join(bench_dir, "new", "benchmark.json")
+        if os.path.isfile(benchmark_path):
+            with open(benchmark_path) as f:
+                bench = json.load(f)
+            script_name = (bench.get("function_id") or bench.get("full_id") or script_name).split("/")[-1]
 
         print(
             f"{vm_name},{script_name},"

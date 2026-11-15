@@ -75,6 +75,8 @@ Each VM runs 89 real-world Plutus smart contract scripts (auction, escrow, unisw
 
 All VMs use the same canonical `.flat` test data committed in `data/plutus_use_cases/`.
 
+A second corpus, `data/mainnet_recent/`, holds 1360 validator evaluations from recent mainnet transactions. Select it with `BENCH_CORPUS=mainnet_recent`. By default a run uses 100 of them, selected by `BENCH_SEED` (default `1`): the same seed always selects the same programs. `BENCH_SAMPLE` sets the sample size, and `BENCH_SAMPLE=all` runs every program (see [METHODOLOGY.md](METHODOLOGY.md#mainnet-corpus)).
+
 ## Quick Start
 
 ```bash
@@ -88,6 +90,13 @@ docker compose run --rm benchmark
 # Run specific VMs only
 docker compose run --rm -e BENCH_VMS=chrysalis,amaru-uplc benchmark
 
+# Run on the mainnet corpus instead of plutus_use_cases (100 programs, seed 1)
+docker compose run --rm -e BENCH_CORPUS=mainnet_recent benchmark
+
+# Another seed, a larger sample, or the whole mainnet corpus
+docker compose run --rm -e BENCH_CORPUS=mainnet_recent -e BENCH_SEED=7 -e BENCH_SAMPLE=250 benchmark
+docker compose run --rm -e BENCH_CORPUS=mainnet_recent -e BENCH_SAMPLE=all benchmark
+
 # Record the host CPU when the container cannot see it (e.g. Docker on macOS)
 HOST_CPU="Apple M4 Pro" docker compose run --rm benchmark
 ```
@@ -96,6 +105,7 @@ Results are written to `./results/<date>/`:
 - `unified.csv` — all VMs, all scripts, nanosecond precision
 - `report.md` — markdown comparison table with geometric means
 - `versions.csv` — VM release labels, source commits, and toolchains
+- `corpus.txt` — the programs the run measured
 - Per-VM raw output logs
 
 ## Updating VM Versions
@@ -126,6 +136,8 @@ versions in `versions.csv`. The generated page shows this provenance under
 
 ```
 data/plutus_use_cases/    # 89 canonical .flat benchmark scripts
+data/mainnet_recent/      # 1360 applied mainnet validators (BENCH_CORPUS=mainnet_recent)
+tools/mainnet-corpus/     # Generator for data/mainnet_recent
 Dockerfile                # Multi-stage: build all VMs, single ubuntu:24.04 runtime
 docker-compose.yml        # One-command orchestration
 .env              # Pinned git SHAs and toolchain versions

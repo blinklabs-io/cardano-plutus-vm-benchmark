@@ -40,5 +40,10 @@ services:
       - .env
     environment:
       - HOST_CPU
+      - BENCH_CORPUS
+      - BENCH_SAMPLE
+      - BENCH_SEED
+      - BENCH_VMS
+      - BENCH_TIMING
     volumes:
       - ./results:/results
