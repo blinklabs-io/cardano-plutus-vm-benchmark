@@ -55,6 +55,24 @@ blaze-plutus runs twice, on Node (V8) and on Bun (JavaScriptCore). The Bun row r
 
 Script sizes range from 3 KB to 13 KB. All VMs use the same canonical copies from `data/plutus_use_cases/`.
 
+### Mainnet corpus
+
+`data/mainnet_recent/` holds 1360 validator evaluations from recent mainnet transactions, selected with `BENCH_CORPUS=mainnet_recent`. They come from plutigo's recent mainnet replay corpus (`replay/testdata/mainnet-2026-11-03-*.json.gz` in plutigo v0.12.1), whose results were checked against cardano-node. Each file is a validator applied to the datum, redeemer and script context it ran with on mainnet, as Data constants, so it is a closed program like the `plutus_use_cases` scripts. All 1360 succeeded on mainnet. Files are named `<transaction id>-<purpose>-<index>.flat` and range from 1 KB to 21 KB.
+
+`tools/mainnet-corpus` regenerates the directory byte for byte:
+
+```bash
+cd tools/mainnet-corpus
+go run . -out ../../data/mainnet_recent \
+    "$(go list -m -f '{{.Dir}}' github.com/blinklabs-io/plutigo)"/replay/testdata/mainnet-2026-11-03-*.json.gz
+```
+
+The generator also evaluates every program with plutigo and stops if any fails.
+
+#### Sampling
+
+A full run of every VM over all 1360 programs takes days, so a mainnet run measures a sample of 100 programs by default. Each program is ranked by the SHA-256 of `<seed>:<file name>` and the first `BENCH_SAMPLE` are taken (`scripts/select_corpus.py`). The same `BENCH_SEED` (default `1`) always selects the same programs, on any machine, and every VM in a run measures the same sample. `BENCH_SAMPLE` sets the size, and `BENCH_SAMPLE=all` measures the whole corpus. Each run lists its programs in `corpus.txt`, and `environment.txt` records the corpus, sample size and seed. Sampling applies to any corpus; `plutus_use_cases` runs all 89 programs by default.
+
 ## Why Native Benchmarks
 
 Each VM uses its own benchmark framework rather than a uniform harness:

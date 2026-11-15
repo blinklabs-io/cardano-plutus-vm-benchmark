@@ -2,7 +2,7 @@
 set -euo pipefail
 
 RUN_DIR="$1"
-DATA_DIR="/bench/data/plutus_use_cases"
+DATA_DIR="${BENCH_DATA_DIR:-/bench/data/${BENCH_CORPUS:-plutus_use_cases}}"
 BENCH_DIR="/bench/amaru-uplc"
 BENCH_BIN="$BENCH_DIR/bin/use_cases"
 RAW="$RUN_DIR/amaru-uplc-raw.log"
@@ -41,7 +41,7 @@ run_tier() {
             echo "--- $name: process $BASHPID"
             exec env PVB_DATA_DIR="$work/$name" \
                 PVB_TIER="$tier" \
-                CRITERION_HOME="$criterion_home" \
+                CRITERION_HOME="$criterion_home/$name" \
                 "$BENCH_BIN" --bench --noplot "${TIMING[@]}"
         ) 2>&1 | tee -a "$raw" || true
     done

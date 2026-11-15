@@ -18,6 +18,28 @@ if [[ -z "${RUN_DIR:-}" ]]; then
 fi
 mkdir -p "$RUN_DIR"
 
+# The corpus is a directory of .flat programs under /bench/data.
+BENCH_CORPUS="${BENCH_CORPUS:-plutus_use_cases}"
+export BENCH_CORPUS
+if ! compgen -G "/bench/data/${BENCH_CORPUS}/*.flat" > /dev/null; then
+    echo "ERROR: no .flat programs in /bench/data/${BENCH_CORPUS}"
+    exit 1
+fi
+
+# BENCH_SAMPLE programs are selected from the corpus by BENCH_SEED; the same
+# seed always selects the same programs. The mainnet corpus defaults to a
+# sample of 100; other corpora, and BENCH_SAMPLE=all, run every program.
+if [[ "$BENCH_CORPUS" == mainnet_recent ]]; then
+    BENCH_SAMPLE="${BENCH_SAMPLE:-100}"
+else
+    BENCH_SAMPLE="${BENCH_SAMPLE:-all}"
+fi
+BENCH_SEED="${BENCH_SEED:-1}"
+BENCH_DATA_DIR="$(mktemp -d)/${BENCH_CORPUS}"
+python3 /bench/scripts/select_corpus.py "/bench/data/${BENCH_CORPUS}" "$BENCH_DATA_DIR" \
+    "$BENCH_SAMPLE" "$BENCH_SEED" > "$RUN_DIR/corpus.txt"
+export BENCH_SAMPLE BENCH_SEED BENCH_DATA_DIR
+
 echo "============================================="
 echo " Cardano Plutus VM Benchmark Suite"
 echo " $(date)"
@@ -46,6 +68,7 @@ detect_cpu() {
     echo "cpu: ${HOST_CPU:-$(detect_cpu)}"
     echo "cores: $(nproc)"
     echo "memory: $(free -h | awk '/Mem:/ {print $2}')"
+    echo "corpus: ${BENCH_CORPUS} ($(wc -l < "$RUN_DIR/corpus.txt") of $(find "/bench/data/${BENCH_CORPUS}" -maxdepth 1 -name '*.flat' | wc -l) programs, sample ${BENCH_SAMPLE}, seed ${BENCH_SEED}; list in corpus.txt)"
 } > "$RUN_DIR/environment.txt"
 
 cat "$RUN_DIR/environment.txt"

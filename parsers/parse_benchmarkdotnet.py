@@ -3,6 +3,7 @@
 
 import json
 import os
+import re
 import sys
 
 VM_NAME = "chrysalis"  # default; overridden by CLI arg
@@ -35,7 +36,33 @@ def parse_time_ns(value) -> int:
     return int(float(s))
 
 
+# BenchmarkDotNet shortens a long parameter value for display, keeping its
+# start and end and appending its length: "8e4034e230b1771(...)02d5b00-spend-0 [72]".
+SHORTENED = re.compile(r"^(?P<head>.*)\(\.\.\.\)(?P<tail>.*) \[(?P<length>\d+)\]$")
+
+
+def full_script_name(name: str, data_dir: str | None) -> str:
+    """Map a shortened parameter value back to its .flat file in data_dir."""
+    m = SHORTENED.match(name)
+    if not m or not data_dir:
+        return name
+    head, tail, length = m["head"], m["tail"], int(m["length"])
+    matches = [
+        n[: -len(".flat")]
+        for n in os.listdir(data_dir)
+        if n.endswith(".flat")
+    ]
+    matches = [
+        n for n in matches
+        if len(n) == length and n.startswith(head) and n.endswith(tail)
+    ]
+    if len(matches) != 1:
+        sys.exit(f"cannot map shortened script name {name!r}: {len(matches)} matches in {data_dir}")
+    return matches[0]
+
+
 def parse(run_dir: str, tier: str = "full") -> None:
+    data_dir = os.environ.get("BENCH_DATA_DIR")
     method = TIER_METHODS[tier]
     print(HEADER)
 
@@ -67,6 +94,7 @@ def parse(run_dir: str, tier: str = "full") -> None:
             script_name = params.replace("Script=", "") if params else bench.get(
                 "MethodTitle", "unknown"
             )
+            script_name = full_script_name(script_name, data_dir)
 
             stats = bench.get("Statistics", {})
             mean_ns = parse_time_ns(stats.get("Mean", 0))
