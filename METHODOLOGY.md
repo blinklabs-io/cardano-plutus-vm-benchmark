@@ -71,7 +71,7 @@ The generator also evaluates every program with plutigo and stops if any fails.
 
 #### Sampling
 
-A full run of every VM over all 1360 programs takes days, so a mainnet run measures a sample of 100 programs by default. Each program is ranked by the SHA-256 of `<seed>:<file name>` and the first `BENCH_SAMPLE` are taken (`scripts/select_corpus.py`). The same `BENCH_SEED` (default `1`) always selects the same programs, on any machine, and every VM in a run measures the same sample. `BENCH_SAMPLE` sets the size, and `BENCH_SAMPLE=all` measures the whole corpus. Each run lists its programs in `corpus.txt`, and `environment.txt` records the corpus, sample size and seed. Sampling applies to any corpus; `plutus_use_cases` runs all 89 programs by default.
+A full run of every VM over all 1360 programs takes days, so a mainnet run measures a sample of 100 programs by default. Each program is ranked by the SHA-256 of `<seed>:<file name>` and the first `BENCH_SAMPLE` are taken (`scripts/select_corpus.py`). The same `BENCH_SEED` (default `1`) always selects the same programs, on any machine, and every VM in a run measures the same sample. `BENCH_SAMPLE` sets the size, and `BENCH_SAMPLE=all` measures the whole corpus. Each run lists its programs in `corpus.txt`, and `environment.txt` records the corpus, sample size and seed. The page shows each corpus's newest run separately, with its sample size, seed and program list. Sampling applies to any corpus; `plutus_use_cases` runs all 89 programs by default.
 
 ## Why Native Benchmarks
 

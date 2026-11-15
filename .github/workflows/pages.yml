@@ -28,10 +28,8 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Generate report
-        run: |
-          latest_run=$(find results -mindepth 2 -maxdepth 2 -name unified.csv -printf '%h\n' | sort -V | tail -n 1)
-          test -n "$latest_run"
-          python report/generate_report.py "$latest_run"
+        # The page shows the newest run of each corpus.
+        run: python report/generate_report.py --latest results
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
