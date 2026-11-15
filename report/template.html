@@ -394,6 +394,10 @@
   a.cat-chip { text-decoration: none; }
   a.cat-chip::before { display: none; }
   .tier-note { margin: -0.4rem 0 1rem; }
+  .program-list { columns: 3 22rem; column-gap: 1.5rem; margin-top: 0.7rem; font-family: var(--font-mono); font-size: 0.66rem; line-height: 1.7; }
+  .program-list a, .program-list span { display: block; color: var(--text-secondary); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .program-list a:hover { color: var(--text); }
+  td.script { font-family: var(--font-mono); white-space: nowrap; }
   .cat-chip.active { color: var(--text); background: var(--surface); border-color: var(--border-accent); }
   .cat-chip.active.int  { color: var(--text); border-color: var(--text-secondary); }
   .cat-chip.active.comp { color: var(--purple-bright); border-color: var(--purple-bright); }
@@ -549,7 +553,7 @@
     <div>
       <a href="https://blinklabs.io" class="brand" target="_blank"><img src="blink-labs-logo.svg" alt="Blink Labs"></a>
       <h1>Cardano <span class="it">Plutus</span> VM Benchmark</h1>
-      <p>Cross-language UPLC virtual-machine comparison &mdash; {{ENV_BADGE}}</p>
+      <p>Cross-language UPLC virtual-machine comparison &mdash; <span id="env-badge"></span></p>
       <p class="lineage">Maintained by <a href="https://blinklabs.io" target="_blank">Blink Labs</a>, continuing the <a href="https://github.com/SAIB-Inc/cardano-plutus-vm-benchmark" target="_blank">original benchmark by SAIB Inc.</a> It tracks the newest code of each VM, not only its latest stable release.</p>
     </div>
     <a href="https://github.com/blinklabs-io/cardano-plutus-vm-benchmark" class="gh-link" target="_blank">
@@ -559,6 +563,8 @@
   </div>
 
   <div class="section">
+    <div class="cat-filter" id="corpus-switch"></div>
+    <div class="note tier-note" id="corpus-note"></div>
     <div class="cat-filter" id="tier-switch"></div>
     <div class="note tier-note" id="tier-note"></div>
     <div class="cat-filter" id="cat-filter"></div>
@@ -586,6 +592,15 @@
     </div>
   </div>
 
+  <div class="section" id="programs">
+    <div class="section-title">Programs <em>what was measured</em></div>
+    <div class="note" id="programs-note" style="margin-bottom:0.7rem"></div>
+    <details class="overall-details">
+      <summary id="programs-summary"></summary>
+      <div class="program-list" id="program-list"></div>
+    </details>
+  </div>
+
   <div class="section" id="exec-model">
     <div class="section-title">Execution Model <em>why categories matter</em></div>
     <div class="note" style="margin-bottom:0.85rem">VMs differ in <em>how</em> they execute UPLC. A UPLC-level JIT compiler is doing fundamentally different work than a CEK interpreter, even when both happen to run on a JIT-compiled host runtime like JVM or .NET. Within-category numbers are like-for-like; cross-category numbers are not directly comparable.</div>
@@ -599,7 +614,7 @@
 
   <div class="section">
     <div class="section-title">Method</div>
-    <div class="note" style="margin:0">Two tiers. The full tier times decoding each whole .flat file and evaluating it; the eval tier decodes the program before timing and times its evaluation only. JIT VMs (llvm-uplc, Scalus JIT) appear only in the eval tier: they compile before timing, and llvm-uplc's compilation time is retained in its raw JSON. Scalus JIT, Scalus CEK, Julc and Chrysalis use three measurement samples; consult their raw framework output for uncertainty. Sequential execution, single Docker container. Geometric means within each category are computed only from scripts where every VM in that category produced a successful result.</div>
+    <div class="note" style="margin:0">Each corpus is measured in its own run and ranked separately; a mainnet run measures a seeded sample of the mainnet corpus (see Programs). Two tiers. The full tier times decoding each whole .flat file and evaluating it; the eval tier decodes the program before timing and times its evaluation only. JIT VMs (llvm-uplc, Scalus JIT) appear only in the eval tier: they compile before timing, and llvm-uplc's compilation time is retained in its raw JSON. Scalus JIT, Scalus CEK, Julc and Chrysalis use three measurement samples; consult their raw framework output for uncertainty. Sequential execution, single Docker container. Geometric means within each category are computed only from scripts where every VM in that category produced a successful result.</div>
   </div>
 
   <footer>
@@ -616,8 +631,45 @@
 </div>
 
 <script>
-const CSV_DATA = `{{CSV_DATA}}`;
-const VERSIONS_DATA = `{{VERSIONS_DATA}}`;
+// One run per corpus; ?corpus= selects it, the first is the default.
+const RUNS = {{RUNS_JSON}};
+const pageParams = new URLSearchParams(location.search);
+const run = RUNS.find(r => r.corpus === pageParams.get('corpus')) || RUNS[0];
+const CSV_DATA = run.csv;
+const VERSIONS_DATA = run.versions;
+function pageLink(corpus, tierKey) {
+  const p = new URLSearchParams();
+  if (corpus !== RUNS[0].corpus) p.set('corpus', corpus);
+  if (tierKey) p.set('tier', tierKey);
+  const q = p.toString();
+  return q ? '?' + q : location.pathname;
+}
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+// Mainnet programs are named <transaction id>-<purpose>-<index>.
+const MAINNET_NAME = /^([0-9a-f]{64})-(.+)$/;
+function scriptLabel(name) {
+  const m = MAINNET_NAME.exec(name);
+  return m ? m[1].slice(0, 8) + '\u2026' + m[1].slice(-6) + '-' + m[2] : name;
+}
+function corpusLine(r) {
+  return r.count < r.total
+    ? r.count + ' of ' + r.total + ' programs, selected with seed ' + r.seed
+    : 'all ' + r.total + ' programs';
+}
+
+document.getElementById('env-badge').innerHTML = run.env;
+document.getElementById('corpus-switch').innerHTML = '<span class="label">Corpus:</span>' + RUNS.map(r =>
+  '<a class="cat-chip'+(r===run?' active':'')+'" href="'+pageLink(r.corpus)+'">'+escapeHtml(r.title)+'<span class="count">'+r.count+'</span></a>').join('');
+document.getElementById('corpus-note').textContent = run.note + ' This run: ' + corpusLine(run) + ', ' + run.date + '.';
+document.getElementById('programs-note').innerHTML = escapeHtml(run.title) + ' (<code>' + escapeHtml(run.corpus) + '</code>): ' + corpusLine(run) + '.' +
+  (run.count < run.total ? ' Programs are ranked by SHA-256 of <code>&lt;seed&gt;:&lt;file name&gt;</code> and the first ' + run.count + ' are taken, so the same seed always selects the same programs (<code>BENCH_SEED</code>, <code>BENCH_SAMPLE</code>).' : '');
+document.getElementById('programs-summary').textContent = 'Show the ' + run.programs.length + ' programs';
+document.getElementById('program-list').innerHTML = run.programs.map(name => {
+  const m = MAINNET_NAME.exec(name);
+  return m
+    ? '<a href="https://cardanoscan.io/transaction/' + m[1] + '" target="_blank" rel="noopener" title="' + escapeHtml(name) + '">' + escapeHtml(name) + '</a>'
+    : '<span title="' + escapeHtml(name) + '">' + escapeHtml(name) + '</span>';
+}).join('');
 
 const VM_META = {
   'amaru-uplc':     { label: 'Amaru UPLC',   lang: 'Rust',        runtime: 'CEK',            engine: 'CEK interpreter',              color: '#2f9e8f' },
@@ -664,10 +716,10 @@ const TIERS = [
 ];
 const allRows = parseCSV(CSV_DATA).map(r => ({ ...r, tier: r.tier || 'full' }));
 const availableTiers = TIERS.filter(t => allRows.some(r => r.tier === t.key));
-const requestedTier = new URLSearchParams(location.search).get('tier');
+const requestedTier = pageParams.get('tier');
 const tier = (availableTiers.find(t => t.key === requestedTier) || availableTiers[0] || TIERS[0]);
 document.getElementById('tier-switch').innerHTML = '<span class="label">Tier:</span>' + availableTiers.map(t =>
-  '<a class="cat-chip'+(t.key===tier.key?' active':'')+'" href="?tier='+t.key+'">'+t.label+'</a>').join('');
+  '<a class="cat-chip'+(t.key===tier.key?' active':'')+'" href="'+pageLink(run.corpus, t.key)+'">'+t.label+'</a>').join('');
 document.getElementById('tier-note').textContent = tier.note;
 
 const rows = allRows.filter(r => r.tier === tier.key), data = {};
@@ -850,7 +902,7 @@ function renderTable() {
   document.getElementById('table-body').innerHTML=scripts.map(script=>{
     const times={}; let min=Infinity;
     vms.forEach(vm=>{const t=data[script]?.[vm]||0;times[vm]=t;if(t>0&&t<min)min=t;});
-    return'<tr><td>'+script+'</td>'+vms.map(vm=>{const t=times[vm];if(t===undefined||t===0)return'<td class="missing">\u2014</td>';if(t<0)return'<td class="failed">FAIL</td>';return`<td${t===min&&vms.filter(v=>times[v]>0).length>1?' class="fastest"':''}>${fmtNs(t)}</td>`;}).join('')+'</tr>';
+    return'<tr><td class="script" title="'+escapeHtml(script)+'">'+escapeHtml(scriptLabel(script))+'</td>'+vms.map(vm=>{const t=times[vm];if(t===undefined||t===0)return'<td class="missing">\u2014</td>';if(t<0)return'<td class="failed">FAIL</td>';return`<td${t===min&&vms.filter(v=>times[v]>0).length>1?' class="fastest"':''}>${fmtNs(t)}</td>`;}).join('')+'</tr>';
   }).join('');
 }
 renderTable();

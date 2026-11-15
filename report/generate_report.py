@@ -2,8 +2,10 @@
 """Generate markdown and HTML comparison reports from unified.csv."""
 
 import csv
+import json
 import math
 import os
+import re
 import sys
 from collections import defaultdict
 
@@ -63,6 +65,61 @@ TIER_NOTES = {
     "full": "Each iteration decodes the whole .flat file, including its Data arguments, and evaluates it.",
     "eval": "The program is decoded before timing; each iteration evaluates it. JIT VMs compile before timing too.",
 }
+
+
+# Corpora, in page order. Runs from before corpora were recorded measured
+# plutus_use_cases.
+CORPORA = ["plutus_use_cases", "mainnet_recent"]
+CORPUS_TITLES = {
+    "plutus_use_cases": "Plutus use cases",
+    "mainnet_recent": "Mainnet validators",
+}
+CORPUS_NOTES = {
+    "plutus_use_cases": "Real-world contracts from the plutus-use-cases test suite (auction, escrow, uniswap, stablecoin and others).",
+    "mainnet_recent": "Validators from recent mainnet transactions, each applied to the datum, redeemer and script context it ran with on mainnet.",
+}
+CORPUS_LINE = re.compile(
+    r"^corpus: (?P<corpus>\S+) \((?P<count>\d+) of (?P<total>\d+) programs, "
+    r"sample (?P<sample>\S+), seed (?P<seed>[^;)]+)",
+    re.MULTILINE,
+)
+
+
+def corpus_info(run_dir: str, env_info: str, scripts) -> dict:
+    """Return the corpus a run measured: name, sample size, seed and programs."""
+    m = CORPUS_LINE.search(env_info)
+    corpus_path = os.path.join(run_dir, "corpus.txt")
+    if os.path.isfile(corpus_path):
+        with open(corpus_path) as f:
+            programs = [line.strip().removesuffix(".flat") for line in f if line.strip()]
+    else:
+        programs = sorted(scripts)
+    if m:
+        return {
+            "corpus": m["corpus"],
+            "count": int(m["count"]),
+            "total": int(m["total"]),
+            "sample": m["sample"],
+            "seed": m["seed"],
+            "programs": programs,
+        }
+    return {
+        "corpus": "plutus_use_cases",
+        "count": len(programs),
+        "total": len(programs),
+        "sample": "all",
+        "seed": None,
+        "programs": programs,
+    }
+
+
+def corpus_summary(info: dict) -> str:
+    """One line describing a run's corpus, for the report."""
+    title = CORPUS_TITLES.get(info["corpus"], info["corpus"])
+    if info["count"] < info["total"]:
+        return (f"{title} (`{info['corpus']}`): {info['count']} of {info['total']} programs, "
+                f"selected with seed {info['seed']}")
+    return f"{title} (`{info['corpus']}`): all {info['total']} programs"
 
 
 def load_data(run_dir: str):
@@ -154,6 +211,10 @@ def generate_markdown(run_dir: str, tiers, env_info, versions) -> None:
     lines.append("")
     date = os.path.basename(run_dir)
     lines.append(f"**Date:** {date}")
+    lines.append("")
+    all_scripts = sorted({s for _, scripts, _ in tiers.values() for s in scripts})
+    info = corpus_info(run_dir, env_info, all_scripts)
+    lines.append(f"**Corpus:** {corpus_summary(info)}. The per-script tables list every program measured.")
     lines.append("")
 
     if env_info:
@@ -271,52 +332,70 @@ def append_tier(lines, tier, data, scripts, present_vms) -> None:
     lines.append("")
 
 
-def generate_html(run_dir: str, env_info: str) -> None:
-    """Generate docs/index.html from template + unified.csv data."""
-    unified_path = os.path.join(run_dir, "unified.csv")
-    template_path = os.path.join(os.path.dirname(__file__), "template.html")
+def run_date(run_dir: str, env_info: str) -> str:
+    """The day a run started, from environment.txt, else its directory name."""
+    m = re.search(r"^date: (\d{4}-\d{2}-\d{2})", env_info, re.MULTILINE)
+    return m[1] if m else os.path.basename(run_dir)
 
-    if not os.path.isfile(template_path):
-        print("Warning: report/template.html not found, skipping HTML generation", file=sys.stderr)
-        return
 
-    with open(template_path) as f:
-        template = f.read()
+def env_badge(run_dir: str, env_info: str) -> str:
+    """The environment line shown in the page header."""
+    badge = ""
+    for line in env_info.split("\n"):
+        key, _, value = line.strip().partition(":")
+        key = key.strip().lower()
+        value = value.strip()
+        if key == "cpu":
+            badge += f"<code>{value}</code>"
+        elif key == "cores":
+            badge += f" &middot; {value} cores"
+        elif key in {"memory", "ram"}:
+            badge += f" &middot; {value}"
+        elif key in {"kernel", "os"}:
+            badge += f" &middot; {value}"
+    date = run_date(run_dir, env_info)
+    return f"{badge} &middot; {date}" if badge else date
 
-    with open(unified_path) as f:
+
+def page_run(run_dir: str) -> dict:
+    """One run's data for the page."""
+    tiers, env_info = load_data(run_dir)
+    with open(os.path.join(run_dir, "unified.csv")) as f:
         csv_data = f.read().strip()
-
     versions_path = os.path.join(run_dir, "versions.csv")
     if os.path.isfile(versions_path):
         with open(versions_path) as f:
             versions_data = f.read().strip()
     else:
         versions_data = "vm,repo,version,revision,toolchain"
+    scripts = sorted({s for _, tier_scripts, _ in tiers.values() for s in tier_scripts})
+    info = corpus_info(run_dir, env_info, scripts)
+    return {
+        **info,
+        "title": CORPUS_TITLES.get(info["corpus"], info["corpus"]),
+        "note": CORPUS_NOTES.get(info["corpus"], ""),
+        "date": run_date(run_dir, env_info),
+        "env": env_badge(run_dir, env_info),
+        "csv": csv_data,
+        "versions": versions_data,
+    }
 
-    # Build environment badge
-    if env_info:
-        env_badge = ""
-        for line in env_info.split("\n"):
-            line = line.strip()
-            key, _, value = line.partition(":")
-            key = key.strip().lower()
-            value = value.strip()
-            if key == "cpu":
-                env_badge += f"<code>{value}</code>"
-            elif key == "cores":
-                env_badge += f" &middot; {value} cores"
-            elif key in {"memory", "ram"}:
-                env_badge += f" &middot; {value}"
-            elif key in {"kernel", "os"}:
-                env_badge += f" &middot; {value}"
-        date = os.path.basename(run_dir)
-        env_badge += f" &middot; {date}"
-    else:
-        env_badge = os.path.basename(run_dir)
 
-    html = (template.replace("{{CSV_DATA}}", csv_data)
-            .replace("{{VERSIONS_DATA}}", versions_data)
-            .replace("{{ENV_BADGE}}", env_badge))
+def generate_html(run_dirs: list[str]) -> None:
+    """Generate docs/index.html from the template and one run per corpus."""
+    template_path = os.path.join(os.path.dirname(__file__), "template.html")
+    if not os.path.isfile(template_path):
+        print("Warning: report/template.html not found, skipping HTML generation", file=sys.stderr)
+        return
+    with open(template_path) as f:
+        template = f.read()
+
+    runs = [page_run(run_dir) for run_dir in run_dirs]
+    order = {corpus: i for i, corpus in enumerate(CORPORA)}
+    runs.sort(key=lambda r: order.get(r["corpus"], len(CORPORA)))
+    # "</" would end the inline script.
+    runs_json = json.dumps(runs).replace("</", "<\\/")
+    html = template.replace("{{RUNS_JSON}}", runs_json)
 
     # Write to docs/index.html (relative to repo root)
     repo_root = os.path.dirname(os.path.dirname(__file__))
@@ -329,15 +408,41 @@ def generate_html(run_dir: str, env_info: str) -> None:
     print(f"HTML report saved to: {html_path}", file=sys.stderr)
 
 
-def generate(run_dir: str) -> None:
-    tiers, env_info = load_data(run_dir)
-    versions = load_versions(run_dir)
-    generate_markdown(run_dir, tiers, env_info, versions)
-    generate_html(run_dir, env_info)
+def natural_key(name: str):
+    return [int(part) if part.isdigit() else part for part in re.split(r"(\d+)", name)]
+
+
+def latest_runs(results_dir: str) -> list[str]:
+    """The newest run of each corpus under results_dir."""
+    latest: dict[str, str] = {}
+    for name in sorted(os.listdir(results_dir), key=natural_key):
+        run_dir = os.path.join(results_dir, name)
+        if not os.path.isfile(os.path.join(run_dir, "unified.csv")):
+            continue
+        env_path = os.path.join(run_dir, "environment.txt")
+        env_info = open(env_path).read() if os.path.isfile(env_path) else ""
+        m = CORPUS_LINE.search(env_info)
+        latest[m["corpus"] if m else "plutus_use_cases"] = run_dir
+    return list(latest.values())
+
+
+def generate(run_dirs: list[str]) -> None:
+    for run_dir in run_dirs:
+        tiers, env_info = load_data(run_dir)
+        versions = load_versions(run_dir)
+        generate_markdown(run_dir, tiers, env_info, versions)
+    generate_html(run_dirs)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print(f"Usage: {sys.argv[0]} <run-dir>", file=sys.stderr)
+    args = sys.argv[1:]
+    if len(args) == 2 and args[0] == "--latest":
+        run_dirs = latest_runs(args[1])
+        if not run_dirs:
+            sys.exit(f"no runs with unified.csv in {args[1]}")
+    elif args and not args[0].startswith("-"):
+        run_dirs = args
+    else:
+        print(f"Usage: {sys.argv[0]} <run-dir>... | --latest <results-dir>", file=sys.stderr)
         sys.exit(1)
-    generate(sys.argv[1])
+    generate(run_dirs)

@@ -106,6 +106,8 @@ Results are written to `./results/<date>/`:
 - `report.md` — markdown comparison table with geometric means
 - `versions.csv` — VM release labels, source commits, and toolchains
 - `corpus.txt` — the programs the run measured
+
+The page shows the newest run of each corpus (`python report/generate_report.py --latest results`), with a switch between corpora and tiers. Each corpus view lists the programs it measured and, for a sample, the seed that selected them.
 - Per-VM raw output logs
 
 ## Updating VM Versions
