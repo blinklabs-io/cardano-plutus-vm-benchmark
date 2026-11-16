@@ -210,8 +210,7 @@ def generate_markdown(run_dir: str, tiers, env_info, versions) -> None:
     lines = []
     lines.append("# Cardano Plutus VM Benchmark Results")
     lines.append("")
-    date = os.path.basename(run_dir)
-    lines.append(f"**Date:** {date}")
+    lines.append(f"**Date:** {run_date(run_dir, env_info)}")
     lines.append("")
     all_scripts = sorted({s for _, scripts, _ in tiers.values() for s in scripts})
     info = corpus_info(run_dir, env_info, all_scripts)

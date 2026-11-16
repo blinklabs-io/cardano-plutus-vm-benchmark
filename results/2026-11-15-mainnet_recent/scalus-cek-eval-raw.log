@@ -1,0 +1,2357 @@
+[info] welcome to sbt 1.13.0 (Ubuntu Java 21.0.13.0.3)
+[info] loading settings for project scalus-build from plugins.sbt...
+[info] loading project definition from /bench/scalus/project
+[info] loading settings for project root from build.sbt...
+[info] resolving key references (29561 settings) ...
+[info] 
+[info]   ███████╗ ██████╗ █████╗ ██╗     ██╗   ██╗███████╗
+[info]   ██╔════╝██╔════╝██╔══██╗██║     ██║   ██║██╔════╝
+[info]   ███████╗██║     ███████║██║     ██║   ██║███████╗
+[info]   ╚════██║██║     ██╔══██║██║     ██║   ██║╚════██║
+[info]   ███████║╚██████╗██║  ██║███████╗╚██████╔╝███████║
+[info]   ╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚══════╝
+[info] 
+[info]   Version: HEAD+20261116-0029 Scala 3.3.9
+[info] 
+[info] Useful sbt tasks:
+[info] *  ~compile - Compile with file-watch enabled
+[info] *  quick - Format all, compile and quick test everything on JVM
+[info] *  precommit - Format all, clean compile and test everything on JVM
+[info] *  ci - ci-jvm, ci-js, ci-native: format check, MiMa, tests on JVM, JS and Native
+[info] *  benchmark - Run benchmarks
+[info] *  mima - Check binary compatibility with the previous version using MiMa
+[info] Copied shared files to target /bench/scalus/scalus-plugin/src/main/shared/scala
+[info] compiling 299 Scala sources to /bench/scalus/scalus-core/jvm/target/scala-3.3.9/classes ...
+[info] done compiling
+[info] compiling 13 Scala sources to /bench/scalus/scalus-uplc-jit-compiler/target/scala-3.3.9/classes ...
+[info] compiling 56 Scala sources to /bench/scalus/scalus-cardano-ledger/jvm/target/scala-3.3.9/classes ...
+[info] done compiling
+[info] done compiling
+[info] compiling 49 Scala sources to /bench/scalus/scalus-cardano-ledger/jvm/target/scala-3.3.9/classes ...
+[info] done compiling
+[info] compiling 3 Scala sources and 1 Java source to /bench/scalus/bloxbean-cardano-client-lib/target/scala-3.3.9/classes ...
+[info] done compiling
+[info] compiling 18 Scala sources to /bench/scalus/bloxbean-cardano-client-lib/target/scala-3.3.9/test-classes ...
+[info] done compiling
+[info] compiling 10 Scala sources to /bench/scalus/bench/target/scala-3.3.9/classes ...
+[info] done compiling
+[info] running (fork) org.openjdk.jmh.generators.bytecode.JmhBytecodeGenerator /bench/scalus/bench/target/scala-3.3.9/classes /bench/scalus/bench/target/scala-3.3.9/src_managed/jmh /bench/scalus/bench/target/scala-3.3.9/resource_managed/jmh default
+[info] Processing 75 classes from /bench/scalus/bench/target/scala-3.3.9/classes with "reflection" generator
+[info] Writing out Java source to /bench/scalus/bench/target/scala-3.3.9/src_managed/jmh and resources to /bench/scalus/bench/target/scala-3.3.9/resource_managed/jmh
+[info] compiling 59 Java sources to /bench/scalus/bench/target/scala-3.3.9/classes ...
+[info] done compiling
+[info] running (fork) org.openjdk.jmh.Main -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff /results/2026-11-15-mainnet_recent/scalus-cek-eval-jmh.csv -p file=047e5557ea893da60b93eacdae74d968f02c7a9999b826ae2eb6c32978b1b345-withdraw-1.flat,06f57a9565ecadf00e2266ee8731a6378bbb07f9a4712a84809cd8a3bba3c969-spend-1.flat,06f57a9565ecadf00e2266ee8731a6378bbb07f9a4712a84809cd8a3bba3c969-withdraw-0.flat,072c3053e18a3836dc90c3102c4e873a0c0048b5858ec6562f224c4aa4c8f564-spend-1.flat,07344c69689c3605f1f3982fb4b7a4506b468575b9dabf7efff7d9c9e082825c-withdraw-0.flat,079e30993837608b034924c42cc4694d711695478824120c2b507885e0f3b79a-spend-3.flat,0ce281ddc2701e852214823cf7f04ff8f49af9924e69034e8bfe371765c7f3ff-spend-0.flat,0e73f4aa816cfce02db01ee04f2017230752556a0e54ac6501945ac0e9dd4080-spend-2.flat,0e73f4aa816cfce02db01ee04f2017230752556a0e54ac6501945ac0e9dd4080-withdraw-0.flat,0fc112573cf010b19921588bbc2b86a62e66b980e891ef482fd3e310c6d4ace8-spend-0.flat,1034704a8ddfc80084f53865c8c18aaaec96c81c6ce99002cb09934ad154d540-spend-2.flat,10ac955d64a7d3c096abb2dcc35062c3db04313b146086d996949f6c1c3eb47a-spend-0.flat,10ac955d64a7d3c096abb2dcc35062c3db04313b146086d996949f6c1c3eb47a-spend-1.flat,1159c40949b99180499b71e05d29832955bafcdbb771c5dce4362c524ef501e8-withdraw-0.flat,15150e241b9f8a6d66750f5ab484069cb38becd38d1676f3cb3afae0c20a102b-spend-3.flat,1848fc0540637f76d0817f6669f53814bfe9148393f6bae94353f352a9cd9789-spend-1.flat,1c2421ab522d18477812623c61a8e2d0f091c12e90435d783b99f8a707254e2b-spend-1.flat,1dd2a4ec66cbe49f57f742a34343288a1b2d9820341398008dff1727d47babe2-spend-1.flat,230b7b9efeeb173c4781b0d06ae5b07b934ad35e54382b40b3bbb8d951418119-spend-0.flat,230b7b9efeeb173c4781b0d06ae5b07b934ad35e54382b40b3bbb8d951418119-spend-1.flat,2752d5588fea3ad912fdcf2bb2fd6d208af2f168d3350656025788ff4fca7980-withdraw-0.flat,2907afb1be082bc589464799734a4a052fcf756e4b04f1c181143c40550c1492-spend-0.flat,2dffd33731beaa8ef42626a0ff6bb7bfd1bdb48fea25866ac12c887c074a5846-spend-1.flat,2dffd33731beaa8ef42626a0ff6bb7bfd1bdb48fea25866ac12c887c074a5846-spend-2.flat,2e0a7798f4a69ae3254bd19b4d21d4764e27b28bc179976c3940ad0bc7b98a95-withdraw-0.flat,2e17be2eb5967cc2b6f6d2773f27b78bd3edf0d30be26324a27ffbed408d5a41-spend-1.flat,3a542d9004cd5c3d4d3c3f4408272e3331c87e158215ddb88ce9e5b6486babe3-spend-2.flat,3b2f7288f98004fdfdf6389310d2bb54b81b56cd94616cde00121e50aab96e97-spend-0.flat,471b6c63a1b1bfb8312bb6fd9be4e254d575388ecd136879a3b60e23592d42fa-spend-3.flat,497181b5f3b60e0c61ecd13e6502fe6ca298a68964e8f3944f603e127c469950-spend-0.flat,4a450a9411b8a231de6ebec5ecfa2fcce57c1baac2ab5fd35e1fc5126341cc38-withdraw-0.flat,4bcb056620920316cb3c5cdb29e2530ae4c386eef466031ec18dec6c5ed1af6f-spend-1.flat,4c553752cc3e282666db7cb2f1a8438d16dc60f23610f37e8da101a24f4521da-spend-3.flat,4d23634065b3fecb5c74891a75e57fbf5947338bd105687619c4b45855aa0f53-spend-1.flat,4dacfe58b35ba66eaf2de7430e1ca1c4a0ef39c03a7f8ec2db6b6b60a6731ea3-spend-1.flat,54a2d1a5ab31f91974caee9eae3176ac0cf9daba5b8353bad694d085912b2772-spend-1.flat,560701f9620127953f66111eb5a43ccc711f7b8f87c826de4d0f12580f2c48e9-spend-0.flat,5845e6241e910e18ecae0c23027081dba0edd2847b3732a4ff0bad9fd23e6af2-spend-0.flat,62a11be50630f9c16da5aee0fae00b26dfdb450f6bdb0edf5fe249cb9b7374ae-withdraw-0.flat,68a7ddeaa226d87325597b4f34d811f855a232178c98681d06e2b809937fa1c5-withdraw-0.flat,690a110a059712200fd3b71780c0d3dcbf58115f7602e82e488f6edf156ce9cc-spend-1.flat,6963136c3eaf099e6103aa509053976631f8fb4d13be9f2da9e8c700f9b3a8ed-spend-2.flat,69cb271e66fba6d994954678f84a8d3d8f55ce704cea1a8a2ed799d3272d9274-spend-0.flat,69cb271e66fba6d994954678f84a8d3d8f55ce704cea1a8a2ed799d3272d9274-withdraw-0.flat,6d9a5b869c864ed6aa21dad15406bbdbedb7711cab091ddf441a3312a4861b8c-spend-1.flat,6d9a5b869c864ed6aa21dad15406bbdbedb7711cab091ddf441a3312a4861b8c-spend-3.flat,6ed6dcefd6e92655097bf8fb2347e8c47214c72f6b4faf0327fd7626faf1d1c4-spend-2.flat,72d37d64464ade67a7e9ebfde460ace13ab334ead86cb7af42f9090fa5fbad95-spend-0.flat,75d066eeed445cc5000cadfaad96c28e0ba1fc8672ab592b193004ef7d5c8dcc-withdraw-0.flat,7683618ee491a7777a311974e047fa4b230d4ad3c5b83e07ede5a1ae91b9e568-withdraw-0.flat,79ac5cc3cf75ece0b184373a68de4f2d716a1fe7c281e903514227964d7c9bdc-spend-4.flat,809c08cf6c9252fd23e2066083c4036e44b4590a6794cda47055d7d2cd48fbe2-mint-0.flat,8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-spend-2.flat,88aa412ef12341d0409925f1cb2310b7e59747b3ef3976424b30827d804e0652-withdraw-0.flat,8c308609194bf1928b5efa6622877653052cdd956fee57d34f787f370a2190db-spend-2.flat,8e1e87b906ef58aa1a19d19d53af2dccbf50830a14a799e56db7b113faa6651f-spend-4.flat,8e4034e230b1771a025fb19c04d9b1df9478695c8049b8398e2ad07df02d5b00-spend-0.flat,922edd6dbcd8d576893c0727e4c9ca0e96fda0b4fd52fcad88eafdfd91fb257c-spend-3.flat,9896cb365fe3d1dd2e9a5cdc96bbccc51222d95e2d410793d68d6268f0466ad4-spend-4.flat,9aa13e8788545578baaa2791bc71f649ed21ce38f325d7c5fea2b49f97166fa7-spend-1.flat,9b8c6b62b2d447b5ed835a735d2799c71f4f86e01ded7ab516df9424f85fa5c5-spend-0.flat,9b8c6b62b2d447b5ed835a735d2799c71f4f86e01ded7ab516df9424f85fa5c5-spend-2.flat,9d98eef7dbdbba6806c447cd2a67e71e6e0db4ae865084bc67773747c91994a2-spend-1.flat,9f32ed141264497b49cb6b0d8439d6f1796d4230617635b70fdebcf4b527fa29-spend-2.flat,a65bbdb06c3b71ae94d40fd6dc96e8514deff4b9f466c2aa0f7e44664cfd2aa1-spend-0.flat,a6658babea9de7ebec38b42508123fa6a3843ce2d8fcdb9d7f5c2cb0ee4dcf86-spend-1.flat,a8db0a9dcc191b286c4239a02d57d3da8f91275bfa4f63a371746544cf6ed468-spend-2.flat,ad58ac07171001d52d275804de74c2690ab8bb9897234c90621a2e60f4d557b4-spend-0.flat,af93bf199959ef3a1b8f895f260ad44c71d7bcfe01505908f5e965444d6516c1-withdraw-0.flat,b38ebc7a31238291e5910091d9cc22ae289aedcd1fe66d78b21f2947d4a4e8ec-spend-1.flat,b3a00c89128d5c56d0b17a220dc9666eaaa5e9314d4d662edabace8b246f1e48-spend-3.flat,b757904e72bd72e242e07a5e90ee0a58ae8f13277a569ec3e915b43f0373e7db-spend-2.flat,b8bfc4091553667248cd4fd998f49252d92f8af25d91a435e513edb07501b77e-mint-1.flat,b9d42b4b35e08f02aeba3cdcd4ca030c9a72a3ce6d07bb0d2816ecf38d905f9a-spend-0.flat,b9d42b4b35e08f02aeba3cdcd4ca030c9a72a3ce6d07bb0d2816ecf38d905f9a-withdraw-0.flat,bc1918acaa783a69e12a7b047f1f29931460d6a28287eab5daa60500c345ddd7-spend-2.flat,be367eee297b5777e927ad74663c851a1f7d0e403de2d2480a11a47292e7a908-spend-2.flat,c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-withdraw-0.flat,c1188f93e914427fd3969efdab1160f1bdb991ed8394c79f127422347fbc1d37-spend-1.flat,c6a1d6630c9c487df70be2ebd8d12b58162e3361b5efda6e6479a4db0f438751-spend-0.flat,c8959fc0f2ed80a9e3ef5cd9cc8b65853d6b98e6828fc4128a2c4b9baf917cc3-spend-4.flat,ca385cdf7753a005abb51173e66b13727ed635085bdd317f2fa789529e5754da-spend-2.flat,d1492333495135ab87d4034d7f3e56bac21928a71184ba79f61d1c4133f298a8-spend-1.flat,d37c44fb509c06b85216974bd213fb50f9301cc5b102d1506a723becf8bdacc5-spend-1.flat,d5017a6865dd289ec514cde490cfdfcd4862b812cc7562c44e50aa6adc194132-spend-0.flat,d6247cf553324b42cd302baae91f44fbcd9342f1d6988ba5214bb01358d63d50-withdraw-0.flat,d62df55b9d15e7ede962934a652d465cb21fbfd7419c28c8c025065fb49a95c7-withdraw-3.flat,d829b5969ae5e397d13c7610a14834af24204d147c02d86b101de3406d231399-spend-4.flat,db7cc24da3b8bbfc5444bc85d883695e64cfd6966389db30eb5dc2a21076ee34-spend-0.flat,dbe943750b032ce13040794ee67cb72d1c6e7a4c9f96cf804d6d13ab7f4f4cb9-withdraw-0.flat,dd64226d4315c5cbe19e2dd00557f0dff8ca7d492ddbe471f2d718067f421e2c-spend-2.flat,debe3afe9219b37e6f9580a4fc5354eeca5e60aa615e65fb8d9f0f2db1a9717d-spend-2.flat,e01b1d0b6c246b2897b1b75f422129518b0ade56cbf6b16a242e8932807b3ae1-spend-0.flat,e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-spend-2.flat,e0f2686ab18a9b21e8f04ea34df1bafe5dedea2150f6d27451f7bd52e5cde9c7-spend-1.flat,e102429d660fc75b02be2a16d00b83a70e94a79da562d65f0f9175f76709d74c-spend-1.flat,f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-spend-2.flat,f5f8b246565f9b4d39ddd176183b6f1f1de70ca681495670acc0d6ce48d9b5d4-withdraw-0.flat,f625e0b7217e6507ccf4805c8325318b4f1c0d0dc2b763aa35b79535f03f25c7-spend-2.flat,fa6305a65a8667ccd09eb2553dc280c9def8be2abb1a392515b81bfb5d2261d8-spend-4.flat .*CekJVMBenchmark.benchEval$
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 047e5557ea893da60b93eacdae74d968f02c7a9999b826ae2eb6c32978b1b345-withdraw-1.flat)
+[info] # Run progress: 0.00% complete, ETA 00:33:20
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 1108.360 us/op
+[info] Iteration   1: 963.869 us/op
+[info] Iteration   2: 933.560 us/op
+[info] Iteration   3: 957.726 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   951.718 ?(99.9%) 292.313 us/op [Average]
+[info]   (min, avg, max) = (933.560, 951.718, 963.869), stdev = 16.023
+[info]   CI (99.9%): [659.405, 1244.032] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 06f57a9565ecadf00e2266ee8731a6378bbb07f9a4712a84809cd8a3bba3c969-spend-1.flat)
+[info] # Run progress: 1.00% complete, ETA 00:34:05
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 27.192 us/op
+[info] Iteration   1: 23.468 us/op
+[info] Iteration   2: 23.970 us/op
+[info] Iteration   3: 23.505 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   23.648 ?(99.9%) 5.109 us/op [Average]
+[info]   (min, avg, max) = (23.468, 23.648, 23.970), stdev = 0.280
+[info]   CI (99.9%): [18.539, 28.757] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 06f57a9565ecadf00e2266ee8731a6378bbb07f9a4712a84809cd8a3bba3c969-withdraw-0.flat)
+[info] # Run progress: 2.00% complete, ETA 00:33:44
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 1668.339 us/op
+[info] Iteration   1: 1421.176 us/op
+[info] Iteration   2: 1431.878 us/op
+[info] Iteration   3: 1495.514 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   1449.523 ?(99.9%) 733.164 us/op [Average]
+[info]   (min, avg, max) = (1421.176, 1449.523, 1495.514), stdev = 40.187
+[info]   CI (99.9%): [716.359, 2182.686] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 072c3053e18a3836dc90c3102c4e873a0c0048b5858ec6562f224c4aa4c8f564-spend-1.flat)
+[info] # Run progress: 3.00% complete, ETA 00:33:23
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 2.731 us/op
+[info] Iteration   1: 2.531 us/op
+[info] Iteration   2: 2.560 us/op
+[info] Iteration   3: 2.535 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   2.542 ?(99.9%) 0.295 us/op [Average]
+[info]   (min, avg, max) = (2.531, 2.542, 2.560), stdev = 0.016
+[info]   CI (99.9%): [2.246, 2.837] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 07344c69689c3605f1f3982fb4b7a4506b468575b9dabf7efff7d9c9e082825c-withdraw-0.flat)
+[info] # Run progress: 4.00% complete, ETA 00:33:01
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 9.581 us/op
+[info] Iteration   1: 8.527 us/op
+[info] Iteration   2: 9.210 us/op
+[info] Iteration   3: 9.009 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   8.915 ?(99.9%) 6.400 us/op [Average]
+[info]   (min, avg, max) = (8.527, 8.915, 9.210), stdev = 0.351
+[info]   CI (99.9%): [2.516, 15.315] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 079e30993837608b034924c42cc4694d711695478824120c2b507885e0f3b79a-spend-3.flat)
+[info] # Run progress: 5.00% complete, ETA 00:32:39
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 299.979 us/op
+[info] Iteration   1: 282.348 us/op
+[info] Iteration   2: 287.744 us/op
+[info] Iteration   3: 298.010 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   289.367 ?(99.9%) 145.145 us/op [Average]
+[info]   (min, avg, max) = (282.348, 289.367, 298.010), stdev = 7.956
+[info]   CI (99.9%): [144.223, 434.512] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 0ce281ddc2701e852214823cf7f04ff8f49af9924e69034e8bfe371765c7f3ff-spend-0.flat)
+[info] # Run progress: 6.00% complete, ETA 00:32:18
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 400.973 us/op
+[info] Iteration   1: 376.126 us/op
+[info] Iteration   2: 386.818 us/op
+[info] Iteration   3: 378.137 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   380.360 ?(99.9%) 103.659 us/op [Average]
+[info]   (min, avg, max) = (376.126, 380.360, 386.818), stdev = 5.682
+[info]   CI (99.9%): [276.701, 484.019] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 0e73f4aa816cfce02db01ee04f2017230752556a0e54ac6501945ac0e9dd4080-spend-2.flat)
+[info] # Run progress: 7.00% complete, ETA 00:31:58
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 16.538 us/op
+[info] Iteration   1: 15.126 us/op
+[info] Iteration   2: 15.043 us/op
+[info] Iteration   3: 15.031 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   15.067 ?(99.9%) 0.943 us/op [Average]
+[info]   (min, avg, max) = (15.031, 15.067, 15.126), stdev = 0.052
+[info]   CI (99.9%): [14.124, 16.009] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 0e73f4aa816cfce02db01ee04f2017230752556a0e54ac6501945ac0e9dd4080-withdraw-0.flat)
+[info] # Run progress: 8.00% complete, ETA 00:31:37
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 670.675 us/op
+[info] Iteration   1: 590.406 us/op
+[info] Iteration   2: 576.096 us/op
+[info] Iteration   3: 565.857 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   577.453 ?(99.9%) 224.955 us/op [Average]
+[info]   (min, avg, max) = (565.857, 577.453, 590.406), stdev = 12.331
+[info]   CI (99.9%): [352.498, 802.408] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 0fc112573cf010b19921588bbc2b86a62e66b980e891ef482fd3e310c6d4ace8-spend-0.flat)
+[info] # Run progress: 9.00% complete, ETA 00:31:16
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 2.597 us/op
+[info] Iteration   1: 2.486 us/op
+[info] Iteration   2: 2.558 us/op
+[info] Iteration   3: 2.475 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   2.506 ?(99.9%) 0.819 us/op [Average]
+[info]   (min, avg, max) = (2.475, 2.506, 2.558), stdev = 0.045
+[info]   CI (99.9%): [1.687, 3.325] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 1034704a8ddfc80084f53865c8c18aaaec96c81c6ce99002cb09934ad154d540-spend-2.flat)
+[info] # Run progress: 10.00% complete, ETA 00:30:55
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 456.701 us/op
+[info] Iteration   1: 422.357 us/op
+[info] Iteration   2: 410.651 us/op
+[info] Iteration   3: 420.100 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   417.703 ?(99.9%) 113.293 us/op [Average]
+[info]   (min, avg, max) = (410.651, 417.703, 422.357), stdev = 6.210
+[info]   CI (99.9%): [304.409, 530.996] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 10ac955d64a7d3c096abb2dcc35062c3db04313b146086d996949f6c1c3eb47a-spend-0.flat)
+[info] # Run progress: 11.00% complete, ETA 00:30:34
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 23.600 us/op
+[info] Iteration   1: 22.541 us/op
+[info] Iteration   2: 21.860 us/op
+[info] Iteration   3: 22.202 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   22.201 ?(99.9%) 6.217 us/op [Average]
+[info]   (min, avg, max) = (21.860, 22.201, 22.541), stdev = 0.341
+[info]   CI (99.9%): [15.984, 28.418] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 10ac955d64a7d3c096abb2dcc35062c3db04313b146086d996949f6c1c3eb47a-spend-1.flat)
+[info] # Run progress: 12.00% complete, ETA 00:30:14
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 24.001 us/op
+[info] Iteration   1: 20.890 us/op
+[info] Iteration   2: 20.936 us/op
+[info] Iteration   3: 20.836 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   20.887 ?(99.9%) 0.913 us/op [Average]
+[info]   (min, avg, max) = (20.836, 20.887, 20.936), stdev = 0.050
+[info]   CI (99.9%): [19.974, 21.800] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 1159c40949b99180499b71e05d29832955bafcdbb771c5dce4362c524ef501e8-withdraw-0.flat)
+[info] # Run progress: 13.00% complete, ETA 00:29:53
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 559.598 us/op
+[info] Iteration   1: 490.431 us/op
+[info] Iteration   2: 479.857 us/op
+[info] Iteration   3: 491.230 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   487.173 ?(99.9%) 115.821 us/op [Average]
+[info]   (min, avg, max) = (479.857, 487.173, 491.230), stdev = 6.349
+[info]   CI (99.9%): [371.351, 602.994] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 15150e241b9f8a6d66750f5ab484069cb38becd38d1676f3cb3afae0c20a102b-spend-3.flat)
+[info] # Run progress: 14.00% complete, ETA 00:29:33
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 521.506 us/op
+[info] Iteration   1: 442.580 us/op
+[info] Iteration   2: 438.826 us/op
+[info] Iteration   3: 429.701 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   437.036 ?(99.9%) 120.835 us/op [Average]
+[info]   (min, avg, max) = (429.701, 437.036, 442.580), stdev = 6.623
+[info]   CI (99.9%): [316.201, 557.871] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 1848fc0540637f76d0817f6669f53814bfe9148393f6bae94353f352a9cd9789-spend-1.flat)
+[info] # Run progress: 15.00% complete, ETA 00:29:12
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 47.470 us/op
+[info] Iteration   1: 41.626 us/op
+[info] Iteration   2: 44.118 us/op
+[info] Iteration   3: 42.160 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   42.635 ?(99.9%) 23.937 us/op [Average]
+[info]   (min, avg, max) = (41.626, 42.635, 44.118), stdev = 1.312
+[info]   CI (99.9%): [18.698, 66.572] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 1c2421ab522d18477812623c61a8e2d0f091c12e90435d783b99f8a707254e2b-spend-1.flat)
+[info] # Run progress: 16.00% complete, ETA 00:28:51
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 835.868 us/op
+[info] Iteration   1: 735.979 us/op
+[info] Iteration   2: 743.397 us/op
+[info] Iteration   3: 795.796 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   758.391 ?(99.9%) 594.851 us/op [Average]
+[info]   (min, avg, max) = (735.979, 758.391, 795.796), stdev = 32.606
+[info]   CI (99.9%): [163.540, 1353.242] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 1dd2a4ec66cbe49f57f742a34343288a1b2d9820341398008dff1727d47babe2-spend-1.flat)
+[info] # Run progress: 17.00% complete, ETA 00:28:31
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 282.556 us/op
+[info] Iteration   1: 256.869 us/op
+[info] Iteration   2: 256.764 us/op
+[info] Iteration   3: 257.427 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   257.020 ?(99.9%) 6.499 us/op [Average]
+[info]   (min, avg, max) = (256.764, 257.020, 257.427), stdev = 0.356
+[info]   CI (99.9%): [250.521, 263.519] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 230b7b9efeeb173c4781b0d06ae5b07b934ad35e54382b40b3bbb8d951418119-spend-0.flat)
+[info] # Run progress: 18.00% complete, ETA 00:28:10
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.266 us/op
+[info] Iteration   1: 13.856 us/op
+[info] Iteration   2: 14.210 us/op
+[info] Iteration   3: 14.097 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   14.054 ?(99.9%) 3.300 us/op [Average]
+[info]   (min, avg, max) = (13.856, 14.054, 14.210), stdev = 0.181
+[info]   CI (99.9%): [10.754, 17.355] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 230b7b9efeeb173c4781b0d06ae5b07b934ad35e54382b40b3bbb8d951418119-spend-1.flat)
+[info] # Run progress: 19.00% complete, ETA 00:27:50
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.001 us/op
+[info] Iteration   1: 4.702 us/op
+[info] Iteration   2: 4.502 us/op
+[info] Iteration   3: 4.473 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.559 ?(99.9%) 2.276 us/op [Average]
+[info]   (min, avg, max) = (4.473, 4.559, 4.702), stdev = 0.125
+[info]   CI (99.9%): [2.283, 6.835] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 2752d5588fea3ad912fdcf2bb2fd6d208af2f168d3350656025788ff4fca7980-withdraw-0.flat)
+[info] # Run progress: 20.00% complete, ETA 00:27:29
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 9.321 us/op
+[info] Iteration   1: 8.918 us/op
+[info] Iteration   2: 9.010 us/op
+[info] Iteration   3: 8.667 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   8.865 ?(99.9%) 3.240 us/op [Average]
+[info]   (min, avg, max) = (8.667, 8.865, 9.010), stdev = 0.178
+[info]   CI (99.9%): [5.625, 12.105] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 2907afb1be082bc589464799734a4a052fcf756e4b04f1c181143c40550c1492-spend-0.flat)
+[info] # Run progress: 21.00% complete, ETA 00:27:08
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.336 us/op
+[info] Iteration   1: 14.326 us/op
+[info] Iteration   2: 14.294 us/op
+[info] Iteration   3: 14.178 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   14.266 ?(99.9%) 1.413 us/op [Average]
+[info]   (min, avg, max) = (14.178, 14.266, 14.326), stdev = 0.077
+[info]   CI (99.9%): [12.853, 15.679] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 2dffd33731beaa8ef42626a0ff6bb7bfd1bdb48fea25866ac12c887c074a5846-spend-1.flat)
+[info] # Run progress: 22.00% complete, ETA 00:26:48
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 45.438 us/op
+[info] Iteration   1: 43.632 us/op
+[info] Iteration   2: 42.795 us/op
+[info] Iteration   3: 43.622 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   43.349 ?(99.9%) 8.757 us/op [Average]
+[info]   (min, avg, max) = (42.795, 43.349, 43.632), stdev = 0.480
+[info]   CI (99.9%): [34.593, 52.106] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 2dffd33731beaa8ef42626a0ff6bb7bfd1bdb48fea25866ac12c887c074a5846-spend-2.flat)
+[info] # Run progress: 23.00% complete, ETA 00:26:27
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 94.319 us/op
+[info] Iteration   1: 85.610 us/op
+[info] Iteration   2: 83.370 us/op
+[info] Iteration   3: 83.402 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   84.127 ?(99.9%) 23.426 us/op [Average]
+[info]   (min, avg, max) = (83.370, 84.127, 85.610), stdev = 1.284
+[info]   CI (99.9%): [60.701, 107.553] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 2e0a7798f4a69ae3254bd19b4d21d4764e27b28bc179976c3940ad0bc7b98a95-withdraw-0.flat)
+[info] # Run progress: 24.00% complete, ETA 00:26:07
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 1130.212 us/op
+[info] Iteration   1: 984.888 us/op
+[info] Iteration   2: 973.370 us/op
+[info] Iteration   3: 1024.747 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   994.335 ?(99.9%) 491.844 us/op [Average]
+[info]   (min, avg, max) = (973.370, 994.335, 1024.747), stdev = 26.960
+[info]   CI (99.9%): [502.490, 1486.179] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 2e17be2eb5967cc2b6f6d2773f27b78bd3edf0d30be26324a27ffbed408d5a41-spend-1.flat)
+[info] # Run progress: 25.00% complete, ETA 00:25:46
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 44.061 us/op
+[info] Iteration   1: 39.961 us/op
+[info] Iteration   2: 40.006 us/op
+[info] Iteration   3: 39.014 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   39.660 ?(99.9%) 10.217 us/op [Average]
+[info]   (min, avg, max) = (39.014, 39.660, 40.006), stdev = 0.560
+[info]   CI (99.9%): [29.444, 49.877] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 3a542d9004cd5c3d4d3c3f4408272e3331c87e158215ddb88ce9e5b6486babe3-spend-2.flat)
+[info] # Run progress: 26.00% complete, ETA 00:25:25
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.960 us/op
+[info] Iteration   1: 5.234 us/op
+[info] Iteration   2: 5.524 us/op
+[info] Iteration   3: 5.332 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   5.363 ?(99.9%) 2.694 us/op [Average]
+[info]   (min, avg, max) = (5.234, 5.363, 5.524), stdev = 0.148
+[info]   CI (99.9%): [2.669, 8.057] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 3b2f7288f98004fdfdf6389310d2bb54b81b56cd94616cde00121e50aab96e97-spend-0.flat)
+[info] # Run progress: 27.00% complete, ETA 00:25:05
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 184.352 us/op
+[info] Iteration   1: 166.006 us/op
+[info] Iteration   2: 167.774 us/op
+[info] Iteration   3: 178.501 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   170.760 ?(99.9%) 123.360 us/op [Average]
+[info]   (min, avg, max) = (166.006, 170.760, 178.501), stdev = 6.762
+[info]   CI (99.9%): [47.401, 294.120] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 471b6c63a1b1bfb8312bb6fd9be4e254d575388ecd136879a3b60e23592d42fa-spend-3.flat)
+[info] # Run progress: 28.00% complete, ETA 00:24:44
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 207.134 us/op
+[info] Iteration   1: 192.366 us/op
+[info] Iteration   2: 197.541 us/op
+[info] Iteration   3: 197.795 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   195.900 ?(99.9%) 55.894 us/op [Average]
+[info]   (min, avg, max) = (192.366, 195.900, 197.795), stdev = 3.064
+[info]   CI (99.9%): [140.007, 251.794] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 497181b5f3b60e0c61ecd13e6502fe6ca298a68964e8f3944f603e127c469950-spend-0.flat)
+[info] # Run progress: 29.00% complete, ETA 00:24:23
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 4.958 us/op
+[info] Iteration   1: 4.654 us/op
+[info] Iteration   2: 4.615 us/op
+[info] Iteration   3: 4.619 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.630 ?(99.9%) 0.390 us/op [Average]
+[info]   (min, avg, max) = (4.615, 4.630, 4.654), stdev = 0.021
+[info]   CI (99.9%): [4.239, 5.020] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 4a450a9411b8a231de6ebec5ecfa2fcce57c1baac2ab5fd35e1fc5126341cc38-withdraw-0.flat)
+[info] # Run progress: 30.00% complete, ETA 00:24:03
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 401.214 us/op
+[info] Iteration   1: 349.726 us/op
+[info] Iteration   2: 346.148 us/op
+[info] Iteration   3: 331.612 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   342.495 ?(99.9%) 175.021 us/op [Average]
+[info]   (min, avg, max) = (331.612, 342.495, 349.726), stdev = 9.593
+[info]   CI (99.9%): [167.474, 517.516] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 4bcb056620920316cb3c5cdb29e2530ae4c386eef466031ec18dec6c5ed1af6f-spend-1.flat)
+[info] # Run progress: 31.00% complete, ETA 00:23:42
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 14.444 us/op
+[info] Iteration   1: 13.947 us/op
+[info] Iteration   2: 13.987 us/op
+[info] Iteration   3: 13.458 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.798 ?(99.9%) 5.372 us/op [Average]
+[info]   (min, avg, max) = (13.458, 13.798, 13.987), stdev = 0.294
+[info]   CI (99.9%): [8.425, 19.170] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 4c553752cc3e282666db7cb2f1a8438d16dc60f23610f37e8da101a24f4521da-spend-3.flat)
+[info] # Run progress: 32.00% complete, ETA 00:23:21
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 24.939 us/op
+[info] Iteration   1: 22.477 us/op
+[info] Iteration   2: 22.398 us/op
+[info] Iteration   3: 21.975 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   22.283 ?(99.9%) 4.926 us/op [Average]
+[info]   (min, avg, max) = (21.975, 22.283, 22.477), stdev = 0.270
+[info]   CI (99.9%): [17.357, 27.209] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 4d23634065b3fecb5c74891a75e57fbf5947338bd105687619c4b45855aa0f53-spend-1.flat)
+[info] # Run progress: 33.00% complete, ETA 00:23:01
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.308 us/op
+[info] Iteration   1: 14.215 us/op
+[info] Iteration   2: 14.010 us/op
+[info] Iteration   3: 13.505 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.910 ?(99.9%) 6.664 us/op [Average]
+[info]   (min, avg, max) = (13.505, 13.910, 14.215), stdev = 0.365
+[info]   CI (99.9%): [7.247, 20.574] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 4dacfe58b35ba66eaf2de7430e1ca1c4a0ef39c03a7f8ec2db6b6b60a6731ea3-spend-1.flat)
+[info] # Run progress: 34.00% complete, ETA 00:22:40
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 2.724 us/op
+[info] Iteration   1: 2.475 us/op
+[info] Iteration   2: 2.444 us/op
+[info] Iteration   3: 2.474 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   2.465 ?(99.9%) 0.318 us/op [Average]
+[info]   (min, avg, max) = (2.444, 2.465, 2.475), stdev = 0.017
+[info]   CI (99.9%): [2.146, 2.783] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 54a2d1a5ab31f91974caee9eae3176ac0cf9daba5b8353bad694d085912b2772-spend-1.flat)
+[info] # Run progress: 35.00% complete, ETA 00:22:19
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 27.057 us/op
+[info] Iteration   1: 23.418 us/op
+[info] Iteration   2: 22.449 us/op
+[info] Iteration   3: 23.516 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   23.128 ?(99.9%) 10.758 us/op [Average]
+[info]   (min, avg, max) = (22.449, 23.128, 23.516), stdev = 0.590
+[info]   CI (99.9%): [12.370, 33.885] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 560701f9620127953f66111eb5a43ccc711f7b8f87c826de4d0f12580f2c48e9-spend-0.flat)
+[info] # Run progress: 36.00% complete, ETA 00:21:59
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.206 us/op
+[info] Iteration   1: 4.713 us/op
+[info] Iteration   2: 4.782 us/op
+[info] Iteration   3: 4.716 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.737 ?(99.9%) 0.716 us/op [Average]
+[info]   (min, avg, max) = (4.713, 4.737, 4.782), stdev = 0.039
+[info]   CI (99.9%): [4.021, 5.453] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 5845e6241e910e18ecae0c23027081dba0edd2847b3732a4ff0bad9fd23e6af2-spend-0.flat)
+[info] # Run progress: 37.00% complete, ETA 00:21:38
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 4.801 us/op
+[info] Iteration   1: 4.377 us/op
+[info] Iteration   2: 4.432 us/op
+[info] Iteration   3: 4.650 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.486 ?(99.9%) 2.633 us/op [Average]
+[info]   (min, avg, max) = (4.377, 4.486, 4.650), stdev = 0.144
+[info]   CI (99.9%): [1.853, 7.120] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 62a11be50630f9c16da5aee0fae00b26dfdb450f6bdb0edf5fe249cb9b7374ae-withdraw-0.flat)
+[info] # Run progress: 38.00% complete, ETA 00:21:18
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 9.407 us/op
+[info] Iteration   1: 8.621 us/op
+[info] Iteration   2: 8.838 us/op
+[info] Iteration   3: 9.044 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   8.834 ?(99.9%) 3.865 us/op [Average]
+[info]   (min, avg, max) = (8.621, 8.834, 9.044), stdev = 0.212
+[info]   CI (99.9%): [4.969, 12.699] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 68a7ddeaa226d87325597b4f34d811f855a232178c98681d06e2b809937fa1c5-withdraw-0.flat)
+[info] # Run progress: 39.00% complete, ETA 00:20:57
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 559.714 us/op
+[info] Iteration   1: 503.503 us/op
+[info] Iteration   2: 525.630 us/op
+[info] Iteration   3: 518.448 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   515.861 ?(99.9%) 205.938 us/op [Average]
+[info]   (min, avg, max) = (503.503, 515.861, 525.630), stdev = 11.288
+[info]   CI (99.9%): [309.923, 721.799] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 690a110a059712200fd3b71780c0d3dcbf58115f7602e82e488f6edf156ce9cc-spend-1.flat)
+[info] # Run progress: 40.00% complete, ETA 00:20:36
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.187 us/op
+[info] Iteration   1: 14.417 us/op
+[info] Iteration   2: 14.350 us/op
+[info] Iteration   3: 14.018 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   14.262 ?(99.9%) 3.903 us/op [Average]
+[info]   (min, avg, max) = (14.018, 14.262, 14.417), stdev = 0.214
+[info]   CI (99.9%): [10.358, 18.165] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 6963136c3eaf099e6103aa509053976631f8fb4d13be9f2da9e8c700f9b3a8ed-spend-2.flat)
+[info] # Run progress: 41.00% complete, ETA 00:20:16
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 4.718 us/op
+[info] Iteration   1: 4.673 us/op
+[info] Iteration   2: 4.488 us/op
+[info] Iteration   3: 4.413 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.525 ?(99.9%) 2.446 us/op [Average]
+[info]   (min, avg, max) = (4.413, 4.525, 4.673), stdev = 0.134
+[info]   CI (99.9%): [2.079, 6.970] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 69cb271e66fba6d994954678f84a8d3d8f55ce704cea1a8a2ed799d3272d9274-spend-0.flat)
+[info] # Run progress: 42.00% complete, ETA 00:19:55
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 14.735 us/op
+[info] Iteration   1: 14.441 us/op
+[info] Iteration   2: 13.754 us/op
+[info] Iteration   3: 13.436 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.877 ?(99.9%) 9.376 us/op [Average]
+[info]   (min, avg, max) = (13.436, 13.877, 14.441), stdev = 0.514
+[info]   CI (99.9%): [4.500, 23.253] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 69cb271e66fba6d994954678f84a8d3d8f55ce704cea1a8a2ed799d3272d9274-withdraw-0.flat)
+[info] # Run progress: 43.00% complete, ETA 00:19:34
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 926.062 us/op
+[info] Iteration   1: 843.822 us/op
+[info] Iteration   2: 828.503 us/op
+[info] Iteration   3: 835.595 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   835.973 ?(99.9%) 139.866 us/op [Average]
+[info]   (min, avg, max) = (828.503, 835.973, 843.822), stdev = 7.667
+[info]   CI (99.9%): [696.107, 975.839] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 6d9a5b869c864ed6aa21dad15406bbdbedb7711cab091ddf441a3312a4861b8c-spend-1.flat)
+[info] # Run progress: 44.00% complete, ETA 00:19:14
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 92.166 us/op
+[info] Iteration   1: 80.881 us/op
+[info] Iteration   2: 78.711 us/op
+[info] Iteration   3: 78.811 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   79.468 ?(99.9%) 22.345 us/op [Average]
+[info]   (min, avg, max) = (78.711, 79.468, 80.881), stdev = 1.225
+[info]   CI (99.9%): [57.123, 101.813] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 6d9a5b869c864ed6aa21dad15406bbdbedb7711cab091ddf441a3312a4861b8c-spend-3.flat)
+[info] # Run progress: 45.00% complete, ETA 00:18:53
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 80.159 us/op
+[info] Iteration   1: 72.081 us/op
+[info] Iteration   2: 70.099 us/op
+[info] Iteration   3: 71.984 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   71.388 ?(99.9%) 20.383 us/op [Average]
+[info]   (min, avg, max) = (70.099, 71.388, 72.081), stdev = 1.117
+[info]   CI (99.9%): [51.005, 91.771] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 6ed6dcefd6e92655097bf8fb2347e8c47214c72f6b4faf0327fd7626faf1d1c4-spend-2.flat)
+[info] # Run progress: 46.00% complete, ETA 00:18:33
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 432.899 us/op
+[info] Iteration   1: 382.146 us/op
+[info] Iteration   2: 386.985 us/op
+[info] Iteration   3: 412.843 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   393.991 ?(99.9%) 301.103 us/op [Average]
+[info]   (min, avg, max) = (382.146, 393.991, 412.843), stdev = 16.504
+[info]   CI (99.9%): [92.889, 695.094] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 72d37d64464ade67a7e9ebfde460ace13ab334ead86cb7af42f9090fa5fbad95-spend-0.flat)
+[info] # Run progress: 47.00% complete, ETA 00:18:12
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 302.163 us/op
+[info] Iteration   1: 262.426 us/op
+[info] Iteration   2: 263.512 us/op
+[info] Iteration   3: 262.061 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   262.666 ?(99.9%) 13.772 us/op [Average]
+[info]   (min, avg, max) = (262.061, 262.666, 263.512), stdev = 0.755
+[info]   CI (99.9%): [248.895, 276.438] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 75d066eeed445cc5000cadfaad96c28e0ba1fc8672ab592b193004ef7d5c8dcc-withdraw-0.flat)
+[info] # Run progress: 48.00% complete, ETA 00:17:51
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 697.473 us/op
+[info] Iteration   1: 583.129 us/op
+[info] Iteration   2: 607.149 us/op
+[info] Iteration   3: 605.853 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   598.710 ?(99.9%) 246.462 us/op [Average]
+[info]   (min, avg, max) = (583.129, 598.710, 607.149), stdev = 13.509
+[info]   CI (99.9%): [352.249, 845.172] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 7683618ee491a7777a311974e047fa4b230d4ad3c5b83e07ede5a1ae91b9e568-withdraw-0.flat)
+[info] # Run progress: 49.00% complete, ETA 00:17:31
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 897.641 us/op
+[info] Iteration   1: 786.045 us/op
+[info] Iteration   2: 841.328 us/op
+[info] Iteration   3: 804.797 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   810.723 ?(99.9%) 512.903 us/op [Average]
+[info]   (min, avg, max) = (786.045, 810.723, 841.328), stdev = 28.114
+[info]   CI (99.9%): [297.820, 1323.627] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 79ac5cc3cf75ece0b184373a68de4f2d716a1fe7c281e903514227964d7c9bdc-spend-4.flat)
+[info] # Run progress: 50.00% complete, ETA 00:17:10
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.732 us/op
+[info] Iteration   1: 14.820 us/op
+[info] Iteration   2: 15.561 us/op
+[info] Iteration   3: 15.439 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   15.273 ?(99.9%) 7.253 us/op [Average]
+[info]   (min, avg, max) = (14.820, 15.273, 15.561), stdev = 0.398
+[info]   CI (99.9%): [8.020, 22.526] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 809c08cf6c9252fd23e2066083c4036e44b4590a6794cda47055d7d2cd48fbe2-mint-0.flat)
+[info] # Run progress: 51.00% complete, ETA 00:16:50
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 195.644 us/op
+[info] Iteration   1: 177.813 us/op
+[info] Iteration   2: 171.677 us/op
+[info] Iteration   3: 165.973 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   171.821 ?(99.9%) 108.027 us/op [Average]
+[info]   (min, avg, max) = (165.973, 171.821, 177.813), stdev = 5.921
+[info]   CI (99.9%): [63.795, 279.848] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-spend-2.flat)
+[info] # Run progress: 52.00% complete, ETA 00:16:29
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 4.845 us/op
+[info] Iteration   1: 4.767 us/op
+[info] Iteration   2: 4.743 us/op
+[info] Iteration   3: 4.671 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.727 ?(99.9%) 0.914 us/op [Average]
+[info]   (min, avg, max) = (4.671, 4.727, 4.767), stdev = 0.050
+[info]   CI (99.9%): [3.812, 5.641] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 88aa412ef12341d0409925f1cb2310b7e59747b3ef3976424b30827d804e0652-withdraw-0.flat)
+[info] # Run progress: 53.00% complete, ETA 00:16:08
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 678.539 us/op
+[info] Iteration   1: 592.336 us/op
+[info] Iteration   2: 578.808 us/op
+[info] Iteration   3: 571.765 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   580.969 ?(99.9%) 190.726 us/op [Average]
+[info]   (min, avg, max) = (571.765, 580.969, 592.336), stdev = 10.454
+[info]   CI (99.9%): [390.243, 771.696] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 8c308609194bf1928b5efa6622877653052cdd956fee57d34f787f370a2190db-spend-2.flat)
+[info] # Run progress: 54.00% complete, ETA 00:15:48
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 26.278 us/op
+[info] Iteration   1: 23.761 us/op
+[info] Iteration   2: 23.297 us/op
+[info] Iteration   3: 23.164 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   23.407 ?(99.9%) 5.716 us/op [Average]
+[info]   (min, avg, max) = (23.164, 23.407, 23.761), stdev = 0.313
+[info]   CI (99.9%): [17.692, 29.123] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 8e1e87b906ef58aa1a19d19d53af2dccbf50830a14a799e56db7b113faa6651f-spend-4.flat)
+[info] # Run progress: 55.00% complete, ETA 00:15:27
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.324 us/op
+[info] Iteration   1: 13.910 us/op
+[info] Iteration   2: 13.544 us/op
+[info] Iteration   3: 13.740 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.731 ?(99.9%) 3.344 us/op [Average]
+[info]   (min, avg, max) = (13.544, 13.731, 13.910), stdev = 0.183
+[info]   CI (99.9%): [10.388, 17.075] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 8e4034e230b1771a025fb19c04d9b1df9478695c8049b8398e2ad07df02d5b00-spend-0.flat)
+[info] # Run progress: 56.00% complete, ETA 00:15:06
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 90.507 us/op
+[info] Iteration   1: 79.775 us/op
+[info] Iteration   2: 78.658 us/op
+[info] Iteration   3: 82.363 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   80.265 ?(99.9%) 34.671 us/op [Average]
+[info]   (min, avg, max) = (78.658, 80.265, 82.363), stdev = 1.900
+[info]   CI (99.9%): [45.594, 114.937] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 922edd6dbcd8d576893c0727e4c9ca0e96fda0b4fd52fcad88eafdfd91fb257c-spend-3.flat)
+[info] # Run progress: 57.00% complete, ETA 00:14:46
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 76.846 us/op
+[info] Iteration   1: 68.668 us/op
+[info] Iteration   2: 68.255 us/op
+[info] Iteration   3: 71.711 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   69.545 ?(99.9%) 34.431 us/op [Average]
+[info]   (min, avg, max) = (68.255, 69.545, 71.711), stdev = 1.887
+[info]   CI (99.9%): [35.113, 103.976] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 9896cb365fe3d1dd2e9a5cdc96bbccc51222d95e2d410793d68d6268f0466ad4-spend-4.flat)
+[info] # Run progress: 58.00% complete, ETA 00:14:25
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.021 us/op
+[info] Iteration   1: 4.596 us/op
+[info] Iteration   2: 4.610 us/op
+[info] Iteration   3: 4.753 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.653 ?(99.9%) 1.582 us/op [Average]
+[info]   (min, avg, max) = (4.596, 4.653, 4.753), stdev = 0.087
+[info]   CI (99.9%): [3.071, 6.235] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 9aa13e8788545578baaa2791bc71f649ed21ce38f325d7c5fea2b49f97166fa7-spend-1.flat)
+[info] # Run progress: 59.00% complete, ETA 00:14:05
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 177.541 us/op
+[info] Iteration   1: 161.848 us/op
+[info] Iteration   2: 167.818 us/op
+[info] Iteration   3: 172.440 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   167.369 ?(99.9%) 96.877 us/op [Average]
+[info]   (min, avg, max) = (161.848, 167.369, 172.440), stdev = 5.310
+[info]   CI (99.9%): [70.492, 264.245] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 9b8c6b62b2d447b5ed835a735d2799c71f4f86e01ded7ab516df9424f85fa5c5-spend-0.flat)
+[info] # Run progress: 60.00% complete, ETA 00:13:44
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 14.748 us/op
+[info] Iteration   1: 13.651 us/op
+[info] Iteration   2: 14.181 us/op
+[info] Iteration   3: 14.123 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.985 ?(99.9%) 5.299 us/op [Average]
+[info]   (min, avg, max) = (13.651, 13.985, 14.181), stdev = 0.290
+[info]   CI (99.9%): [8.686, 19.284] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 9b8c6b62b2d447b5ed835a735d2799c71f4f86e01ded7ab516df9424f85fa5c5-spend-2.flat)
+[info] # Run progress: 61.00% complete, ETA 00:13:23
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.738 us/op
+[info] Iteration   1: 14.945 us/op
+[info] Iteration   2: 15.358 us/op
+[info] Iteration   3: 15.435 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   15.246 ?(99.9%) 4.815 us/op [Average]
+[info]   (min, avg, max) = (14.945, 15.246, 15.435), stdev = 0.264
+[info]   CI (99.9%): [10.431, 20.061] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 9d98eef7dbdbba6806c447cd2a67e71e6e0db4ae865084bc67773747c91994a2-spend-1.flat)
+[info] # Run progress: 62.00% complete, ETA 00:13:03
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.104 us/op
+[info] Iteration   1: 14.155 us/op
+[info] Iteration   2: 14.354 us/op
+[info] Iteration   3: 13.879 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   14.129 ?(99.9%) 4.354 us/op [Average]
+[info]   (min, avg, max) = (13.879, 14.129, 14.354), stdev = 0.239
+[info]   CI (99.9%): [9.775, 18.483] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = 9f32ed141264497b49cb6b0d8439d6f1796d4230617635b70fdebcf4b527fa29-spend-2.flat)
+[info] # Run progress: 63.00% complete, ETA 00:12:42
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 4.680 us/op
+[info] Iteration   1: 4.542 us/op
+[info] Iteration   2: 4.573 us/op
+[info] Iteration   3: 4.391 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.502 ?(99.9%) 1.776 us/op [Average]
+[info]   (min, avg, max) = (4.391, 4.502, 4.573), stdev = 0.097
+[info]   CI (99.9%): [2.727, 6.278] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = a65bbdb06c3b71ae94d40fd6dc96e8514deff4b9f466c2aa0f7e44664cfd2aa1-spend-0.flat)
+[info] # Run progress: 64.00% complete, ETA 00:12:22
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 74.023 us/op
+[info] Iteration   1: 71.931 us/op
+[info] Iteration   2: 71.649 us/op
+[info] Iteration   3: 70.069 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   71.216 ?(99.9%) 18.303 us/op [Average]
+[info]   (min, avg, max) = (70.069, 71.216, 71.931), stdev = 1.003
+[info]   CI (99.9%): [52.913, 89.519] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = a6658babea9de7ebec38b42508123fa6a3843ce2d8fcdb9d7f5c2cb0ee4dcf86-spend-1.flat)
+[info] # Run progress: 65.00% complete, ETA 00:12:01
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 22.178 us/op
+[info] Iteration   1: 21.182 us/op
+[info] Iteration   2: 21.841 us/op
+[info] Iteration   3: 20.701 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   21.241 ?(99.9%) 10.442 us/op [Average]
+[info]   (min, avg, max) = (20.701, 21.241, 21.841), stdev = 0.572
+[info]   CI (99.9%): [10.799, 31.683] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = a8db0a9dcc191b286c4239a02d57d3da8f91275bfa4f63a371746544cf6ed468-spend-2.flat)
+[info] # Run progress: 66.00% complete, ETA 00:11:40
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.242 us/op
+[info] Iteration   1: 4.728 us/op
+[info] Iteration   2: 4.543 us/op
+[info] Iteration   3: 4.506 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.592 ?(99.9%) 2.166 us/op [Average]
+[info]   (min, avg, max) = (4.506, 4.592, 4.728), stdev = 0.119
+[info]   CI (99.9%): [2.426, 6.758] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = ad58ac07171001d52d275804de74c2690ab8bb9897234c90621a2e60f4d557b4-spend-0.flat)
+[info] # Run progress: 67.00% complete, ETA 00:11:20
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 185.474 us/op
+[info] Iteration   1: 166.601 us/op
+[info] Iteration   2: 162.211 us/op
+[info] Iteration   3: 162.106 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   163.639 ?(99.9%) 46.807 us/op [Average]
+[info]   (min, avg, max) = (162.106, 163.639, 166.601), stdev = 2.566
+[info]   CI (99.9%): [116.832, 210.446] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = af93bf199959ef3a1b8f895f260ad44c71d7bcfe01505908f5e965444d6516c1-withdraw-0.flat)
+[info] # Run progress: 68.00% complete, ETA 00:10:59
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 499.720 us/op
+[info] Iteration   1: 430.856 us/op
+[info] Iteration   2: 424.088 us/op
+[info] Iteration   3: 423.142 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   426.029 ?(99.9%) 76.764 us/op [Average]
+[info]   (min, avg, max) = (423.142, 426.029, 430.856), stdev = 4.208
+[info]   CI (99.9%): [349.265, 502.792] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = b38ebc7a31238291e5910091d9cc22ae289aedcd1fe66d78b21f2947d4a4e8ec-spend-1.flat)
+[info] # Run progress: 69.00% complete, ETA 00:10:38
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.073 us/op
+[info] Iteration   1: 4.623 us/op
+[info] Iteration   2: 4.646 us/op
+[info] Iteration   3: 4.621 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.630 ?(99.9%) 0.254 us/op [Average]
+[info]   (min, avg, max) = (4.621, 4.630, 4.646), stdev = 0.014
+[info]   CI (99.9%): [4.376, 4.884] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = b3a00c89128d5c56d0b17a220dc9666eaaa5e9314d4d662edabace8b246f1e48-spend-3.flat)
+[info] # Run progress: 70.00% complete, ETA 00:10:18
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.234 us/op
+[info] Iteration   1: 13.675 us/op
+[info] Iteration   2: 13.618 us/op
+[info] Iteration   3: 14.461 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.918 ?(99.9%) 8.595 us/op [Average]
+[info]   (min, avg, max) = (13.618, 13.918, 14.461), stdev = 0.471
+[info]   CI (99.9%): [5.323, 22.513] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = b757904e72bd72e242e07a5e90ee0a58ae8f13277a569ec3e915b43f0373e7db-spend-2.flat)
+[info] # Run progress: 71.00% complete, ETA 00:09:57
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 4.002 us/op
+[info] Iteration   1: 3.712 us/op
+[info] Iteration   2: 3.730 us/op
+[info] Iteration   3: 3.830 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   3.758 ?(99.9%) 1.160 us/op [Average]
+[info]   (min, avg, max) = (3.712, 3.758, 3.830), stdev = 0.064
+[info]   CI (99.9%): [2.597, 4.918] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = b8bfc4091553667248cd4fd998f49252d92f8af25d91a435e513edb07501b77e-mint-1.flat)
+[info] # Run progress: 72.00% complete, ETA 00:09:37
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 241.412 us/op
+[info] Iteration   1: 210.744 us/op
+[info] Iteration   2: 218.626 us/op
+[info] Iteration   3: 227.275 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   218.882 ?(99.9%) 150.843 us/op [Average]
+[info]   (min, avg, max) = (210.744, 218.882, 227.275), stdev = 8.268
+[info]   CI (99.9%): [68.038, 369.725] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = b9d42b4b35e08f02aeba3cdcd4ca030c9a72a3ce6d07bb0d2816ecf38d905f9a-spend-0.flat)
+[info] # Run progress: 73.00% complete, ETA 00:09:16
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 423.667 us/op
+[info] Iteration   1: 379.065 us/op
+[info] Iteration   2: 378.933 us/op
+[info] Iteration   3: 379.893 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   379.297 ?(99.9%) 9.489 us/op [Average]
+[info]   (min, avg, max) = (378.933, 379.297, 379.893), stdev = 0.520
+[info]   CI (99.9%): [369.808, 388.786] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = b9d42b4b35e08f02aeba3cdcd4ca030c9a72a3ce6d07bb0d2816ecf38d905f9a-withdraw-0.flat)
+[info] # Run progress: 74.00% complete, ETA 00:08:55
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 11.990 us/op
+[info] Iteration   1: 11.254 us/op
+[info] Iteration   2: 11.420 us/op
+[info] Iteration   3: 11.196 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   11.290 ?(99.9%) 2.121 us/op [Average]
+[info]   (min, avg, max) = (11.196, 11.290, 11.420), stdev = 0.116
+[info]   CI (99.9%): [9.169, 13.411] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = bc1918acaa783a69e12a7b047f1f29931460d6a28287eab5daa60500c345ddd7-spend-2.flat)
+[info] # Run progress: 75.00% complete, ETA 00:08:35
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 14.612 us/op
+[info] Iteration   1: 13.935 us/op
+[info] Iteration   2: 14.403 us/op
+[info] Iteration   3: 13.859 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   14.066 ?(99.9%) 5.370 us/op [Average]
+[info]   (min, avg, max) = (13.859, 14.066, 14.403), stdev = 0.294
+[info]   CI (99.9%): [8.696, 19.436] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = be367eee297b5777e927ad74663c851a1f7d0e403de2d2480a11a47292e7a908-spend-2.flat)
+[info] # Run progress: 76.00% complete, ETA 00:08:14
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 14.617 us/op
+[info] Iteration   1: 13.865 us/op
+[info] Iteration   2: 14.569 us/op
+[info] Iteration   3: 14.548 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   14.327 ?(99.9%) 7.302 us/op [Average]
+[info]   (min, avg, max) = (13.865, 14.327, 14.569), stdev = 0.400
+[info]   CI (99.9%): [7.026, 21.629] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-withdraw-0.flat)
+[info] # Run progress: 77.00% complete, ETA 00:07:54
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 611.301 us/op
+[info] Iteration   1: 537.731 us/op
+[info] Iteration   2: 534.285 us/op
+[info] Iteration   3: 507.064 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   526.360 ?(99.9%) 306.488 us/op [Average]
+[info]   (min, avg, max) = (507.064, 526.360, 537.731), stdev = 16.800
+[info]   CI (99.9%): [219.872, 832.848] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = c1188f93e914427fd3969efdab1160f1bdb991ed8394c79f127422347fbc1d37-spend-1.flat)
+[info] # Run progress: 78.00% complete, ETA 00:07:33
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 325.247 us/op
+[info] Iteration   1: 293.564 us/op
+[info] Iteration   2: 289.346 us/op
+[info] Iteration   3: 284.077 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   288.996 ?(99.9%) 86.715 us/op [Average]
+[info]   (min, avg, max) = (284.077, 288.996, 293.564), stdev = 4.753
+[info]   CI (99.9%): [202.280, 375.711] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = c6a1d6630c9c487df70be2ebd8d12b58162e3361b5efda6e6479a4db0f438751-spend-0.flat)
+[info] # Run progress: 79.00% complete, ETA 00:07:12
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 76.246 us/op
+[info] Iteration   1: 72.228 us/op
+[info] Iteration   2: 69.201 us/op
+[info] Iteration   3: 68.567 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   69.998 ?(99.9%) 35.693 us/op [Average]
+[info]   (min, avg, max) = (68.567, 69.998, 72.228), stdev = 1.956
+[info]   CI (99.9%): [34.305, 105.692] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = c8959fc0f2ed80a9e3ef5cd9cc8b65853d6b98e6828fc4128a2c4b9baf917cc3-spend-4.flat)
+[info] # Run progress: 80.00% complete, ETA 00:06:52
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 6.107 us/op
+[info] Iteration   1: 5.589 us/op
+[info] Iteration   2: 5.433 us/op
+[info] Iteration   3: 5.392 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   5.471 ?(99.9%) 1.897 us/op [Average]
+[info]   (min, avg, max) = (5.392, 5.471, 5.589), stdev = 0.104
+[info]   CI (99.9%): [3.574, 7.369] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = ca385cdf7753a005abb51173e66b13727ed635085bdd317f2fa789529e5754da-spend-2.flat)
+[info] # Run progress: 81.00% complete, ETA 00:06:31
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 89.089 us/op
+[info] Iteration   1: 80.070 us/op
+[info] Iteration   2: 79.353 us/op
+[info] Iteration   3: 79.900 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   79.774 ?(99.9%) 6.829 us/op [Average]
+[info]   (min, avg, max) = (79.353, 79.774, 80.070), stdev = 0.374
+[info]   CI (99.9%): [72.945, 86.604] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = d1492333495135ab87d4034d7f3e56bac21928a71184ba79f61d1c4133f298a8-spend-1.flat)
+[info] # Run progress: 82.00% complete, ETA 00:06:11
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.224 us/op
+[info] Iteration   1: 13.582 us/op
+[info] Iteration   2: 13.618 us/op
+[info] Iteration   3: 14.387 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.863 ?(99.9%) 8.296 us/op [Average]
+[info]   (min, avg, max) = (13.582, 13.863, 14.387), stdev = 0.455
+[info]   CI (99.9%): [5.566, 22.159] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = d37c44fb509c06b85216974bd213fb50f9301cc5b102d1506a723becf8bdacc5-spend-1.flat)
+[info] # Run progress: 83.00% complete, ETA 00:05:50
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 6.105 us/op
+[info] Iteration   1: 5.365 us/op
+[info] Iteration   2: 5.499 us/op
+[info] Iteration   3: 5.735 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   5.533 ?(99.9%) 3.416 us/op [Average]
+[info]   (min, avg, max) = (5.365, 5.533, 5.735), stdev = 0.187
+[info]   CI (99.9%): [2.117, 8.949] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = d5017a6865dd289ec514cde490cfdfcd4862b812cc7562c44e50aa6adc194132-spend-0.flat)
+[info] # Run progress: 84.00% complete, ETA 00:05:29
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 94.005 us/op
+[info] Iteration   1: 83.688 us/op
+[info] Iteration   2: 83.891 us/op
+[info] Iteration   3: 86.575 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   84.718 ?(99.9%) 29.394 us/op [Average]
+[info]   (min, avg, max) = (83.688, 84.718, 86.575), stdev = 1.611
+[info]   CI (99.9%): [55.324, 114.112] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = d6247cf553324b42cd302baae91f44fbcd9342f1d6988ba5214bb01358d63d50-withdraw-0.flat)
+[info] # Run progress: 85.00% complete, ETA 00:05:09
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 9.138 us/op
+[info] Iteration   1: 8.530 us/op
+[info] Iteration   2: 8.923 us/op
+[info] Iteration   3: 8.822 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   8.758 ?(99.9%) 3.726 us/op [Average]
+[info]   (min, avg, max) = (8.530, 8.758, 8.923), stdev = 0.204
+[info]   CI (99.9%): [5.033, 12.484] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = d62df55b9d15e7ede962934a652d465cb21fbfd7419c28c8c025065fb49a95c7-withdraw-3.flat)
+[info] # Run progress: 86.00% complete, ETA 00:04:48
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 162.104 us/op
+[info] Iteration   1: 144.521 us/op
+[info] Iteration   2: 152.757 us/op
+[info] Iteration   3: 145.884 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   147.721 ?(99.9%) 80.539 us/op [Average]
+[info]   (min, avg, max) = (144.521, 147.721, 152.757), stdev = 4.415
+[info]   CI (99.9%): [67.182, 228.260] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = d829b5969ae5e397d13c7610a14834af24204d147c02d86b101de3406d231399-spend-4.flat)
+[info] # Run progress: 87.00% complete, ETA 00:04:27
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 39.002 us/op
+[info] Iteration   1: 37.088 us/op
+[info] Iteration   2: 39.695 us/op
+[info] Iteration   3: 38.133 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   38.305 ?(99.9%) 23.935 us/op [Average]
+[info]   (min, avg, max) = (37.088, 38.305, 39.695), stdev = 1.312
+[info]   CI (99.9%): [14.370, 62.240] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = db7cc24da3b8bbfc5444bc85d883695e64cfd6966389db30eb5dc2a21076ee34-spend-0.flat)
+[info] # Run progress: 88.00% complete, ETA 00:04:07
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 316.300 us/op
+[info] Iteration   1: 290.785 us/op
+[info] Iteration   2: 285.693 us/op
+[info] Iteration   3: 292.790 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   289.756 ?(99.9%) 66.743 us/op [Average]
+[info]   (min, avg, max) = (285.693, 289.756, 292.790), stdev = 3.658
+[info]   CI (99.9%): [223.013, 356.499] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = dbe943750b032ce13040794ee67cb72d1c6e7a4c9f96cf804d6d13ab7f4f4cb9-withdraw-0.flat)
+[info] # Run progress: 89.00% complete, ETA 00:03:46
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 18.508 us/op
+[info] Iteration   1: 17.427 us/op
+[info] Iteration   2: 16.908 us/op
+[info] Iteration   3: 16.485 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   16.940 ?(99.9%) 8.607 us/op [Average]
+[info]   (min, avg, max) = (16.485, 16.940, 17.427), stdev = 0.472
+[info]   CI (99.9%): [8.333, 25.547] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = dd64226d4315c5cbe19e2dd00557f0dff8ca7d492ddbe471f2d718067f421e2c-spend-2.flat)
+[info] # Run progress: 90.00% complete, ETA 00:03:26
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.166 us/op
+[info] Iteration   1: 14.024 us/op
+[info] Iteration   2: 14.001 us/op
+[info] Iteration   3: 13.489 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.838 ?(99.9%) 5.514 us/op [Average]
+[info]   (min, avg, max) = (13.489, 13.838, 14.024), stdev = 0.302
+[info]   CI (99.9%): [8.324, 19.352] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = debe3afe9219b37e6f9580a4fc5354eeca5e60aa615e65fb8d9f0f2db1a9717d-spend-2.flat)
+[info] # Run progress: 91.00% complete, ETA 00:03:05
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.084 us/op
+[info] Iteration   1: 4.832 us/op
+[info] Iteration   2: 4.701 us/op
+[info] Iteration   3: 4.800 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.778 ?(99.9%) 1.252 us/op [Average]
+[info]   (min, avg, max) = (4.701, 4.778, 4.832), stdev = 0.069
+[info]   CI (99.9%): [3.526, 6.030] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = e01b1d0b6c246b2897b1b75f422129518b0ade56cbf6b16a242e8932807b3ae1-spend-0.flat)
+[info] # Run progress: 92.00% complete, ETA 00:02:44
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 2.814 us/op
+[info] Iteration   1: 2.517 us/op
+[info] Iteration   2: 2.466 us/op
+[info] Iteration   3: 2.546 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   2.510 ?(99.9%) 0.735 us/op [Average]
+[info]   (min, avg, max) = (2.466, 2.510, 2.546), stdev = 0.040
+[info]   CI (99.9%): [1.775, 3.245] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-spend-2.flat)
+[info] # Run progress: 93.00% complete, ETA 00:02:24
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.153 us/op
+[info] Iteration   1: 13.590 us/op
+[info] Iteration   2: 13.800 us/op
+[info] Iteration   3: 14.148 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   13.846 ?(99.9%) 5.143 us/op [Average]
+[info]   (min, avg, max) = (13.590, 13.846, 14.148), stdev = 0.282
+[info]   CI (99.9%): [8.703, 18.989] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = e0f2686ab18a9b21e8f04ea34df1bafe5dedea2150f6d27451f7bd52e5cde9c7-spend-1.flat)
+[info] # Run progress: 94.00% complete, ETA 00:02:03
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 25.690 us/op
+[info] Iteration   1: 22.513 us/op
+[info] Iteration   2: 23.052 us/op
+[info] Iteration   3: 24.699 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   23.421 ?(99.9%) 20.773 us/op [Average]
+[info]   (min, avg, max) = (22.513, 23.421, 24.699), stdev = 1.139
+[info]   CI (99.9%): [2.649, 44.194] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = e102429d660fc75b02be2a16d00b83a70e94a79da562d65f0f9175f76709d74c-spend-1.flat)
+[info] # Run progress: 95.00% complete, ETA 00:01:43
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 15.361 us/op
+[info] Iteration   1: 14.106 us/op
+[info] Iteration   2: 14.605 us/op
+[info] Iteration   3: 14.092 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   14.268 ?(99.9%) 5.332 us/op [Average]
+[info]   (min, avg, max) = (14.092, 14.268, 14.605), stdev = 0.292
+[info]   CI (99.9%): [8.936, 19.600] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-spend-2.flat)
+[info] # Run progress: 96.00% complete, ETA 00:01:22
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 320.817 us/op
+[info] Iteration   1: 283.726 us/op
+[info] Iteration   2: 303.668 us/op
+[info] Iteration   3: 289.021 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   292.138 ?(99.9%) 188.451 us/op [Average]
+[info]   (min, avg, max) = (283.726, 292.138, 303.668), stdev = 10.330
+[info]   CI (99.9%): [103.687, 480.590] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = f5f8b246565f9b4d39ddd176183b6f1f1de70ca681495670acc0d6ce48d9b5d4-withdraw-0.flat)
+[info] # Run progress: 97.00% complete, ETA 00:01:01
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 1068.149 us/op
+[info] Iteration   1: 949.785 us/op
+[info] Iteration   2: 1005.911 us/op
+[info] Iteration   3: 981.150 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   978.949 ?(99.9%) 513.159 us/op [Average]
+[info]   (min, avg, max) = (949.785, 978.949, 1005.911), stdev = 28.128
+[info]   CI (99.9%): [465.789, 1492.108] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = f625e0b7217e6507ccf4805c8325318b4f1c0d0dc2b763aa35b79535f03f25c7-spend-2.flat)
+[info] # Run progress: 98.00% complete, ETA 00:00:41
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 5.096 us/op
+[info] Iteration   1: 4.934 us/op
+[info] Iteration   2: 5.000 us/op
+[info] Iteration   3: 4.900 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   4.944 ?(99.9%) 0.925 us/op [Average]
+[info]   (min, avg, max) = (4.900, 4.944, 5.000), stdev = 0.051
+[info]   CI (99.9%): [4.019, 5.870] (assumes normal distribution)
+[info] # JMH version: 1.37
+[info] # VM version: JDK 21.0.13.0.3, OpenJDK 64-Bit Server VM, 21.0.13.0.3+1-1-24.04.1-Ubuntu
+[info] # VM invoker: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+[info] # VM options: -Xss64m -Xmx4g
+[info] # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+[info] # Warmup: 1 iterations, 5 s each
+[info] # Measurement: 3 iterations, 5 s each
+[info] # Timeout: 10 min per iteration
+[info] # Threads: 1 thread, will synchronize iterations
+[info] # Benchmark mode: Average time, time/op
+[info] # Benchmark: scalus.uplc.eval.CekJVMBenchmark.benchEval
+[info] # Parameters: (file = fa6305a65a8667ccd09eb2553dc280c9def8be2abb1a392515b81bfb5d2261d8-spend-4.flat)
+[info] # Run progress: 99.00% complete, ETA 00:00:20
+[info] # Fork: 1 of 1
+[info] # Warmup Iteration   1: 26.284 us/op
+[info] Iteration   1: 23.552 us/op
+[info] Iteration   2: 23.490 us/op
+[info] Iteration   3: 22.270 us/op
+[info] Result "scalus.uplc.eval.CekJVMBenchmark.benchEval":
+[info]   23.104 ?(99.9%) 13.191 us/op [Average]
+[info]   (min, avg, max) = (22.270, 23.104, 23.552), stdev = 0.723
+[info]   CI (99.9%): [9.913, 36.295] (assumes normal distribution)
+[info] # Run complete. Total time: 00:34:21
+[info] REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+[info] why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+[info] experiments, perform baseline and negative tests that provide experimental control, make sure
+[info] the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+[info] Do not assume the numbers tell you what you want them to tell.
+[info] NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+[info] extra caution when trusting the results, look into the generated code to check the benchmark still
+[info] works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+[info] different JVMs are already problematic, the performance difference caused by different Blackhole
+[info] modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+[info] Benchmark                                                                                            (file)  Mode  Cnt     Score     Error  Units
+[info] CekJVMBenchmark.benchEval  047e5557ea893da60b93eacdae74d968f02c7a9999b826ae2eb6c32978b1b345-withdraw-1.flat  avgt    3   951.718 ? 292.313  us/op
+[info] CekJVMBenchmark.benchEval     06f57a9565ecadf00e2266ee8731a6378bbb07f9a4712a84809cd8a3bba3c969-spend-1.flat  avgt    3    23.648 ?   5.109  us/op
+[info] CekJVMBenchmark.benchEval  06f57a9565ecadf00e2266ee8731a6378bbb07f9a4712a84809cd8a3bba3c969-withdraw-0.flat  avgt    3  1449.523 ? 733.164  us/op
+[info] CekJVMBenchmark.benchEval     072c3053e18a3836dc90c3102c4e873a0c0048b5858ec6562f224c4aa4c8f564-spend-1.flat  avgt    3     2.542 ?   0.295  us/op
+[info] CekJVMBenchmark.benchEval  07344c69689c3605f1f3982fb4b7a4506b468575b9dabf7efff7d9c9e082825c-withdraw-0.flat  avgt    3     8.915 ?   6.400  us/op
+[info] CekJVMBenchmark.benchEval     079e30993837608b034924c42cc4694d711695478824120c2b507885e0f3b79a-spend-3.flat  avgt    3   289.367 ? 145.145  us/op
+[info] CekJVMBenchmark.benchEval     0ce281ddc2701e852214823cf7f04ff8f49af9924e69034e8bfe371765c7f3ff-spend-0.flat  avgt    3   380.360 ? 103.659  us/op
+[info] CekJVMBenchmark.benchEval     0e73f4aa816cfce02db01ee04f2017230752556a0e54ac6501945ac0e9dd4080-spend-2.flat  avgt    3    15.067 ?   0.943  us/op
+[info] CekJVMBenchmark.benchEval  0e73f4aa816cfce02db01ee04f2017230752556a0e54ac6501945ac0e9dd4080-withdraw-0.flat  avgt    3   577.453 ? 224.955  us/op
+[info] CekJVMBenchmark.benchEval     0fc112573cf010b19921588bbc2b86a62e66b980e891ef482fd3e310c6d4ace8-spend-0.flat  avgt    3     2.506 ?   0.819  us/op
+[info] CekJVMBenchmark.benchEval     1034704a8ddfc80084f53865c8c18aaaec96c81c6ce99002cb09934ad154d540-spend-2.flat  avgt    3   417.703 ? 113.293  us/op
+[info] CekJVMBenchmark.benchEval     10ac955d64a7d3c096abb2dcc35062c3db04313b146086d996949f6c1c3eb47a-spend-0.flat  avgt    3    22.201 ?   6.217  us/op
+[info] CekJVMBenchmark.benchEval     10ac955d64a7d3c096abb2dcc35062c3db04313b146086d996949f6c1c3eb47a-spend-1.flat  avgt    3    20.887 ?   0.913  us/op
+[info] CekJVMBenchmark.benchEval  1159c40949b99180499b71e05d29832955bafcdbb771c5dce4362c524ef501e8-withdraw-0.flat  avgt    3   487.173 ? 115.821  us/op
+[info] CekJVMBenchmark.benchEval     15150e241b9f8a6d66750f5ab484069cb38becd38d1676f3cb3afae0c20a102b-spend-3.flat  avgt    3   437.036 ? 120.835  us/op
+[info] CekJVMBenchmark.benchEval     1848fc0540637f76d0817f6669f53814bfe9148393f6bae94353f352a9cd9789-spend-1.flat  avgt    3    42.635 ?  23.937  us/op
+[info] CekJVMBenchmark.benchEval     1c2421ab522d18477812623c61a8e2d0f091c12e90435d783b99f8a707254e2b-spend-1.flat  avgt    3   758.391 ? 594.851  us/op
+[info] CekJVMBenchmark.benchEval     1dd2a4ec66cbe49f57f742a34343288a1b2d9820341398008dff1727d47babe2-spend-1.flat  avgt    3   257.020 ?   6.499  us/op
+[info] CekJVMBenchmark.benchEval     230b7b9efeeb173c4781b0d06ae5b07b934ad35e54382b40b3bbb8d951418119-spend-0.flat  avgt    3    14.054 ?   3.300  us/op
+[info] CekJVMBenchmark.benchEval     230b7b9efeeb173c4781b0d06ae5b07b934ad35e54382b40b3bbb8d951418119-spend-1.flat  avgt    3     4.559 ?   2.276  us/op
+[info] CekJVMBenchmark.benchEval  2752d5588fea3ad912fdcf2bb2fd6d208af2f168d3350656025788ff4fca7980-withdraw-0.flat  avgt    3     8.865 ?   3.240  us/op
+[info] CekJVMBenchmark.benchEval     2907afb1be082bc589464799734a4a052fcf756e4b04f1c181143c40550c1492-spend-0.flat  avgt    3    14.266 ?   1.413  us/op
+[info] CekJVMBenchmark.benchEval     2dffd33731beaa8ef42626a0ff6bb7bfd1bdb48fea25866ac12c887c074a5846-spend-1.flat  avgt    3    43.349 ?   8.757  us/op
+[info] CekJVMBenchmark.benchEval     2dffd33731beaa8ef42626a0ff6bb7bfd1bdb48fea25866ac12c887c074a5846-spend-2.flat  avgt    3    84.127 ?  23.426  us/op
+[info] CekJVMBenchmark.benchEval  2e0a7798f4a69ae3254bd19b4d21d4764e27b28bc179976c3940ad0bc7b98a95-withdraw-0.flat  avgt    3   994.335 ? 491.844  us/op
+[info] CekJVMBenchmark.benchEval     2e17be2eb5967cc2b6f6d2773f27b78bd3edf0d30be26324a27ffbed408d5a41-spend-1.flat  avgt    3    39.660 ?  10.217  us/op
+[info] CekJVMBenchmark.benchEval     3a542d9004cd5c3d4d3c3f4408272e3331c87e158215ddb88ce9e5b6486babe3-spend-2.flat  avgt    3     5.363 ?   2.694  us/op
+[info] CekJVMBenchmark.benchEval     3b2f7288f98004fdfdf6389310d2bb54b81b56cd94616cde00121e50aab96e97-spend-0.flat  avgt    3   170.760 ? 123.360  us/op
+[info] CekJVMBenchmark.benchEval     471b6c63a1b1bfb8312bb6fd9be4e254d575388ecd136879a3b60e23592d42fa-spend-3.flat  avgt    3   195.900 ?  55.894  us/op
+[info] CekJVMBenchmark.benchEval     497181b5f3b60e0c61ecd13e6502fe6ca298a68964e8f3944f603e127c469950-spend-0.flat  avgt    3     4.630 ?   0.390  us/op
+[info] CekJVMBenchmark.benchEval  4a450a9411b8a231de6ebec5ecfa2fcce57c1baac2ab5fd35e1fc5126341cc38-withdraw-0.flat  avgt    3   342.495 ? 175.021  us/op
+[info] CekJVMBenchmark.benchEval     4bcb056620920316cb3c5cdb29e2530ae4c386eef466031ec18dec6c5ed1af6f-spend-1.flat  avgt    3    13.798 ?   5.372  us/op
+[info] CekJVMBenchmark.benchEval     4c553752cc3e282666db7cb2f1a8438d16dc60f23610f37e8da101a24f4521da-spend-3.flat  avgt    3    22.283 ?   4.926  us/op
+[info] CekJVMBenchmark.benchEval     4d23634065b3fecb5c74891a75e57fbf5947338bd105687619c4b45855aa0f53-spend-1.flat  avgt    3    13.910 ?   6.664  us/op
+[info] CekJVMBenchmark.benchEval     4dacfe58b35ba66eaf2de7430e1ca1c4a0ef39c03a7f8ec2db6b6b60a6731ea3-spend-1.flat  avgt    3     2.465 ?   0.318  us/op
+[info] CekJVMBenchmark.benchEval     54a2d1a5ab31f91974caee9eae3176ac0cf9daba5b8353bad694d085912b2772-spend-1.flat  avgt    3    23.128 ?  10.758  us/op
+[info] CekJVMBenchmark.benchEval     560701f9620127953f66111eb5a43ccc711f7b8f87c826de4d0f12580f2c48e9-spend-0.flat  avgt    3     4.737 ?   0.716  us/op
+[info] CekJVMBenchmark.benchEval     5845e6241e910e18ecae0c23027081dba0edd2847b3732a4ff0bad9fd23e6af2-spend-0.flat  avgt    3     4.486 ?   2.633  us/op
+[info] CekJVMBenchmark.benchEval  62a11be50630f9c16da5aee0fae00b26dfdb450f6bdb0edf5fe249cb9b7374ae-withdraw-0.flat  avgt    3     8.834 ?   3.865  us/op
+[info] CekJVMBenchmark.benchEval  68a7ddeaa226d87325597b4f34d811f855a232178c98681d06e2b809937fa1c5-withdraw-0.flat  avgt    3   515.861 ? 205.938  us/op
+[info] CekJVMBenchmark.benchEval     690a110a059712200fd3b71780c0d3dcbf58115f7602e82e488f6edf156ce9cc-spend-1.flat  avgt    3    14.262 ?   3.903  us/op
+[info] CekJVMBenchmark.benchEval     6963136c3eaf099e6103aa509053976631f8fb4d13be9f2da9e8c700f9b3a8ed-spend-2.flat  avgt    3     4.525 ?   2.446  us/op
+[info] CekJVMBenchmark.benchEval     69cb271e66fba6d994954678f84a8d3d8f55ce704cea1a8a2ed799d3272d9274-spend-0.flat  avgt    3    13.877 ?   9.376  us/op
+[info] CekJVMBenchmark.benchEval  69cb271e66fba6d994954678f84a8d3d8f55ce704cea1a8a2ed799d3272d9274-withdraw-0.flat  avgt    3   835.973 ? 139.866  us/op
+[info] CekJVMBenchmark.benchEval     6d9a5b869c864ed6aa21dad15406bbdbedb7711cab091ddf441a3312a4861b8c-spend-1.flat  avgt    3    79.468 ?  22.345  us/op
+[info] CekJVMBenchmark.benchEval     6d9a5b869c864ed6aa21dad15406bbdbedb7711cab091ddf441a3312a4861b8c-spend-3.flat  avgt    3    71.388 ?  20.383  us/op
+[info] CekJVMBenchmark.benchEval     6ed6dcefd6e92655097bf8fb2347e8c47214c72f6b4faf0327fd7626faf1d1c4-spend-2.flat  avgt    3   393.991 ? 301.103  us/op
+[info] CekJVMBenchmark.benchEval     72d37d64464ade67a7e9ebfde460ace13ab334ead86cb7af42f9090fa5fbad95-spend-0.flat  avgt    3   262.666 ?  13.772  us/op
+[info] CekJVMBenchmark.benchEval  75d066eeed445cc5000cadfaad96c28e0ba1fc8672ab592b193004ef7d5c8dcc-withdraw-0.flat  avgt    3   598.710 ? 246.462  us/op
+[info] CekJVMBenchmark.benchEval  7683618ee491a7777a311974e047fa4b230d4ad3c5b83e07ede5a1ae91b9e568-withdraw-0.flat  avgt    3   810.723 ? 512.903  us/op
+[info] CekJVMBenchmark.benchEval     79ac5cc3cf75ece0b184373a68de4f2d716a1fe7c281e903514227964d7c9bdc-spend-4.flat  avgt    3    15.273 ?   7.253  us/op
+[info] CekJVMBenchmark.benchEval      809c08cf6c9252fd23e2066083c4036e44b4590a6794cda47055d7d2cd48fbe2-mint-0.flat  avgt    3   171.821 ? 108.027  us/op
+[info] CekJVMBenchmark.benchEval     8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-spend-2.flat  avgt    3     4.727 ?   0.914  us/op
+[info] CekJVMBenchmark.benchEval  88aa412ef12341d0409925f1cb2310b7e59747b3ef3976424b30827d804e0652-withdraw-0.flat  avgt    3   580.969 ? 190.726  us/op
+[info] CekJVMBenchmark.benchEval     8c308609194bf1928b5efa6622877653052cdd956fee57d34f787f370a2190db-spend-2.flat  avgt    3    23.407 ?   5.716  us/op
+[info] CekJVMBenchmark.benchEval     8e1e87b906ef58aa1a19d19d53af2dccbf50830a14a799e56db7b113faa6651f-spend-4.flat  avgt    3    13.731 ?   3.344  us/op
+[info] CekJVMBenchmark.benchEval     8e4034e230b1771a025fb19c04d9b1df9478695c8049b8398e2ad07df02d5b00-spend-0.flat  avgt    3    80.265 ?  34.671  us/op
+[info] CekJVMBenchmark.benchEval     922edd6dbcd8d576893c0727e4c9ca0e96fda0b4fd52fcad88eafdfd91fb257c-spend-3.flat  avgt    3    69.545 ?  34.431  us/op
+[info] CekJVMBenchmark.benchEval     9896cb365fe3d1dd2e9a5cdc96bbccc51222d95e2d410793d68d6268f0466ad4-spend-4.flat  avgt    3     4.653 ?   1.582  us/op
+[info] CekJVMBenchmark.benchEval     9aa13e8788545578baaa2791bc71f649ed21ce38f325d7c5fea2b49f97166fa7-spend-1.flat  avgt    3   167.369 ?  96.877  us/op
+[info] CekJVMBenchmark.benchEval     9b8c6b62b2d447b5ed835a735d2799c71f4f86e01ded7ab516df9424f85fa5c5-spend-0.flat  avgt    3    13.985 ?   5.299  us/op
+[info] CekJVMBenchmark.benchEval     9b8c6b62b2d447b5ed835a735d2799c71f4f86e01ded7ab516df9424f85fa5c5-spend-2.flat  avgt    3    15.246 ?   4.815  us/op
+[info] CekJVMBenchmark.benchEval     9d98eef7dbdbba6806c447cd2a67e71e6e0db4ae865084bc67773747c91994a2-spend-1.flat  avgt    3    14.129 ?   4.354  us/op
+[info] CekJVMBenchmark.benchEval     9f32ed141264497b49cb6b0d8439d6f1796d4230617635b70fdebcf4b527fa29-spend-2.flat  avgt    3     4.502 ?   1.776  us/op
+[info] CekJVMBenchmark.benchEval     a65bbdb06c3b71ae94d40fd6dc96e8514deff4b9f466c2aa0f7e44664cfd2aa1-spend-0.flat  avgt    3    71.216 ?  18.303  us/op
+[info] CekJVMBenchmark.benchEval     a6658babea9de7ebec38b42508123fa6a3843ce2d8fcdb9d7f5c2cb0ee4dcf86-spend-1.flat  avgt    3    21.241 ?  10.442  us/op
+[info] CekJVMBenchmark.benchEval     a8db0a9dcc191b286c4239a02d57d3da8f91275bfa4f63a371746544cf6ed468-spend-2.flat  avgt    3     4.592 ?   2.166  us/op
+[info] CekJVMBenchmark.benchEval     ad58ac07171001d52d275804de74c2690ab8bb9897234c90621a2e60f4d557b4-spend-0.flat  avgt    3   163.639 ?  46.807  us/op
+[info] CekJVMBenchmark.benchEval  af93bf199959ef3a1b8f895f260ad44c71d7bcfe01505908f5e965444d6516c1-withdraw-0.flat  avgt    3   426.029 ?  76.764  us/op
+[info] CekJVMBenchmark.benchEval     b38ebc7a31238291e5910091d9cc22ae289aedcd1fe66d78b21f2947d4a4e8ec-spend-1.flat  avgt    3     4.630 ?   0.254  us/op
+[info] CekJVMBenchmark.benchEval     b3a00c89128d5c56d0b17a220dc9666eaaa5e9314d4d662edabace8b246f1e48-spend-3.flat  avgt    3    13.918 ?   8.595  us/op
+[info] CekJVMBenchmark.benchEval     b757904e72bd72e242e07a5e90ee0a58ae8f13277a569ec3e915b43f0373e7db-spend-2.flat  avgt    3     3.758 ?   1.160  us/op
+[info] CekJVMBenchmark.benchEval      b8bfc4091553667248cd4fd998f49252d92f8af25d91a435e513edb07501b77e-mint-1.flat  avgt    3   218.882 ? 150.843  us/op
+[info] CekJVMBenchmark.benchEval     b9d42b4b35e08f02aeba3cdcd4ca030c9a72a3ce6d07bb0d2816ecf38d905f9a-spend-0.flat  avgt    3   379.297 ?   9.489  us/op
+[info] CekJVMBenchmark.benchEval  b9d42b4b35e08f02aeba3cdcd4ca030c9a72a3ce6d07bb0d2816ecf38d905f9a-withdraw-0.flat  avgt    3    11.290 ?   2.121  us/op
+[info] CekJVMBenchmark.benchEval     bc1918acaa783a69e12a7b047f1f29931460d6a28287eab5daa60500c345ddd7-spend-2.flat  avgt    3    14.066 ?   5.370  us/op
+[info] CekJVMBenchmark.benchEval     be367eee297b5777e927ad74663c851a1f7d0e403de2d2480a11a47292e7a908-spend-2.flat  avgt    3    14.327 ?   7.302  us/op
+[info] CekJVMBenchmark.benchEval  c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-withdraw-0.flat  avgt    3   526.360 ? 306.488  us/op
+[info] CekJVMBenchmark.benchEval     c1188f93e914427fd3969efdab1160f1bdb991ed8394c79f127422347fbc1d37-spend-1.flat  avgt    3   288.996 ?  86.715  us/op
+[info] CekJVMBenchmark.benchEval     c6a1d6630c9c487df70be2ebd8d12b58162e3361b5efda6e6479a4db0f438751-spend-0.flat  avgt    3    69.998 ?  35.693  us/op
+[info] CekJVMBenchmark.benchEval     c8959fc0f2ed80a9e3ef5cd9cc8b65853d6b98e6828fc4128a2c4b9baf917cc3-spend-4.flat  avgt    3     5.471 ?   1.897  us/op
+[info] CekJVMBenchmark.benchEval     ca385cdf7753a005abb51173e66b13727ed635085bdd317f2fa789529e5754da-spend-2.flat  avgt    3    79.774 ?   6.829  us/op
+[info] CekJVMBenchmark.benchEval     d1492333495135ab87d4034d7f3e56bac21928a71184ba79f61d1c4133f298a8-spend-1.flat  avgt    3    13.863 ?   8.296  us/op
+[info] CekJVMBenchmark.benchEval     d37c44fb509c06b85216974bd213fb50f9301cc5b102d1506a723becf8bdacc5-spend-1.flat  avgt    3     5.533 ?   3.416  us/op
+[info] CekJVMBenchmark.benchEval     d5017a6865dd289ec514cde490cfdfcd4862b812cc7562c44e50aa6adc194132-spend-0.flat  avgt    3    84.718 ?  29.394  us/op
+[info] CekJVMBenchmark.benchEval  d6247cf553324b42cd302baae91f44fbcd9342f1d6988ba5214bb01358d63d50-withdraw-0.flat  avgt    3     8.758 ?   3.726  us/op
+[info] CekJVMBenchmark.benchEval  d62df55b9d15e7ede962934a652d465cb21fbfd7419c28c8c025065fb49a95c7-withdraw-3.flat  avgt    3   147.721 ?  80.539  us/op
+[info] CekJVMBenchmark.benchEval     d829b5969ae5e397d13c7610a14834af24204d147c02d86b101de3406d231399-spend-4.flat  avgt    3    38.305 ?  23.935  us/op
+[info] CekJVMBenchmark.benchEval     db7cc24da3b8bbfc5444bc85d883695e64cfd6966389db30eb5dc2a21076ee34-spend-0.flat  avgt    3   289.756 ?  66.743  us/op
+[info] CekJVMBenchmark.benchEval  dbe943750b032ce13040794ee67cb72d1c6e7a4c9f96cf804d6d13ab7f4f4cb9-withdraw-0.flat  avgt    3    16.940 ?   8.607  us/op
+[info] CekJVMBenchmark.benchEval     dd64226d4315c5cbe19e2dd00557f0dff8ca7d492ddbe471f2d718067f421e2c-spend-2.flat  avgt    3    13.838 ?   5.514  us/op
+[info] CekJVMBenchmark.benchEval     debe3afe9219b37e6f9580a4fc5354eeca5e60aa615e65fb8d9f0f2db1a9717d-spend-2.flat  avgt    3     4.778 ?   1.252  us/op
+[info] CekJVMBenchmark.benchEval     e01b1d0b6c246b2897b1b75f422129518b0ade56cbf6b16a242e8932807b3ae1-spend-0.flat  avgt    3     2.510 ?   0.735  us/op
+[info] CekJVMBenchmark.benchEval     e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-spend-2.flat  avgt    3    13.846 ?   5.143  us/op
+[info] CekJVMBenchmark.benchEval     e0f2686ab18a9b21e8f04ea34df1bafe5dedea2150f6d27451f7bd52e5cde9c7-spend-1.flat  avgt    3    23.421 ?  20.773  us/op
+[info] CekJVMBenchmark.benchEval     e102429d660fc75b02be2a16d00b83a70e94a79da562d65f0f9175f76709d74c-spend-1.flat  avgt    3    14.268 ?   5.332  us/op
+[info] CekJVMBenchmark.benchEval     f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-spend-2.flat  avgt    3   292.138 ? 188.451  us/op
+[info] CekJVMBenchmark.benchEval  f5f8b246565f9b4d39ddd176183b6f1f1de70ca681495670acc0d6ce48d9b5d4-withdraw-0.flat  avgt    3   978.949 ? 513.159  us/op
+[info] CekJVMBenchmark.benchEval     f625e0b7217e6507ccf4805c8325318b4f1c0d0dc2b763aa35b79535f03f25c7-spend-2.flat  avgt    3     4.944 ?   0.925  us/op
+[info] CekJVMBenchmark.benchEval     fa6305a65a8667ccd09eb2553dc280c9def8be2abb1a392515b81bfb5d2261d8-spend-4.flat  avgt    3    23.104 ?  13.191  us/op
+[info] Benchmark result is saved to /results/2026-11-15-mainnet_recent/scalus-cek-eval-jmh.csv
+[success] Total time: 2150 s (0:35:50.0), completed Nov 16, 2026, 1:05:50 AM
