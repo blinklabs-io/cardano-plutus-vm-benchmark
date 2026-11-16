@@ -376,6 +376,7 @@ def page_run(run_dir: str) -> dict:
         "note": CORPUS_NOTES.get(info["corpus"], ""),
         "date": run_date(run_dir, env_info),
         "env": env_badge(run_dir, env_info),
+        "env_text": env_info,
         "csv": csv_data,
         "versions": versions_data,
     }
