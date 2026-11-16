@@ -1,0 +1,95 @@
+Found 89 benchmark files
+
+plutus_use_cases benchmarks (Python / OpShin uplc)
+==========================================================================================
+  auction_1-1                            20 runs     110.61 ms  +/-    8.89 ms  [ 106.30 ms ..  137.85 ms]
+  auction_1-2                            20 runs     418.69 ms  +/-   43.87 ms  [ 377.18 ms ..  549.15 ms]
+  auction_1-3                            20 runs     400.50 ms  +/-   24.18 ms  [ 379.98 ms ..  468.68 ms]
+  auction_1-4                            20 runs     137.01 ms  +/-    9.40 ms  [ 128.82 ms ..  161.55 ms]
+  auction_2-1                            20 runs     125.05 ms  +/-   11.83 ms  [ 109.24 ms ..  146.45 ms]
+  auction_2-2                            20 runs     454.43 ms  +/-   44.64 ms  [ 405.40 ms ..  582.45 ms]
+  auction_2-3                            20 runs     489.89 ms  +/-   16.25 ms  [ 475.69 ms ..  525.98 ms]
+  auction_2-4                            20 runs     391.05 ms  +/-   13.77 ms  [ 377.99 ms ..  415.26 ms]
+  auction_2-5                            20 runs     131.99 ms  +/-    9.04 ms  [ 127.69 ms ..  160.85 ms]
+  coop-1                              SKIP (eval error)
+  coop-2                              SKIP (eval error)
+  coop-3                              SKIP (eval error)
+  coop-4                              SKIP (eval error)
+  coop-5                              SKIP (eval error)
+  coop-6                              SKIP (eval error)
+  coop-7                              SKIP (eval error)
+  crowdfunding-success-1                 20 runs     148.49 ms  +/-   17.48 ms  [ 126.62 ms ..  195.41 ms]
+  crowdfunding-success-2                 20 runs     164.71 ms  +/-   30.63 ms  [ 129.39 ms ..  265.40 ms]
+  crowdfunding-success-3                 20 runs     138.11 ms  +/-   14.75 ms  [ 126.42 ms ..  184.98 ms]
+  currency-1                             20 runs     162.66 ms  +/-   11.65 ms  [ 155.47 ms ..  191.98 ms]
+  escrow-redeem_1-1                      20 runs     214.42 ms  +/-   11.23 ms  [ 207.81 ms ..  242.76 ms]
+  escrow-redeem_1-2                      20 runs     213.46 ms  +/-   10.81 ms  [ 207.18 ms ..  239.63 ms]
+  escrow-redeem_2-1                      20 runs     242.51 ms  +/-   10.95 ms  [ 235.51 ms ..  269.33 ms]
+  escrow-redeem_2-2                      20 runs     239.58 ms  +/-    9.74 ms  [ 235.25 ms ..  268.67 ms]
+  escrow-redeem_2-3                      20 runs     296.97 ms  +/-   39.35 ms  [ 239.19 ms ..  384.11 ms]
+  escrow-refund-1                        20 runs     136.49 ms  +/-   15.00 ms  [ 118.85 ms ..  169.68 ms]
+  future-increase-margin-1               20 runs     169.82 ms  +/-   13.76 ms  [ 156.00 ms ..  212.10 ms]
+  future-increase-margin-2               20 runs     315.88 ms  +/-   13.46 ms  [ 304.31 ms ..  350.11 ms]
+  future-increase-margin-3               20 runs     320.61 ms  +/-   21.86 ms  [ 304.07 ms ..  374.87 ms]
+  future-increase-margin-4            SKIP (eval error)
+  future-increase-margin-5            SKIP (eval error)
+  future-pay-out-1                       20 runs     159.07 ms  +/-    6.97 ms  [ 155.81 ms ..  186.76 ms]
+  future-pay-out-2                       20 runs     341.75 ms  +/-   26.45 ms  [ 308.86 ms ..  403.13 ms]
+  future-pay-out-3                       20 runs     338.36 ms  +/-   21.99 ms  [ 304.76 ms ..  390.95 ms]
+  future-pay-out-4                    SKIP (eval error)
+  future-settle-early-1                  20 runs     159.78 ms  +/-    9.09 ms  [ 155.53 ms ..  186.99 ms]
+  future-settle-early-2                  20 runs     309.23 ms  +/-   11.55 ms  [ 302.91 ms ..  338.29 ms]
+  future-settle-early-3                  20 runs     333.89 ms  +/-   42.42 ms  [ 303.00 ms ..  467.72 ms]
+  future-settle-early-4               SKIP (eval error)
+  game-sm-success_1-1                    20 runs     256.30 ms  +/-   13.36 ms  [ 246.62 ms ..  283.43 ms]
+  game-sm-success_1-2                    20 runs     134.31 ms  +/-   18.81 ms  [ 114.00 ms ..  172.49 ms]
+  game-sm-success_1-3                    20 runs     431.39 ms  +/-   26.25 ms  [ 381.82 ms ..  475.37 ms]
+  game-sm-success_1-4                    20 runs     130.00 ms  +/-    6.45 ms  [ 126.41 ms ..  156.05 ms]
+  game-sm-success_2-1                    20 runs     270.32 ms  +/-   36.36 ms  [ 247.57 ms ..  376.96 ms]
+  game-sm-success_2-2                    20 runs     123.15 ms  +/-   11.62 ms  [ 112.20 ms ..  150.08 ms]
+  game-sm-success_2-3                    20 runs     382.73 ms  +/-   13.06 ms  [ 373.85 ms ..  411.74 ms]
+  game-sm-success_2-4                    20 runs     128.91 ms  +/-    6.72 ms  [ 126.15 ms ..  157.94 ms]
+  game-sm-success_2-5                    20 runs     415.67 ms  +/-   34.76 ms  [ 376.02 ms ..  501.86 ms]
+  game-sm-success_2-6                    20 runs     128.35 ms  +/-    6.99 ms  [ 125.70 ms ..  158.70 ms]
+  guardrail-sorted-large              SKIP (eval error)
+  guardrail-sorted-small              SKIP (eval error)
+  guardrail-unsorted-large            SKIP (eval error)
+  guardrail-unsorted-small            SKIP (eval error)
+  multisig-sm-01                      SKIP (eval error)
+  multisig-sm-02                      SKIP (eval error)
+  multisig-sm-03                      SKIP (eval error)
+  multisig-sm-04                      SKIP (eval error)
+  multisig-sm-05                      SKIP (eval error)
+  multisig-sm-06                      SKIP (eval error)
+  multisig-sm-07                      SKIP (eval error)
+  multisig-sm-08                      SKIP (eval error)
+  multisig-sm-09                      SKIP (eval error)
+  multisig-sm-10                      SKIP (eval error)
+  ping-pong-1                            20 runs     248.05 ms  +/-   35.96 ms  [ 219.22 ms ..  353.69 ms]
+  ping-pong-2                            20 runs     231.77 ms  +/-   16.35 ms  [ 218.76 ms ..  272.92 ms]
+  ping-pong_2-1                          20 runs     171.59 ms  +/-   16.54 ms  [ 159.79 ms ..  213.06 ms]
+  prism-1                                20 runs     100.17 ms  +/-    9.11 ms  [  96.24 ms ..  129.36 ms]
+  prism-2                                20 runs     290.57 ms  +/-   26.57 ms  [ 260.93 ms ..  351.17 ms]
+  prism-3                                20 runs     248.29 ms  +/-   16.75 ms  [ 213.68 ms ..  290.55 ms]
+  pubkey-1                               22 runs      94.05 ms  +/-    9.75 ms  [  86.79 ms ..  122.23 ms]
+  stablecoin_1-1                      SKIP (eval error)
+  stablecoin_1-2                         20 runs     148.24 ms  +/-   27.01 ms  [ 115.01 ms ..  211.33 ms]
+  stablecoin_1-3                      SKIP (eval error)
+  stablecoin_1-4                         20 runs     119.48 ms  +/-    8.95 ms  [ 115.43 ms ..  146.32 ms]
+  stablecoin_1-5                      SKIP (eval error)
+  stablecoin_1-6                         20 runs     142.90 ms  +/-    8.69 ms  [ 137.37 ms ..  166.98 ms]
+  stablecoin_2-1                      SKIP (eval error)
+  stablecoin_2-2                         20 runs     118.64 ms  +/-   11.13 ms  [ 110.63 ms ..  159.06 ms]
+  stablecoin_2-3                      SKIP (eval error)
+  stablecoin_2-4                         20 runs     119.21 ms  +/-    8.70 ms  [ 115.32 ms ..  146.03 ms]
+  token-account-1                        20 runs     125.93 ms  +/-    8.80 ms  [ 122.33 ms ..  152.41 ms]
+  token-account-2                        20 runs     198.66 ms  +/-    8.55 ms  [ 193.98 ms ..  225.23 ms]
+  uniswap-1                              20 runs     262.37 ms  +/-   24.49 ms  [ 245.73 ms ..  331.38 ms]
+  uniswap-2                              20 runs     165.88 ms  +/-   16.69 ms  [ 141.69 ms ..  197.14 ms]
+  uniswap-3                              20 runs     874.73 ms  +/-   27.71 ms  [ 851.55 ms ..  943.54 ms]
+  uniswap-4                              20 runs     176.05 ms  +/-    6.47 ms  [ 173.10 ms ..  204.01 ms]
+  uniswap-5                              20 runs     684.86 ms  +/-   73.43 ms  [ 587.98 ms ..  866.39 ms]
+  uniswap-6                              20 runs     178.25 ms  +/-   10.92 ms  [ 168.83 ms ..  208.71 ms]
+  vesting-1                              20 runs     215.95 ms  +/-    9.34 ms  [ 210.92 ms ..  244.05 ms]
+==========================================================================================
+  Grand total: 1182 iterations, mean 243.51 ms/eval

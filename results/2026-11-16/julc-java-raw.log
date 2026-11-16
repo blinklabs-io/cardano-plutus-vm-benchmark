@@ -1,0 +1,2969 @@
+EVAL_FAIL: coop-1 Failure
+EVAL_FAIL: coop-2 Failure
+EVAL_FAIL: coop-3 Failure
+EVAL_FAIL: coop-4 Failure
+EVAL_FAIL: coop-5 Failure
+EVAL_FAIL: coop-6 Failure
+EVAL_FAIL: coop-7 Failure
+EVAL_FAIL: guardrail-sorted-large Failure
+EVAL_FAIL: guardrail-sorted-small Failure
+EVAL_FAIL: guardrail-unsorted-large Failure
+EVAL_FAIL: guardrail-unsorted-small Failure
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_1-1.flat)
+
+# Run progress: 0.00% complete, ETA 00:29:40
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 362.867 us/op
+Iteration   1: 278.517 us/op
+Iteration   2: 283.749 us/op
+Iteration   3: 289.382 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  283.883 ±(99.9%) 99.130 us/op [Average]
+  (min, avg, max) = (278.517, 283.883, 289.382), stdev = 5.434
+  CI (99.9%): [184.752, 383.013] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_1-2.flat)
+
+# Run progress: 1.12% complete, ETA 00:29:52
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1117.573 us/op
+Iteration   1: 826.482 us/op
+Iteration   2: 846.147 us/op
+Iteration   3: 833.080 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  835.236 ±(99.9%) 182.585 us/op [Average]
+  (min, avg, max) = (826.482, 835.236, 846.147), stdev = 10.008
+  CI (99.9%): [652.651, 1017.821] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_1-3.flat)
+
+# Run progress: 2.25% complete, ETA 00:29:31
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1473.395 us/op
+Iteration   1: 842.479 us/op
+Iteration   2: 905.300 us/op
+Iteration   3: 875.633 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  874.471 ±(99.9%) 573.332 us/op [Average]
+  (min, avg, max) = (842.479, 874.471, 905.300), stdev = 31.426
+  CI (99.9%): [301.139, 1447.802] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_1-4.flat)
+
+# Run progress: 3.37% complete, ETA 00:29:09
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 444.886 us/op
+Iteration   1: 319.264 us/op
+Iteration   2: 350.170 us/op
+Iteration   3: 333.832 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  334.422 ±(99.9%) 282.073 us/op [Average]
+  (min, avg, max) = (319.264, 334.422, 350.170), stdev = 15.461
+  CI (99.9%): [52.349, 616.495] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_2-1.flat)
+
+# Run progress: 4.49% complete, ETA 00:28:47
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 357.432 us/op
+Iteration   1: 268.526 us/op
+Iteration   2: 278.951 us/op
+Iteration   3: 263.722 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  270.399 ±(99.9%) 142.038 us/op [Average]
+  (min, avg, max) = (263.722, 270.399, 278.951), stdev = 7.786
+  CI (99.9%): [128.361, 412.438] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_2-2.flat)
+
+# Run progress: 5.62% complete, ETA 00:28:27
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1226.122 us/op
+Iteration   1: 887.975 us/op
+Iteration   2: 836.496 us/op
+Iteration   3: 827.705 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  850.725 ±(99.9%) 593.963 us/op [Average]
+  (min, avg, max) = (827.705, 850.725, 887.975), stdev = 32.557
+  CI (99.9%): [256.762, 1444.689] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_2-3.flat)
+
+# Run progress: 6.74% complete, ETA 00:28:06
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1345.406 us/op
+Iteration   1: 1155.592 us/op
+Iteration   2: 1089.057 us/op
+Iteration   3: 1114.865 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1119.838 ±(99.9%) 611.987 us/op [Average]
+  (min, avg, max) = (1089.057, 1119.838, 1155.592), stdev = 33.545
+  CI (99.9%): [507.851, 1731.825] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_2-4.flat)
+
+# Run progress: 7.87% complete, ETA 00:27:46
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1279.066 us/op
+Iteration   1: 866.939 us/op
+Iteration   2: 876.262 us/op
+Iteration   3: 878.563 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  873.921 ±(99.9%) 112.294 us/op [Average]
+  (min, avg, max) = (866.939, 873.921, 878.563), stdev = 6.155
+  CI (99.9%): [761.628, 986.215] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = auction_2-5.flat)
+
+# Run progress: 8.99% complete, ETA 00:27:25
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 450.772 us/op
+Iteration   1: 362.559 us/op
+Iteration   2: 319.866 us/op
+Iteration   3: 319.758 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  334.061 ±(99.9%) 450.252 us/op [Average]
+  (min, avg, max) = (319.758, 334.061, 362.559), stdev = 24.680
+  CI (99.9%): [≈ 0, 784.312] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = coop-1.flat)
+
+# Run progress: 10.11% complete, ETA 00:27:05
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 30.886 us/op
+Iteration   1: 26.706 us/op
+Iteration   2: 26.443 us/op
+Iteration   3: 28.533 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  27.227 ±(99.9%) 20.770 us/op [Average]
+  (min, avg, max) = (26.443, 27.227, 28.533), stdev = 1.138
+  CI (99.9%): [6.457, 47.998] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = coop-2.flat)
+
+# Run progress: 11.24% complete, ETA 00:26:44
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 61.323 us/op
+Iteration   1: 50.290 us/op
+Iteration   2: 49.017 us/op
+Iteration   3: 51.071 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  50.126 ±(99.9%) 18.916 us/op [Average]
+  (min, avg, max) = (49.017, 50.126, 51.071), stdev = 1.037
+  CI (99.9%): [31.211, 69.042] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = coop-3.flat)
+
+# Run progress: 12.36% complete, ETA 00:26:24
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 57.415 us/op
+Iteration   1: 53.326 us/op
+Iteration   2: 52.510 us/op
+Iteration   3: 52.660 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  52.832 ±(99.9%) 7.933 us/op [Average]
+  (min, avg, max) = (52.510, 52.832, 53.326), stdev = 0.435
+  CI (99.9%): [44.899, 60.764] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = coop-4.flat)
+
+# Run progress: 13.48% complete, ETA 00:26:04
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 65.609 us/op
+Iteration   1: 55.770 us/op
+Iteration   2: 56.853 us/op
+Iteration   3: 55.238 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  55.954 ±(99.9%) 15.010 us/op [Average]
+  (min, avg, max) = (55.238, 55.954, 56.853), stdev = 0.823
+  CI (99.9%): [40.943, 70.964] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = coop-5.flat)
+
+# Run progress: 14.61% complete, ETA 00:25:43
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 68.848 us/op
+Iteration   1: 55.994 us/op
+Iteration   2: 57.573 us/op
+Iteration   3: 61.564 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  58.377 ±(99.9%) 52.375 us/op [Average]
+  (min, avg, max) = (55.994, 58.377, 61.564), stdev = 2.871
+  CI (99.9%): [6.002, 110.752] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = coop-6.flat)
+
+# Run progress: 15.73% complete, ETA 00:25:23
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 30.746 us/op
+Iteration   1: 26.609 us/op
+Iteration   2: 28.987 us/op
+Iteration   3: 27.820 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  27.805 ±(99.9%) 21.691 us/op [Average]
+  (min, avg, max) = (26.609, 27.805, 28.987), stdev = 1.189
+  CI (99.9%): [6.114, 49.496] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = coop-7.flat)
+
+# Run progress: 16.85% complete, ETA 00:25:03
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 32.800 us/op
+Iteration   1: 26.845 us/op
+Iteration   2: 28.784 us/op
+Iteration   3: 27.506 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  27.711 ±(99.9%) 17.983 us/op [Average]
+  (min, avg, max) = (26.845, 27.711, 28.784), stdev = 0.986
+  CI (99.9%): [9.728, 45.695] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = crowdfunding-success-1.flat)
+
+# Run progress: 17.98% complete, ETA 00:24:43
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 389.724 us/op
+Iteration   1: 308.694 us/op
+Iteration   2: 298.068 us/op
+Iteration   3: 292.193 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  299.652 ±(99.9%) 152.584 us/op [Average]
+  (min, avg, max) = (292.193, 299.652, 308.694), stdev = 8.364
+  CI (99.9%): [147.068, 452.236] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = crowdfunding-success-2.flat)
+
+# Run progress: 19.10% complete, ETA 00:24:22
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 377.682 us/op
+Iteration   1: 303.696 us/op
+Iteration   2: 329.686 us/op
+Iteration   3: 324.999 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  319.461 ±(99.9%) 252.714 us/op [Average]
+  (min, avg, max) = (303.696, 319.461, 329.686), stdev = 13.852
+  CI (99.9%): [66.747, 572.174] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = crowdfunding-success-3.flat)
+
+# Run progress: 20.22% complete, ETA 00:24:02
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 388.678 us/op
+Iteration   1: 308.381 us/op
+Iteration   2: 315.517 us/op
+Iteration   3: 306.760 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  310.219 ±(99.9%) 85.000 us/op [Average]
+  (min, avg, max) = (306.760, 310.219, 315.517), stdev = 4.659
+  CI (99.9%): [225.219, 395.219] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = currency-1.flat)
+
+# Run progress: 21.35% complete, ETA 00:23:41
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 486.922 us/op
+Iteration   1: 391.879 us/op
+Iteration   2: 365.775 us/op
+Iteration   3: 350.921 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  369.525 ±(99.9%) 378.279 us/op [Average]
+  (min, avg, max) = (350.921, 369.525, 391.879), stdev = 20.735
+  CI (99.9%): [≈ 0, 747.804] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = escrow-redeem_1-1.flat)
+
+# Run progress: 22.47% complete, ETA 00:23:21
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 598.652 us/op
+Iteration   1: 461.908 us/op
+Iteration   2: 466.004 us/op
+Iteration   3: 475.282 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  467.731 ±(99.9%) 125.009 us/op [Average]
+  (min, avg, max) = (461.908, 467.731, 475.282), stdev = 6.852
+  CI (99.9%): [342.722, 592.740] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = escrow-redeem_1-2.flat)
+
+# Run progress: 23.60% complete, ETA 00:23:01
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 685.799 us/op
+Iteration   1: 497.612 us/op
+Iteration   2: 466.029 us/op
+Iteration   3: 469.299 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  477.647 ±(99.9%) 316.853 us/op [Average]
+  (min, avg, max) = (466.029, 477.647, 497.612), stdev = 17.368
+  CI (99.9%): [160.794, 794.499] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = escrow-redeem_2-1.flat)
+
+# Run progress: 24.72% complete, ETA 00:22:41
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 820.609 us/op
+Iteration   1: 545.430 us/op
+Iteration   2: 571.203 us/op
+Iteration   3: 518.422 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  545.018 ±(99.9%) 481.508 us/op [Average]
+  (min, avg, max) = (518.422, 545.018, 571.203), stdev = 26.393
+  CI (99.9%): [63.511, 1026.526] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = escrow-redeem_2-2.flat)
+
+# Run progress: 25.84% complete, ETA 00:22:20
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 792.436 us/op
+Iteration   1: 544.143 us/op
+Iteration   2: 535.427 us/op
+Iteration   3: 541.804 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  540.458 ±(99.9%) 82.301 us/op [Average]
+  (min, avg, max) = (535.427, 540.458, 544.143), stdev = 4.511
+  CI (99.9%): [458.158, 622.759] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = escrow-redeem_2-3.flat)
+
+# Run progress: 26.97% complete, ETA 00:22:00
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 733.360 us/op
+Iteration   1: 529.434 us/op
+Iteration   2: 534.379 us/op
+Iteration   3: 572.990 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  545.601 ±(99.9%) 435.076 us/op [Average]
+  (min, avg, max) = (529.434, 545.601, 572.990), stdev = 23.848
+  CI (99.9%): [110.525, 980.677] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = escrow-refund-1.flat)
+
+# Run progress: 28.09% complete, ETA 00:21:40
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 368.615 us/op
+Iteration   1: 243.977 us/op
+Iteration   2: 266.848 us/op
+Iteration   3: 253.435 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  254.753 ±(99.9%) 209.666 us/op [Average]
+  (min, avg, max) = (243.977, 254.753, 266.848), stdev = 11.492
+  CI (99.9%): [45.087, 464.419] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-increase-margin-1.flat)
+
+# Run progress: 29.21% complete, ETA 00:21:19
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 518.958 us/op
+Iteration   1: 349.893 us/op
+Iteration   2: 358.950 us/op
+Iteration   3: 373.280 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  360.708 ±(99.9%) 215.134 us/op [Average]
+  (min, avg, max) = (349.893, 360.708, 373.280), stdev = 11.792
+  CI (99.9%): [145.573, 575.842] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-increase-margin-2.flat)
+
+# Run progress: 30.34% complete, ETA 00:20:59
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 956.246 us/op
+Iteration   1: 677.514 us/op
+Iteration   2: 671.280 us/op
+Iteration   3: 673.304 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  674.032 ±(99.9%) 58.024 us/op [Average]
+  (min, avg, max) = (671.280, 674.032, 677.514), stdev = 3.180
+  CI (99.9%): [616.009, 732.056] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-increase-margin-3.flat)
+
+# Run progress: 31.46% complete, ETA 00:20:39
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 828.612 us/op
+Iteration   1: 680.509 us/op
+Iteration   2: 736.181 us/op
+Iteration   3: 720.069 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  712.253 ±(99.9%) 522.630 us/op [Average]
+  (min, avg, max) = (680.509, 712.253, 736.181), stdev = 28.647
+  CI (99.9%): [189.623, 1234.884] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-increase-margin-4.flat)
+
+# Run progress: 32.58% complete, ETA 00:20:18
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 880.734 us/op
+Iteration   1: 724.062 us/op
+Iteration   2: 728.058 us/op
+Iteration   3: 742.889 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  731.669 ±(99.9%) 180.966 us/op [Average]
+  (min, avg, max) = (724.062, 731.669, 742.889), stdev = 9.919
+  CI (99.9%): [550.703, 912.635] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-increase-margin-5.flat)
+
+# Run progress: 33.71% complete, ETA 00:19:58
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1543.209 us/op
+Iteration   1: 1417.039 us/op
+Iteration   2: 1339.528 us/op
+Iteration   3: 1287.156 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1347.908 ±(99.9%) 1192.147 us/op [Average]
+  (min, avg, max) = (1287.156, 1347.908, 1417.039), stdev = 65.346
+  CI (99.9%): [155.760, 2540.055] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-pay-out-1.flat)
+
+# Run progress: 34.83% complete, ETA 00:19:38
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 481.153 us/op
+Iteration   1: 352.472 us/op
+Iteration   2: 342.151 us/op
+Iteration   3: 361.938 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  352.187 ±(99.9%) 180.556 us/op [Average]
+  (min, avg, max) = (342.151, 352.187, 361.938), stdev = 9.897
+  CI (99.9%): [171.631, 532.743] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-pay-out-2.flat)
+
+# Run progress: 35.96% complete, ETA 00:19:17
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 837.905 us/op
+Iteration   1: 738.919 us/op
+Iteration   2: 723.113 us/op
+Iteration   3: 704.025 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  722.019 ±(99.9%) 318.768 us/op [Average]
+  (min, avg, max) = (704.025, 722.019, 738.919), stdev = 17.473
+  CI (99.9%): [403.251, 1040.788] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-pay-out-3.flat)
+
+# Run progress: 37.08% complete, ETA 00:18:57
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 817.287 us/op
+Iteration   1: 737.231 us/op
+Iteration   2: 692.294 us/op
+Iteration   3: 660.261 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  696.595 ±(99.9%) 705.391 us/op [Average]
+  (min, avg, max) = (660.261, 696.595, 737.231), stdev = 38.665
+  CI (99.9%): [≈ 0, 1401.986] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-pay-out-4.flat)
+
+# Run progress: 38.20% complete, ETA 00:18:37
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1892.488 us/op
+Iteration   1: 1411.224 us/op
+Iteration   2: 1262.352 us/op
+Iteration   3: 1309.179 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1327.585 ±(99.9%) 1388.776 us/op [Average]
+  (min, avg, max) = (1262.352, 1327.585, 1411.224), stdev = 76.123
+  CI (99.9%): [≈ 0, 2716.361] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-settle-early-1.flat)
+
+# Run progress: 39.33% complete, ETA 00:18:16
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 467.832 us/op
+Iteration   1: 340.805 us/op
+Iteration   2: 346.082 us/op
+Iteration   3: 354.453 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  347.113 ±(99.9%) 125.559 us/op [Average]
+  (min, avg, max) = (340.805, 347.113, 354.453), stdev = 6.882
+  CI (99.9%): [221.555, 472.672] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-settle-early-2.flat)
+
+# Run progress: 40.45% complete, ETA 00:17:56
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 920.706 us/op
+Iteration   1: 729.522 us/op
+Iteration   2: 703.568 us/op
+Iteration   3: 727.582 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  720.224 ±(99.9%) 263.749 us/op [Average]
+  (min, avg, max) = (703.568, 720.224, 729.522), stdev = 14.457
+  CI (99.9%): [456.475, 983.973] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-settle-early-3.flat)
+
+# Run progress: 41.57% complete, ETA 00:17:36
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 831.972 us/op
+Iteration   1: 699.841 us/op
+Iteration   2: 661.042 us/op
+Iteration   3: 692.269 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  684.384 ±(99.9%) 375.201 us/op [Average]
+  (min, avg, max) = (661.042, 684.384, 699.841), stdev = 20.566
+  CI (99.9%): [309.183, 1059.585] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = future-settle-early-4.flat)
+
+# Run progress: 42.70% complete, ETA 00:17:15
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1740.252 us/op
+Iteration   1: 1022.449 us/op
+Iteration   2: 1007.620 us/op
+Iteration   3: 1024.619 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1018.229 ±(99.9%) 168.788 us/op [Average]
+  (min, avg, max) = (1007.620, 1018.229, 1024.619), stdev = 9.252
+  CI (99.9%): [849.441, 1187.018] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_1-1.flat)
+
+# Run progress: 43.82% complete, ETA 00:16:55
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 704.455 us/op
+Iteration   1: 549.650 us/op
+Iteration   2: 582.807 us/op
+Iteration   3: 601.450 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  577.969 ±(99.9%) 478.656 us/op [Average]
+  (min, avg, max) = (549.650, 577.969, 601.450), stdev = 26.237
+  CI (99.9%): [99.313, 1056.625] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_1-2.flat)
+
+# Run progress: 44.94% complete, ETA 00:16:35
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 420.820 us/op
+Iteration   1: 290.370 us/op
+Iteration   2: 286.314 us/op
+Iteration   3: 287.692 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  288.125 ±(99.9%) 37.623 us/op [Average]
+  (min, avg, max) = (286.314, 288.125, 290.370), stdev = 2.062
+  CI (99.9%): [250.502, 325.748] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_1-3.flat)
+
+# Run progress: 46.07% complete, ETA 00:16:14
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1169.903 us/op
+Iteration   1: 824.448 us/op
+Iteration   2: 872.996 us/op
+Iteration   3: 871.970 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  856.471 ±(99.9%) 506.040 us/op [Average]
+  (min, avg, max) = (824.448, 856.471, 872.996), stdev = 27.738
+  CI (99.9%): [350.431, 1362.511] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_1-4.flat)
+
+# Run progress: 47.19% complete, ETA 00:15:54
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 430.812 us/op
+Iteration   1: 318.049 us/op
+Iteration   2: 336.716 us/op
+Iteration   3: 322.958 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  325.908 ±(99.9%) 176.543 us/op [Average]
+  (min, avg, max) = (318.049, 325.908, 336.716), stdev = 9.677
+  CI (99.9%): [149.365, 502.450] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_2-1.flat)
+
+# Run progress: 48.31% complete, ETA 00:15:34
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 772.570 us/op
+Iteration   1: 574.546 us/op
+Iteration   2: 586.281 us/op
+Iteration   3: 540.716 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  567.181 ±(99.9%) 431.618 us/op [Average]
+  (min, avg, max) = (540.716, 567.181, 586.281), stdev = 23.658
+  CI (99.9%): [135.563, 998.800] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_2-2.flat)
+
+# Run progress: 49.44% complete, ETA 00:15:13
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 405.320 us/op
+Iteration   1: 305.295 us/op
+Iteration   2: 293.737 us/op
+Iteration   3: 287.045 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  295.359 ±(99.9%) 168.435 us/op [Average]
+  (min, avg, max) = (287.045, 295.359, 305.295), stdev = 9.233
+  CI (99.9%): [126.924, 463.794] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_2-3.flat)
+
+# Run progress: 50.56% complete, ETA 00:14:53
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1033.194 us/op
+Iteration   1: 918.160 us/op
+Iteration   2: 834.307 us/op
+Iteration   3: 865.958 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  872.808 ±(99.9%) 772.512 us/op [Average]
+  (min, avg, max) = (834.307, 872.808, 918.160), stdev = 42.344
+  CI (99.9%): [100.296, 1645.321] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_2-4.flat)
+
+# Run progress: 51.69% complete, ETA 00:14:33
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 425.670 us/op
+Iteration   1: 323.044 us/op
+Iteration   2: 319.751 us/op
+Iteration   3: 319.332 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  320.709 ±(99.9%) 37.089 us/op [Average]
+  (min, avg, max) = (319.332, 320.709, 323.044), stdev = 2.033
+  CI (99.9%): [283.620, 357.799] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_2-5.flat)
+
+# Run progress: 52.81% complete, ETA 00:14:12
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1130.430 us/op
+Iteration   1: 943.988 us/op
+Iteration   2: 849.587 us/op
+Iteration   3: 871.826 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  888.467 ±(99.9%) 900.360 us/op [Average]
+  (min, avg, max) = (849.587, 888.467, 943.988), stdev = 49.352
+  CI (99.9%): [≈ 0, 1788.827] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = game-sm-success_2-6.flat)
+
+# Run progress: 53.93% complete, ETA 00:13:52
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 452.705 us/op
+Iteration   1: 328.658 us/op
+Iteration   2: 317.769 us/op
+Iteration   3: 338.403 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  328.276 ±(99.9%) 188.311 us/op [Average]
+  (min, avg, max) = (317.769, 328.276, 338.403), stdev = 10.322
+  CI (99.9%): [139.965, 516.587] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = guardrail-sorted-large.flat)
+
+# Run progress: 55.06% complete, ETA 00:13:32
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 35.267 us/op
+Iteration   1: 27.645 us/op
+Iteration   2: 26.213 us/op
+Iteration   3: 26.244 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  26.701 ±(99.9%) 14.917 us/op [Average]
+  (min, avg, max) = (26.213, 26.701, 27.645), stdev = 0.818
+  CI (99.9%): [11.784, 41.618] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = guardrail-sorted-small.flat)
+
+# Run progress: 56.18% complete, ETA 00:13:12
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 32.445 us/op
+Iteration   1: 31.731 us/op
+Iteration   2: 28.634 us/op
+Iteration   3: 30.462 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  30.275 ±(99.9%) 28.404 us/op [Average]
+  (min, avg, max) = (28.634, 30.275, 31.731), stdev = 1.557
+  CI (99.9%): [1.871, 58.680] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = guardrail-unsorted-large.flat)
+
+# Run progress: 57.30% complete, ETA 00:12:51
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 34.111 us/op
+Iteration   1: 28.538 us/op
+Iteration   2: 29.059 us/op
+Iteration   3: 29.578 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  29.058 ±(99.9%) 9.483 us/op [Average]
+  (min, avg, max) = (28.538, 29.058, 29.578), stdev = 0.520
+  CI (99.9%): [19.575, 38.542] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = guardrail-unsorted-small.flat)
+
+# Run progress: 58.43% complete, ETA 00:12:31
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 33.806 us/op
+Iteration   1: 28.219 us/op
+Iteration   2: 28.260 us/op
+Iteration   3: 29.441 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  28.640 ±(99.9%) 12.658 us/op [Average]
+  (min, avg, max) = (28.219, 28.640, 29.441), stdev = 0.694
+  CI (99.9%): [15.981, 41.298] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-01.flat)
+
+# Run progress: 59.55% complete, ETA 00:12:11
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 745.068 us/op
+Iteration   1: 570.325 us/op
+Iteration   2: 601.000 us/op
+Iteration   3: 566.271 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  579.199 ±(99.9%) 346.434 us/op [Average]
+  (min, avg, max) = (566.271, 579.199, 601.000), stdev = 18.989
+  CI (99.9%): [232.765, 925.632] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-02.flat)
+
+# Run progress: 60.67% complete, ETA 00:11:50
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 749.731 us/op
+Iteration   1: 569.683 us/op
+Iteration   2: 598.763 us/op
+Iteration   3: 593.327 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  587.258 ±(99.9%) 282.069 us/op [Average]
+  (min, avg, max) = (569.683, 587.258, 598.763), stdev = 15.461
+  CI (99.9%): [305.189, 869.326] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-03.flat)
+
+# Run progress: 61.80% complete, ETA 00:11:30
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 925.292 us/op
+Iteration   1: 582.223 us/op
+Iteration   2: 586.022 us/op
+Iteration   3: 562.859 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  577.035 ±(99.9%) 226.634 us/op [Average]
+  (min, avg, max) = (562.859, 577.035, 586.022), stdev = 12.423
+  CI (99.9%): [350.400, 803.669] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-04.flat)
+
+# Run progress: 62.92% complete, ETA 00:11:10
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 729.744 us/op
+Iteration   1: 594.443 us/op
+Iteration   2: 643.223 us/op
+Iteration   3: 577.864 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  605.176 ±(99.9%) 619.842 us/op [Average]
+  (min, avg, max) = (577.864, 605.176, 643.223), stdev = 33.976
+  CI (99.9%): [≈ 0, 1225.018] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-05.flat)
+
+# Run progress: 64.04% complete, ETA 00:10:49
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 978.235 us/op
+Iteration   1: 761.047 us/op
+Iteration   2: 755.249 us/op
+Iteration   3: 753.910 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  756.735 ±(99.9%) 69.212 us/op [Average]
+  (min, avg, max) = (753.910, 756.735, 761.047), stdev = 3.794
+  CI (99.9%): [687.523, 825.948] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-06.flat)
+
+# Run progress: 65.17% complete, ETA 00:10:29
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 792.645 us/op
+Iteration   1: 634.184 us/op
+Iteration   2: 607.141 us/op
+Iteration   3: 602.160 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  614.495 ±(99.9%) 314.381 us/op [Average]
+  (min, avg, max) = (602.160, 614.495, 634.184), stdev = 17.232
+  CI (99.9%): [300.114, 928.876] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-07.flat)
+
+# Run progress: 66.29% complete, ETA 00:10:09
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 742.528 us/op
+Iteration   1: 590.477 us/op
+Iteration   2: 570.178 us/op
+Iteration   3: 597.498 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  586.051 ±(99.9%) 258.838 us/op [Average]
+  (min, avg, max) = (570.178, 586.051, 597.498), stdev = 14.188
+  CI (99.9%): [327.213, 844.888] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-08.flat)
+
+# Run progress: 67.42% complete, ETA 00:09:49
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 896.011 us/op
+Iteration   1: 633.463 us/op
+Iteration   2: 572.259 us/op
+Iteration   3: 572.920 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  592.881 ±(99.9%) 641.214 us/op [Average]
+  (min, avg, max) = (572.259, 592.881, 633.463), stdev = 35.147
+  CI (99.9%): [≈ 0, 1234.094] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-09.flat)
+
+# Run progress: 68.54% complete, ETA 00:09:28
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 811.341 us/op
+Iteration   1: 603.163 us/op
+Iteration   2: 571.945 us/op
+Iteration   3: 570.612 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  581.906 ±(99.9%) 336.063 us/op [Average]
+  (min, avg, max) = (570.612, 581.906, 603.163), stdev = 18.421
+  CI (99.9%): [245.843, 917.970] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = multisig-sm-10.flat)
+
+# Run progress: 69.66% complete, ETA 00:09:08
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1160.774 us/op
+Iteration   1: 819.091 us/op
+Iteration   2: 813.765 us/op
+Iteration   3: 829.402 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  820.753 ±(99.9%) 145.028 us/op [Average]
+  (min, avg, max) = (813.765, 820.753, 829.402), stdev = 7.949
+  CI (99.9%): [675.725, 965.780] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = ping-pong-1.flat)
+
+# Run progress: 70.79% complete, ETA 00:08:48
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 623.089 us/op
+Iteration   1: 474.402 us/op
+Iteration   2: 475.766 us/op
+Iteration   3: 499.518 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  483.229 ±(99.9%) 257.665 us/op [Average]
+  (min, avg, max) = (474.402, 483.229, 499.518), stdev = 14.123
+  CI (99.9%): [225.564, 740.894] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = ping-pong-2.flat)
+
+# Run progress: 71.91% complete, ETA 00:08:27
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 698.611 us/op
+Iteration   1: 497.900 us/op
+Iteration   2: 467.803 us/op
+Iteration   3: 462.400 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  476.034 ±(99.9%) 348.959 us/op [Average]
+  (min, avg, max) = (462.400, 476.034, 497.900), stdev = 19.128
+  CI (99.9%): [127.076, 824.993] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = ping-pong_2-1.flat)
+
+# Run progress: 73.03% complete, ETA 00:08:07
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 446.325 us/op
+Iteration   1: 330.766 us/op
+Iteration   2: 327.380 us/op
+Iteration   3: 361.418 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  339.855 ±(99.9%) 342.086 us/op [Average]
+  (min, avg, max) = (327.380, 339.855, 361.418), stdev = 18.751
+  CI (99.9%): [≈ 0, 681.941] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = prism-1.flat)
+
+# Run progress: 74.16% complete, ETA 00:07:47
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 350.183 us/op
+Iteration   1: 251.797 us/op
+Iteration   2: 243.010 us/op
+Iteration   3: 243.657 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  246.155 ±(99.9%) 89.340 us/op [Average]
+  (min, avg, max) = (243.010, 246.155, 251.797), stdev = 4.897
+  CI (99.9%): [156.815, 335.495] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = prism-2.flat)
+
+# Run progress: 75.28% complete, ETA 00:07:26
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 868.674 us/op
+Iteration   1: 595.481 us/op
+Iteration   2: 658.942 us/op
+Iteration   3: 619.569 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  624.664 ±(99.9%) 584.455 us/op [Average]
+  (min, avg, max) = (595.481, 624.664, 658.942), stdev = 32.036
+  CI (99.9%): [40.209, 1209.119] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = prism-3.flat)
+
+# Run progress: 76.40% complete, ETA 00:07:06
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 684.794 us/op
+Iteration   1: 501.030 us/op
+Iteration   2: 516.777 us/op
+Iteration   3: 496.601 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  504.803 ±(99.9%) 193.454 us/op [Average]
+  (min, avg, max) = (496.601, 504.803, 516.777), stdev = 10.604
+  CI (99.9%): [311.348, 698.257] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = pubkey-1.flat)
+
+# Run progress: 77.53% complete, ETA 00:06:46
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 284.101 us/op
+Iteration   1: 204.369 us/op
+Iteration   2: 223.200 us/op
+Iteration   3: 223.657 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  217.076 ±(99.9%) 200.796 us/op [Average]
+  (min, avg, max) = (204.369, 217.076, 223.657), stdev = 11.006
+  CI (99.9%): [16.280, 417.871] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_1-1.flat)
+
+# Run progress: 78.65% complete, ETA 00:06:25
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 2552.780 us/op
+Iteration   1: 1754.207 us/op
+Iteration   2: 1799.970 us/op
+Iteration   3: 1649.366 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1734.514 ±(99.9%) 1408.586 us/op [Average]
+  (min, avg, max) = (1649.366, 1734.514, 1799.970), stdev = 77.209
+  CI (99.9%): [325.929, 3143.100] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_1-2.flat)
+
+# Run progress: 79.78% complete, ETA 00:06:05
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 368.298 us/op
+Iteration   1: 295.723 us/op
+Iteration   2: 297.857 us/op
+Iteration   3: 275.792 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  289.791 ±(99.9%) 222.026 us/op [Average]
+  (min, avg, max) = (275.792, 289.791, 297.857), stdev = 12.170
+  CI (99.9%): [67.765, 511.817] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_1-3.flat)
+
+# Run progress: 80.90% complete, ETA 00:05:45
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 3334.500 us/op
+Iteration   1: 1943.074 us/op
+Iteration   2: 1876.080 us/op
+Iteration   3: 1901.807 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1906.987 ±(99.9%) 616.567 us/op [Average]
+  (min, avg, max) = (1876.080, 1906.987, 1943.074), stdev = 33.796
+  CI (99.9%): [1290.420, 2523.554] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_1-4.flat)
+
+# Run progress: 82.02% complete, ETA 00:05:25
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 424.295 us/op
+Iteration   1: 315.709 us/op
+Iteration   2: 314.830 us/op
+Iteration   3: 305.765 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  312.101 ±(99.9%) 100.426 us/op [Average]
+  (min, avg, max) = (305.765, 312.101, 315.709), stdev = 5.505
+  CI (99.9%): [211.675, 412.528] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_1-5.flat)
+
+# Run progress: 83.15% complete, ETA 00:05:04
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 3172.081 us/op
+Iteration   1: 2329.107 us/op
+Iteration   2: 2416.272 us/op
+Iteration   3: 2319.057 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  2354.812 ±(99.9%) 975.358 us/op [Average]
+  (min, avg, max) = (2319.057, 2354.812, 2416.272), stdev = 53.463
+  CI (99.9%): [1379.454, 3330.170] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_1-6.flat)
+
+# Run progress: 84.27% complete, ETA 00:04:44
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 465.882 us/op
+Iteration   1: 396.885 us/op
+Iteration   2: 356.941 us/op
+Iteration   3: 355.244 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  369.690 ±(99.9%) 429.945 us/op [Average]
+  (min, avg, max) = (355.244, 369.690, 396.885), stdev = 23.567
+  CI (99.9%): [≈ 0, 799.635] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_2-1.flat)
+
+# Run progress: 85.39% complete, ETA 00:04:24
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 2168.159 us/op
+Iteration   1: 1677.269 us/op
+Iteration   2: 1670.148 us/op
+Iteration   3: 1852.942 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1733.453 ±(99.9%) 1888.991 us/op [Average]
+  (min, avg, max) = (1670.148, 1733.453, 1852.942), stdev = 103.542
+  CI (99.9%): [≈ 0, 3622.444] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_2-2.flat)
+
+# Run progress: 86.52% complete, ETA 00:04:03
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 465.878 us/op
+Iteration   1: 288.149 us/op
+Iteration   2: 284.302 us/op
+Iteration   3: 279.986 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  284.146 ±(99.9%) 74.508 us/op [Average]
+  (min, avg, max) = (279.986, 284.146, 288.149), stdev = 4.084
+  CI (99.9%): [209.638, 358.654] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_2-3.flat)
+
+# Run progress: 87.64% complete, ETA 00:03:43
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 2424.206 us/op
+Iteration   1: 2066.734 us/op
+Iteration   2: 1934.449 us/op
+Iteration   3: 2040.123 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  2013.769 ±(99.9%) 1276.513 us/op [Average]
+  (min, avg, max) = (1934.449, 2013.769, 2066.734), stdev = 69.970
+  CI (99.9%): [737.256, 3290.282] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = stablecoin_2-4.flat)
+
+# Run progress: 88.76% complete, ETA 00:03:23
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 403.898 us/op
+Iteration   1: 297.959 us/op
+Iteration   2: 290.434 us/op
+Iteration   3: 309.354 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  299.249 ±(99.9%) 173.787 us/op [Average]
+  (min, avg, max) = (290.434, 299.249, 309.354), stdev = 9.526
+  CI (99.9%): [125.462, 473.036] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = token-account-1.flat)
+
+# Run progress: 89.89% complete, ETA 00:03:02
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 386.841 us/op
+Iteration   1: 278.263 us/op
+Iteration   2: 294.915 us/op
+Iteration   3: 294.785 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  289.321 ±(99.9%) 174.715 us/op [Average]
+  (min, avg, max) = (278.263, 289.321, 294.915), stdev = 9.577
+  CI (99.9%): [114.606, 464.036] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = token-account-2.flat)
+
+# Run progress: 91.01% complete, ETA 00:02:42
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 627.195 us/op
+Iteration   1: 480.600 us/op
+Iteration   2: 453.834 us/op
+Iteration   3: 432.674 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  455.702 ±(99.9%) 438.169 us/op [Average]
+  (min, avg, max) = (432.674, 455.702, 480.600), stdev = 24.018
+  CI (99.9%): [17.533, 893.872] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = uniswap-1.flat)
+
+# Run progress: 92.13% complete, ETA 00:02:22
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 648.926 us/op
+Iteration   1: 498.511 us/op
+Iteration   2: 553.868 us/op
+Iteration   3: 520.005 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  524.128 ±(99.9%) 509.145 us/op [Average]
+  (min, avg, max) = (498.511, 524.128, 553.868), stdev = 27.908
+  CI (99.9%): [14.983, 1033.272] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = uniswap-2.flat)
+
+# Run progress: 93.26% complete, ETA 00:02:01
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 455.247 us/op
+Iteration   1: 328.978 us/op
+Iteration   2: 325.766 us/op
+Iteration   3: 326.213 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  326.986 ±(99.9%) 31.736 us/op [Average]
+  (min, avg, max) = (325.766, 326.986, 328.978), stdev = 1.740
+  CI (99.9%): [295.249, 358.722] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = uniswap-3.flat)
+
+# Run progress: 94.38% complete, ETA 00:01:41
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 2506.980 us/op
+Iteration   1: 2275.907 us/op
+Iteration   2: 2506.982 us/op
+Iteration   3: 2204.752 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  2329.214 ±(99.9%) 2882.675 us/op [Average]
+  (min, avg, max) = (2204.752, 2329.214, 2506.982), stdev = 158.009
+  CI (99.9%): [≈ 0, 5211.888] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = uniswap-4.flat)
+
+# Run progress: 95.51% complete, ETA 00:01:21
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 578.264 us/op
+Iteration   1: 459.751 us/op
+Iteration   2: 461.519 us/op
+Iteration   3: 455.874 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  459.048 ±(99.9%) 52.672 us/op [Average]
+  (min, avg, max) = (455.874, 459.048, 461.519), stdev = 2.887
+  CI (99.9%): [406.376, 511.720] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = uniswap-5.flat)
+
+# Run progress: 96.63% complete, ETA 00:01:00
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 1872.940 us/op
+Iteration   1: 1594.905 us/op
+Iteration   2: 1462.636 us/op
+Iteration   3: 1455.781 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  1504.441 ±(99.9%) 1430.657 us/op [Average]
+  (min, avg, max) = (1455.781, 1504.441, 1594.905), stdev = 78.419
+  CI (99.9%): [73.784, 2935.097] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = uniswap-6.flat)
+
+# Run progress: 97.75% complete, ETA 00:00:40
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 572.236 us/op
+Iteration   1: 440.235 us/op
+Iteration   2: 469.646 us/op
+Iteration   3: 436.276 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  448.719 ±(99.9%) 332.598 us/op [Average]
+  (min, avg, max) = (436.276, 448.719, 469.646), stdev = 18.231
+  CI (99.9%): [116.121, 781.317] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 25.0.2, Java HotSpot(TM) 64-Bit Server VM, 25.0.2+10-LTS-jvmci-b01
+# VM invoker: /opt/jdk-25/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.julclang.benchmark.CekJavaBenchmark.bench
+# Parameters: (file = vesting-1.flat)
+
+# Run progress: 98.88% complete, ETA 00:00:20
+# Fork: 1 of 1
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:ThreadPriorityPolicy=1 may require system level permission, e.g., being the root user. If the necessary permission is not possessed, changes to priority will be silently ignored.
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/bench/julc/julc-benchmark-jmh.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: 664.370 us/op
+Iteration   1: 512.180 us/op
+Iteration   2: 481.059 us/op
+Iteration   3: 483.987 us/op
+
+
+Result "org.julclang.benchmark.CekJavaBenchmark.bench":
+  492.409 ±(99.9%) 313.520 us/op [Average]
+  (min, avg, max) = (481.059, 492.409, 512.180), stdev = 17.185
+  CI (99.9%): [178.889, 805.928] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:30:07
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                      (file)  Mode  Cnt     Score      Error  Units
+CekJavaBenchmark.bench               auction_1-1.flat  avgt    3   283.883 ±   99.130  us/op
+CekJavaBenchmark.bench               auction_1-2.flat  avgt    3   835.236 ±  182.585  us/op
+CekJavaBenchmark.bench               auction_1-3.flat  avgt    3   874.471 ±  573.332  us/op
+CekJavaBenchmark.bench               auction_1-4.flat  avgt    3   334.422 ±  282.073  us/op
+CekJavaBenchmark.bench               auction_2-1.flat  avgt    3   270.399 ±  142.038  us/op
+CekJavaBenchmark.bench               auction_2-2.flat  avgt    3   850.725 ±  593.963  us/op
+CekJavaBenchmark.bench               auction_2-3.flat  avgt    3  1119.838 ±  611.987  us/op
+CekJavaBenchmark.bench               auction_2-4.flat  avgt    3   873.921 ±  112.294  us/op
+CekJavaBenchmark.bench               auction_2-5.flat  avgt    3   334.061 ±  450.252  us/op
+CekJavaBenchmark.bench                    coop-1.flat  avgt    3    27.227 ±   20.770  us/op
+CekJavaBenchmark.bench                    coop-2.flat  avgt    3    50.126 ±   18.916  us/op
+CekJavaBenchmark.bench                    coop-3.flat  avgt    3    52.832 ±    7.933  us/op
+CekJavaBenchmark.bench                    coop-4.flat  avgt    3    55.954 ±   15.010  us/op
+CekJavaBenchmark.bench                    coop-5.flat  avgt    3    58.377 ±   52.375  us/op
+CekJavaBenchmark.bench                    coop-6.flat  avgt    3    27.805 ±   21.691  us/op
+CekJavaBenchmark.bench                    coop-7.flat  avgt    3    27.711 ±   17.983  us/op
+CekJavaBenchmark.bench    crowdfunding-success-1.flat  avgt    3   299.652 ±  152.584  us/op
+CekJavaBenchmark.bench    crowdfunding-success-2.flat  avgt    3   319.461 ±  252.714  us/op
+CekJavaBenchmark.bench    crowdfunding-success-3.flat  avgt    3   310.219 ±   85.000  us/op
+CekJavaBenchmark.bench                currency-1.flat  avgt    3   369.525 ±  378.279  us/op
+CekJavaBenchmark.bench         escrow-redeem_1-1.flat  avgt    3   467.731 ±  125.009  us/op
+CekJavaBenchmark.bench         escrow-redeem_1-2.flat  avgt    3   477.647 ±  316.853  us/op
+CekJavaBenchmark.bench         escrow-redeem_2-1.flat  avgt    3   545.018 ±  481.508  us/op
+CekJavaBenchmark.bench         escrow-redeem_2-2.flat  avgt    3   540.458 ±   82.301  us/op
+CekJavaBenchmark.bench         escrow-redeem_2-3.flat  avgt    3   545.601 ±  435.076  us/op
+CekJavaBenchmark.bench           escrow-refund-1.flat  avgt    3   254.753 ±  209.666  us/op
+CekJavaBenchmark.bench  future-increase-margin-1.flat  avgt    3   360.708 ±  215.134  us/op
+CekJavaBenchmark.bench  future-increase-margin-2.flat  avgt    3   674.032 ±   58.024  us/op
+CekJavaBenchmark.bench  future-increase-margin-3.flat  avgt    3   712.253 ±  522.630  us/op
+CekJavaBenchmark.bench  future-increase-margin-4.flat  avgt    3   731.669 ±  180.966  us/op
+CekJavaBenchmark.bench  future-increase-margin-5.flat  avgt    3  1347.908 ± 1192.147  us/op
+CekJavaBenchmark.bench          future-pay-out-1.flat  avgt    3   352.187 ±  180.556  us/op
+CekJavaBenchmark.bench          future-pay-out-2.flat  avgt    3   722.019 ±  318.768  us/op
+CekJavaBenchmark.bench          future-pay-out-3.flat  avgt    3   696.595 ±  705.391  us/op
+CekJavaBenchmark.bench          future-pay-out-4.flat  avgt    3  1327.585 ± 1388.776  us/op
+CekJavaBenchmark.bench     future-settle-early-1.flat  avgt    3   347.113 ±  125.559  us/op
+CekJavaBenchmark.bench     future-settle-early-2.flat  avgt    3   720.224 ±  263.749  us/op
+CekJavaBenchmark.bench     future-settle-early-3.flat  avgt    3   684.384 ±  375.201  us/op
+CekJavaBenchmark.bench     future-settle-early-4.flat  avgt    3  1018.229 ±  168.788  us/op
+CekJavaBenchmark.bench       game-sm-success_1-1.flat  avgt    3   577.969 ±  478.656  us/op
+CekJavaBenchmark.bench       game-sm-success_1-2.flat  avgt    3   288.125 ±   37.623  us/op
+CekJavaBenchmark.bench       game-sm-success_1-3.flat  avgt    3   856.471 ±  506.040  us/op
+CekJavaBenchmark.bench       game-sm-success_1-4.flat  avgt    3   325.908 ±  176.543  us/op
+CekJavaBenchmark.bench       game-sm-success_2-1.flat  avgt    3   567.181 ±  431.618  us/op
+CekJavaBenchmark.bench       game-sm-success_2-2.flat  avgt    3   295.359 ±  168.435  us/op
+CekJavaBenchmark.bench       game-sm-success_2-3.flat  avgt    3   872.808 ±  772.512  us/op
+CekJavaBenchmark.bench       game-sm-success_2-4.flat  avgt    3   320.709 ±   37.089  us/op
+CekJavaBenchmark.bench       game-sm-success_2-5.flat  avgt    3   888.467 ±  900.360  us/op
+CekJavaBenchmark.bench       game-sm-success_2-6.flat  avgt    3   328.276 ±  188.311  us/op
+CekJavaBenchmark.bench    guardrail-sorted-large.flat  avgt    3    26.701 ±   14.917  us/op
+CekJavaBenchmark.bench    guardrail-sorted-small.flat  avgt    3    30.275 ±   28.404  us/op
+CekJavaBenchmark.bench  guardrail-unsorted-large.flat  avgt    3    29.058 ±    9.483  us/op
+CekJavaBenchmark.bench  guardrail-unsorted-small.flat  avgt    3    28.640 ±   12.658  us/op
+CekJavaBenchmark.bench            multisig-sm-01.flat  avgt    3   579.199 ±  346.434  us/op
+CekJavaBenchmark.bench            multisig-sm-02.flat  avgt    3   587.258 ±  282.069  us/op
+CekJavaBenchmark.bench            multisig-sm-03.flat  avgt    3   577.035 ±  226.634  us/op
+CekJavaBenchmark.bench            multisig-sm-04.flat  avgt    3   605.176 ±  619.842  us/op
+CekJavaBenchmark.bench            multisig-sm-05.flat  avgt    3   756.735 ±   69.212  us/op
+CekJavaBenchmark.bench            multisig-sm-06.flat  avgt    3   614.495 ±  314.381  us/op
+CekJavaBenchmark.bench            multisig-sm-07.flat  avgt    3   586.051 ±  258.838  us/op
+CekJavaBenchmark.bench            multisig-sm-08.flat  avgt    3   592.881 ±  641.214  us/op
+CekJavaBenchmark.bench            multisig-sm-09.flat  avgt    3   581.906 ±  336.063  us/op
+CekJavaBenchmark.bench            multisig-sm-10.flat  avgt    3   820.753 ±  145.028  us/op
+CekJavaBenchmark.bench               ping-pong-1.flat  avgt    3   483.229 ±  257.665  us/op
+CekJavaBenchmark.bench               ping-pong-2.flat  avgt    3   476.034 ±  348.959  us/op
+CekJavaBenchmark.bench             ping-pong_2-1.flat  avgt    3   339.855 ±  342.086  us/op
+CekJavaBenchmark.bench                   prism-1.flat  avgt    3   246.155 ±   89.340  us/op
+CekJavaBenchmark.bench                   prism-2.flat  avgt    3   624.664 ±  584.455  us/op
+CekJavaBenchmark.bench                   prism-3.flat  avgt    3   504.803 ±  193.454  us/op
+CekJavaBenchmark.bench                  pubkey-1.flat  avgt    3   217.076 ±  200.796  us/op
+CekJavaBenchmark.bench            stablecoin_1-1.flat  avgt    3  1734.514 ± 1408.586  us/op
+CekJavaBenchmark.bench            stablecoin_1-2.flat  avgt    3   289.791 ±  222.026  us/op
+CekJavaBenchmark.bench            stablecoin_1-3.flat  avgt    3  1906.987 ±  616.567  us/op
+CekJavaBenchmark.bench            stablecoin_1-4.flat  avgt    3   312.101 ±  100.426  us/op
+CekJavaBenchmark.bench            stablecoin_1-5.flat  avgt    3  2354.812 ±  975.358  us/op
+CekJavaBenchmark.bench            stablecoin_1-6.flat  avgt    3   369.690 ±  429.945  us/op
+CekJavaBenchmark.bench            stablecoin_2-1.flat  avgt    3  1733.453 ± 1888.991  us/op
+CekJavaBenchmark.bench            stablecoin_2-2.flat  avgt    3   284.146 ±   74.508  us/op
+CekJavaBenchmark.bench            stablecoin_2-3.flat  avgt    3  2013.769 ± 1276.513  us/op
+CekJavaBenchmark.bench            stablecoin_2-4.flat  avgt    3   299.249 ±  173.787  us/op
+CekJavaBenchmark.bench           token-account-1.flat  avgt    3   289.321 ±  174.715  us/op
+CekJavaBenchmark.bench           token-account-2.flat  avgt    3   455.702 ±  438.169  us/op
+CekJavaBenchmark.bench                 uniswap-1.flat  avgt    3   524.128 ±  509.145  us/op
+CekJavaBenchmark.bench                 uniswap-2.flat  avgt    3   326.986 ±   31.736  us/op
+CekJavaBenchmark.bench                 uniswap-3.flat  avgt    3  2329.214 ± 2882.675  us/op
+CekJavaBenchmark.bench                 uniswap-4.flat  avgt    3   459.048 ±   52.672  us/op
+CekJavaBenchmark.bench                 uniswap-5.flat  avgt    3  1504.441 ± 1430.657  us/op
+CekJavaBenchmark.bench                 uniswap-6.flat  avgt    3   448.719 ±  332.598  us/op
+CekJavaBenchmark.bench                 vesting-1.flat  avgt    3   492.409 ±  313.520  us/op
+
+Benchmark result is saved to /results/2026-11-15/julc-java-jmh.csv

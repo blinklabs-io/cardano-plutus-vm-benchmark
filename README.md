@@ -6,52 +6,91 @@ Builds 11 VMs from source or released packages inside Docker, runs each VM's ben
 
 This version is maintained by [Blink Labs](https://blinklabs.io). It continues the [original benchmark by SAIB Inc.](https://github.com/SAIB-Inc/cardano-plutus-vm-benchmark) and tracks the newest code of each VM rather than only its latest stable release (see [Updating VM Versions](#updating-vm-versions)).
 
-## Latest Results (2026-11-13)
+## Latest Results (2026-11-16)
 
 > System: Intel Core i7-6700 @ 3.40 GHz, 8 logical cores, 15 GiB RAM, Linux kernel 6.8.0-147-generic
 
-Each VM was built from the newest code on its default branch, or its newest published package (see [`versions.csv`](results/2026-11-13/versions.csv)).
+Each VM was built from the newest code on its default branch, or its newest published package (see [`versions.csv`](results/2026-11-16/versions.csv)). Each corpus and each tier is ranked separately; lower is better. The [page](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/) switches between them and lists every program measured.
 
-### Full tier: decode and evaluate
+### Plutus use cases: all 89 programs
 
-Each iteration decodes the whole `.flat` file, including its Data arguments, and evaluates it.
-
-| VM | Language | Geo Mean | vs Fastest |
-|---|---|---|---|
-| **Plutigo CEK (Go)** | Go | 351.12 us | 1.00x |
-| **Amaru UPLC CEK (Rust)** | Rust | 375.51 us | 1.07x |
-| **Scalus CEK (Scala / JVM)** | Scala / JVM | 459.99 us | 1.31x |
-| **Plutuz CEK (Zig)** | Zig | 686.84 us | 1.96x |
-| **Chrysalis CEK (C# / .NET)** | C# / .NET | 727.85 us | 2.07x |
-| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 759.30 us | 2.16x |
-| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 1.05 ms | 2.98x |
-| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 2.31 ms | 6.58x |
-| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 2.37 ms | 6.76x |
-| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 14.89 ms | 42.42x |
-| **opshin CEK (Python / CPython)** | Python / CPython | 106.80 ms | 304.17x |
-
-### Eval tier: evaluate a decoded program
-
-The program is decoded before timing; each iteration evaluates it. JIT VMs compile before timing too.
+#### Full tier: decode and evaluate
 
 | VM | Language | Geo Mean | vs Fastest |
 |---|---|---|---|
-| **llvm-uplc post-JIT execution (C++ / LLVM)** | C++ / LLVM | 168.95 us | 1.00x |
-| **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 186.40 us | 1.10x |
-| **Plutigo CEK (Go)** | Go | 244.43 us | 1.45x |
-| **Amaru UPLC CEK (Rust)** | Rust | 253.88 us | 1.50x |
-| **Scalus CEK (Scala / JVM)** | Scala / JVM | 284.47 us | 1.68x |
-| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 362.85 us | 2.15x |
-| **Plutuz CEK (Zig)** | Zig | 467.44 us | 2.77x |
-| **Chrysalis CEK (C# / .NET)** | C# / .NET | 525.01 us | 3.11x |
-| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 547.94 us | 3.24x |
-| **Julc CEK (Java / GraalVM)** | Java / GraalVM | 823.80 us | 4.88x |
-| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 1.87 ms | 11.05x |
-| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 1.88 ms | 11.12x |
-| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 12.84 ms | 76.01x |
-| **opshin CEK (Python / CPython)** | Python / CPython | 91.76 ms | 543.12x |
+| **Plutigo CEK (Go)** | Go | 354.85 us | 1.00x |
+| **Amaru UPLC CEK (Rust)** | Rust | 378.53 us | 1.07x |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 464.73 us | 1.31x |
+| **Plutuz CEK (Zig)** | Zig | 690.09 us | 1.94x |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 733.87 us | 2.07x |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 770.52 us | 2.17x |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 1.07 ms | 3.01x |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 2.32 ms | 6.55x |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 2.36 ms | 6.64x |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 15.14 ms | 42.68x |
+| **opshin CEK (Python / CPython)** | Python / CPython | 109.15 ms | 307.61x |
 
-*Measured on Nov 13 across 89 `plutus_use_cases` scripts; the two tiers are ranked separately and lower is better. Scalus JIT, llvm-uplc and Julc appear in the eval tier only (see [METHODOLOGY.md](METHODOLOGY.md#what-is-measured)). Julc had 11 evaluation failures and OpShin had 30 in each tier it runs; failures are shown in the report and use the slowest successful time for that script in the geometric mean. Scalus JIT's three-sample JMH intervals are wider than its means for most scripts, so its result is low confidence. See [`results/2026-11-13/report.md`](results/2026-11-13/report.md) for versions, results, and coverage.*
+#### Eval tier: evaluate a decoded program
+
+| VM | Language | Geo Mean | vs Fastest |
+|---|---|---|---|
+| **llvm-uplc post-JIT execution (C++ / LLVM)** | C++ / LLVM | 171.23 us | 1.00x |
+| **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 192.79 us | 1.13x |
+| **Plutigo CEK (Go)** | Go | 247.20 us | 1.44x |
+| **Amaru UPLC CEK (Rust)** | Rust | 258.02 us | 1.51x |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 286.69 us | 1.67x |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 368.79 us | 2.15x |
+| **Plutuz CEK (Zig)** | Zig | 474.98 us | 2.77x |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 520.75 us | 3.04x |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 556.08 us | 3.25x |
+| **Julc CEK (Java / GraalVM)** | Java / GraalVM | 833.53 us | 4.87x |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 1.89 ms | 11.06x |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 1.91 ms | 11.13x |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 13.35 ms | 77.99x |
+| **opshin CEK (Python / CPython)** | Python / CPython | 94.05 ms | 549.27x |
+
+*Julc fails 11 scripts and OpShin 30; failures use the slowest successful time for that script in the geometric mean. See [`results/2026-11-16/report.md`](results/2026-11-16/report.md).*
+
+### Mainnet validators: 100 of 1360 programs, seed 1
+
+#### Full tier: decode and evaluate
+
+| VM | Language | Geo Mean | vs Fastest |
+|---|---|---|---|
+| **Amaru UPLC CEK (Rust)** | Rust | 164.66 us | 1.00x |
+| **Plutigo CEK (Go)** | Go | 173.21 us | 1.05x |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 207.31 us | 1.26x |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 252.38 us | 1.53x |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 256.26 us | 1.56x |
+| **Plutuz CEK (Zig)** | Zig | 348.65 us | 2.12x |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 591.95 us | 3.59x |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 781.21 us | 4.74x |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 873.05 us | 5.30x |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 7.19 ms | 43.66x |
+| **opshin CEK (Python / CPython)** | Python / CPython | 45.36 ms | 275.46x |
+
+#### Eval tier: evaluate a decoded program
+
+| VM | Language | Geo Mean | vs Fastest |
+|---|---|---|---|
+| **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 16.39 us | 1.00x |
+| **Plutigo CEK (Go)** | Go | 39.02 us | 2.38x |
+| **Amaru UPLC CEK (Rust)** | Rust | 39.27 us | 2.40x |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 41.45 us | 2.53x |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 47.66 us | 2.91x |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 71.09 us | 4.34x |
+| **llvm-uplc post-JIT execution (C++ / LLVM)** | C++ / LLVM | 71.33 us | 4.35x |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 73.49 us | 4.48x |
+| **Plutuz CEK (Zig)** | Zig | 133.50 us | 8.14x |
+| **Julc CEK (Java / GraalVM)** | Java / GraalVM | 154.59 us | 9.43x |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 248.14 us | 15.14x |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 288.07 us | 17.57x |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 4.76 ms | 290.33x |
+| **opshin CEK (Python / CPython)** | Python / CPython | 27.71 ms | 1690.58x |
+
+*OpShin fails 19 programs and plutus-machine 1, each of which succeeded on mainnet; failures use the slowest successful time for that program in the geometric mean. Scalus JIT was rerun on the same 100 programs after an sbt packaging error. See [`results/2026-11-15-mainnet_recent/report.md`](results/2026-11-15-mainnet_recent/report.md) and its [`corpus.txt`](results/2026-11-15-mainnet_recent/corpus.txt).*
+
+*Full tier: each iteration decodes the whole `.flat` file, including its Data arguments, and evaluates it. Eval tier: the program is decoded before timing; JIT VMs (Scalus JIT, llvm-uplc) and Julc appear here only (see [METHODOLOGY.md](METHODOLOGY.md#what-is-measured)). Scalus JIT's three-sample JMH intervals are wide, so its results are low confidence.*
 
 ## VMs Benchmarked
 
