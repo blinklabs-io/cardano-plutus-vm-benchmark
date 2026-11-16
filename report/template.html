@@ -56,7 +56,7 @@
   .page { max-width: 68rem; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
 
   /* Masthead */
-  .masthead { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 3rem; }
+  .masthead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem 1rem; margin-bottom: 3rem; }
   .masthead img { height: 20px; display: block; filter: var(--logo-filter); }
   .masthead nav { display: flex; gap: 1.25rem; font-size: 0.85rem; }
   .masthead nav a { color: var(--ink-2); text-decoration: none; }
@@ -160,7 +160,7 @@
   td.none { color: var(--ink-3); }
 
   /* Versions */
-  .versions { margin-top: 1.2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); column-gap: 2.5rem; }
+  .versions { margin-top: 1.2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr)); column-gap: 2.5rem; }
   .versions div { display: grid; grid-template-columns: 1fr auto; gap: 0 1rem; padding: 0.55rem 0; border-bottom: 1px solid var(--rule); font-size: 0.88rem; }
   .versions b { font-weight: 600; }
   .versions a, .versions span { color: var(--ink-2); text-underline-offset: 3px; text-align: right; }
@@ -177,6 +177,7 @@
   @media (max-width: 720px) {
     .page { padding-top: 1.5rem; }
     .masthead { margin-bottom: 2rem; }
+    .masthead nav { gap: 1rem; }
     .axis { display: none; }
     .rung { grid-template-columns: 1.6rem 1fr auto; row-gap: 0.4rem; }
     .rung .track { grid-column: 2 / -1; grid-row: 2; }
@@ -313,7 +314,8 @@ function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
 // Data for the selected corpus and tier.
 const rowsAll = parseCSV(run.csv).map(r => ({ ...r, tier: r.tier || 'full' }));
 const tiers = TIERS.filter(t => rowsAll.some(r => r.tier === t.key));
-const tier = tiers.find(t => t.key === params.get('tier')) || tiers[0];
+// A run with no result rows has no tiers; show it as the full tier, empty.
+const tier = tiers.find(t => t.key === params.get('tier')) || tiers[0] || TIERS[0];
 const data = {};
 rowsAll.filter(r => r.tier === tier.key).forEach(r => { (data[r.script] = data[r.script] || {})[r.vm] = parseInt(r.mean_ns, 10); });
 const programs = Object.keys(data).sort();
@@ -332,7 +334,11 @@ const stats = vms.map(vm => {
   });
   return { vm, mean: geo(values), failed };
 }).sort((a, b) => a.mean - b.mean);
-const best = stats.length ? stats[0].mean : 1;
+// A VM with no successful time anywhere (every program failed for every VM)
+// cannot be placed on the axis.
+const ranked = stats.filter(s => s.mean > 0);
+const unranked = stats.filter(s => !(s.mean > 0));
+const best = ranked.length ? ranked[0].mean : 1;
 
 // Switches
 document.getElementById('corpus-switch').innerHTML = RUNS.map(r =>
@@ -344,30 +350,45 @@ const sampled = run.count < run.total;
 document.getElementById('view-note').textContent = run.note + ' ' + tier.note;
 
 // Ranking ladder on a log time axis
-const lo = Math.floor(Math.log10(Math.min(...stats.map(s => s.mean)) * 0.7));
-const hi = Math.ceil(Math.log10(Math.max(...stats.map(s => s.mean)) * 1.15));
-const x = ns => ((Math.log10(ns) - lo) / (hi - lo)) * 100;
-const decades = []; for (let d = lo; d <= hi; d++) decades.push(d);
-const decadeLabel = d => fmt(Math.pow(10, d)).replace(/\.0+ /, ' ');
-const grid = decades.map(d => '<span class="gridline" style="left:' + x(Math.pow(10, d)) + '%"></span>').join('');
-document.getElementById('ranking-note').textContent =
-  'Geometric mean time per program across ' + plural(programs.length, 'program', 'programs') + ', fastest first. The time axis is logarithmic: each gridline is ten times slower than the one before.';
-document.getElementById('ladder').innerHTML =
-  '<div class="axis" aria-hidden="true"><span></span><span></span><span class="track">' +
-  decades.map(d => '<span class="tick" style="left:' + x(Math.pow(10, d)) + '%"><span>' + decadeLabel(d) + '</span></span>').join('') +
-  '</span><span class="num">Mean</span><span class="num">vs fastest</span></div>' +
-  stats.map((s, i) => {
-    const m = VM_META[s.vm];
-    const cls = 'rung' + (m.jit ? ' jit' : '') + (i === 0 ? ' lead' : '');
-    const fails = s.failed ? '<span class="fails">' + plural(s.failed, 'program failed', 'programs failed') + '</span>' : '';
-    return '<div class="' + cls + '">' +
-      '<span class="pos">' + (i + 1) + '</span>' +
-      '<span class="who"><b>' + esc(m.name) + '</b><small>' + esc(m.lang) + '</small>' + fails + '</span>' +
-      '<span class="track">' + grid + '<span class="stem" style="width:' + x(s.mean) + '%"></span><span class="dot" style="left:' + x(s.mean) + '%"></span></span>' +
-      '<span class="time">' + fmt(s.mean) + '</span>' +
-      '<span class="ratio">' + (s.mean / best).toFixed(s.mean / best >= 100 ? 0 : 2) + '×</span>' +
-    '</div>';
-  }).join('');
+function renderLadder() {
+  const ladder = document.getElementById('ladder');
+  const note = document.getElementById('ranking-note');
+  const noResults = unranked.length
+    ? '<p class="section-note">No successful results for ' + unranked.map(s => esc(VM_META[s.vm].name)).join(', ') + '.</p>'
+    : '';
+  if (!ranked.length) {
+    note.textContent = programs.length
+      ? 'No VM produced a successful result in this view. The per-program table below shows the failures.'
+      : 'This view has no results.';
+    ladder.innerHTML = noResults;
+    return;
+  }
+  const lo = Math.floor(Math.log10(Math.min(...ranked.map(s => s.mean)) * 0.7));
+  const hi = Math.ceil(Math.log10(Math.max(...ranked.map(s => s.mean)) * 1.15));
+  const x = ns => ((Math.log10(ns) - lo) / (hi - lo)) * 100;
+  const decades = []; for (let d = lo; d <= hi; d++) decades.push(d);
+  const decadeLabel = d => fmt(Math.pow(10, d)).replace(/\.0+ /, ' ');
+  const grid = decades.map(d => '<span class="gridline" style="left:' + x(Math.pow(10, d)) + '%"></span>').join('');
+  note.textContent =
+    'Geometric mean time per program across ' + plural(programs.length, 'program', 'programs') + ', fastest first. The time axis is logarithmic: each gridline is ten times slower than the one before.';
+  ladder.innerHTML =
+    '<div class="axis" aria-hidden="true"><span></span><span></span><span class="track">' +
+    decades.map(d => '<span class="tick" style="left:' + x(Math.pow(10, d)) + '%"><span>' + decadeLabel(d) + '</span></span>').join('') +
+    '</span><span class="num">Mean</span><span class="num">vs fastest</span></div>' +
+    ranked.map((s, i) => {
+      const m = VM_META[s.vm];
+      const cls = 'rung' + (m.jit ? ' jit' : '') + (i === 0 ? ' lead' : '');
+      const fails = s.failed ? '<span class="fails">' + plural(s.failed, 'program failed', 'programs failed') + '</span>' : '';
+      return '<div class="' + cls + '">' +
+        '<span class="pos">' + (i + 1) + '</span>' +
+        '<span class="who"><b>' + esc(m.name) + '</b><small>' + esc(m.lang) + '</small>' + fails + '</span>' +
+        '<span class="track">' + grid + '<span class="stem" style="width:' + x(s.mean) + '%"></span><span class="dot" style="left:' + x(s.mean) + '%"></span></span>' +
+        '<span class="time">' + fmt(s.mean) + '</span>' +
+        '<span class="ratio">' + (s.mean / best).toFixed(s.mean / best >= 100 ? 0 : 2) + '×</span>' +
+      '</div>';
+    }).join('') + noResults;
+}
+renderLadder();
 
 // Programs: sample, seed and the per-program table
 document.getElementById('programs-note').innerHTML = sampled
