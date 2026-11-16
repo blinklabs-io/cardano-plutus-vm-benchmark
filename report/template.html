@@ -394,12 +394,22 @@ const env = {};
 const cpu = (env.cpu || '').replace(/\(R\)|\(TM\)| CPU/g, '').replace(/\s*\((x86_64|aarch64|arm64)\)/, '').replace(/\s+/g, ' ').trim();
 document.getElementById('machine-note').textContent = 'Measured on ' + run.date +
   (cpu ? ', on an ' + cpu + ' with ' + (env.cores || '?') + ' cores and ' + (env.memory || '?').replace(/Gi$/, ' GiB') + ' of memory' : '') + '.';
+// Link a VM's source: its commit on GitHub, or its repository or package
+// page. Only http(s) URLs are linked; anything else is shown as text.
+function sourceLink(repo, revision) {
+  let url;
+  try { url = new URL(repo); } catch { return ''; }
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') return '';
+  if (url.hostname === 'github.com' && /^[0-9a-f]{7,64}$/.test(revision || '')) {
+    url.pathname = url.pathname.replace(/\.git$/, '').replace(/\/$/, '') + '/commit/' + revision;
+  }
+  return url.href;
+}
 const versions = {};
 parseCSV(run.versions).forEach(v => versions[v.vm] = v);
 document.getElementById('versions').innerHTML = order.filter(vm => versions[vm]).map(vm => {
   const v = versions[vm];
-  let href = v.repo && v.repo !== 'unknown' ? v.repo : '';
-  if (href.includes('github.com') && v.revision && v.revision !== 'unknown') href = href.replace(/\.git$/, '') + '/commit/' + v.revision;
+  const href = sourceLink(v.repo, v.revision);
   const label = esc(v.version || v.revision || 'unknown');
   return '<div><b>' + esc(VM_META[vm].name) + '</b>' + (href ? '<a href="' + esc(href) + '">' + label + '</a>' : '<span>' + label + '</span>') +
     '<small>' + esc(v.toolchain || '') + '</small></div>';
