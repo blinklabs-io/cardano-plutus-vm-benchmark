@@ -158,6 +158,7 @@
   td.best { color: var(--accent); font-weight: 700; }
   td.failed { color: var(--fail); }
   td.none { color: var(--ink-3); }
+  tbody th .runs { color: var(--ink-3); font-weight: 400; margin-left: 0.35rem; }
 
   /* Versions */
   .versions { margin-top: 1.2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr)); column-gap: 2.5rem; }
@@ -204,6 +205,7 @@
   <div class="controls">
     <div class="switch"><span class="switch-name" id="corpus-label">Programs</span><nav class="segments" id="corpus-switch" aria-labelledby="corpus-label"></nav></div>
     <div class="switch"><span class="switch-name" id="tier-label">What is timed</span><nav class="segments" id="tier-switch" aria-labelledby="tier-label"></nav></div>
+    <div class="switch" id="unit-row" hidden><span class="switch-name" id="unit-label">Rank by</span><nav class="segments" id="unit-switch" aria-labelledby="unit-label"></nav></div>
   </div>
   <p class="view-note" id="view-note"></p>
 
@@ -295,10 +297,11 @@ function fmt(ns) {
   return Math.round(ns) + ' ns';
 }
 function geo(values) { return values.length ? Math.exp(values.reduce((s, x) => s + Math.log(x), 0) / values.length) : 0; }
-function link(corpus, tierKey) {
+function link(corpus, tierKey, unitKey) {
   const p = new URLSearchParams();
   if (corpus !== RUNS[0].corpus) p.set('corpus', corpus);
   if (tierKey !== 'full') p.set('tier', tierKey);
+  if (unitKey && unitKey !== 'tx') p.set('unit', unitKey);
   const q = p.toString();
   return q ? '?' + q : location.pathname;
 }
@@ -321,15 +324,43 @@ rowsAll.filter(r => r.tier === tier.key).forEach(r => { (data[r.script] = data[r
 const programs = Object.keys(data).sort();
 const vms = Object.keys(VM_META).filter(vm => programs.some(p => vm in data[p]));
 
-// Geometric mean per VM; a failed or missing program counts at the slowest
+// Mainnet programs belong to transactions, and the ledger validates every
+// script of a transaction together. Ranking by transaction sums each VM's
+// times over every script a transaction runs; a VM that fails any of them
+// fails the transaction.
+const txOf = p => (MAINNET.exec(p) || [])[1];
+const grouped = programs.length > 0 && programs.every(p => txOf(p));
+const UNITS = [
+  { key: 'tx', label: 'Transaction', one: 'transaction', many: 'transactions' },
+  { key: 'run', label: 'Script run', one: 'script run', many: 'script runs' },
+];
+const PROGRAM_UNIT = { key: 'program', one: 'program', many: 'programs' };
+const unit = grouped ? (UNITS.find(u => u.key === params.get('unit')) || UNITS[0]) : PROGRAM_UNIT;
+const scriptsOf = {};
+programs.forEach(p => { const tx = txOf(p); if (tx) (scriptsOf[tx] = scriptsOf[tx] || []).push(p); });
+let rowData = data, rowKeys = programs;
+if (unit.key === 'tx') {
+  rowData = {};
+  Object.entries(scriptsOf).forEach(([tx, ps]) => {
+    rowData[tx] = {};
+    vms.forEach(vm => {
+      const ts = ps.map(p => data[p][vm] || 0);
+      if (ts.every(t => t > 0)) rowData[tx][vm] = ts.reduce((a, b) => a + b, 0);
+      else if (ts.some(t => t < 0)) rowData[tx][vm] = -1;
+    });
+  });
+  rowKeys = Object.keys(rowData).sort();
+}
+
+// Geometric mean per VM; a failed or missing row counts at the slowest
 // successful time any other VM had for it.
 const stats = vms.map(vm => {
   const values = []; let failed = 0;
-  programs.forEach(p => {
-    const t = data[p][vm] || 0;
+  rowKeys.forEach(p => {
+    const t = rowData[p][vm] || 0;
     if (t > 0) { values.push(t); return; }
     if (t < 0) failed++;
-    const worst = Math.max(0, ...vms.filter(o => o !== vm).map(o => data[p][o] || 0));
+    const worst = Math.max(0, ...vms.filter(o => o !== vm).map(o => rowData[p][o] || 0));
     if (worst > 0) values.push(worst);
   });
   return { vm, mean: geo(values), failed };
@@ -341,13 +372,23 @@ const unranked = stats.filter(s => !(s.mean > 0));
 const best = ranked.length ? ranked[0].mean : 1;
 
 // Switches
+function corpusSize(r) {
+  if (r.tx_count) return r.tx_count < r.tx_total ? r.tx_count + ' of ' + r.tx_total + ' transactions' : r.tx_total + ' transactions';
+  return r.count < r.total ? r.count + ' of ' + r.total : String(r.count);
+}
 document.getElementById('corpus-switch').innerHTML = RUNS.map(r =>
-  '<a href="' + link(r.corpus, tier.key) + '"' + (r === run ? ' aria-current="page"' : '') + '>' + esc(r.title) +
-  '<small>' + (r.count < r.total ? r.count + ' of ' + r.total : r.count) + '</small></a>').join('');
+  '<a href="' + link(r.corpus, tier.key, unit.key) + '"' + (r === run ? ' aria-current="page"' : '') + '>' + esc(r.title) +
+  '<small>' + corpusSize(r) + '</small></a>').join('');
 document.getElementById('tier-switch').innerHTML = tiers.map(t =>
-  '<a href="' + link(run.corpus, t.key) + '"' + (t === tier ? ' aria-current="page"' : '') + '>' + t.label + '</a>').join('');
+  '<a href="' + link(run.corpus, t.key, unit.key) + '"' + (t === tier ? ' aria-current="page"' : '') + '>' + t.label + '</a>').join('');
+if (grouped) {
+  document.getElementById('unit-row').hidden = false;
+  document.getElementById('unit-switch').innerHTML = UNITS.map(u =>
+    '<a href="' + link(run.corpus, tier.key, u.key) + '"' + (u === unit ? ' aria-current="page"' : '') + '>' + u.label + '</a>').join('');
+}
 const sampled = run.count < run.total;
-document.getElementById('view-note').textContent = run.note + ' ' + tier.note;
+document.getElementById('view-note').textContent = run.note + ' ' + tier.note +
+  (unit.key === 'tx' ? ' A transaction\u2019s time is the sum of every script it runs.' : '');
 
 // Ranking ladder on a log time axis
 function renderLadder() {
@@ -357,8 +398,8 @@ function renderLadder() {
     ? '<p class="section-note">No successful results for ' + unranked.map(s => esc(VM_META[s.vm].name)).join(', ') + '.</p>'
     : '';
   if (!ranked.length) {
-    note.textContent = programs.length
-      ? 'No VM produced a successful result in this view. The per-program table below shows the failures.'
+    note.textContent = rowKeys.length
+      ? 'No VM produced a successful result in this view. The table below shows the failures.'
       : 'This view has no results.';
     ladder.innerHTML = noResults;
     return;
@@ -370,7 +411,7 @@ function renderLadder() {
   const decadeLabel = d => fmt(Math.pow(10, d)).replace(/\.0+ /, ' ');
   const grid = decades.map(d => '<span class="gridline" style="left:' + x(Math.pow(10, d)) + '%"></span>').join('');
   note.textContent =
-    'Geometric mean time per program across ' + plural(programs.length, 'program', 'programs') + ', fastest first. The time axis is logarithmic: each gridline is ten times slower than the one before.';
+    'Geometric mean time per ' + unit.one + ' across ' + plural(rowKeys.length, unit.one, unit.many) + ', fastest first. The time axis is logarithmic: each gridline is ten times slower than the one before.';
   ladder.innerHTML =
     '<div class="axis" aria-hidden="true"><span></span><span></span><span class="track">' +
     decades.map(d => '<span class="tick" style="left:' + x(Math.pow(10, d)) + '%"><span>' + decadeLabel(d) + '</span></span>').join('') +
@@ -378,7 +419,7 @@ function renderLadder() {
     ranked.map((s, i) => {
       const m = VM_META[s.vm];
       const cls = 'rung' + (m.jit ? ' jit' : '') + (i === 0 ? ' lead' : '');
-      const fails = s.failed ? '<span class="fails">' + plural(s.failed, 'program failed', 'programs failed') + '</span>' : '';
+      const fails = s.failed ? '<span class="fails">' + plural(s.failed, unit.one + ' failed', unit.many + ' failed') + '</span>' : '';
       return '<div class="' + cls + '">' +
         '<span class="pos">' + (i + 1) + '</span>' +
         '<span class="who"><b>' + esc(m.name) + '</b><small>' + esc(m.lang) + '</small>' + fails + '</span>' +
@@ -390,23 +431,38 @@ function renderLadder() {
 }
 renderLadder();
 
-// Programs: sample, seed and the per-program table
-document.getElementById('programs-note').innerHTML = sampled
-  ? esc(run.title) + ': ' + run.count + ' of the ' + run.total + ' programs in <code>' + esc(run.corpus) + '</code>, selected with seed <code>' + esc(run.seed) + '</code>. ' +
-    'Each program is ranked by the SHA-256 of the seed and its file name, and the first ' + run.count + ' are taken, so the same seed always selects the same programs. ' +
-    'Set <code>BENCH_SEED</code> and <code>BENCH_SAMPLE</code> to choose another sample, or <code>BENCH_SAMPLE=all</code> to run every program.' +
-    (MAINNET.test(programs[0] || '') ? ' Each program links to its mainnet transaction.' : '')
-  : esc(run.title) + ': all ' + run.total + ' programs in <code>' + esc(run.corpus) + '</code>.';
-document.getElementById('programs-summary').textContent = 'Show times for all ' + plural(programs.length, 'program', 'programs');
+// Programs: sample, seed and the table of times
+const corpusCode = '<code>' + esc(run.corpus) + '</code>';
+const howToSample = 'Set <code>BENCH_SEED</code> and <code>BENCH_SAMPLE</code> to choose another sample, or <code>BENCH_SAMPLE=all</code> to run every program.';
+let programsNote;
+if (run.tx_count && run.tx_count < run.tx_total) {
+  programsNote = esc(run.title) + ': every script of ' + run.tx_count + ' of the ' + run.tx_total + ' transactions in ' + corpusCode +
+    ' (' + run.count + ' of ' + run.total + ' programs), selected with seed <code>' + esc(run.seed) + '</code>. ' +
+    'Each transaction is ranked by the SHA-256 of the seed and its ID, and the first ' + run.tx_count + ' are taken, so the same seed always selects the same transactions. ' + howToSample;
+} else if (sampled) {
+  programsNote = esc(run.title) + ': ' + run.count + ' of the ' + run.total + ' programs in ' + corpusCode + ', selected with seed <code>' + esc(run.seed) + '</code>. ' +
+    'Each program is ranked by the SHA-256 of the seed and its file name, and the first ' + run.count + ' are taken, so the same seed always selects the same programs. ' + howToSample;
+} else {
+  programsNote = esc(run.title) + ': all ' + run.total + ' programs in ' + corpusCode + '.';
+}
+if (grouped) programsNote += ' Each row links to its mainnet transaction.';
+document.getElementById('programs-note').innerHTML = programsNote;
+document.getElementById('programs-summary').textContent = 'Show times for all ' + plural(rowKeys.length, unit.one, unit.many);
 const order = stats.map(s => s.vm);
-document.getElementById('table-head').innerHTML = '<tr><th scope="col">Program</th>' +
+function rowCell(key) {
+  if (unit.key !== 'tx') return programCell(key);
+  const n = scriptsOf[key].length;
+  return '<a href="https://cardanoscan.io/transaction/' + key + '" title="' + esc(key) + '" target="_blank" rel="noopener">' +
+    esc(key.slice(0, 8) + '\u2026' + key.slice(-6)) + '</a> <span class="runs">' + plural(n, 'script', 'scripts') + '</span>';
+}
+document.getElementById('table-head').innerHTML = '<tr><th scope="col">' + (unit.key === 'tx' ? 'Transaction' : 'Program') + '</th>' +
   order.map(vm => '<th scope="col">' + esc(VM_META[vm].name) + '</th>').join('') + '</tr>';
-document.getElementById('table-body').innerHTML = programs.map(p => {
-  const times = order.map(vm => data[p][vm] || 0);
+document.getElementById('table-body').innerHTML = rowKeys.map(k => {
+  const times = order.map(vm => rowData[k][vm] || 0);
   const fastest = Math.min(...times.filter(t => t > 0));
-  return '<tr><th scope="row">' + programCell(p) + '</th>' + times.map(t =>
+  return '<tr><th scope="row">' + rowCell(k) + '</th>' + times.map(t =>
     t > 0 ? '<td' + (t === fastest ? ' class="best"' : '') + '>' + fmt(t) + '</td>'
-    : t < 0 ? '<td class="failed">failed</td>' : '<td class="none">–</td>').join('') + '</tr>';
+    : t < 0 ? '<td class="failed">failed</td>' : '<td class="none">\u2013</td>').join('') + '</tr>';
 }).join('');
 
 // Versions and machine

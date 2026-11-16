@@ -26,18 +26,29 @@ if ! compgen -G "/bench/data/${BENCH_CORPUS}/*.flat" > /dev/null; then
     exit 1
 fi
 
-# BENCH_SAMPLE programs are selected from the corpus by BENCH_SEED; the same
-# seed always selects the same programs. The mainnet corpus defaults to a
-# sample of 100; other corpora, and BENCH_SAMPLE=all, run every program.
+# BENCH_SAMPLE is selected from the corpus by BENCH_SEED; the same seed
+# always selects the same programs. In the mainnet corpus it counts
+# transactions, and every script a chosen transaction runs is kept; it
+# defaults to 40 transactions there. Other corpora, and BENCH_SAMPLE=all,
+# run every program.
 if [[ "$BENCH_CORPUS" == mainnet_recent ]]; then
-    BENCH_SAMPLE="${BENCH_SAMPLE:-100}"
+    BENCH_SAMPLE="${BENCH_SAMPLE:-40}"
 else
     BENCH_SAMPLE="${BENCH_SAMPLE:-all}"
 fi
 BENCH_SEED="${BENCH_SEED:-1}"
 BENCH_DATA_DIR="$(mktemp -d)/${BENCH_CORPUS}"
-python3 /bench/scripts/select_corpus.py "/bench/data/${BENCH_CORPUS}" "$BENCH_DATA_DIR" \
-    "$BENCH_SAMPLE" "$BENCH_SEED" > "$RUN_DIR/corpus.txt"
+selection=$(python3 /bench/scripts/select_corpus.py "/bench/data/${BENCH_CORPUS}" "$BENCH_DATA_DIR" \
+    "$BENCH_SAMPLE" "$BENCH_SEED" 2>&1 > "$RUN_DIR/corpus.txt") || { echo "ERROR: $selection"; exit 1; }
+selection_re='programs=([0-9]+) of ([0-9]+) groups=([0-9]+) of ([0-9]+) grouped=(yes|no)'
+if [[ ! "$selection" =~ $selection_re ]]; then
+    echo "ERROR: unexpected corpus selection output: $selection"
+    exit 1
+fi
+CORPUS_SAMPLE="${BASH_REMATCH[1]} of ${BASH_REMATCH[2]} programs"
+if [[ "${BASH_REMATCH[5]}" == yes ]]; then
+    CORPUS_SAMPLE+=" from ${BASH_REMATCH[3]} of ${BASH_REMATCH[4]} transactions"
+fi
 export BENCH_SAMPLE BENCH_SEED BENCH_DATA_DIR
 
 echo "============================================="
@@ -68,7 +79,7 @@ detect_cpu() {
     echo "cpu: ${HOST_CPU:-$(detect_cpu)}"
     echo "cores: $(nproc)"
     echo "memory: $(free -h | awk '/Mem:/ {print $2}')"
-    echo "corpus: ${BENCH_CORPUS} ($(wc -l < "$RUN_DIR/corpus.txt") of $(find "/bench/data/${BENCH_CORPUS}" -maxdepth 1 -name '*.flat' | wc -l) programs, sample ${BENCH_SAMPLE}, seed ${BENCH_SEED}; list in corpus.txt)"
+    echo "corpus: ${BENCH_CORPUS} (${CORPUS_SAMPLE}, sample ${BENCH_SAMPLE}, seed ${BENCH_SEED}; list in corpus.txt)"
 } > "$RUN_DIR/environment.txt"
 
 cat "$RUN_DIR/environment.txt"

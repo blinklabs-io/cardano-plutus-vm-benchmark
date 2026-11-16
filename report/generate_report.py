@@ -80,7 +80,8 @@ CORPUS_NOTES = {
     "mainnet_recent": "Validators from recent mainnet transactions, each applied to the datum, redeemer and script context it ran with on mainnet.",
 }
 CORPUS_LINE = re.compile(
-    r"^corpus: (?P<corpus>\S+) \((?P<count>\d+) of (?P<total>\d+) programs, "
+    r"^corpus: (?P<corpus>\S+) \((?P<count>\d+) of (?P<total>\d+) programs"
+    r"(?: from (?P<tx_count>\d+) of (?P<tx_total>\d+) transactions)?, "
     r"sample (?P<sample>\S+), seed (?P<seed>[^;)]+)",
     re.MULTILINE,
 )
@@ -102,6 +103,8 @@ def corpus_info(run_dir: str, env_info: str, scripts) -> dict:
             "total": int(m["total"]),
             "sample": m["sample"],
             "seed": m["seed"],
+            "tx_count": int(m["tx_count"]) if m["tx_count"] else None,
+            "tx_total": int(m["tx_total"]) if m["tx_total"] else None,
             "programs": programs,
         }
     return {
@@ -110,6 +113,8 @@ def corpus_info(run_dir: str, env_info: str, scripts) -> dict:
         "total": len(programs),
         "sample": "all",
         "seed": None,
+        "tx_count": None,
+        "tx_total": None,
         "programs": programs,
     }
 
@@ -117,6 +122,9 @@ def corpus_info(run_dir: str, env_info: str, scripts) -> dict:
 def corpus_summary(info: dict) -> str:
     """One line describing a run's corpus, for the report."""
     title = CORPUS_TITLES.get(info["corpus"], info["corpus"])
+    if info["tx_count"] and info["tx_count"] < info["tx_total"]:
+        return (f"{title} (`{info['corpus']}`): every script of {info['tx_count']} of {info['tx_total']} "
+                f"transactions ({info['count']} of {info['total']} programs), selected with seed {info['seed']}")
     if info["count"] < info["total"]:
         return (f"{title} (`{info['corpus']}`): {info['count']} of {info['total']} programs, "
                 f"selected with seed {info['seed']}")
@@ -167,6 +175,35 @@ def load_versions(run_dir: str):
             for row in csv.DictReader(f):
                 versions[row["vm"]] = row
     return versions
+
+
+# Mainnet programs are named "<transaction id>-<purpose>-<index>".
+TRANSACTION_NAME = re.compile(r"^([0-9a-f]{64})-")
+
+
+def transaction_totals(data, scripts, present_vms):
+    """Sum each VM's times over every script of each transaction.
+
+    Returns None unless every program is named after a transaction. A VM
+    that failed any script of a transaction fails the transaction (-1); one
+    that is missing a script, without failing one, has no total for it.
+    """
+    runs = defaultdict(list)
+    for script in scripts:
+        m = TRANSACTION_NAME.match(script)
+        if not m:
+            return None
+        runs[m[1]].append(script)
+    totals = {}
+    for tx, tx_scripts in runs.items():
+        totals[tx] = {}
+        for vm in present_vms:
+            times = [data[s].get(vm, 0) for s in tx_scripts]
+            if all(t > 0 for t in times):
+                totals[tx][vm] = sum(times)
+            elif any(t < 0 for t in times):
+                totals[tx][vm] = -1
+    return totals
 
 
 def compute_geo_means(data, scripts, present_vms):
@@ -275,6 +312,27 @@ def append_tier(lines, tier, data, scripts, present_vms) -> None:
     lines.append("")
     lines.append(TIER_NOTES.get(tier, ""))
     lines.append("")
+
+    totals = transaction_totals(data, scripts, present_vms)
+    if totals:
+        transactions = sorted(totals)
+        tx_means = compute_geo_means(totals, transactions, present_vms)
+        tx_fastest = min(v for v in tx_means.values() if v > 0) if any(v > 0 for v in tx_means.values()) else 1
+        lines.append(f"### Per transaction (geometric mean of {len(transactions)} transaction totals)")
+        lines.append("")
+        lines.append("*Each VM's time for a transaction is the sum of its times for every script the transaction runs. "
+                     "A VM that fails any script fails the transaction, which is assigned the slowest competitor's total.*")
+        lines.append("")
+        lines.append("| VM | Language | Geo Mean | vs Fastest | Failed transactions |")
+        lines.append("|---|---|---|---|---|")
+        for vm in sorted(present_vms, key=lambda v: tx_means.get(v, float("inf"))):
+            label = VM_LABELS.get(vm, vm)
+            lang = label.split("(")[-1].rstrip(")") if "(" in label else ""
+            geo = tx_means[vm]
+            failed = sum(1 for tx in transactions if totals[tx].get(vm, 0) < 0)
+            lines.append(f"| **{label}** | {lang} | {fmt_ns(int(geo))} | {geo / tx_fastest:.2f}x | {failed} |")
+        lines.append("")
+
     lines.append("### Summary (geometric mean across all scripts)")
     lines.append("")
     lines.append("*Note: VMs that fail or skip a script are assigned the slowest competitor's time for that script.*")
