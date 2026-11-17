@@ -18,7 +18,11 @@ cp "$DATA_DIR"/*.flat bench/src/main/resources/data/
 FILE_LIST=$(ls bench/src/main/resources/data/*.flat | xargs -I{} basename {} | paste -sd, -)
 
 # Run JMH benchmark with all files, CSV output
-sbt "bench/Jmh/run -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff $RUN_DIR/scalus-jit-jmh.csv -p file=$FILE_LIST .*JITBenchmark" \
+# Clean the bench project first: sbt-jmh regenerates its benchmark classes
+# on every run, and a bench target left by an earlier run in this container
+# can make packaging look for generated class files that no longer exist
+# (FileNotFoundException under jmh_generated).
+sbt "bench/clean" "bench/Jmh/run -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff $RUN_DIR/scalus-jit-jmh.csv -p file=$FILE_LIST .*JITBenchmark" \
     2>&1 | tee "$RUN_DIR/scalus-jit-raw.log"
 
 # Decoding and JIT compilation happen in @Setup: eval tier
