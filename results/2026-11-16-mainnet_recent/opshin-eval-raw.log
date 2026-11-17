@@ -1,0 +1,108 @@
+Found 102 benchmark files
+
+plutus_use_cases benchmarks (Python / OpShin uplc)
+==========================================================================================
+  04cb6786e24f2690d94e908b31b02213b0befe91ac58923ac57951726df25cc9-spend-1   996 runs       2.01 ms  +/-  123.28 us  [   1.95 ms ..    3.61 ms]
+  0fc112573cf010b19921588bbc2b86a62e66b980e891ef482fd3e310c6d4ace8-spend-0   982 runs       2.04 ms  +/-  124.91 us  [   1.97 ms ..    3.80 ms]
+  1fa35fdb02def65d70348c4a0a1a3b749a93c8f267dc8b531347936388028a18-spend-0 SKIP (eval error)
+  1fa35fdb02def65d70348c4a0a1a3b749a93c8f267dc8b531347936388028a18-spend-2   395 runs       5.07 ms  +/-  268.54 us  [   4.97 ms ..    8.59 ms]
+  1fa35fdb02def65d70348c4a0a1a3b749a93c8f267dc8b531347936388028a18-spend-3   398 runs       5.03 ms  +/-   47.19 us  [   4.97 ms ..    5.33 ms]
+  206ac25b32f1ff0becac4a4ca788f833910b0fc2ad0ed3507577f89ed40a1f3d-spend-0 SKIP (eval error)
+  206ac25b32f1ff0becac4a4ca788f833910b0fc2ad0ed3507577f89ed40a1f3d-spend-1   237 runs       8.46 ms  +/-    1.82 ms  [   8.24 ms ..   36.37 ms]
+  316b997bb14d86e3fa1af6dc4898b307f4ff182c1d511462cd3f455362836e47-spend-0    51 runs      40.03 ms  +/-    7.03 ms  [  37.86 ms ..   68.29 ms]
+  316b997bb14d86e3fa1af6dc4898b307f4ff182c1d511462cd3f455362836e47-withdraw-0    20 runs     136.41 ms  +/-   12.97 ms  [ 124.61 ms ..  168.84 ms]
+  3598b54af22fda534e594138b0703ff7971c24c75a63190ec303a3ce497ab244-spend-0   858 runs       2.33 ms  +/-  644.06 us  [   1.99 ms ..    6.71 ms]
+  37a68e7227267dc3ee41b94949c45a84a5c2a8d01cb1dc646333618af9eaee63-spend-0   354 runs       5.65 ms  +/-  713.25 us  [   5.31 ms ..   12.21 ms]
+  37a68e7227267dc3ee41b94949c45a84a5c2a8d01cb1dc646333618af9eaee63-spend-1 SKIP (eval error)
+  3cff44e46e2d4712017a72cd2fe5272270af0f55745fec48b74442fd017df379-spend-0    25 runs      80.14 ms  +/-   10.23 ms  [  73.47 ms ..  111.12 ms]
+  3e3b0282bf031ff6fc34d7706ecba6c2dfb7676cf53d7d54f5fb9c1c5991753c-spend-1 SKIP (eval error)
+  3e3b0282bf031ff6fc34d7706ecba6c2dfb7676cf53d7d54f5fb9c1c5991753c-spend-2   360 runs       5.57 ms  +/-  561.95 us  [   5.28 ms ..    9.56 ms]
+  43dfbfbefaa184ed1010ecd05c2f5b96dd29bc062d08bc97f26187a1bd30738f-spend-0   400 runs       5.00 ms  +/-   72.69 us  [   4.94 ms ..    5.57 ms]
+  4d0688efbb6c86bed339d4e32c6d6bac32cd12f7b58a3f05ed6c1946c6abaa7f-spend-0    20 runs     178.66 ms  +/-    9.09 ms  [ 174.51 ms ..  206.75 ms]
+  4d0688efbb6c86bed339d4e32c6d6bac32cd12f7b58a3f05ed6c1946c6abaa7f-spend-1    20 runs     163.59 ms  +/-   10.26 ms  [ 159.40 ms ..  194.47 ms]
+  4d0688efbb6c86bed339d4e32c6d6bac32cd12f7b58a3f05ed6c1946c6abaa7f-spend-3    23 runs      90.10 ms  +/-    7.79 ms  [  84.07 ms ..  116.48 ms]
+  520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-0    76 runs      26.35 ms  +/-    5.44 ms  [  23.70 ms ..   53.25 ms]
+  520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-1    81 runs      24.70 ms  +/-    4.52 ms  [  23.70 ms ..   53.15 ms]
+  520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-2    82 runs      24.53 ms  +/-    4.50 ms  [  23.62 ms ..   53.27 ms]
+  520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-4   139 runs      14.41 ms  +/-    2.57 ms  [  13.72 ms ..   42.72 ms]
+  520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-withdraw-0 SKIP (eval error)
+  5580e04420083bd288188d7eef5c40398d334a4fba8b066a7f1b91e89c57e478-spend-0 SKIP (eval error)
+  5580e04420083bd288188d7eef5c40398d334a4fba8b066a7f1b91e89c57e478-spend-1   150 runs      13.42 ms  +/-    3.39 ms  [  12.55 ms ..   41.45 ms]
+  5580e04420083bd288188d7eef5c40398d334a4fba8b066a7f1b91e89c57e478-withdraw-0   319 runs       6.28 ms  +/-  363.23 us  [   6.16 ms ..   10.88 ms]
+  56c90a79fb6c5d5fcdfa7306c93f458ce90b97a8d4109b271a0c2d21e987b345-spend-1    40 runs      50.06 ms  +/-    4.41 ms  [  48.94 ms ..   77.41 ms]
+  56c90a79fb6c5d5fcdfa7306c93f458ce90b97a8d4109b271a0c2d21e987b345-spend-3    75 runs      26.90 ms  +/-    5.28 ms  [  21.98 ms ..   47.00 ms]
+  5c86af86bef9773d582ed641789add4c32df3dbd442a2d7a523239006e721928-spend-0   129 runs      15.60 ms  +/-    4.24 ms  [  13.01 ms ..   47.65 ms]
+  5c86af86bef9773d582ed641789add4c32df3dbd442a2d7a523239006e721928-spend-2    74 runs      27.35 ms  +/-    5.50 ms  [  23.12 ms ..   54.28 ms]
+  5c86af86bef9773d582ed641789add4c32df3dbd442a2d7a523239006e721928-withdraw-0 SKIP (eval error)
+  5cf5f0fb43ef1f8664b037e06b8265b51b6857ab2e8c626fc2fa10a4157f9cdb-spend-0    76 runs      26.58 ms  +/-    6.48 ms  [  23.00 ms ..   65.16 ms]
+  5cf5f0fb43ef1f8664b037e06b8265b51b6857ab2e8c626fc2fa10a4157f9cdb-spend-1   139 runs      14.41 ms  +/-    3.75 ms  [  13.02 ms ..   41.67 ms]
+  5cf5f0fb43ef1f8664b037e06b8265b51b6857ab2e8c626fc2fa10a4157f9cdb-withdraw-0 SKIP (eval error)
+  5e1d902963b3cef77bd9bff968f8f93229853319bc7e606302094a80ac4e8bbc-spend-1   953 runs       2.10 ms  +/-  313.26 us  [   1.96 ms ..    5.47 ms]
+  7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-0    78 runs      25.64 ms  +/-    4.93 ms  [  23.79 ms ..   53.65 ms]
+  7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-2   142 runs      14.15 ms  +/-    2.34 ms  [  13.82 ms ..   41.89 ms]
+  7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-3    81 runs      24.70 ms  +/-    4.56 ms  [  23.69 ms ..   53.55 ms]
+  7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-4    80 runs      25.02 ms  +/-    5.51 ms  [  23.70 ms ..   53.34 ms]
+  7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-withdraw-0 SKIP (eval error)
+  81af9388c7fb7f1a557c802069ab2f8cae1b441dc46e3755d98e10c825a672f4-spend-0    52 runs      39.01 ms  +/-    7.36 ms  [  36.77 ms ..   68.90 ms]
+  81af9388c7fb7f1a557c802069ab2f8cae1b441dc46e3755d98e10c825a672f4-withdraw-0    20 runs     131.11 ms  +/-   12.71 ms  [ 123.73 ms ..  168.87 ms]
+  8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-spend-1    85 runs      23.76 ms  +/-    4.37 ms  [  22.82 ms ..   52.02 ms]
+  8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-spend-2   148 runs      13.53 ms  +/-    3.25 ms  [  12.97 ms ..   41.39 ms]
+  8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-withdraw-0 SKIP (eval error)
+  8864ea90e54f74150e7f58d4680e9b9a0959ace4d7048a942cd7a2adfb0a3e3d-spend-0   315 runs       6.37 ms  +/-   52.66 us  [   6.28 ms ..    6.69 ms]
+  8864ea90e54f74150e7f58d4680e9b9a0959ace4d7048a942cd7a2adfb0a3e3d-withdraw-0    43 runs      46.90 ms  +/-    5.74 ms  [  44.63 ms ..   73.75 ms]
+  89553182a5487bd6705877584384095e764058416d9561ebd6ae9b7701ed9b01-spend-0   143 runs      14.02 ms  +/-    3.73 ms  [  12.98 ms ..   41.54 ms]
+  89553182a5487bd6705877584384095e764058416d9561ebd6ae9b7701ed9b01-spend-1    78 runs      25.68 ms  +/-    5.84 ms  [  22.94 ms ..   52.97 ms]
+  89553182a5487bd6705877584384095e764058416d9561ebd6ae9b7701ed9b01-withdraw-0 SKIP (eval error)
+  8d8b269e8998bbc54b0a770089ee9f36bf5a48eff7c1cdc7c92872b928c0d7c8-spend-1 SKIP (eval error)
+  8d8b269e8998bbc54b0a770089ee9f36bf5a48eff7c1cdc7c92872b928c0d7c8-spend-2   137 runs      14.66 ms  +/-    4.64 ms  [  12.59 ms ..   53.60 ms]
+  8d8b269e8998bbc54b0a770089ee9f36bf5a48eff7c1cdc7c92872b928c0d7c8-withdraw-0   256 runs       7.82 ms  +/-    1.91 ms  [   6.77 ms ..   20.53 ms]
+  90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-0    74 runs      27.40 ms  +/-    6.39 ms  [  23.83 ms ..   58.61 ms]
+  90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-1    82 runs      24.66 ms  +/-    4.53 ms  [  23.65 ms ..   53.59 ms]
+  90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-2   140 runs      14.31 ms  +/-    3.35 ms  [  13.79 ms ..   42.41 ms]
+  90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-3    82 runs      24.62 ms  +/-    4.42 ms  [  23.67 ms ..   52.65 ms]
+  90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-withdraw-0 SKIP (eval error)
+  9821e1defa09d0e9407e4ce6622ead240125df3df75fba63539c55afd841d6f8-spend-1   987 runs       2.03 ms  +/-  121.18 us  [   1.97 ms ..    4.86 ms]
+  9b456b77cfc279bd3d80822b553952720e452fddc05c47cac387f1d4f6da6700-spend-1   916 runs       2.19 ms  +/-  423.58 us  [   1.98 ms ..    5.41 ms]
+  9d61863e3a770cc83ec05bccd87b25c28eba22f423a0a63acbeea17fa23e5499-spend-0    49 runs      41.62 ms  +/-    8.60 ms  [  37.01 ms ..   79.89 ms]
+  9d61863e3a770cc83ec05bccd87b25c28eba22f423a0a63acbeea17fa23e5499-withdraw-0    20 runs     121.52 ms  +/-   11.18 ms  [ 113.62 ms ..  155.29 ms]
+  a640b437d8b74eb832e1eb42b537419ef29ae4a7f027781817810ab3891217cf-spend-0    83 runs      24.20 ms  +/-    5.38 ms  [  22.83 ms ..   52.55 ms]
+  a640b437d8b74eb832e1eb42b537419ef29ae4a7f027781817810ab3891217cf-spend-2   149 runs      13.51 ms  +/-    3.23 ms  [  12.98 ms ..   41.25 ms]
+  a640b437d8b74eb832e1eb42b537419ef29ae4a7f027781817810ab3891217cf-withdraw-0 SKIP (eval error)
+  a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-spend-0   145 runs      13.81 ms  +/-    3.28 ms  [  13.27 ms ..   41.61 ms]
+  a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-spend-1    83 runs      24.21 ms  +/-    4.44 ms  [  23.21 ms ..   52.63 ms]
+  a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-spend-3   148 runs      13.60 ms  +/-    2.34 ms  [  13.21 ms ..   41.51 ms]
+  a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-withdraw-0 SKIP (eval error)
+  b045c8789a4d7d250c7971e12d4bd0a7e423015e18489e91b1d42967c0c1aea6-spend-0 SKIP (eval error)
+  beaa9d1683d7bdde24a920f2561b0b9dbe90b652c18b3e59154cfd222c5f696f-spend-1    71 runs      28.33 ms  +/-    1.33 ms  [  27.50 ms ..   34.20 ms]
+  beaa9d1683d7bdde24a920f2561b0b9dbe90b652c18b3e59154cfd222c5f696f-spend-3    36 runs      57.43 ms  +/-    8.29 ms  [  50.53 ms ..   82.43 ms]
+  c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-mint-0    46 runs      43.81 ms  +/-   11.63 ms  [  35.66 ms ..   90.02 ms]
+  c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-mint-1    31 runs      67.11 ms  +/-    9.34 ms  [  57.77 ms ..   94.37 ms]
+  c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-spend-0 SKIP (eval error)
+  c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-spend-2    20 runs     263.74 ms  +/-   18.59 ms  [ 240.75 ms ..  308.52 ms]
+  c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-spend-3    29 runs      70.75 ms  +/-    5.33 ms  [  68.83 ms ..   98.64 ms]
+  c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-0   143 runs      13.99 ms  +/-    3.33 ms  [  13.47 ms ..   42.17 ms]
+  c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-1   146 runs      13.76 ms  +/-    2.34 ms  [  13.42 ms ..   41.89 ms]
+  c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-2    83 runs      24.33 ms  +/-    3.30 ms  [  23.33 ms ..   52.32 ms]
+  c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-4   143 runs      14.04 ms  +/-    2.54 ms  [  13.55 ms ..   42.64 ms]
+  c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-withdraw-0 SKIP (eval error)
+  c6aa9ec93c2e4fe6396240b1fae8ed4a1e5960403af40ae1d52d0753beced05c-spend-2    43 runs      47.00 ms  +/-  234.86 us  [  46.73 ms ..   47.68 ms]
+  c6aa9ec93c2e4fe6396240b1fae8ed4a1e5960403af40ae1d52d0753beced05c-spend-3 SKIP (eval error)
+  d07abba71f61a3da474a8559df90d5403498c99d3bad640e4e413e97adbf5f45-spend-2    51 runs      39.42 ms  +/-    6.11 ms  [  37.79 ms ..   69.78 ms]
+  d07abba71f61a3da474a8559df90d5403498c99d3bad640e4e413e97adbf5f45-withdraw-0   137 runs      14.62 ms  +/-    2.34 ms  [  14.23 ms ..   41.87 ms]
+  d07abba71f61a3da474a8559df90d5403498c99d3bad640e4e413e97adbf5f45-withdraw-1    20 runs     129.74 ms  +/-   10.28 ms  [ 119.00 ms ..  152.18 ms]
+  dfcf1fe2a0bca423b0e7260a24922c0437785c894ecb27fef5587c2d4d5f1227-spend-0    83 runs      24.21 ms  +/-    5.50 ms  [  22.75 ms ..   52.23 ms]
+  dfcf1fe2a0bca423b0e7260a24922c0437785c894ecb27fef5587c2d4d5f1227-spend-1   152 runs      13.20 ms  +/-    2.28 ms  [  12.84 ms ..   41.21 ms]
+  dfcf1fe2a0bca423b0e7260a24922c0437785c894ecb27fef5587c2d4d5f1227-withdraw-0 SKIP (eval error)
+  e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-spend-0   136 runs      14.77 ms  +/-    3.41 ms  [  12.92 ms ..   42.15 ms]
+  e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-spend-2    72 runs      28.03 ms  +/-    7.06 ms  [  23.11 ms ..   62.61 ms]
+  e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-withdraw-0 SKIP (eval error)
+  e2fbfa2be7dc3f978d4131f60a99085b888b8b7a2123d41400dc4697d6a84df7-spend-0   338 runs       5.92 ms  +/-    1.02 ms  [   5.25 ms ..   13.13 ms]
+  e2fbfa2be7dc3f978d4131f60a99085b888b8b7a2123d41400dc4697d6a84df7-spend-1 SKIP (eval error)
+  f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-spend-0   133 runs      15.12 ms  +/-    4.63 ms  [  12.58 ms ..   50.06 ms]
+  f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-spend-2 SKIP (eval error)
+  f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-withdraw-0   294 runs       6.82 ms  +/-   81.67 us  [   6.71 ms ..    7.45 ms]
+  f72cc6d135256d2dcb98b13d5ea222ca234bdae2b3540e446e1331cc50660edd-spend-1    84 runs      23.90 ms  +/-    4.37 ms  [  22.94 ms ..   51.95 ms]
+  f72cc6d135256d2dcb98b13d5ea222ca234bdae2b3540e446e1331cc50660edd-spend-2   148 runs      13.59 ms  +/-    3.37 ms  [  12.97 ms ..   41.45 ms]
+  f72cc6d135256d2dcb98b13d5ea222ca234bdae2b3540e446e1331cc50660edd-withdraw-0 SKIP (eval error)
+==========================================================================================
+  Grand total: 14527 iterations, mean 11.38 ms/eval

@@ -1,0 +1,922 @@
+{
+  "benchmarks": [
+    {
+      "name": "04cb6786e24f2690d94e908b31b02213b0befe91ac58923ac57951726df25cc9-spend-1",
+      "mean_ns": 314453,
+      "median_ns": 304830,
+      "min_ns": 299264,
+      "max_ns": 1534679,
+      "stddev_ns": 42201,
+      "iterations": 15879
+    },
+    {
+      "name": "0fc112573cf010b19921588bbc2b86a62e66b980e891ef482fd3e310c6d4ace8-spend-0",
+      "mean_ns": 319058,
+      "median_ns": 301677,
+      "min_ns": 296903,
+      "max_ns": 1324148,
+      "stddev_ns": 58488,
+      "iterations": 15650
+    },
+    {
+      "name": "1fa35fdb02def65d70348c4a0a1a3b749a93c8f267dc8b531347936388028a18-spend-0",
+      "mean_ns": 16508430,
+      "median_ns": 16205366,
+      "min_ns": 15784550,
+      "max_ns": 25723691,
+      "stddev_ns": 1040148,
+      "iterations": 303
+    },
+    {
+      "name": "1fa35fdb02def65d70348c4a0a1a3b749a93c8f267dc8b531347936388028a18-spend-2",
+      "mean_ns": 1122679,
+      "median_ns": 1089700,
+      "min_ns": 1082004,
+      "max_ns": 3106455,
+      "stddev_ns": 117223,
+      "iterations": 4452
+    },
+    {
+      "name": "1fa35fdb02def65d70348c4a0a1a3b749a93c8f267dc8b531347936388028a18-spend-3",
+      "mean_ns": 1219864,
+      "median_ns": 1132445,
+      "min_ns": 1080681,
+      "max_ns": 3588856,
+      "stddev_ns": 251096,
+      "iterations": 4097
+    },
+    {
+      "name": "206ac25b32f1ff0becac4a4ca788f833910b0fc2ad0ed3507577f89ed40a1f3d-spend-0",
+      "mean_ns": 25627082,
+      "median_ns": 24558345,
+      "min_ns": 23564820,
+      "max_ns": 40819679,
+      "stddev_ns": 2770039,
+      "iterations": 196
+    },
+    {
+      "name": "206ac25b32f1ff0becac4a4ca788f833910b0fc2ad0ed3507577f89ed40a1f3d-spend-1",
+      "mean_ns": 1585625,
+      "median_ns": 1551725,
+      "min_ns": 1539091,
+      "max_ns": 3065421,
+      "stddev_ns": 91608,
+      "iterations": 3153
+    },
+    {
+      "name": "316b997bb14d86e3fa1af6dc4898b307f4ff182c1d511462cd3f455362836e47-spend-0",
+      "mean_ns": 2727316,
+      "median_ns": 2683904,
+      "min_ns": 2640283,
+      "max_ns": 4409104,
+      "stddev_ns": 111416,
+      "iterations": 1833
+    },
+    {
+      "name": "316b997bb14d86e3fa1af6dc4898b307f4ff182c1d511462cd3f455362836e47-withdraw-0",
+      "mean_ns": 22425806,
+      "median_ns": 22262015,
+      "min_ns": 21899551,
+      "max_ns": 31760822,
+      "stddev_ns": 807458,
+      "iterations": 223
+    },
+    {
+      "name": "3598b54af22fda534e594138b0703ff7971c24c75a63190ec303a3ce497ab244-spend-0",
+      "mean_ns": 305024,
+      "median_ns": 298705,
+      "min_ns": 295354,
+      "max_ns": 707709,
+      "stddev_ns": 29096,
+      "iterations": 16380
+    },
+    {
+      "name": "37a68e7227267dc3ee41b94949c45a84a5c2a8d01cb1dc646333618af9eaee63-spend-0",
+      "mean_ns": 1007282,
+      "median_ns": 987165,
+      "min_ns": 979540,
+      "max_ns": 2300058,
+      "stddev_ns": 67361,
+      "iterations": 4963
+    },
+    {
+      "name": "37a68e7227267dc3ee41b94949c45a84a5c2a8d01cb1dc646333618af9eaee63-spend-1",
+      "mean_ns": 13133536,
+      "median_ns": 12404908,
+      "min_ns": 11628774,
+      "max_ns": 25686726,
+      "stddev_ns": 2074328,
+      "iterations": 381
+    },
+    {
+      "name": "3cff44e46e2d4712017a72cd2fe5272270af0f55745fec48b74442fd017df379-spend-0",
+      "mean_ns": 10419643,
+      "median_ns": 9638539,
+      "min_ns": 8846487,
+      "max_ns": 20551540,
+      "stddev_ns": 1955428,
+      "iterations": 480
+    },
+    {
+      "name": "3e3b0282bf031ff6fc34d7706ecba6c2dfb7676cf53d7d54f5fb9c1c5991753c-spend-1",
+      "mean_ns": 12690106,
+      "median_ns": 12053905,
+      "min_ns": 11591982,
+      "max_ns": 23282023,
+      "stddev_ns": 1710916,
+      "iterations": 394
+    },
+    {
+      "name": "3e3b0282bf031ff6fc34d7706ecba6c2dfb7676cf53d7d54f5fb9c1c5991753c-spend-2",
+      "mean_ns": 1049039,
+      "median_ns": 1002399,
+      "min_ns": 992725,
+      "max_ns": 2688240,
+      "stddev_ns": 141333,
+      "iterations": 4765
+    },
+    {
+      "name": "43dfbfbefaa184ed1010ecd05c2f5b96dd29bc062d08bc97f26187a1bd30738f-spend-0",
+      "mean_ns": 592351,
+      "median_ns": 583733,
+      "min_ns": 576324,
+      "max_ns": 1147541,
+      "stddev_ns": 36496,
+      "iterations": 8438
+    },
+    {
+      "name": "4d0688efbb6c86bed339d4e32c6d6bac32cd12f7b58a3f05ed6c1946c6abaa7f-spend-0",
+      "mean_ns": 29058082,
+      "median_ns": 28185504,
+      "min_ns": 27483279,
+      "max_ns": 39695508,
+      "stddev_ns": 2501210,
+      "iterations": 173
+    },
+    {
+      "name": "4d0688efbb6c86bed339d4e32c6d6bac32cd12f7b58a3f05ed6c1946c6abaa7f-spend-1",
+      "mean_ns": 33537127,
+      "median_ns": 32110436,
+      "min_ns": 31209694,
+      "max_ns": 49064330,
+      "stddev_ns": 3353808,
+      "iterations": 150
+    },
+    {
+      "name": "4d0688efbb6c86bed339d4e32c6d6bac32cd12f7b58a3f05ed6c1946c6abaa7f-spend-3",
+      "mean_ns": 16918667,
+      "median_ns": 16765922,
+      "min_ns": 16479917,
+      "max_ns": 30910570,
+      "stddev_ns": 982794,
+      "iterations": 296
+    },
+    {
+      "name": "520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-0",
+      "mean_ns": 2702789,
+      "median_ns": 2527144,
+      "min_ns": 2374159,
+      "max_ns": 5912396,
+      "stddev_ns": 511772,
+      "iterations": 1850
+    },
+    {
+      "name": "520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-1",
+      "mean_ns": 2572843,
+      "median_ns": 2439195,
+      "min_ns": 2373282,
+      "max_ns": 6554335,
+      "stddev_ns": 369290,
+      "iterations": 1944
+    },
+    {
+      "name": "520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-2",
+      "mean_ns": 2466266,
+      "median_ns": 2422436,
+      "min_ns": 2383069,
+      "max_ns": 3392342,
+      "stddev_ns": 101370,
+      "iterations": 2028
+    },
+    {
+      "name": "520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-spend-4",
+      "mean_ns": 1787260,
+      "median_ns": 1735908,
+      "min_ns": 1699117,
+      "max_ns": 4045139,
+      "stddev_ns": 193634,
+      "iterations": 2798
+    },
+    {
+      "name": "520e37a2777089921c50a8ff3d15f7742c58dfc5a548555ca1960f372206e602-withdraw-0",
+      "mean_ns": 53825063,
+      "median_ns": 53025391,
+      "min_ns": 52041768,
+      "max_ns": 65231916,
+      "stddev_ns": 2518086,
+      "iterations": 93
+    },
+    {
+      "name": "5580e04420083bd288188d7eef5c40398d334a4fba8b066a7f1b91e89c57e478-spend-0",
+      "mean_ns": 15629650,
+      "median_ns": 15565036,
+      "min_ns": 15233278,
+      "max_ns": 18366005,
+      "stddev_ns": 368512,
+      "iterations": 320
+    },
+    {
+      "name": "5580e04420083bd288188d7eef5c40398d334a4fba8b066a7f1b91e89c57e478-spend-1",
+      "mean_ns": 911371,
+      "median_ns": 878177,
+      "min_ns": 866453,
+      "max_ns": 3477989,
+      "stddev_ns": 110089,
+      "iterations": 5485
+    },
+    {
+      "name": "5580e04420083bd288188d7eef5c40398d334a4fba8b066a7f1b91e89c57e478-withdraw-0",
+      "mean_ns": 1667537,
+      "median_ns": 1549121,
+      "min_ns": 1464894,
+      "max_ns": 4156966,
+      "stddev_ns": 349549,
+      "iterations": 2998
+    },
+    {
+      "name": "56c90a79fb6c5d5fcdfa7306c93f458ce90b97a8d4109b271a0c2d21e987b345-spend-1",
+      "mean_ns": 8961175,
+      "median_ns": 8468763,
+      "min_ns": 7718342,
+      "max_ns": 20239999,
+      "stddev_ns": 1431580,
+      "iterations": 558
+    },
+    {
+      "name": "56c90a79fb6c5d5fcdfa7306c93f458ce90b97a8d4109b271a0c2d21e987b345-spend-3",
+      "mean_ns": 3162000,
+      "median_ns": 2999466,
+      "min_ns": 2915253,
+      "max_ns": 6322066,
+      "stddev_ns": 430642,
+      "iterations": 1582
+    },
+    {
+      "name": "5c86af86bef9773d582ed641789add4c32df3dbd442a2d7a523239006e721928-spend-0",
+      "mean_ns": 1065049,
+      "median_ns": 1011516,
+      "min_ns": 1002860,
+      "max_ns": 3240739,
+      "stddev_ns": 160277,
+      "iterations": 4694
+    },
+    {
+      "name": "5c86af86bef9773d582ed641789add4c32df3dbd442a2d7a523239006e721928-spend-2",
+      "mean_ns": 1714385,
+      "median_ns": 1688083,
+      "min_ns": 1675865,
+      "max_ns": 2390692,
+      "stddev_ns": 59461,
+      "iterations": 2916
+    },
+    {
+      "name": "5c86af86bef9773d582ed641789add4c32df3dbd442a2d7a523239006e721928-withdraw-0",
+      "mean_ns": 20551052,
+      "median_ns": 20492995,
+      "min_ns": 20250775,
+      "max_ns": 21960130,
+      "stddev_ns": 258803,
+      "iterations": 244
+    },
+    {
+      "name": "5cf5f0fb43ef1f8664b037e06b8265b51b6857ab2e8c626fc2fa10a4157f9cdb-spend-0",
+      "mean_ns": 1700394,
+      "median_ns": 1675061,
+      "min_ns": 1660988,
+      "max_ns": 2674267,
+      "stddev_ns": 59774,
+      "iterations": 2940
+    },
+    {
+      "name": "5cf5f0fb43ef1f8664b037e06b8265b51b6857ab2e8c626fc2fa10a4157f9cdb-spend-1",
+      "mean_ns": 1038484,
+      "median_ns": 1021345,
+      "min_ns": 1014014,
+      "max_ns": 1689148,
+      "stddev_ns": 46213,
+      "iterations": 4814
+    },
+    {
+      "name": "5cf5f0fb43ef1f8664b037e06b8265b51b6857ab2e8c626fc2fa10a4157f9cdb-withdraw-0",
+      "mean_ns": 23395835,
+      "median_ns": 22061468,
+      "min_ns": 20249347,
+      "max_ns": 38197450,
+      "stddev_ns": 3244030,
+      "iterations": 214
+    },
+    {
+      "name": "5e1d902963b3cef77bd9bff968f8f93229853319bc7e606302094a80ac4e8bbc-spend-1",
+      "mean_ns": 324026,
+      "median_ns": 303513,
+      "min_ns": 298158,
+      "max_ns": 1069574,
+      "stddev_ns": 62285,
+      "iterations": 15420
+    },
+    {
+      "name": "7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-0",
+      "mean_ns": 2445166,
+      "median_ns": 2411640,
+      "min_ns": 2391890,
+      "max_ns": 3117727,
+      "stddev_ns": 69086,
+      "iterations": 2045
+    },
+    {
+      "name": "7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-2",
+      "mean_ns": 1751706,
+      "median_ns": 1725463,
+      "min_ns": 1714079,
+      "max_ns": 2428173,
+      "stddev_ns": 55821,
+      "iterations": 2854
+    },
+    {
+      "name": "7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-3",
+      "mean_ns": 2436408,
+      "median_ns": 2402152,
+      "min_ns": 2384093,
+      "max_ns": 3304127,
+      "stddev_ns": 68180,
+      "iterations": 2052
+    },
+    {
+      "name": "7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-spend-4",
+      "mean_ns": 2445095,
+      "median_ns": 2414197,
+      "min_ns": 2386112,
+      "max_ns": 3911012,
+      "stddev_ns": 81783,
+      "iterations": 2045
+    },
+    {
+      "name": "7aad9d758bb8ba5a1a6db2c040863a6fb95a6d48e28f9d0013f00c3c0a9618f8-withdraw-0",
+      "mean_ns": 52187884,
+      "median_ns": 51546985,
+      "min_ns": 51019284,
+      "max_ns": 66019049,
+      "stddev_ns": 2128375,
+      "iterations": 96
+    },
+    {
+      "name": "81af9388c7fb7f1a557c802069ab2f8cae1b441dc46e3755d98e10c825a672f4-spend-0",
+      "mean_ns": 2345091,
+      "median_ns": 2133591,
+      "min_ns": 1964888,
+      "max_ns": 5839605,
+      "stddev_ns": 602125,
+      "iterations": 2132
+    },
+    {
+      "name": "81af9388c7fb7f1a557c802069ab2f8cae1b441dc46e3755d98e10c825a672f4-withdraw-0",
+      "mean_ns": 24904831,
+      "median_ns": 23272893,
+      "min_ns": 21406077,
+      "max_ns": 43043196,
+      "stddev_ns": 3644409,
+      "iterations": 201
+    },
+    {
+      "name": "8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-spend-1",
+      "mean_ns": 1793832,
+      "median_ns": 1690841,
+      "min_ns": 1669840,
+      "max_ns": 4301385,
+      "stddev_ns": 271808,
+      "iterations": 2787
+    },
+    {
+      "name": "8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-spend-2",
+      "mean_ns": 1028443,
+      "median_ns": 1000771,
+      "min_ns": 994120,
+      "max_ns": 2346228,
+      "stddev_ns": 90998,
+      "iterations": 4861
+    },
+    {
+      "name": "8524a1608a92eeb70d670b153789a0344de435bf46ffa21720cae67355d70c08-withdraw-0",
+      "mean_ns": 20331474,
+      "median_ns": 20295053,
+      "min_ns": 20057621,
+      "max_ns": 22336456,
+      "stddev_ns": 209233,
+      "iterations": 246
+    },
+    {
+      "name": "8864ea90e54f74150e7f58d4680e9b9a0959ace4d7048a942cd7a2adfb0a3e3d-spend-0",
+      "mean_ns": 978167,
+      "median_ns": 938462,
+      "min_ns": 928444,
+      "max_ns": 2490488,
+      "stddev_ns": 141245,
+      "iterations": 5111
+    },
+    {
+      "name": "8864ea90e54f74150e7f58d4680e9b9a0959ace4d7048a942cd7a2adfb0a3e3d-withdraw-0",
+      "mean_ns": 5166901,
+      "median_ns": 5064983,
+      "min_ns": 4998234,
+      "max_ns": 13048289,
+      "stddev_ns": 437800,
+      "iterations": 968
+    },
+    {
+      "name": "89553182a5487bd6705877584384095e764058416d9561ebd6ae9b7701ed9b01-spend-0",
+      "mean_ns": 1034128,
+      "median_ns": 1003507,
+      "min_ns": 997095,
+      "max_ns": 2964570,
+      "stddev_ns": 109901,
+      "iterations": 4834
+    },
+    {
+      "name": "89553182a5487bd6705877584384095e764058416d9561ebd6ae9b7701ed9b01-spend-1",
+      "mean_ns": 1923384,
+      "median_ns": 1802945,
+      "min_ns": 1672958,
+      "max_ns": 5184627,
+      "stddev_ns": 397252,
+      "iterations": 2600
+    },
+    {
+      "name": "89553182a5487bd6705877584384095e764058416d9561ebd6ae9b7701ed9b01-withdraw-0",
+      "mean_ns": 21869384,
+      "median_ns": 21043946,
+      "min_ns": 20244637,
+      "max_ns": 30440677,
+      "stddev_ns": 2185373,
+      "iterations": 229
+    },
+    {
+      "name": "8d8b269e8998bbc54b0a770089ee9f36bf5a48eff7c1cdc7c92872b928c0d7c8-spend-1",
+      "mean_ns": 16553520,
+      "median_ns": 16521348,
+      "min_ns": 16390813,
+      "max_ns": 18076630,
+      "stddev_ns": 165228,
+      "iterations": 303
+    },
+    {
+      "name": "8d8b269e8998bbc54b0a770089ee9f36bf5a48eff7c1cdc7c92872b928c0d7c8-spend-2",
+      "mean_ns": 920800,
+      "median_ns": 908277,
+      "min_ns": 899373,
+      "max_ns": 1589427,
+      "stddev_ns": 34937,
+      "iterations": 5429
+    },
+    {
+      "name": "8d8b269e8998bbc54b0a770089ee9f36bf5a48eff7c1cdc7c92872b928c0d7c8-withdraw-0",
+      "mean_ns": 1584077,
+      "median_ns": 1553653,
+      "min_ns": 1541154,
+      "max_ns": 4036572,
+      "stddev_ns": 102483,
+      "iterations": 3156
+    },
+    {
+      "name": "90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-0",
+      "mean_ns": 2412833,
+      "median_ns": 2374190,
+      "min_ns": 2354454,
+      "max_ns": 4470912,
+      "stddev_ns": 108958,
+      "iterations": 2072
+    },
+    {
+      "name": "90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-1",
+      "mean_ns": 2387726,
+      "median_ns": 2349275,
+      "min_ns": 2333651,
+      "max_ns": 4712838,
+      "stddev_ns": 120643,
+      "iterations": 2094
+    },
+    {
+      "name": "90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-2",
+      "mean_ns": 1920207,
+      "median_ns": 1773137,
+      "min_ns": 1679072,
+      "max_ns": 5499053,
+      "stddev_ns": 445750,
+      "iterations": 2604
+    },
+    {
+      "name": "90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-spend-3",
+      "mean_ns": 2720961,
+      "median_ns": 2532506,
+      "min_ns": 2346783,
+      "max_ns": 6722238,
+      "stddev_ns": 562699,
+      "iterations": 1838
+    },
+    {
+      "name": "90cb5b2794405aa739fd72c7d9807423a74d5c83bb94c6d22df53b473d7b0f9f-withdraw-0",
+      "mean_ns": 53686612,
+      "median_ns": 51309355,
+      "min_ns": 49598858,
+      "max_ns": 81177226,
+      "stddev_ns": 5020014,
+      "iterations": 94
+    },
+    {
+      "name": "9821e1defa09d0e9407e4ce6622ead240125df3df75fba63539c55afd841d6f8-spend-1",
+      "mean_ns": 309074,
+      "median_ns": 300764,
+      "min_ns": 296946,
+      "max_ns": 818308,
+      "stddev_ns": 30861,
+      "iterations": 16164
+    },
+    {
+      "name": "9b456b77cfc279bd3d80822b553952720e452fddc05c47cac387f1d4f6da6700-spend-1",
+      "mean_ns": 310367,
+      "median_ns": 301590,
+      "min_ns": 297753,
+      "max_ns": 914169,
+      "stddev_ns": 32958,
+      "iterations": 16097
+    },
+    {
+      "name": "9d61863e3a770cc83ec05bccd87b25c28eba22f423a0a63acbeea17fa23e5499-spend-0",
+      "mean_ns": 2031132,
+      "median_ns": 1999011,
+      "min_ns": 1987201,
+      "max_ns": 3006047,
+      "stddev_ns": 68216,
+      "iterations": 2462
+    },
+    {
+      "name": "9d61863e3a770cc83ec05bccd87b25c28eba22f423a0a63acbeea17fa23e5499-withdraw-0",
+      "mean_ns": 16498389,
+      "median_ns": 16463191,
+      "min_ns": 16271584,
+      "max_ns": 17295000,
+      "stddev_ns": 133468,
+      "iterations": 304
+    },
+    {
+      "name": "a640b437d8b74eb832e1eb42b537419ef29ae4a7f027781817810ab3891217cf-spend-0",
+      "mean_ns": 1782668,
+      "median_ns": 1704703,
+      "min_ns": 1669314,
+      "max_ns": 4698974,
+      "stddev_ns": 257945,
+      "iterations": 2805
+    },
+    {
+      "name": "a640b437d8b74eb832e1eb42b537419ef29ae4a7f027781817810ab3891217cf-spend-2",
+      "mean_ns": 1129765,
+      "median_ns": 1054166,
+      "min_ns": 999734,
+      "max_ns": 2917284,
+      "stddev_ns": 238086,
+      "iterations": 4425
+    },
+    {
+      "name": "a640b437d8b74eb832e1eb42b537419ef29ae4a7f027781817810ab3891217cf-withdraw-0",
+      "mean_ns": 21353689,
+      "median_ns": 20666046,
+      "min_ns": 20153347,
+      "max_ns": 29486246,
+      "stddev_ns": 1682479,
+      "iterations": 235
+    },
+    {
+      "name": "a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-spend-0",
+      "mean_ns": 1277154,
+      "median_ns": 1207859,
+      "min_ns": 1182725,
+      "max_ns": 3639593,
+      "stddev_ns": 218672,
+      "iterations": 3914
+    },
+    {
+      "name": "a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-spend-1",
+      "mean_ns": 1901514,
+      "median_ns": 1873007,
+      "min_ns": 1859851,
+      "max_ns": 2694946,
+      "stddev_ns": 62880,
+      "iterations": 2629
+    },
+    {
+      "name": "a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-spend-3",
+      "mean_ns": 1218042,
+      "median_ns": 1193579,
+      "min_ns": 1184556,
+      "max_ns": 3072583,
+      "stddev_ns": 77063,
+      "iterations": 4105
+    },
+    {
+      "name": "a9a1c75415a0b94d888b9de41a54e1937dfdccb3be31edf48b776d4832aa28b4-withdraw-0",
+      "mean_ns": 26903397,
+      "median_ns": 26874565,
+      "min_ns": 26364486,
+      "max_ns": 28606661,
+      "stddev_ns": 283675,
+      "iterations": 186
+    },
+    {
+      "name": "b045c8789a4d7d250c7971e12d4bd0a7e423015e18489e91b1d42967c0c1aea6-spend-0",
+      "mean_ns": 6313853,
+      "median_ns": 6099948,
+      "min_ns": 6027765,
+      "max_ns": 14588339,
+      "stddev_ns": 801376,
+      "iterations": 792
+    },
+    {
+      "name": "beaa9d1683d7bdde24a920f2561b0b9dbe90b652c18b3e59154cfd222c5f696f-spend-1",
+      "mean_ns": 4374899,
+      "median_ns": 4075861,
+      "min_ns": 3781318,
+      "max_ns": 10519566,
+      "stddev_ns": 849738,
+      "iterations": 1143
+    },
+    {
+      "name": "beaa9d1683d7bdde24a920f2561b0b9dbe90b652c18b3e59154cfd222c5f696f-spend-3",
+      "mean_ns": 9169894,
+      "median_ns": 8585230,
+      "min_ns": 8003279,
+      "max_ns": 20460281,
+      "stddev_ns": 1643446,
+      "iterations": 546
+    },
+    {
+      "name": "c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-mint-0",
+      "mean_ns": 2649703,
+      "median_ns": 2523695,
+      "min_ns": 2454053,
+      "max_ns": 6548016,
+      "stddev_ns": 378721,
+      "iterations": 1887
+    },
+    {
+      "name": "c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-mint-1",
+      "mean_ns": 8779335,
+      "median_ns": 8617276,
+      "min_ns": 8444898,
+      "max_ns": 17863688,
+      "stddev_ns": 681646,
+      "iterations": 570
+    },
+    {
+      "name": "c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-spend-0",
+      "mean_ns": 45054127,
+      "median_ns": 44092832,
+      "min_ns": 43791165,
+      "max_ns": 61534614,
+      "stddev_ns": 2824663,
+      "iterations": 111
+    },
+    {
+      "name": "c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-spend-2",
+      "mean_ns": 43125499,
+      "median_ns": 43059877,
+      "min_ns": 42859530,
+      "max_ns": 43879652,
+      "stddev_ns": 199815,
+      "iterations": 116
+    },
+    {
+      "name": "c02bca582fd48df4c2fa59247fccb5af4ae236e6e843c8e0a65988e03de16e31-spend-3",
+      "mean_ns": 12627330,
+      "median_ns": 12645086,
+      "min_ns": 12429747,
+      "max_ns": 13464131,
+      "stddev_ns": 124191,
+      "iterations": 396
+    },
+    {
+      "name": "c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-0",
+      "mean_ns": 1402267,
+      "median_ns": 1324310,
+      "min_ns": 1307411,
+      "max_ns": 3707875,
+      "stddev_ns": 219303,
+      "iterations": 3565
+    },
+    {
+      "name": "c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-1",
+      "mean_ns": 1469274,
+      "median_ns": 1363919,
+      "min_ns": 1308994,
+      "max_ns": 3895898,
+      "stddev_ns": 302967,
+      "iterations": 3403
+    },
+    {
+      "name": "c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-2",
+      "mean_ns": 2095330,
+      "median_ns": 2025179,
+      "min_ns": 1987939,
+      "max_ns": 5852321,
+      "stddev_ns": 244011,
+      "iterations": 2386
+    },
+    {
+      "name": "c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-spend-4",
+      "mean_ns": 1337998,
+      "median_ns": 1317025,
+      "min_ns": 1308224,
+      "max_ns": 1902245,
+      "stddev_ns": 50658,
+      "iterations": 3737
+    },
+    {
+      "name": "c0e22f7175c8d0cb4e309ecfb533bd6bf47461016dfd16667ac640be355565de-withdraw-0",
+      "mean_ns": 33020825,
+      "median_ns": 32130735,
+      "min_ns": 31736901,
+      "max_ns": 60633899,
+      "stddev_ns": 3324479,
+      "iterations": 152
+    },
+    {
+      "name": "c6aa9ec93c2e4fe6396240b1fae8ed4a1e5960403af40ae1d52d0753beced05c-spend-2",
+      "mean_ns": 4345341,
+      "median_ns": 4313014,
+      "min_ns": 4263079,
+      "max_ns": 4954989,
+      "stddev_ns": 81882,
+      "iterations": 1151
+    },
+    {
+      "name": "c6aa9ec93c2e4fe6396240b1fae8ed4a1e5960403af40ae1d52d0753beced05c-spend-3",
+      "mean_ns": 23014857,
+      "median_ns": 22723726,
+      "min_ns": 22347620,
+      "max_ns": 32642047,
+      "stddev_ns": 1225727,
+      "iterations": 218
+    },
+    {
+      "name": "d07abba71f61a3da474a8559df90d5403498c99d3bad640e4e413e97adbf5f45-spend-2",
+      "mean_ns": 2122635,
+      "median_ns": 2086682,
+      "min_ns": 2073069,
+      "max_ns": 4477980,
+      "stddev_ns": 98088,
+      "iterations": 2356
+    },
+    {
+      "name": "d07abba71f61a3da474a8559df90d5403498c99d3bad640e4e413e97adbf5f45-withdraw-0",
+      "mean_ns": 2110909,
+      "median_ns": 1951316,
+      "min_ns": 1799963,
+      "max_ns": 5131506,
+      "stddev_ns": 477766,
+      "iterations": 2369
+    },
+    {
+      "name": "d07abba71f61a3da474a8559df90d5403498c99d3bad640e4e413e97adbf5f45-withdraw-1",
+      "mean_ns": 21262841,
+      "median_ns": 19913208,
+      "min_ns": 18628511,
+      "max_ns": 34180420,
+      "stddev_ns": 3201545,
+      "iterations": 236
+    },
+    {
+      "name": "dfcf1fe2a0bca423b0e7260a24922c0437785c894ecb27fef5587c2d4d5f1227-spend-0",
+      "mean_ns": 1825168,
+      "median_ns": 1739333,
+      "min_ns": 1701238,
+      "max_ns": 4543923,
+      "stddev_ns": 266097,
+      "iterations": 2739
+    },
+    {
+      "name": "dfcf1fe2a0bca423b0e7260a24922c0437785c894ecb27fef5587c2d4d5f1227-spend-1",
+      "mean_ns": 1062926,
+      "median_ns": 1028463,
+      "min_ns": 1021025,
+      "max_ns": 3408487,
+      "stddev_ns": 125599,
+      "iterations": 4703
+    },
+    {
+      "name": "dfcf1fe2a0bca423b0e7260a24922c0437785c894ecb27fef5587c2d4d5f1227-withdraw-0",
+      "mean_ns": 22355722,
+      "median_ns": 21393245,
+      "min_ns": 20774688,
+      "max_ns": 35997637,
+      "stddev_ns": 2354087,
+      "iterations": 224
+    },
+    {
+      "name": "e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-spend-0",
+      "mean_ns": 1032393,
+      "median_ns": 1002831,
+      "min_ns": 995747,
+      "max_ns": 2293135,
+      "stddev_ns": 95270,
+      "iterations": 4842
+    },
+    {
+      "name": "e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-spend-2",
+      "mean_ns": 1708203,
+      "median_ns": 1682088,
+      "min_ns": 1667751,
+      "max_ns": 2563933,
+      "stddev_ns": 59266,
+      "iterations": 2927
+    },
+    {
+      "name": "e03d515e7ff1e5754c4545babdecf3ef754e1b787db0f03cfede7e3dc2d6b826-withdraw-0",
+      "mean_ns": 21360930,
+      "median_ns": 20563774,
+      "min_ns": 20172669,
+      "max_ns": 41452848,
+      "stddev_ns": 2435486,
+      "iterations": 235
+    },
+    {
+      "name": "e2fbfa2be7dc3f978d4131f60a99085b888b8b7a2123d41400dc4697d6a84df7-spend-0",
+      "mean_ns": 1125897,
+      "median_ns": 1026903,
+      "min_ns": 971902,
+      "max_ns": 3002380,
+      "stddev_ns": 281556,
+      "iterations": 4440
+    },
+    {
+      "name": "e2fbfa2be7dc3f978d4131f60a99085b888b8b7a2123d41400dc4697d6a84df7-spend-1",
+      "mean_ns": 11972844,
+      "median_ns": 11782097,
+      "min_ns": 11558799,
+      "max_ns": 21885849,
+      "stddev_ns": 843195,
+      "iterations": 418
+    },
+    {
+      "name": "f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-spend-0",
+      "mean_ns": 929983,
+      "median_ns": 906420,
+      "min_ns": 896585,
+      "max_ns": 2237264,
+      "stddev_ns": 77474,
+      "iterations": 5375
+    },
+    {
+      "name": "f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-spend-2",
+      "mean_ns": 16750104,
+      "median_ns": 16509153,
+      "min_ns": 16306024,
+      "max_ns": 28419440,
+      "stddev_ns": 1196229,
+      "iterations": 299
+    },
+    {
+      "name": "f401f24221c086d2b5cac02a40dc568b40cdec2acc38326c0204db4958c1e57e-withdraw-0",
+      "mean_ns": 1572230,
+      "median_ns": 1549593,
+      "min_ns": 1539207,
+      "max_ns": 3019299,
+      "stddev_ns": 67045,
+      "iterations": 3180
+    },
+    {
+      "name": "f72cc6d135256d2dcb98b13d5ea222ca234bdae2b3540e446e1331cc50660edd-spend-1",
+      "mean_ns": 1757938,
+      "median_ns": 1689510,
+      "min_ns": 1652051,
+      "max_ns": 4661456,
+      "stddev_ns": 237426,
+      "iterations": 2844
+    },
+    {
+      "name": "f72cc6d135256d2dcb98b13d5ea222ca234bdae2b3540e446e1331cc50660edd-spend-2",
+      "mean_ns": 1004263,
+      "median_ns": 987637,
+      "min_ns": 979505,
+      "max_ns": 1603712,
+      "stddev_ns": 44786,
+      "iterations": 4978
+    },
+    {
+      "name": "f72cc6d135256d2dcb98b13d5ea222ca234bdae2b3540e446e1331cc50660edd-withdraw-0",
+      "mean_ns": 23643903,
+      "median_ns": 21987422,
+      "min_ns": 20108815,
+      "max_ns": 41707380,
+      "stddev_ns": 3808001,
+      "iterations": 212
+    }
+  ]
+}
