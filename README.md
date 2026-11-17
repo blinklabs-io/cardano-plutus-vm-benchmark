@@ -114,7 +114,7 @@ Each VM runs 89 real-world Plutus smart contract scripts (auction, escrow, unisw
 
 All VMs use the same canonical `.flat` test data committed in `data/plutus_use_cases/`.
 
-A second corpus, `data/mainnet_recent/`, holds 1360 validator evaluations from recent mainnet transactions. Select it with `BENCH_CORPUS=mainnet_recent`. They come from 522 transactions, and a run samples whole transactions: by default every script of 40 transactions (about 100 programs), selected by `BENCH_SEED` (default `1`). The same seed always selects the same transactions. `BENCH_SAMPLE` sets the number of transactions, and `BENCH_SAMPLE=all` runs every program. Mainnet results are ranked per transaction, summing each VM's times over every script a transaction runs, as well as per script run (see [METHODOLOGY.md](METHODOLOGY.md#mainnet-corpus)).
+A second corpus, `data/mainnet_recent/`, holds 1360 validator evaluations from recent mainnet transactions. Select it with `BENCH_CORPUS=mainnet_recent`. They come from 522 transactions, and a run samples whole transactions: by default every script of 40 transactions (about 100 programs), selected by `BENCH_SEED` (default `1`). The same seed always selects the same transactions. `BENCH_SAMPLE` sets the number of transactions, and `BENCH_SAMPLE=all` runs every program. Mainnet results are ranked per transaction only when every corpus script for that transaction is present in the run, summing each VM's times across those scripts. Reports also rank per script run (see [METHODOLOGY.md](METHODOLOGY.md#mainnet-corpus)).
 
 ## Quick Start
 
@@ -146,7 +146,7 @@ Results are written to `./results/<date>/`:
 - `versions.csv` — VM release labels, source commits, and toolchains
 - `corpus.txt` — the programs the run measured
 
-The page shows the newest run of each corpus (`python report/generate_report.py --latest results`), with switches for the corpus, the tier and, for mainnet, ranking per transaction or per script run. Each corpus view lists the programs it measured and, for a sample, the seed that selected them.
+The page shows the newest run of each corpus (`python report/generate_report.py --latest results`), with switches for the corpus, the tier and, when complete transaction groups are available, ranking per transaction or per script run. Each corpus view lists the programs it measured and, for a sample, the seed that selected them.
 - Per-VM raw output logs
 
 ## Updating VM Versions

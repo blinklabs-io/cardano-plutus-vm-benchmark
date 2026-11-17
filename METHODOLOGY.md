@@ -75,7 +75,7 @@ A full run of every VM over all 1360 programs takes days, so a mainnet run measu
 
 #### Ranking per transaction
 
-Mainnet results are also ranked per transaction. A VM's time for a transaction is the sum of its times for every script the transaction runs, and VMs are ranked by the geometric mean of those totals. A VM that fails any script of a transaction fails the transaction, which counts at the slowest competitor's total. The page shows this ranking by default for mainnet runs, and the ranking per script run beside it; `report.md` has both. The page shows each corpus's newest run separately, with its sample size, seed and program list. Sampling applies to any corpus; `plutus_use_cases` runs all 89 programs by default.
+Mainnet results are also ranked per transaction. A VM's time for a transaction is the sum of its times for every script the transaction runs, and VMs are ranked by the geometric mean of those totals. Only transactions with every corpus script present in a run are ranked, so partial groups in older runs cannot appear as transaction totals. A VM that fails any script of a transaction fails the transaction, which counts at the slowest competitor's total. The page shows this ranking by default when the run has complete transaction groups, and the ranking per script run beside it; `report.md` has both when complete groups are available. The page shows each corpus's newest run separately, with its sample size, seed and program list. Sampling applies to any corpus; `plutus_use_cases` runs all 89 programs by default.
 
 ## Why Native Benchmarks
 
