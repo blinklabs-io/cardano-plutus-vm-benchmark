@@ -80,7 +80,8 @@ CORPUS_NOTES = {
     "mainnet_recent": "Validators from recent mainnet transactions, each applied to the datum, redeemer and script context it ran with on mainnet.",
 }
 CORPUS_LINE = re.compile(
-    r"^corpus: (?P<corpus>\S+) \((?P<count>\d+) of (?P<total>\d+) programs, "
+    r"^corpus: (?P<corpus>\S+) \((?P<count>\d+) of (?P<total>\d+) programs"
+    r"(?: from (?P<tx_count>\d+) of (?P<tx_total>\d+) transactions)?, "
     r"sample (?P<sample>\S+), seed (?P<seed>[^;)]+)",
     re.MULTILINE,
 )
@@ -102,6 +103,8 @@ def corpus_info(run_dir: str, env_info: str, scripts) -> dict:
             "total": int(m["total"]),
             "sample": m["sample"],
             "seed": m["seed"],
+            "tx_count": int(m["tx_count"]) if m["tx_count"] else None,
+            "tx_total": int(m["tx_total"]) if m["tx_total"] else None,
             "programs": programs,
         }
     return {
@@ -110,13 +113,52 @@ def corpus_info(run_dir: str, env_info: str, scripts) -> dict:
         "total": len(programs),
         "sample": "all",
         "seed": None,
+        "tx_count": None,
+        "tx_total": None,
         "programs": programs,
+    }
+
+
+def corpus_programs(corpus: str) -> list[str]:
+    """Return the complete set of programs tracked for a corpus."""
+    if corpus not in CORPORA:
+        return []
+    corpus_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", corpus)
+    if not os.path.isdir(corpus_dir):
+        return []
+    return sorted(
+        name.removesuffix(".flat")
+        for name in os.listdir(corpus_dir)
+        if name.endswith(".flat")
+    )
+
+
+def complete_transaction_ids(scripts, complete_scripts) -> set[str]:
+    """Return transaction IDs whose complete corpus script groups are present."""
+    expected = defaultdict(set)
+    for script in complete_scripts:
+        match = TRANSACTION_NAME.match(script)
+        if match:
+            expected[match[1]].add(script)
+
+    present = defaultdict(set)
+    for script in scripts:
+        match = TRANSACTION_NAME.match(script)
+        if match:
+            present[match[1]].add(script)
+
+    return {
+        tx for tx, tx_scripts in present.items()
+        if expected.get(tx) == tx_scripts
     }
 
 
 def corpus_summary(info: dict) -> str:
     """One line describing a run's corpus, for the report."""
     title = CORPUS_TITLES.get(info["corpus"], info["corpus"])
+    if info["tx_count"] and info["tx_count"] < info["tx_total"]:
+        return (f"{title} (`{info['corpus']}`): every script of {info['tx_count']} of {info['tx_total']} "
+                f"transactions ({info['count']} of {info['total']} programs), selected with seed {info['seed']}")
     if info["count"] < info["total"]:
         return (f"{title} (`{info['corpus']}`): {info['count']} of {info['total']} programs, "
                 f"selected with seed {info['seed']}")
@@ -169,6 +211,37 @@ def load_versions(run_dir: str):
     return versions
 
 
+# Mainnet programs are named "<transaction id>-<purpose>-<index>".
+TRANSACTION_NAME = re.compile(r"^([0-9a-f]{64})-")
+
+
+def transaction_totals(data, scripts, present_vms, complete_transactions):
+    """Sum each VM's times over every script of each transaction.
+
+    Returns None unless every program is named after a transaction. Incomplete
+    corpus groups are omitted. A VM that failed any script fails the transaction
+    (-1); one missing a script without failing one has no total for it.
+    """
+    runs = defaultdict(list)
+    for script in scripts:
+        m = TRANSACTION_NAME.match(script)
+        if not m:
+            return None
+        runs[m[1]].append(script)
+    totals = {}
+    for tx, tx_scripts in runs.items():
+        if tx not in complete_transactions:
+            continue
+        totals[tx] = {}
+        for vm in present_vms:
+            times = [data[s].get(vm, 0) for s in tx_scripts]
+            if all(t > 0 for t in times):
+                totals[tx][vm] = sum(times)
+            elif any(t < 0 for t in times):
+                totals[tx][vm] = -1
+    return totals
+
+
 def compute_geo_means(data, scripts, present_vms):
     """Compute geometric means with penalty for missing scripts.
 
@@ -214,6 +287,7 @@ def generate_markdown(run_dir: str, tiers, env_info, versions) -> None:
     lines.append("")
     all_scripts = sorted({s for _, scripts, _ in tiers.values() for s in scripts})
     info = corpus_info(run_dir, env_info, all_scripts)
+    complete_scripts = corpus_programs(info["corpus"])
     lines.append(f"**Corpus:** {corpus_summary(info)}. The per-script tables list every program measured.")
     lines.append("")
 
@@ -252,7 +326,7 @@ def generate_markdown(run_dir: str, tiers, env_info, versions) -> None:
     lines.append("")
 
     for tier, (data, scripts, tier_vms) in tiers.items():
-        append_tier(lines, tier, data, scripts, tier_vms)
+        append_tier(lines, tier, data, scripts, tier_vms, complete_scripts)
 
     lines.append("---")
     lines.append("*Generated by [cardano-plutus-vm-benchmark](https://github.com/blinklabs-io/cardano-plutus-vm-benchmark)*")
@@ -266,7 +340,7 @@ def generate_markdown(run_dir: str, tiers, env_info, versions) -> None:
     print(f"\nReport saved to: {report_path}", file=sys.stderr)
 
 
-def append_tier(lines, tier, data, scripts, present_vms) -> None:
+def append_tier(lines, tier, data, scripts, present_vms, complete_scripts) -> None:
     """Append one tier's summary, coverage and per-script tables."""
     geo_means = compute_geo_means(data, scripts, present_vms)
     fastest_geo = min(geo_means.values()) if geo_means else 1
@@ -275,6 +349,32 @@ def append_tier(lines, tier, data, scripts, present_vms) -> None:
     lines.append("")
     lines.append(TIER_NOTES.get(tier, ""))
     lines.append("")
+
+    complete_transactions = complete_transaction_ids(scripts, complete_scripts)
+    totals = transaction_totals(data, scripts, present_vms, complete_transactions)
+    if totals:
+        transactions = sorted(totals)
+        tx_means = compute_geo_means(totals, transactions, present_vms)
+        tx_fastest = min(v for v in tx_means.values() if v > 0) if any(v > 0 for v in tx_means.values()) else 1
+        lines.append(f"### Per transaction (geometric mean of {len(transactions)} transaction totals)")
+        lines.append("")
+        lines.append("*Each VM's time for a transaction is the sum of its times for every script the transaction runs. "
+                     "A VM that fails any script fails the transaction, which is assigned the slowest competitor's total.*")
+        lines.append("")
+        lines.append("| VM | Language | Geo Mean | vs Fastest | Failed transactions |")
+        lines.append("|---|---|---|---|---|")
+        ranked_vms = sorted(present_vms, key=lambda vm: (tx_means[vm] <= 0, tx_means[vm]))
+        for vm in ranked_vms:
+            label = VM_LABELS.get(vm, vm)
+            lang = label.split("(")[-1].rstrip(")") if "(" in label else ""
+            geo = tx_means[vm]
+            failed = sum(1 for tx in transactions if totals[tx].get(vm, 0) < 0)
+            if geo > 0:
+                lines.append(f"| **{label}** | {lang} | {fmt_ns(int(geo))} | {geo / tx_fastest:.2f}x | {failed} |")
+            else:
+                lines.append(f"| **{label}** | {lang} | n/a | n/a | {failed} |")
+        lines.append("")
+
     lines.append("### Summary (geometric mean across all scripts)")
     lines.append("")
     lines.append("*Note: VMs that fail or skip a script are assigned the slowest competitor's time for that script.*")
@@ -370,8 +470,13 @@ def page_run(run_dir: str) -> dict:
         versions_data = "vm,repo,version,revision,toolchain"
     scripts = sorted({s for _, tier_scripts, _ in tiers.values() for s in tier_scripts})
     info = corpus_info(run_dir, env_info, scripts)
+    complete_scripts = corpus_programs(info["corpus"])
     return {
         **info,
+        "complete_transactions": {
+            tier: sorted(complete_transaction_ids(tier_scripts, complete_scripts))
+            for tier, (_, tier_scripts, _) in tiers.items()
+        },
         "title": CORPUS_TITLES.get(info["corpus"], info["corpus"]),
         "note": CORPUS_NOTES.get(info["corpus"], ""),
         "date": run_date(run_dir, env_info),

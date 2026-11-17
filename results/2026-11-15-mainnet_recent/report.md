@@ -39,6 +39,24 @@ corpus: mainnet_recent (100 of 1360 programs, sample 100, seed 1; list in corpus
 
 Each iteration decodes the whole .flat file, including its Data arguments, and evaluates it.
 
+### Per transaction (geometric mean of 7 transaction totals)
+
+*Each VM's time for a transaction is the sum of its times for every script the transaction runs. A VM that fails any script fails the transaction, which is assigned the slowest competitor's total.*
+
+| VM | Language | Geo Mean | vs Fastest | Failed transactions |
+|---|---|---|---|---|
+| **Amaru UPLC CEK (Rust)** | Rust | 41.07 us | 1.00x | 0 |
+| **Plutigo CEK (Go)** | Go | 44.09 us | 1.07x | 0 |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 50.56 us | 1.23x | 0 |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 62.51 us | 1.52x | 0 |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 63.26 us | 1.54x | 0 |
+| **Plutuz CEK (Zig)** | Zig | 100.05 us | 2.44x | 0 |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 121.30 us | 2.95x | 0 |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 208.52 us | 5.08x | 0 |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 258.90 us | 6.30x | 0 |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 3.03 ms | 73.81x | 0 |
+| **opshin CEK (Python / CPython)** | Python / CPython | 10.22 ms | 248.80x | 1 |
+
 ### Summary (geometric mean across all scripts)
 
 *Note: VMs that fail or skip a script are assigned the slowest competitor's time for that script.*
@@ -181,6 +199,27 @@ Each iteration decodes the whole .flat file, including its Data arguments, and e
 ## Eval tier: evaluate a decoded program
 
 The program is decoded before timing; each iteration evaluates it. JIT VMs compile before timing too.
+
+### Per transaction (geometric mean of 7 transaction totals)
+
+*Each VM's time for a transaction is the sum of its times for every script the transaction runs. A VM that fails any script fails the transaction, which is assigned the slowest competitor's total.*
+
+| VM | Language | Geo Mean | vs Fastest | Failed transactions |
+|---|---|---|---|---|
+| **Scalus UPLC→JVM JIT (Scala / JVM)** | Scala / JVM | 3.55 us | 1.00x | 0 |
+| **Plutigo CEK (Go)** | Go | 13.05 us | 3.68x | 0 |
+| **Scalus CEK (Scala / JVM)** | Scala / JVM | 14.58 us | 4.11x | 0 |
+| **Amaru UPLC CEK (Rust)** | Rust | 15.56 us | 4.39x | 0 |
+| **plutus-core CEK (Haskell / GHC)** | Haskell / GHC | 18.43 us | 5.19x | 0 |
+| **llvm-uplc post-JIT execution (C++ / LLVM)** | C++ / LLVM | 23.99 us | 6.77x | 0 |
+| **Chrysalis CEK (C# / .NET AOT)** | C# / .NET AOT | 30.07 us | 8.48x | 0 |
+| **Chrysalis CEK (C# / .NET)** | C# / .NET | 30.34 us | 8.55x | 0 |
+| **Julc CEK (Java / GraalVM)** | Java / GraalVM | 54.10 us | 15.25x | 0 |
+| **Plutuz CEK (Zig)** | Zig | 70.87 us | 19.98x | 0 |
+| **blaze-plutus CEK (TypeScript / Bun JSC)** | TypeScript / Bun JSC | 91.00 us | 25.66x | 0 |
+| **blaze-plutus CEK (TypeScript / Node V8)** | TypeScript / Node V8 | 113.75 us | 32.07x | 0 |
+| **Harmonic Labs plutus-machine CEK (TypeScript / Node.js)** | TypeScript / Node.js | 2.02 ms | 569.30x | 0 |
+| **opshin CEK (Python / CPython)** | Python / CPython | 6.99 ms | 1971.33x | 1 |
 
 ### Summary (geometric mean across all scripts)
 
