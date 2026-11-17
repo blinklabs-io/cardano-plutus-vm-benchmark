@@ -26,7 +26,11 @@ for tier in full eval; do
         suffix="-eval"
         method="benchEval\$"
     fi
-    sbt "bench/Jmh/run -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff $RUN_DIR/scalus-cek${suffix}-jmh.csv -p file=$FILE_LIST .*CekJVMBenchmark.${method}" \
+    # Clean the bench project first: sbt-jmh regenerates its benchmark classes
+    # on every run, and a bench target left by an earlier run in this container
+    # can make packaging look for generated class files that no longer exist
+    # (FileNotFoundException under jmh_generated).
+    sbt "bench/clean" "bench/Jmh/run -i 3 -wi 1 -w 5s -r 5s -f 1 -t 1 -rff $RUN_DIR/scalus-cek${suffix}-jmh.csv -p file=$FILE_LIST .*CekJVMBenchmark.${method}" \
         2>&1 | tee "$RUN_DIR/scalus-cek${suffix}-raw.log"
     python3 /bench/parsers/parse_jmh.py "$RUN_DIR/scalus-cek${suffix}-jmh.csv" scalus-cek "$tier" > "$RUN_DIR/scalus-cek${suffix}.csv"
     # Fill in -1 for any scripts that were given but produced no result
