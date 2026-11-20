@@ -10,6 +10,7 @@
 # FROM are usable in FROM lines and must be re-declared inside a stage.
 ARG DOTNET_VERSION=10.0
 ARG AMARU_UPLC_RUST_VERSION=1.97
+ARG AIKEN_RUST_VERSION=1.97
 ARG GO_VERSION=1.27.3
 ARG BUN_VERSION=1.3.10
 ARG PYTHON_VERSION=3.14
@@ -34,6 +35,28 @@ COPY harness/chrysalis/eval-tier.patch /tmp/eval-tier.patch
 RUN git apply /tmp/eval-tier.patch
 RUN dotnet restore benchmarks/PlutusBench/PlutusBench.csproj
 RUN dotnet build -c Release -p:TreatWarningsAsErrors=false benchmarks/PlutusBench/PlutusBench.csproj
+
+# =============================================================================
+# Build stage: Aiken UPLC (Rust / Criterion)
+# =============================================================================
+FROM rust:${AIKEN_RUST_VERSION}-bookworm AS build-aiken
+
+ARG AIKEN_REPO
+ARG AIKEN_SHA
+ARG CARGO_BUILD_JOBS=2
+ENV CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS}
+
+RUN git clone "$AIKEN_REPO" /src/aiken \
+    && cd /src/aiken && (git checkout "$AIKEN_SHA" || (git fetch origin "$AIKEN_SHA" && git checkout "$AIKEN_SHA"))
+
+# The harness depends on aiken's crates/uplc by path and starts from aiken's
+# own Cargo.lock, so uplc builds with the dependency versions it is developed
+# with; cargo only adds what the harness needs (criterion).
+COPY harness/aiken /src/bench
+WORKDIR /src/bench
+RUN cp /src/aiken/Cargo.lock Cargo.lock \
+    && cargo build --release --bin aiken-bench \
+    && cp target/release/aiken-bench /aiken-bench-bin
 
 # =============================================================================
 # Build stage: Amaru UPLC (Rust / Criterion)
@@ -358,6 +381,7 @@ COPY --from=build-chrysalis /src /bench/chrysalis
 
 # Amaru UPLC: released crate benchmark binary
 COPY --from=build-amaru-uplc /use_cases-bin /bench/amaru-uplc/bin/use_cases
+COPY --from=build-aiken /aiken-bench-bin /bench/aiken/bin/aiken-bench
 
 # Harmonic Labs plutus-machine: released package and its native benchmark
 COPY --from=build-plutus-machine /src /bench/plutus-machine

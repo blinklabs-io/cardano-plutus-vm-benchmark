@@ -100,6 +100,7 @@ Ranked per transaction: a VM's time for a transaction is the sum of its times fo
 |---|---|---|---|
 | **plutus-core** | Haskell / GHC | Criterion | [IntersectMBO/plutus](https://github.com/IntersectMBO/plutus) (`plutus-benchmark`) |
 | **Amaru UPLC** | Rust | Repository Criterion.rs adapter | [`amaru-uplc`](https://crates.io/crates/amaru-uplc) |
+| **Aiken UPLC** | Rust | Repository Criterion.rs adapter | [aiken-lang/aiken](https://github.com/aiken-lang/aiken) (`crates/uplc`) |
 | **Harmonic Labs plutus-machine** | TypeScript / Node.js | Repository Node.js adapter | [`@harmoniclabs/plutus-machine`](https://www.npmjs.com/package/@harmoniclabs/plutus-machine), the evaluator used by Pebble |
 | **Plutuz** | Zig | Custom (JSON) | [utxo-company/plutuz](https://github.com/utxo-company/plutuz) |
 | **Chrysalis** | C# / .NET | BenchmarkDotNet (JIT + AOT) | [SAIB-Inc/Chrysalis](https://github.com/SAIB-Inc/Chrysalis) |
@@ -187,7 +188,7 @@ docker-compose.yml        # One-command orchestration
 scripts/                  # Per-VM runner scripts, orchestrator, update-pins.sh
 parsers/                  # Output normalizers (one per framework)
 report/                   # Unified CSV -> markdown report generator
-harness/                  # Adapters for Amaru and plutus-machine; eval-tier patches and harnesses
+harness/                  # Adapters for Amaru, Aiken and plutus-machine; eval-tier patches and harnesses
 results/                  # Git-tracked results, including per-run versions.csv
 ```
 
