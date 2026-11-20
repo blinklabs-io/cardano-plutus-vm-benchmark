@@ -63,6 +63,21 @@ for vm in "${GIT_VMS[@]}"; do
     label="${tag:-${branch}@${sha:0:7}}"
     env_set "${vm}_SHA" "$sha"
     env_set "${vm}_VERSION" "$label"
+    if [[ "$vm" == AIKEN && "$old" != "$sha" ]]; then
+        docker run --rm -u "$(id -u):$(id -g)" \
+            -e CARGO_HOME=/tmp/cargo -e RUSTUP_TOOLCHAIN=stable \
+            -e AIKEN_ARCHIVE="${repo%.git}/archive/${sha}.tar.gz" \
+            -v "$PWD/harness/aiken:/tmp/bench" -w /tmp \
+            "rust:$(env_get AIKEN_RUST_VERSION)-bookworm" \
+            bash -euo pipefail -c '
+                mkdir aiken
+                curl -fL "$AIKEN_ARCHIVE" | tar -xz --strip-components=1 -C aiken
+                cp aiken/Cargo.lock bench/Cargo.lock
+                cd bench
+                cargo metadata --format-version 1 > /dev/null
+                cargo metadata --locked --format-version 1 > /dev/null
+            '
+    fi
     env_comment "${vm}_SHA" "${branch} head on $(date -u +%F)"
     if [[ "$old" == "$sha" ]]; then
         echo "${vm}: unchanged ${label}"
@@ -101,4 +116,4 @@ env_comment PLUTUS_MACHINE_REPO "newest npm release (${pm})"
 echo "PLUTUS_MACHINE: ${pm}"
 
 echo
-echo "Updated ${ENV_FILE}. Rebuild with: docker compose build"
+echo "Updated ${ENV_FILE}. Rebuild the benchmark image to use the new pins."

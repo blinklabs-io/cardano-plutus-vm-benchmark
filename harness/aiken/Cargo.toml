@@ -5,8 +5,7 @@ edition = "2024"
 publish = false
 
 # The Dockerfile clones aiken-lang/aiken next to this crate, at ../aiken, and
-# starts from aiken's own Cargo.lock so uplc builds with the dependency
-# versions it is developed with.
+# preserves aiken's dependency versions in the committed harness lockfile.
 [dependencies]
 uplc = { path = "../aiken/crates/uplc" }
 # The Criterion version of the Amaru UPLC harness, so both Rust CEK rows use

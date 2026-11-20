@@ -49,13 +49,10 @@ ENV CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS}
 RUN git clone "$AIKEN_REPO" /src/aiken \
     && cd /src/aiken && (git checkout "$AIKEN_SHA" || (git fetch origin "$AIKEN_SHA" && git checkout "$AIKEN_SHA"))
 
-# The harness depends on aiken's crates/uplc by path and starts from aiken's
-# own Cargo.lock, so uplc builds with the dependency versions it is developed
-# with; cargo only adds what the harness needs (criterion).
+# The harness lockfile extends the pinned upstream dependency set.
 COPY harness/aiken /src/bench
 WORKDIR /src/bench
-RUN cp /src/aiken/Cargo.lock Cargo.lock \
-    && cargo build --release --bin aiken-bench \
+RUN cargo build --locked --release --bin aiken-bench \
     && cp target/release/aiken-bench /aiken-bench-bin
 
 # =============================================================================

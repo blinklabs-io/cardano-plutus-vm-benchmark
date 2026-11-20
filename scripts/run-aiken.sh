@@ -26,12 +26,16 @@ trap 'rm -rf "$work"' EXIT
 
 # The full tier decodes each .flat file in the timed loop; PVB_TIER=eval
 # decodes it before timing and times evaluation only.
+failed=0
+
 run_tier() {
     local tier="$1" suffix="$2"
     local raw="$RUN_DIR/aiken${suffix}-raw.log"
     local criterion_home="$BENCH_DIR/target/criterion${suffix}"
     rm -rf "$criterion_home"
     : > "$raw"
+    rm -f "$RUN_DIR/aiken${suffix}.csv"
+    rm -rf "$RUN_DIR/criterion-output-aiken${suffix}"
 
     for flat in "$DATA_DIR"/*.flat; do
         name=$(basename "$flat" .flat)
@@ -48,17 +52,18 @@ run_tier() {
 
     if ! find "$criterion_home" -type f -name estimates.json -print -quit 2>/dev/null | grep -q .; then
         echo "ERROR: Criterion produced no $tier tier measurements"
-        return 1
+        failed=1
+    else
+        cp -r "$criterion_home" "$RUN_DIR/criterion-output-aiken${suffix}"
+        python3 /bench/parsers/parse_criterion.py \
+            "$RUN_DIR/criterion-output-aiken${suffix}" aiken \
+            > "$RUN_DIR/aiken${suffix}.csv"
     fi
-
-    rm -rf "$RUN_DIR/criterion-output-aiken${suffix}"
-    cp -r "$criterion_home" "$RUN_DIR/criterion-output-aiken${suffix}"
-    python3 /bench/parsers/parse_criterion.py \
-        "$RUN_DIR/criterion-output-aiken${suffix}" aiken \
-        > "$RUN_DIR/aiken${suffix}.csv"
     python3 /bench/parsers/fill_failures.py \
         "$RUN_DIR/aiken${suffix}.csv" "$DATA_DIR" aiken "$raw"
 }
 
 run_tier full ""
 run_tier eval "-eval"
+
+exit "$failed"

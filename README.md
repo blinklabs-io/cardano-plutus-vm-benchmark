@@ -202,7 +202,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## TODO
 
-- [ ] Add Aiken UPLC (Rust, [aiken-lang/aiken](https://github.com/aiken-lang/aiken) `crates/uplc`) — needs custom bench harness, no native benchmarks exist
 
 ## License
 
