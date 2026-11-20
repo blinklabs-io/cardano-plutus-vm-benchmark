@@ -115,14 +115,41 @@ if [[ "$pm" != "$(env_get PLUTUS_MACHINE_VERSION)" ]]; then
 node <<'JS'
 const fs = require("fs");
 const { execFileSync } = require("child_process");
-const view = (...args) => JSON.parse(execFileSync("npm", ["view", ...args, "--json"]) || "null");
+const view = (...args) => JSON.parse(
+    execFileSync("npm", ["view", ...args, "--json"], { encoding: "utf8" }).trim() || "null"
+);
+const compareVersions = (left, right) => {
+    const parts = version => {
+        const [release, ...prerelease] = version.split("+")[0].split("-");
+        return [release.split("."), prerelease.length ? prerelease.join("-").split(".") : null];
+    };
+    const compareNumber = (a, b) => BigInt(a) < BigInt(b) ? -1 : BigInt(a) > BigInt(b) ? 1 : 0;
+    const [a, ap] = parts(left);
+    const [b, bp] = parts(right);
+    for (let i = 0; i < 3; i++) {
+        const order = compareNumber(a[i], b[i]);
+        if (order) return order;
+    }
+    if (!ap || !bp) return ap ? -1 : bp ? 1 : 0;
+    for (let i = 0; i < Math.max(ap.length, bp.length); i++) {
+        if (i === ap.length) return -1;
+        if (i === bp.length) return 1;
+        if (ap[i] === bp[i]) continue;
+        const an = /^[0-9]+$/.test(ap[i]);
+        const bn = /^[0-9]+$/.test(bp[i]);
+        if (an && bn) return compareNumber(ap[i], bp[i]);
+        if (an !== bn) return an ? -1 : 1;
+        return ap[i] < bp[i] ? -1 : 1;
+    }
+    return 0;
+};
 const peers = view(`@harmoniclabs/plutus-machine@${process.env.PM}`, "peerDependencies") || {};
 const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
 for (const [dep, range] of Object.entries(peers)) {
     if (!(dep in pkg.dependencies)) continue;
     const versions = [].concat(view(`${dep}@${range}`, "version") || []);
     if (versions.length === 0) throw new Error(`no ${dep} version matches ${range}`);
-    const newest = versions[versions.length - 1];
+    const newest = versions.reduce((best, version) => compareVersions(version, best) > 0 ? version : best);
     if (pkg.dependencies[dep] !== newest) {
         console.log(`${dep}: ${pkg.dependencies[dep]} -> ${newest}`);
         pkg.dependencies[dep] = newest;
