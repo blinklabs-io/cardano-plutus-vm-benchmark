@@ -1,0 +1,22 @@
+[package]
+name = "aiken-uplc-bench"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# The Dockerfile clones aiken-lang/aiken next to this crate, at ../aiken, and
+# preserves aiken's dependency versions in the committed harness lockfile.
+[dependencies]
+uplc = { path = "../aiken/crates/uplc" }
+# The Criterion version of the Amaru UPLC harness, so both Rust CEK rows use
+# the same framework.
+criterion = { version = "=0.8.2", features = ["html_reports"] }
+
+[[bin]]
+name = "aiken-bench"
+path = "src/main.rs"
+
+# The release profile of the Amaru UPLC harness: fat LTO and one codegen unit.
+[profile.release]
+lto = "fat"
+codegen-units = 1

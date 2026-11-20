@@ -86,7 +86,7 @@ cat "$RUN_DIR/environment.txt"
 echo ""
 
 # Track which VMs to run (default: all)
-VMS="${BENCH_VMS:-chrysalis,chrysalis-aot,amaru-uplc,plutus-machine,plutigo,blaze-jsc,blaze-v8,plutuz,opshin,haskell,scalus-cek,scalus-jit,julc-java,llvm-uplc-jit}"
+VMS="${BENCH_VMS:-chrysalis,chrysalis-aot,amaru-uplc,aiken,plutus-machine,plutigo,blaze-jsc,blaze-v8,plutuz,opshin,haskell,scalus-cek,scalus-jit,julc-java,llvm-uplc-jit}"
 
 # Keep source revisions and toolchains alongside each run so generated reports
 # identify the exact implementations that produced the measurements.
@@ -94,6 +94,7 @@ version_row() {
     local vm="$1" repo="" version="" revision="" toolchain=""
     case "$vm" in
         chrysalis|chrysalis-aot) repo="${CHRYSALIS_REPO:-}"; version="${CHRYSALIS_VERSION:-}"; revision="${CHRYSALIS_SHA:-}"; toolchain=".NET SDK ${DOTNET_VERSION:-unknown}" ;;
+        aiken) repo="${AIKEN_REPO:-}"; version="${AIKEN_VERSION:-}"; revision="${AIKEN_SHA:-}"; toolchain="rustc ${AIKEN_RUST_VERSION:-unknown}" ;;
         amaru-uplc) repo="${AMARU_UPLC_REPO:-}"; version="${AMARU_UPLC_VERSION:-}"; toolchain="rustc ${AMARU_UPLC_RUST_TOOLCHAIN:-${AMARU_UPLC_RUST_VERSION:-unknown}}" ;;
         plutus-machine) repo="${PLUTUS_MACHINE_REPO:-}"; version="${PLUTUS_MACHINE_VERSION:-}"; toolchain="Node.js ${NODE_MAJOR:-unknown}" ;;
         plutigo) repo="${PLUTIGO_REPO:-}"; version="${PLUTIGO_VERSION:-}"; revision="${PLUTIGO_SHA:-}"; toolchain="Go ${GO_VERSION:-unknown}" ;;

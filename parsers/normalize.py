@@ -19,6 +19,7 @@ VMS = [
     "chrysalis",
     "chrysalis-aot",
     "amaru-uplc",
+    "aiken",
     "plutus-machine",
     "plutigo",
     "blaze-jsc",

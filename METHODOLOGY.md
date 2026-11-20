@@ -20,6 +20,7 @@ Both tiers include whatever per-run setup a VM performs for each evaluation (for
 | llvm-uplc | — | `uplcbench --mode compiled`; decoding and JIT compilation are before timing |
 | Julc | — | `CekJavaBenchmark.bench`; decoding is in `@Setup`, and each call prepares the program (builtin availability walk and cost model construction) |
 | Amaru UPLC | our harness | our harness, `PVB_TIER=eval` |
+| Aiken UPLC | our harness (`harness/aiken`): flat decode, conversion to named De Bruijn and evaluation, as aiken's own ledger path does | our harness, `PVB_TIER=eval`: each iteration evaluates a clone of the decoded program, made in Criterion's untimed setup |
 | Harmonic Labs plutus-machine | our harness | our harness, `PVB_TIER=eval` |
 | opshin | our script | our script, `PVB_TIER=eval` |
 | Chrysalis (JIT and AOT) | upstream `DecodeAndEval` | `Eval`, added by `harness/chrysalis/eval-tier.patch` |
@@ -28,7 +29,7 @@ Both tiers include whatever per-run setup a VM performs for each evaluation (for
 
 Plutigo and plutus-core evaluate every script as a Plutus V3 program, as plutus-core's own `validation` benchmark does.
 
-Where the eval tier reuses one decoded program across iterations and the term representation is mutable (plutus-machine, opshin, blaze-plutus), the harness first checks that evaluation leaves the decoded program unchanged, and records the script as failed if it does not.
+Where the eval tier reuses one decoded program across iterations and the term representation is mutable (plutus-machine, opshin, blaze-plutus), and for Aiken, whose eval consumes a clone that shares the decoded terms, the harness first checks that evaluation leaves the decoded program unchanged, and records the script as failed if it does not.
 
 ## VM Versions
 
@@ -86,6 +87,7 @@ Each VM uses its own benchmark framework rather than a uniform harness:
 | plutus-core | Criterion (Haskell) | Automatic | Automatic | Automatic |
 | Chrysalis | BenchmarkDotNet (`--job short`) | 3 iterations | 3 | Auto |
 | Amaru UPLC | Repository Criterion.rs adapter | Automatic (warmup phase) | Auto | Auto |
+| Aiken UPLC | Repository Criterion.rs adapter | Automatic (warmup phase) | Auto | Auto |
 | Harmonic Labs plutus-machine | Repository Node.js adapter | 5 iterations | 50 | 5s |
 | Plutigo | Go testing.B | Automatic (b.N scaling) | Auto | 5s |
 | blaze-plutus | Vitest bench | Automatic | Auto | Auto |
@@ -104,6 +106,7 @@ Each framework handles warmup, iteration count, and outlier detection using its 
 - **Pinned versions**: every VM is pinned to an exact source revision or package version in `.env`, moved to the newest by `scripts/update-pins.sh` (see [VM Versions](#vm-versions))
 - **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark. The plutus-machine adapter exercises the exact npm package used by Pebble, but replaces `process.env` with a plain object before loading it (see Limitations).
 - **Amaru release profile**: its adapter is compiled with fat LTO and one codegen unit. Its default V3/PV11 cost model is constructed once per process and cloned for each `Program::eval`, matching the upstream adapter.
+- **Aiken UPLC**: the harness builds the `uplc` crate of aiken-lang/aiken from source, with the release profile of the Amaru adapter (fat LTO, one codegen unit) and aiken's own `Cargo.lock`. It evaluates each program as Plutus V3 at protocol version 11 with the crate's default V3 cost model for that protocol version, and runs one process per script.
 
 ## Unified Output
 
