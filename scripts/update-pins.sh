@@ -106,9 +106,32 @@ pm=$(curl -fsSL https://registry.npmjs.org/@harmoniclabs/plutus-machine |
     python3 -c 'import json,sys; t=json.load(sys.stdin)["time"]; t.pop("created",None); t.pop("modified",None); print(max(t, key=t.get))')
 if [[ "$pm" != "$(env_get PLUTUS_MACHINE_VERSION)" ]]; then
     sed -i -E "s|(\"@harmoniclabs/plutus-machine\": )\"[^\"]+\"|\1\"${pm}\"|" harness/plutus-machine/package.json
-    docker run --rm -u "$(id -u):$(id -g)" -e npm_config_cache=/tmp/npm \
+    # The harness depends directly on some of plutus-machine's peers (the
+    # UPLC decoder). Move each to the newest version the new peer range
+    # accepts, or npm cannot resolve the tree.
+    docker run --rm -i -u "$(id -u):$(id -g)" -e npm_config_cache=/tmp/npm -e PM="$pm" \
         -v "$PWD/harness/plutus-machine:/w" -w /w "node:$(env_get NODE_MAJOR)-bookworm" \
-        npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+        bash -euo pipefail -s <<'EOF'
+node <<'JS'
+const fs = require("fs");
+const { execFileSync } = require("child_process");
+const view = (...args) => JSON.parse(execFileSync("npm", ["view", ...args, "--json"]) || "null");
+const peers = view(`@harmoniclabs/plutus-machine@${process.env.PM}`, "peerDependencies") || {};
+const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+for (const [dep, range] of Object.entries(peers)) {
+    if (!(dep in pkg.dependencies)) continue;
+    const versions = [].concat(view(`${dep}@${range}`, "version") || []);
+    if (versions.length === 0) throw new Error(`no ${dep} version matches ${range}`);
+    const newest = versions[versions.length - 1];
+    if (pkg.dependencies[dep] !== newest) {
+        console.log(`${dep}: ${pkg.dependencies[dep]} -> ${newest}`);
+        pkg.dependencies[dep] = newest;
+    }
+}
+fs.writeFileSync("package.json", JSON.stringify(pkg, null, 2) + "\n");
+JS
+npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+EOF
 fi
 env_set PLUTUS_MACHINE_VERSION "$pm"
 env_set PLUTUS_MACHINE_REPO "https://www.npmjs.com/package/@harmoniclabs/plutus-machine/v/${pm}"
