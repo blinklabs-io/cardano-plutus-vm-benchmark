@@ -88,7 +88,7 @@ Each VM uses its own benchmark framework rather than a uniform harness:
 | Chrysalis | BenchmarkDotNet (`--job short`) | 3 iterations | 3 | Auto |
 | Amaru UPLC | Repository Criterion.rs adapter | Automatic (warmup phase) | Auto | Auto |
 | Aiken UPLC | Repository Criterion.rs adapter | Automatic (warmup phase) | Auto | Auto |
-| Harmonic Labs plutus-machine | Repository Node.js adapter | 5 iterations | 50 | 5s |
+| Harmonic Labs plutus-machine | Repository adapter on Bun | 5 iterations | 50 | 5s |
 | Plutigo | Go testing.B | Automatic (b.N scaling) | Auto | 5s |
 | blaze-plutus | Vitest bench | Automatic | Auto | Auto |
 | Plutuz | Custom | 5 iterations | 50 | 5s |
@@ -104,7 +104,7 @@ Each framework handles warmup, iteration count, and outlier detection using its 
 - **Same machine**: all VMs run inside a single Docker container (`ubuntu:24.04`, glibc)
 - **Sequential execution**: VMs run one at a time to avoid CPU contention
 - **Pinned versions**: every VM is pinned to an exact source revision or package version in `.env`, moved to the newest by `scripts/update-pins.sh` (see [VM Versions](#vm-versions))
-- **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark. The plutus-machine adapter exercises the exact npm package used by Pebble, but replaces `process.env` with a plain object before loading it (see Limitations).
+- **Implementation-owned benchmark paths**: each VM uses its native benchmark when one is published. The Amaru adapter exercises the released crate through the same Criterion loop as its source benchmark. The plutus-machine adapter exercises the exact npm package used by Pebble, on Bun; the runner fails if the benchmark reports another runtime.
 - **Amaru release profile**: its adapter is compiled with fat LTO and one codegen unit. Its default V3/PV11 cost model is constructed once per process and cloned for each `Program::eval`, matching the upstream adapter.
 - **Aiken UPLC**: the harness builds the `uplc` crate of aiken-lang/aiken from source, with the release profile of the Amaru adapter (fat LTO, one codegen unit) and aiken's own `Cargo.lock`. It evaluates each program as Plutus V3 at protocol version 11 with the crate's default V3 cost model for that protocol version, and runs one process per script.
 
@@ -129,7 +129,7 @@ Times are in **nanoseconds**. The summary uses **geometric mean** across all 89 
 - **Results before tiers**: runs recorded before tiers were introduced have no `tier` column and are read as the full tier, but their plutus-core, Julc, Scalus JIT and llvm-uplc rows measured evaluation without decoding.
 - **blaze-plutus on Bun before the runtime check**: runs recorded before the runtime check ran their "Bun JSC" row with `bun run vitest`, which runs on Node. Those rows measured Node (V8), not JavaScriptCore.
 - **Unreleased code**: following each VM's default branch measures code that may change before its next release, including regressions that a release would fix. The label in `versions.csv` says whether a pin is a tagged release.
-- **plutus-machine `process.env` replacement**: the package reads `PEBBLE_PROFILE` on every CEK step. The adapter swaps `process.env` for a plain object so that native lookup is not measured, which also removes a per-step cost Pebble users pay. Its numbers are therefore not end-to-end and are not directly comparable to the other VMs.
+- **plutus-machine before Bun**: runs recorded before plutus-machine 3.1.0 ran it on Node.js with `process.env` replaced by a plain object, because those versions read `PEBBLE_PROFILE` on every CEK step. Since 3.1.0 reads it once per evaluation, the adapter runs the package unmodified, on Bun.
 - **JIT warmup variance**: .NET and Node.js/Bun have JIT compilation, meaning early iterations are slower. Their frameworks account for this, but it's a fundamentally different execution model than ahead-of-time compiled VMs.
 - **Memory comparison**: each VM uses different allocators and GC strategies. Memory numbers are not directly comparable across languages.
 - **Docker overhead**: container execution adds minimal but non-zero overhead vs bare metal. This affects all VMs equally.

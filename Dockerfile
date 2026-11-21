@@ -109,8 +109,10 @@ RUN git apply /tmp/pvb.patch
 RUN bun install
 
 # =============================================================================
-# Build stage: Harmonic Labs plutus-machine (Node.js)
+# Build stage: Harmonic Labs plutus-machine
 # =============================================================================
+# npm installs exactly what package-lock.json records; the runner runs the
+# benchmark on Bun.
 FROM node:${NODE_MAJOR}-bookworm AS build-plutus-machine
 
 WORKDIR /src

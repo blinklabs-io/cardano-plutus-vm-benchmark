@@ -9,6 +9,20 @@ import unittest
 from report import generate_report
 
 
+class RuntimeLabelTest(unittest.TestCase):
+    def label(self, versions):
+        return generate_report.vm_labels(versions)["plutus-machine"]
+
+    def test_bun_toolchain_is_labelled_bun(self):
+        self.assertIn("Bun JSC", self.label({"plutus-machine": {"toolchain": "Bun 1.3.14"}}))
+
+    def test_recorded_node_toolchain_stays_node(self):
+        self.assertIn("Node.js", self.label({"plutus-machine": {"toolchain": "Node.js 22"}}))
+
+    def test_run_without_versions_is_node(self):
+        self.assertIn("Node.js", self.label({}))
+
+
 class TransactionRankingTest(unittest.TestCase):
     def test_partial_transaction_is_excluded(self):
         complete_tx = "a" * 64
@@ -50,6 +64,7 @@ class TransactionRankingTest(unittest.TestCase):
             [script],
             ["haskell", "scalus-cek"],
             [script],
+            generate_report.VM_LABELS,
         )
 
         transaction_table = lines[lines.index("|---|---|---|---|---|") + 1:]
