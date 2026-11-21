@@ -21,7 +21,7 @@ VM_ORDER = [
 VM_LABELS = {
     "amaru-uplc": "Amaru UPLC CEK (Rust)",
     "aiken": "Aiken UPLC CEK (Rust)",
-    "plutus-machine": "Harmonic Labs plutus-machine CEK (TypeScript / Node.js)",
+    "plutus-machine": "Harmonic Labs plutus-machine CEK (TypeScript / Bun JSC)",
     "plutuz": "Plutuz CEK (Zig)",
     "chrysalis": "Chrysalis CEK (C# / .NET)",
     "chrysalis-aot": "Chrysalis CEK (C# / .NET AOT)",

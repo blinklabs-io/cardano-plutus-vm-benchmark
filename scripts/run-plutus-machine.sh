@@ -5,7 +5,7 @@ RUN_DIR="$1"
 DATA_DIR="${BENCH_DATA_DIR:-/bench/data/${BENCH_CORPUS:-plutus_use_cases}}"
 BENCH_DIR="/bench/plutus-machine"
 
-echo "Harmonic Labs plutus-machine CEK (TypeScript / Node.js)"
+echo "Harmonic Labs plutus-machine CEK (TypeScript / Bun JSC)"
 
 rm -rf "$BENCH_DIR/bench/results"
 
@@ -17,7 +17,11 @@ run_tier() {
     local raw_json="$RUN_DIR/plutus-machine${suffix}-raw.json"
     local native_json="$BENCH_DIR/bench/results/plutus_use_cases${suffix}.json"
 
-    BENCH_DATA="$DATA_DIR" PVB_TIER="$tier" node "$BENCH_DIR/bench/bench.mjs" 2>&1 | tee "$raw_log"
+    BENCH_DATA="$DATA_DIR" PVB_TIER="$tier" bun "$BENCH_DIR/bench/bench.mjs" 2>&1 | tee "$raw_log"
+    if ! grep -q "PVB_RUNTIME: bun " "$raw_log"; then
+        echo "ERROR: plutus-machine did not run on bun: $(grep -o 'PVB_RUNTIME: .*' "$raw_log" | head -1)" >&2
+        exit 1
+    fi
     cp "$native_json" "$raw_json"
     python3 /bench/parsers/parse_plutus_machine_json.py "$raw_json" > "$RUN_DIR/plutus-machine${suffix}.csv"
     python3 /bench/parsers/fill_failures.py \

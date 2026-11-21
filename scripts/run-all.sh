@@ -96,7 +96,7 @@ version_row() {
         chrysalis|chrysalis-aot) repo="${CHRYSALIS_REPO:-}"; version="${CHRYSALIS_VERSION:-}"; revision="${CHRYSALIS_SHA:-}"; toolchain=".NET SDK ${DOTNET_VERSION:-unknown}" ;;
         aiken) repo="${AIKEN_REPO:-}"; version="${AIKEN_VERSION:-}"; revision="${AIKEN_SHA:-}"; toolchain="rustc ${AIKEN_RUST_VERSION:-unknown}" ;;
         amaru-uplc) repo="${AMARU_UPLC_REPO:-}"; version="${AMARU_UPLC_VERSION:-}"; toolchain="rustc ${AMARU_UPLC_RUST_TOOLCHAIN:-${AMARU_UPLC_RUST_VERSION:-unknown}}" ;;
-        plutus-machine) repo="${PLUTUS_MACHINE_REPO:-}"; version="${PLUTUS_MACHINE_VERSION:-}"; toolchain="Node.js ${NODE_MAJOR:-unknown}" ;;
+        plutus-machine) repo="${PLUTUS_MACHINE_REPO:-}"; version="${PLUTUS_MACHINE_VERSION:-}"; toolchain="Bun ${BUN_VERSION:-unknown}" ;;
         plutigo) repo="${PLUTIGO_REPO:-}"; version="${PLUTIGO_VERSION:-}"; revision="${PLUTIGO_SHA:-}"; toolchain="Go ${GO_VERSION:-unknown}" ;;
         blaze-jsc) repo="${BLAZE_REPO:-}"; version="${BLAZE_VERSION:-}"; revision="${BLAZE_SHA:-}"; toolchain="Bun ${BUN_VERSION:-unknown}" ;;
         blaze-v8) repo="${BLAZE_REPO:-}"; version="${BLAZE_VERSION:-}"; revision="${BLAZE_SHA:-}"; toolchain="Node.js ${NODE_MAJOR:-unknown}" ;;

@@ -5,7 +5,7 @@
 // bench/plutus_use_cases (the benchmark repo symlinks them there) and writes
 // bench/results/plutus_use_cases.json.
 //
-//   node bench/bench.mjs
+//   bun bench/bench.mjs
 //
 // Warmup 5 iterations, then at least 50 iterations and at least 5 seconds per
 // script, matching the other custom runners in that suite.
@@ -20,10 +20,6 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
 
-// plutus-machine reads process.env.PEBBLE_PROFILE on every CEK step. That is a
-// native lookup in Node, so a plain copy keeps it out of the measured time.
-process.env = { ...process.env };
-
 const require = createRequire(import.meta.url);
 const { UPLCDecoder, showUPLC } = require("@harmoniclabs/uplc");
 const { CEKError, Machine } = require("../dist/index.js");
@@ -37,6 +33,9 @@ const OUT_FILE = join(OUT_DIR, EVAL_TIER ? "plutus_use_cases-eval.json" : "plutu
 const WARMUP = Number(process.env.BENCH_WARMUP ?? 5);
 const MIN_ITERATIONS = Number(process.env.BENCH_MIN_ITERS ?? 50);
 const TIME_BUDGET_NS = Number(process.env.BENCH_BUDGET_NS ?? 5e9);
+
+// The runner checks this line: the benchmark is meant to run on Bun.
+console.log(`PVB_RUNTIME: ${process.versions.bun ? `bun ${process.versions.bun}` : `node ${process.versions.node}`}`);
 
 if (!existsSync(DATA_DIR)) {
   console.error(`no benchmark data at ${DATA_DIR}`);
