@@ -7,6 +7,10 @@ BENCH_DIR="/bench/blaze-plutus"
 
 echo "blaze-jsc (TypeScript / Bun / JavaScriptCore)"
 
+# A reused RUN_DIR may hold this VM's results from an earlier run, possibly
+# on another runtime; a failed run must not leave them to be reported.
+rm -f "$RUN_DIR"/blaze-jsc{,-eval}{.csv,-raw.log,-raw.json}
+
 # Symlink canonical flat files into expected location
 rm -rf "$BENCH_DIR/packages/blaze-plutus/bench/plutus_use_cases"
 ln -sf "$DATA_DIR" "$BENCH_DIR/packages/blaze-plutus/bench/plutus_use_cases"
@@ -26,7 +30,8 @@ run_tier() {
     # harness/blaze/pvb.patch prints the runtime that ran the benchmark.
     if ! grep -q "PVB_RUNTIME: bun " "$raw"; then
         echo "ERROR: blaze-jsc did not run on bun: $(grep -o 'PVB_RUNTIME: .*' "$raw" | head -1)" >&2
-        exit 1
+        # Status 3 tells run-all.sh to abort rather than report this run.
+        exit 3
     fi
     python3 /bench/parsers/parse_vitest.py blaze-jsc "$raw" > "$RUN_DIR/blaze-jsc${suffix}.csv"
     python3 /bench/parsers/fill_failures.py "$RUN_DIR/blaze-jsc${suffix}.csv" "$DATA_DIR" blaze-jsc "$raw"

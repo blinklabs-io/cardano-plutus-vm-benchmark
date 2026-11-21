@@ -88,6 +88,11 @@ echo ""
 # Track which VMs to run (default: all)
 VMS="${BENCH_VMS:-chrysalis,chrysalis-aot,amaru-uplc,aiken,plutus-machine,plutigo,blaze-jsc,blaze-v8,plutuz,opshin,haskell,scalus-cek,scalus-jit,julc-java,llvm-uplc-jit}"
 
+# The Bun the runners execute, not the version the image was asked to install.
+installed_bun_version() {
+    bun --version 2>/dev/null || echo unknown
+}
+
 # Keep source revisions and toolchains alongside each run so generated reports
 # identify the exact implementations that produced the measurements.
 version_row() {
@@ -96,9 +101,9 @@ version_row() {
         chrysalis|chrysalis-aot) repo="${CHRYSALIS_REPO:-}"; version="${CHRYSALIS_VERSION:-}"; revision="${CHRYSALIS_SHA:-}"; toolchain=".NET SDK ${DOTNET_VERSION:-unknown}" ;;
         aiken) repo="${AIKEN_REPO:-}"; version="${AIKEN_VERSION:-}"; revision="${AIKEN_SHA:-}"; toolchain="rustc ${AIKEN_RUST_VERSION:-unknown}" ;;
         amaru-uplc) repo="${AMARU_UPLC_REPO:-}"; version="${AMARU_UPLC_VERSION:-}"; toolchain="rustc ${AMARU_UPLC_RUST_TOOLCHAIN:-${AMARU_UPLC_RUST_VERSION:-unknown}}" ;;
-        plutus-machine) repo="${PLUTUS_MACHINE_REPO:-}"; version="${PLUTUS_MACHINE_VERSION:-}"; toolchain="Bun ${BUN_VERSION:-unknown}" ;;
+        plutus-machine) repo="${PLUTUS_MACHINE_REPO:-}"; version="${PLUTUS_MACHINE_VERSION:-}"; toolchain="Bun $(installed_bun_version)" ;;
         plutigo) repo="${PLUTIGO_REPO:-}"; version="${PLUTIGO_VERSION:-}"; revision="${PLUTIGO_SHA:-}"; toolchain="Go ${GO_VERSION:-unknown}" ;;
-        blaze-jsc) repo="${BLAZE_REPO:-}"; version="${BLAZE_VERSION:-}"; revision="${BLAZE_SHA:-}"; toolchain="Bun ${BUN_VERSION:-unknown}" ;;
+        blaze-jsc) repo="${BLAZE_REPO:-}"; version="${BLAZE_VERSION:-}"; revision="${BLAZE_SHA:-}"; toolchain="Bun $(installed_bun_version)" ;;
         blaze-v8) repo="${BLAZE_REPO:-}"; version="${BLAZE_VERSION:-}"; revision="${BLAZE_SHA:-}"; toolchain="Node.js ${NODE_MAJOR:-unknown}" ;;
         plutuz) repo="${PLUTUZ_REPO:-}"; version="${PLUTUZ_VERSION:-}"; revision="${PLUTUZ_SHA:-}"; toolchain="Zig ${ZIG_VERSION:-unknown}" ;;
         opshin) repo="${OPSHIN_REPO:-}"; version="${OPSHIN_VERSION:-}"; revision="${OPSHIN_SHA:-}"; toolchain="Python ${PYTHON_VERSION:-unknown}" ;;
@@ -151,6 +156,9 @@ else
     PRIORITY=()
 fi
 
+# Exit status a runner uses when its benchmark ran on the wrong runtime.
+RUNTIME_MISMATCH=3
+
 run_vm() {
     local vm_name="$1"
     local script="/bench/scripts/run-${vm_name}.sh"
@@ -165,10 +173,17 @@ run_vm() {
     echo " Running: ${vm_name}"
     echo "---------------------------------------------"
 
-    if "${PRIORITY[@]}" bash "$script" "$RUN_DIR"; then
+    local rc=0
+    "${PRIORITY[@]}" bash "$script" "$RUN_DIR" || rc=$?
+    if (( rc == 0 )); then
         echo "OK: ${vm_name} completed"
+    elif (( rc == RUNTIME_MISMATCH )); then
+        # versions.csv names the intended toolchain, so a run that measured
+        # another runtime must not reach the report.
+        echo "ERROR: ${vm_name} did not run on its expected runtime; aborting"
+        exit "$rc"
     else
-        echo "FAIL: ${vm_name} exited with code $?"
+        echo "FAIL: ${vm_name} exited with code ${rc}"
     fi
 }
 
