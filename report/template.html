@@ -292,6 +292,10 @@ function parseCSV(csv) {
   const lines = csv.trim().split('\n'), head = lines[0].split(',');
   return lines.slice(1).map(l => { const v = l.split(','), o = {}; head.forEach((h, i) => o[h.trim()] = (v[i] || '').trim()); return o; });
 }
+// plutus-machine ran on Node.js until its adapter moved to Bun; name the
+// runtime this run recorded.
+const pmToolchain = (parseCSV(run.versions).find(v => v.vm === 'plutus-machine') || {}).toolchain || '';
+VM_META['plutus-machine'].lang = 'TypeScript on ' + (/^Bun\b/.test(pmToolchain) ? 'Bun (JavaScriptCore)' : 'Node.js') + ', by Harmonic Labs';
 function fmt(ns) {
   if (ns >= 1e9) return (ns / 1e9).toFixed(2) + ' s';
   if (ns >= 1e6) return (ns / 1e6).toFixed(2) + ' ms';
