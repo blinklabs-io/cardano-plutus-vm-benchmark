@@ -10,7 +10,7 @@ This version is maintained by [Blink Labs](https://blinklabs.io). It continues t
 
 > System: Intel Core i7-6700 @ 3.40 GHz, 8 logical cores, 15 GiB RAM, Linux kernel 6.8.0-147-generic
 
-Each VM was built from the newest code on its default branch, or its newest published package (see [`versions.csv`](results/2026-11-23/versions.csv)). Each corpus and each tier is ranked separately; lower is better. The [page](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/) switches between them and lists every program measured.
+Each VM was built from the newest code on its default branch, or its newest published package, except Scalus, held at `master@a3e3487` because its newer benchmarks do not build (see [`versions.csv`](results/2026-11-23/versions.csv)). Each corpus and each tier is ranked separately; lower is better. The [page](https://blinklabs-io.github.io/cardano-plutus-vm-benchmark/) switches between them and lists every program measured.
 
 ### Plutus use cases: all 89 programs
 
